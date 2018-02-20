@@ -1,9 +1,5 @@
 import React from 'react';
 
-const RootStyle = {
-    color: 'green'
-}
-
 class Root extends React.Component {
     constructor(){
     	super();
@@ -14,7 +10,7 @@ class Root extends React.Component {
 
     render() {
         return (
-            <div style={RootStyle} onClick={() => {
+            <div onClick={() => {
                     this.setState({number: this.state.number - 1});
             }}>
                 Here be the stuff: {this.state.number}
