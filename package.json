@@ -1,7 +1,7 @@
 {
   "name": "data2go",
   "version": "1.0.0",
-  "description": "",
+  "description": "Data2Go location intelligence platform",
   "main": "index.js",
   "scripts": {
     "compile": "webpack",
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/ubigu/datatogo.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ubigu Oy",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ubigu/datatogo/issues"
