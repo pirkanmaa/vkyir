@@ -6,6 +6,6 @@ import './styles/styles.scss';
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
         React.createElement(App),
-        document.getElementById('react-test')
+        document.getElementById('app')
     );
 });
