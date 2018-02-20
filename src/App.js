@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const RootStyle = {
-    color: 'green'
-}
-
-class Root extends React.Component {
+class App extends Component {
     constructor(){
     	super();
     	this.state = {
@@ -14,7 +10,7 @@ class Root extends React.Component {
 
     render() {
         return (
-            <div style={RootStyle} onClick={() => {
+            <div className={AppStyle} onClick={() => {
                     this.setState({number: this.state.number - 1});
             }}>
                 Here be the stuff: {this.state.number}
@@ -23,4 +19,4 @@ class Root extends React.Component {
     }
 }
 
-export default Root;
+export default App;

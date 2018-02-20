@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './Root';
+import App from './App';
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-        React.createElement(Root),
+        React.createElement(App),
         document.getElementById('react-test')
     );
 });
