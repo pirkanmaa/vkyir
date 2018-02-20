@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 const styles = {
-    mapComponent: {
+    Map: {
         background: 'black',
         color: 'white',
         display: 'flex',
@@ -12,18 +12,18 @@ const styles = {
     }
 }
 
-class MapComponent extends Component {
+class Map extends Component {
     constructor() {
         super();
     }
 
     render() {
         return (
-            <div style={styles.mapComponent}>
+            <div style={styles.Map}>
                 <h3> Here be the Map </h3>
             </div>
         );
     }
 };
 
-export default MapComponent;
+export default Map;
