@@ -5,10 +5,10 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        background: 'black',
+        background: 'rgba(0, 0, 0, 0.4)',
         color: 'white',
-        minWidth: '20%',
-        margin: '20px'
+        minWidth: '10%',
+        margin: '10px'
     }
 }
 

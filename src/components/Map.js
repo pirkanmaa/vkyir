@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 const styles = {
     map: {
-        background: 'black',
+        background: 'rgba(0, 0, 0, 0.4)',
         color: 'white',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         minWidth: '70%',
         minHeight: '90%',
-        margin: '20px'
+        margin: '10px'
     }
 }
 
@@ -21,7 +21,7 @@ class Map extends Component {
     render() {
         return (
             <div style={styles.map}>
-                <h3> Here be the Map </h3>
+                <h2> Here be the Map </h2>
             </div>
         );
     }

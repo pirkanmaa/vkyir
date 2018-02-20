@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Map from './components/Map';
 import MapTheme from './components/MapTheme';
+import Toolbar from './components/Toolbar';
 
 const styles = {
     app: {
@@ -10,11 +11,12 @@ const styles = {
         background: '#27db48',
         padding: '40px',
         minWidth: '800px',
-        minHeight: '600px'
+        minHeight: '600px',
+        fontFamily: 'monospace'
     },
     header: {
         position: 'absolute',
-        top: '30px'
+        top: '40px',
     }
 }
 
@@ -32,6 +34,7 @@ class App extends Component {
                 <h1 style={styles.header}> App container </h1>
                 <MapTheme></MapTheme>
                 <Map></Map>
+                <Toolbar></Toolbar>
             </div>
         );
     }
