@@ -12,7 +12,12 @@ Start dev server:
 npm start
 ```
 
-Compile:
+Start hot webpack dev server:
 ```
-npm run compile
+npm run dev-server
+```
+
+Build:
+```
+npm run build
 ```
