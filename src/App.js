@@ -10,7 +10,7 @@ class App extends Component {
 
     render() {
         return (
-            <div className={AppStyle} onClick={() => {
+            <div onClick={() => {
                     this.setState({number: this.state.number - 1});
             }}>
                 Here be the stuff: {this.state.number}
