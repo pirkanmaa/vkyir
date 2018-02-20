@@ -1,5 +1,5 @@
 # Data2Go
-ToDo: Write descriptions
+Data2Go location intelligence platform development branch
 ---
 
 Install dependencies:
