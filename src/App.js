@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+import MapComponent from './components/MapComponent';
+
+const styles = {
+    app: {
+        background: 'orange',
+        padding: '50px'
+    }
+}
 
 class App extends Component {
     constructor(){
@@ -10,10 +18,9 @@ class App extends Component {
 
     render() {
         return (
-            <div onClick={() => {
-                    this.setState({number: this.state.number - 1});
-            }}>
-                Here be the stuff: {this.state.number}
+            <div style={styles.app}>
+                <h1 style={styles.header}> App container </h1>
+                <MapComponent> </MapComponent>
             </div>
         );
     }
