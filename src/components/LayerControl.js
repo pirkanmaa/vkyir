@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
 
-class LayerControl extends Component {
-    constructor() {
-        super();
-    }
+export default class LayerControl extends Component {
 
-    render() {
-        return (
-            <div className='layerControl'>
-                <h3> Layer Control </h3>
-            </div>
-        );
-    }
+  constructor(props) {
+    super(props);
+    this.state = {open: false};
+  }
+
+  handleToggle = () => this.setState({open: !this.state.open});
+
+  render() {
+    return (
+      <div>
+        <FlatButton
+          label="Show map layers"
+          onClick={this.handleToggle}
+        />
+        <Drawer open={this.state.open}>
+          <MenuItem>Layer Control</MenuItem>
+        </Drawer>
+      </div>
+    );
+  }
 }
-
-export default LayerControl;
