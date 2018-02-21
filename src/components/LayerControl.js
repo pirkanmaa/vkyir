@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-class Map extends Component {
+class LayerControl extends Component {
     constructor() {
         super();
     }
 
     render() {
         return (
-            <div className='map'>
-                <h2> Here be the Map </h2>
+            <div className='layerControl'>
+                <h3> Map Themes </h3>
             </div>
         );
     }
-};
+}
 
-export default Map;
+export default LayerControl;
