@@ -3,6 +3,7 @@ import OLMap from 'ol/map';
 import View from 'ol/view';
 import TileLayer from 'ol/layer/tile';
 import XYZ from 'ol/source/xyz';
+import Zoom from 'ol/control/zoom';
 
 class Map extends Component {
     constructor() {
@@ -22,7 +23,8 @@ class Map extends Component {
             view: new View({
                 center: [1100000, 7600000],
                 zoom: 7
-            })
+            }),
+            controls: [new Zoom]
         });
     }
 
