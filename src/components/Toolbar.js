@@ -9,16 +9,17 @@ const style = {
 }
 
 class Toolbar extends Component {
-    constructor() {
-        super();
+    /* Function to notify parent if LayerButton was clicked */
+    layerButtonClicked = () => {
+        this.props.toggleDrawer();
     }
 
     render() {
         return (
             <div className='toolBar'>
-            <LayerButton></LayerButton>
-            <ShareButton></ShareButton>
-            <ZoomButtons></ZoomButtons>
+                <LayerButton handleClick={this.layerButtonClicked}></LayerButton>
+                <ShareButton></ShareButton>
+                <ZoomButtons></ZoomButtons>
             </div>
         );
     }

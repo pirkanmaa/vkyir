@@ -7,10 +7,15 @@ const style = {
     display: 'flex'
 }
 
-const LayerButton = () => (
-    <FloatingActionButton mini={true} style={style} onClick={() => setState({ on: !state.on })}>
-    <MapsLayers />
-    </FloatingActionButton>
-);
+class LayerButton extends Component {
+    render() {
+        return(
+            <FloatingActionButton mini={true} style={style}
+                                  onClick={() => this.props.handleClick()}>
+                <MapsLayers />
+            </FloatingActionButton>
+        );
+    }
+}
 
 export default LayerButton;

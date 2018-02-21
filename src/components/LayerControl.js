@@ -7,20 +7,13 @@ export default class LayerControl extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {open: false};
   }
-
-  handleToggle = () => this.setState({open: !this.state.open});
 
   render() {
     return (
       <div>
-        <FlatButton
-          label="Show map layers"
-          onClick={this.handleToggle}
-        />
-        <Drawer open={this.state.open}>
-          <MenuItem>Layer Control</MenuItem>
+        <Drawer open={this.props.drawerStatus}>
+          <MenuItem> Layer Control </MenuItem>
         </Drawer>
       </div>
     );
