@@ -3,6 +3,21 @@ html {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: monospace;
     font-size: 1.6rem;
+}
+
+.app {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: #27db48;
+    padding: 40px;
+    min-width: 800px;
+    min-height: 600px;
+}
+
+.header {
+    position: absolute;
+    top: 40px;
 }
