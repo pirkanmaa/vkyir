@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
+import OLMap from 'ol/map';
+import View from 'ol/view';
+import TileLayer from 'ol/layer/tile';
+import XYZ from 'ol/source/xyz';
 
 class Map extends Component {
     constructor() {
         super();
     }
 
+    componentDidMount() {
+        let map = new OLMap({
+            target: 'map',
+            layers: [
+                new TileLayer({
+                    source: new XYZ({
+                        url: 'https://api.mapbox.com/styles/v1/webigu/cjdwtqlgj7dev2snnlo0nfaiu/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2ViaWd1IiwiYSI6ImNqZHd0cTNidzBvM2kyeHM2Mjh2YzdiMGoifQ.3fbmDT3SZof-RM3uSpHMDg'
+                    })
+                })
+            ],
+            view: new View({
+                center: [1100000, 7600000],
+                zoom: 7
+            })
+        });
+    }
+
     render() {
         return (
-            <div className='map'>
-                <h2> Here be the Map </h2>
-            </div>
+            <div className='map' id='map'></div>
         );
     }
 };

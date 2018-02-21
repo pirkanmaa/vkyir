@@ -8,7 +8,7 @@ class LayerControl extends Component {
     render() {
         return (
             <div className='layerControl'>
-                <h3> Map Themes </h3>
+                <h3> Layer Control </h3>
             </div>
         );
     }
