@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import LockButton from './tools/LockButton';
+import LayerButton from './tools/LayerButton';
+import ShareButton from './tools/ShareButton';
+import PrintButton from './tools/PrintButton';
 import ZoomIn from './tools/ZoomIn';
 import ZoomOut from './tools/ZoomOut';
-import ShareButton from './tools/ShareButton';
-import LayerButton from './tools/LayerButton';
 
 const style = {
     margin: 20,
@@ -18,8 +20,10 @@ class Toolbar extends Component {
     render() {
         return (
             <div className='toolBar'>
+                <LockButton/>
                 <LayerButton handleClick={this.layerButtonClicked} />
-                <ShareButton></ShareButton>
+                <ShareButton/>
+                <PrintButton/>
                 <ZoomIn handleClick={this.zoomInClicked} />
                 <ZoomOut handleClick={this.zoomOutClicked} />
             </div>

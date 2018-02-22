@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import Share from 'material-ui/svg-icons/social/share';
+import ActionPrint from 'material-ui/svg-icons/action/print';
 
 const style = {
-    marginBottom: 10
+    marginBottom: 40
 }
 
-const ShareButton = () => (
+const PrintButton = () => (
     <FloatingActionButton mini={true} style={style}>
-        <Share />
+        <ActionPrint />
     </FloatingActionButton>
 );
 
-export default ShareButton;
+export default PrintButton;

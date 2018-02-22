@@ -13,7 +13,8 @@ class App extends Component {
         center: [1100000, 7600000],
         zoom: 7,
         maxZoom: 10,
-        minZoom: 7
+        minZoom: 7,
+        zoomStep: 0.25
     };
 
     /* Toggle Map Layer Control Drawer */
@@ -23,11 +24,15 @@ class App extends Component {
 
     /* Map Zoomers */
     zoomIn = () => {
-        this.setState({ zoom: this.state.zoom <= this.state.maxZoom ? this.state.zoom + 0.2 : this.state.zoom });
+        if(this.state.zoom < this.state.maxZoom) {
+            this.setState({ zoom: this.state.zoom + this.state.zoomStep });
+        }
     }
 
     zoomOut = () => {
-        this.setState({ zoom: this.state.zoom >= this.state.minZoom ? this.state.zoom - 0.2 : this.state.zoom });
+        if(this.state.zoom > this.state.minZoom) {
+            this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+        }
     }
 
     render() {
