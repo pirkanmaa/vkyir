@@ -44,6 +44,7 @@ class Map extends Component {
 
     }
 
+    // Tässä on nyt väärä logiikka. Nyt about aina kun joku DOMissa päivittyy tms, kartta heittää zuumit.
     componentDidUpdate() {
         view.setZoom(this.props.zoom);
     }
