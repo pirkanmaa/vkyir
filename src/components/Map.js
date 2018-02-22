@@ -13,6 +13,12 @@ const basemaps = {
 class Map extends Component {
 
     componentDidMount() {
+        
+        let view = new View({
+            center: this.props.center,
+            zoom: this.props.zoom
+        });
+
         let map = new OLMap({
             target: 'map',
             layers: [
@@ -22,12 +28,14 @@ class Map extends Component {
                     })
                 })
             ],
-            view: new View({
-                center: this.props.center,
-                zoom: this.props.zoom
-            }),
+            view: view,
             controls: [new Zoom]
         });
+
+        map.on('pointermove', function () {
+            console.log(view.getCenter());
+        });
+
     }
 
     render() {
