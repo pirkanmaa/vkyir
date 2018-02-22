@@ -10,24 +10,27 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            showLayerControl: false
+            showLayerControl: false,
+            zoom: 7,
+            center: [1100000, 7600000]
         };
     }
 
     /* Toggle LayerControl (drawer) */
     toggleLayerControl = () => {
-        this.setState({showLayerControl: !this.state.showLayerControl});
+        this.setState({ showLayerControl: !this.state.showLayerControl });
     }
 
     render() {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                 <div className='app'>
-                    <Map></Map>
-                    <LayerControl drawerStatus={this.state.showLayerControl}>
-                    </LayerControl>
-                    <Toolbar toggleDrawer={this.toggleLayerControl}>
-                    </Toolbar>
+                    <Map 
+                        zoom={this.state.zoom}
+                        center={this.state.center}
+                    />
+                    <LayerControl drawerStatus={this.state.showLayerControl}/>
+                    <Toolbar toggleDrawer={this.toggleLayerControl}/>
                 </div>
             </MuiThemeProvider>
         );
