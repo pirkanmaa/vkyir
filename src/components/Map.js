@@ -16,7 +16,9 @@ class Map extends Component {
         
         let view = new View({
             center: this.props.center,
-            zoom: this.props.zoom
+            zoom: this.props.zoom,
+            maxZoom: this.props.maxZoom,
+            minZoom: this.props.minZoom
         });
 
         let map = new OLMap({

@@ -10,22 +10,18 @@ const style = {
 }
 
 class Toolbar extends Component {
-    /* Function to notify parent if LayerButton was clicked */
-    layerButtonClicked = () => {
-        this.props.toggleDrawer();
-    }
 
-    zoomIn = () => {
-        this.props.zoom();
-    }
+    layerButtonClicked = () => { this.props.toggleDrawer(); }
+    zoomInClicked = () => { this.props.zoomIn(); }
+    zoomOutClicked = () => { this.props.zoomOut(); }
 
     render() {
         return (
             <div className='toolBar'>
                 <LayerButton handleClick={this.layerButtonClicked}/>
                 <ShareButton></ShareButton>
-                <ZoomIn></ZoomIn>
-                <ZoomOut></ZoomOut>
+                <ZoomIn handleClick={this.zoomInClicked}/>
+                <ZoomOut handleClick={this.zoomOutClicked}/>
             </div>
         );
     }

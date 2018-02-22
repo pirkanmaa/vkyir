@@ -13,7 +13,7 @@ export default class LayerControl extends Component {
     return (
       <div>
         <Drawer open={this.props.drawerStatus}>
-          <MenuItem> Layer Control </MenuItem>
+          <MenuItem> Map Layers </MenuItem>
           <MenuItem> Basemaps </MenuItem>
         </Drawer>
       </div>
