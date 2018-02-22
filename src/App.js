@@ -30,7 +30,10 @@ class App extends Component {
                         center={this.state.center}
                     />
                     <LayerControl drawerStatus={this.state.showLayerControl}/>
-                    <Toolbar toggleDrawer={this.toggleLayerControl}/>
+                    <Toolbar
+                        toggleDrawer={this.toggleLayerControl}
+                        zoom={this.state.zoom}
+                    />
                 </div>
             </MuiThemeProvider>
         );

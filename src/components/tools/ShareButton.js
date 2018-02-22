@@ -3,8 +3,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Share from 'material-ui/svg-icons/social/share';
 
 const style = {
-    margin: 20,
-    display: 'flex'
+    marginBottom: 40
 }
 
 const ShareButton = () => (

@@ -4,7 +4,7 @@ import MapsLayers from 'material-ui/svg-icons/maps/layers';
 import MapsLayersClear from 'material-ui/svg-icons/maps/layers-clear';
 
 const style = {
-    display: 'flex'
+    margin: 10
 }
 
 class LayerButton extends Component {
