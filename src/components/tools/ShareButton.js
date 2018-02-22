@@ -8,7 +8,7 @@ const style = {
 
 const ShareButton = () => (
     <FloatingActionButton mini={true} style={style}>
-    <Share />
+        <Share />
     </FloatingActionButton>
 );
 

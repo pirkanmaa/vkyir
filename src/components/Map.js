@@ -10,16 +10,16 @@ const basemaps = {
     mapboxGray: 'https://api.mapbox.com/styles/v1/webigu/cjdwtqlgj7dev2snnlo0nfaiu/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2ViaWd1IiwiYSI6ImNqZHd0cTNidzBvM2kyeHM2Mjh2YzdiMGoifQ.3fbmDT3SZof-RM3uSpHMDg'
 }
 
+let view = new View;
+
 class Map extends Component {
 
     componentDidMount() {
-        
-        let view = new View({
-            center: this.props.center,
-            zoom: this.props.zoom,
-            maxZoom: this.props.maxZoom,
-            minZoom: this.props.minZoom
-        });
+
+        view.setCenter(this.props.center);
+        view.setZoom(this.props.zoom);
+        view.setMaxZoom(this.props.maxZoom);
+        view.setMinZoom(this.props.minZoom);
 
         let map = new OLMap({
             target: 'map',
@@ -34,10 +34,14 @@ class Map extends Component {
             controls: [new Zoom]
         });
 
-        map.on('pointermove', function () {
-            console.log(view.getCenter());
+        map.on('pointermove', function() {
+            console.log(view.getCenter())
         });
 
+    }
+
+    componentDidUpdate() {
+        view.setZoom(this.props.zoom)
     }
 
     render() {

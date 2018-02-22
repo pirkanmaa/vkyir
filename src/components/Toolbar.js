@@ -18,10 +18,10 @@ class Toolbar extends Component {
     render() {
         return (
             <div className='toolBar'>
-                <LayerButton handleClick={this.layerButtonClicked}/>
+                <LayerButton handleClick={this.layerButtonClicked} />
                 <ShareButton></ShareButton>
-                <ZoomIn handleClick={this.zoomInClicked}/>
-                <ZoomOut handleClick={this.zoomOutClicked}/>
+                <ZoomIn handleClick={this.zoomInClicked} />
+                <ZoomOut handleClick={this.zoomOutClicked} />
             </div>
         );
     }

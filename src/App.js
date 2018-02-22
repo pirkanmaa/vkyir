@@ -7,43 +7,40 @@ import LayerControl from './components/LayerControl';
 import Toolbar from './components/Toolbar';
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            showLayerControl: false,
-            center: [1100000, 7600000],
-            zoom: 7,
-            maxZoom: 10,
-            minZoom: 7
-        };
-    }
 
-    /* Toggle Map Layer Control Drawer */ 
+    state = {
+        showLayerControl: false,
+        center: [1100000, 7600000],
+        zoom: 7,
+        maxZoom: 10,
+        minZoom: 7
+    };
+
+    /* Toggle Map Layer Control Drawer */
     toggleLayerControl = () => {
         this.setState({ showLayerControl: !this.state.showLayerControl });
     }
 
-    /* Map Zoom In */ 
+    /* Map Zoomers */
     zoomIn = () => {
-        this.setState({ zoom: this.state.zoom <= this.state.maxZoom ? this.state.zoom + 0.5 : this.state.zoom});
+        this.setState({ zoom: this.state.zoom <= this.state.maxZoom ? this.state.zoom + 0.5 : this.state.zoom });
     }
 
-    /* Map Zoom Out */ 
     zoomOut = () => {
-        this.setState({ zoom: this.state.zoom >= this.state.minZoom ? this.state.zoom - 0.5 : this.state.zoom});
+        this.setState({ zoom: this.state.zoom >= this.state.minZoom ? this.state.zoom - 0.5 : this.state.zoom });
     }
 
     render() {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                 <div className='app'>
-                    <Map 
+                    <Map
                         zoom={this.state.zoom}
                         minZoom={this.state.minZoom}
                         maxZoom={this.state.maxZoom}
                         center={this.state.center}
                     />
-                    <LayerControl drawerStatus={this.state.showLayerControl}/>
+                    <LayerControl drawerStatus={this.state.showLayerControl} />
                     <Toolbar
                         toggleDrawer={this.toggleLayerControl}
                         zoomIn={this.zoomIn}
