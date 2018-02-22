@@ -23,11 +23,11 @@ class App extends Component {
 
     /* Map Zoomers */
     zoomIn = () => {
-        this.setState({ zoom: this.state.zoom <= this.state.maxZoom ? this.state.zoom + 0.5 : this.state.zoom });
+        this.setState({ zoom: this.state.zoom <= this.state.maxZoom ? this.state.zoom + 0.2 : this.state.zoom });
     }
 
     zoomOut = () => {
-        this.setState({ zoom: this.state.zoom >= this.state.minZoom ? this.state.zoom - 0.5 : this.state.zoom });
+        this.setState({ zoom: this.state.zoom >= this.state.minZoom ? this.state.zoom - 0.2 : this.state.zoom });
     }
 
     render() {

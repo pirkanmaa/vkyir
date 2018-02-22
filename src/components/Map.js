@@ -31,17 +31,21 @@ class Map extends Component {
                 })
             ],
             view: view,
-            controls: [new Zoom]
+            controls: []
         });
 
         map.on('pointermove', function() {
             console.log(view.getCenter())
         });
 
+        map.on('moveend', function() {
+            console.log(view.getZoom())
+        });
+
     }
 
     componentDidUpdate() {
-        view.setZoom(this.props.zoom)
+        view.setZoom(this.props.zoom);
     }
 
     render() {
