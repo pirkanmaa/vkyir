@@ -3,13 +3,15 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ActionPrint from 'material-ui/svg-icons/action/print';
 
 const style = {
-    marginBottom: 40
+    marginBottom: 100
 }
 
-const PrintButton = () => (
-    <FloatingActionButton mini={true} style={style}>
-        <ActionPrint />
-    </FloatingActionButton>
-);
-
-export default PrintButton;
+export default class PrintButton extends Component {
+    render() {
+        return (
+            <FloatingActionButton mini={true} style={style}>
+                <ActionPrint />
+            </FloatingActionButton>
+        );
+    }
+}

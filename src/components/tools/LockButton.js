@@ -4,7 +4,7 @@ import ActionLock from 'material-ui/svg-icons/action/lock';
 import ActionLockOpen from 'material-ui/svg-icons/action/lock-open';
 
 const style = {
-    margin: 10
+    marginBottom: 10
 }
 
 export default class LockButton extends Component {

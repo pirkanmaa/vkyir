@@ -4,10 +4,10 @@ import MapsLayers from 'material-ui/svg-icons/maps/layers';
 import MapsLayersClear from 'material-ui/svg-icons/maps/layers-clear';
 
 const style = {
-    margin: 10
+    marginBottom: 10
 }
 
-class LayerButton extends Component {
+export default class LayerButton extends Component {
     render() {
         return (
             <FloatingActionButton mini={true} style={style} onClick={() => this.props.handleClick()}>
@@ -16,5 +16,3 @@ class LayerButton extends Component {
         );
     }
 }
-
-export default LayerButton;

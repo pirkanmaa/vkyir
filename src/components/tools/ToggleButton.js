@@ -4,9 +4,8 @@ import ActionSettings from 'material-ui/svg-icons/action/settings';
 
 const style = {
     display: 'flex',
-    right: '1em',
-    bottom: '1em',
-    margin: 10,
+    right: '1rem',
+    bottom: '1rem',
     position: 'absolute'
 }
 
@@ -18,4 +17,4 @@ export default class ToggleButton extends Component {
             </FloatingActionButton>
         );
     }
-}
+} 

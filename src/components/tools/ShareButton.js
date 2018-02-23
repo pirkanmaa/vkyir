@@ -6,10 +6,12 @@ const style = {
     marginBottom: 10
 }
 
-const ShareButton = () => (
-    <FloatingActionButton mini={true} style={style}>
-        <Share />
-    </FloatingActionButton>
-);
-
-export default ShareButton;
+export default class ShareButton extends Component {
+    render() {
+        return (
+            <FloatingActionButton mini={true} style={style}>
+                <Share />
+            </FloatingActionButton>
+        );
+    }
+}

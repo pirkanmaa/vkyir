@@ -18,7 +18,7 @@ const style = {
     height: '50%',
     top: '25%',
     bottom: '25%',
-    right: '1em',
+    right: '1rem',
     width: 'auto',
     boxShadow: 'none'
 }
