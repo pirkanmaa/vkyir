@@ -1,43 +1,83 @@
 import React, { Component } from 'react';
 import Map from './components/Map';
-import MapTheme from './components/MapTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import LayerControl from './components/LayerControl';
 import Toolbar from './components/Toolbar';
-
-const styles = {
-    app: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        background: '#27db48',
-        padding: '40px',
-        minWidth: '800px',
-        minHeight: '600px',
-        fontFamily: 'monospace'
-    },
-    header: {
-        position: 'absolute',
-        top: '40px',
-    }
-}
+import LoginDialog from './components/LoginDialog';
+import ToggleButton from './components/ToggleButton';
 
 class App extends Component {
-    constructor(){
-    	super();
-    	this.state = {
-            number: 123,
-        };
+
+    state = {
+        showLayerControl: false,
+        showToolbar: true,
+        showLogin: false,
+        logged: false,
+        center: [1100000, 7600000],
+        zoom: 7,
+        maxZoom: 10,
+        minZoom: 7,
+        zoomStep: 0.25
+    };
+
+    /* Toggle Map Layer Control Drawer */
+    toggleLayerControl = () => {
+        this.setState({ showLayerControl: !this.state.showLayerControl });
+    }
+
+    toggleToolbar = () => {
+        this.setState({ showToolbar: !this.state.showToolbar });
+    }
+
+    toggleLogin = () => {
+        this.setState({ showLogin: !this.state.showLogin });
+    }
+
+    /* Map Zoomers */
+    zoomIn = () => {
+        if (this.state.zoom < this.state.maxZoom) {
+            this.setState({ zoom: this.state.zoom + this.state.zoomStep });
+        }
+    }
+
+    zoomOut = () => {
+        if (this.state.zoom > this.state.minZoom) {
+            this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+        }
     }
 
     render() {
         return (
-            <div style={styles.app}>
-                <h1 style={styles.header}> App container </h1>
-                <MapTheme></MapTheme>
-                <Map></Map>
-                <Toolbar></Toolbar>
-            </div>
+            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+                <div className='app'>
+                    <Map
+                        zoom={this.state.zoom}
+                        minZoom={this.state.minZoom}
+                        maxZoom={this.state.maxZoom}
+                        center={this.state.center}
+                    />
+                    <LayerControl
+                        layerControlVisibility={this.state.showLayerControl}
+                    />
+                    <Toolbar
+                        toolbarVisibility={this.state.showToolbar}
+                        toggleLayerControl={this.toggleLayerControl}
+                        toggleLogin={this.toggleLogin}
+                        zoomIn={this.zoomIn}
+                        zoomOut={this.zoomOut}
+                    />
+                    <ToggleButton
+                        toggleToolbar={this.toggleToolbar}
+                    />
+                    <LoginDialog
+                        toggleLogin={this.toggleLogin}
+                        loginDialogVisibility={this.state.showLogin}
+                    />
+                </div>
+            </MuiThemeProvider>
         );
     }
 }
-
 export default App;
