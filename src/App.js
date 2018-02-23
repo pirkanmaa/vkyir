@@ -10,6 +10,7 @@ class App extends Component {
 
     state = {
         showLayerControl: false,
+        showToolbar: true,
         center: [1100000, 7600000],
         zoom: 7,
         maxZoom: 10,
@@ -20,6 +21,10 @@ class App extends Component {
     /* Toggle Map Layer Control Drawer */
     toggleLayerControl = () => {
         this.setState({ showLayerControl: !this.state.showLayerControl });
+    }
+
+    toggleToolbar = () => {
+        this.setState({ showToolbar: !this.state.showToolbar });
     }
 
     /* Map Zoomers */
@@ -45,9 +50,13 @@ class App extends Component {
                         maxZoom={this.state.maxZoom}
                         center={this.state.center}
                     />
-                    <LayerControl drawerStatus={this.state.showLayerControl} />
+                    <LayerControl
+                        layerControlVisibility={this.state.showLayerControl}
+                        />
                     <Toolbar
-                        toggleDrawer={this.toggleLayerControl}
+                        toolbarVisibility={this.state.showToolbar}
+                        toggleLayerControl={this.toggleLayerControl}
+                        toggleToolbar={this.toggleToolbar}
                         zoomIn={this.zoomIn}
                         zoomOut={this.zoomOut}
                     />
