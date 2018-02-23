@@ -5,12 +5,15 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import LayerControl from './components/LayerControl';
 import Toolbar from './components/Toolbar';
+import LoginDialog from './components/LoginDialog';
 
 class App extends Component {
 
     state = {
         showLayerControl: false,
         showToolbar: true,
+        showLogin: false,
+        logged: false,
         center: [1100000, 7600000],
         zoom: 7,
         maxZoom: 10,
@@ -27,15 +30,19 @@ class App extends Component {
         this.setState({ showToolbar: !this.state.showToolbar });
     }
 
+    toggleLogin = () => {
+        this.setState({ showLogin: !this.state.showLogin });
+    }
+
     /* Map Zoomers */
     zoomIn = () => {
-        if(this.state.zoom < this.state.maxZoom) {
+        if (this.state.zoom < this.state.maxZoom) {
             this.setState({ zoom: this.state.zoom + this.state.zoomStep });
         }
     }
 
     zoomOut = () => {
-        if(this.state.zoom > this.state.minZoom) {
+        if (this.state.zoom > this.state.minZoom) {
             this.setState({ zoom: this.state.zoom - this.state.zoomStep });
         }
     }
@@ -52,13 +59,18 @@ class App extends Component {
                     />
                     <LayerControl
                         layerControlVisibility={this.state.showLayerControl}
-                        />
+                    />
                     <Toolbar
                         toolbarVisibility={this.state.showToolbar}
                         toggleLayerControl={this.toggleLayerControl}
+                        toggleLogin={this.toggleLogin}
                         toggleToolbar={this.toggleToolbar}
                         zoomIn={this.zoomIn}
                         zoomOut={this.zoomOut}
+                    />
+                    <LoginDialog 
+                        toggleLogin={this.toggleLogin}
+                        loginDialogVisibility={this.state.showLogin}
                     />
                 </div>
             </MuiThemeProvider>

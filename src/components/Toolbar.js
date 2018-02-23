@@ -19,13 +19,15 @@ const style = {
     top: '25%',
     bottom: '25%',
     right: '1em',
-    width: 'auto'
+    width: 'auto',
+    boxShadow: 'none'
 }
 
-class Toolbar extends Component {
+export default class Toolbar extends Component {
 
     toggleButtonClicked = () => { this.props.toggleToolbar(); }
     layerButtonClicked = () => { this.props.toggleLayerControl(); }
+    lockClicked = () => { this.props.toggleLogin(); }
     zoomInClicked = () => { this.props.zoomIn(); }
     zoomOutClicked = () => { this.props.zoomOut(); }
 
@@ -34,7 +36,7 @@ class Toolbar extends Component {
             <div>
                 <ToggleButton handleClick={this.toggleButtonClicked} />
                 <Drawer openSecondary={true} open={this.props.toolbarVisibility} containerStyle={style}>
-                    <LockButton />
+                    <LockButton handleClick={this.lockClicked} />
                     <LayerButton handleClick={this.layerButtonClicked} />
                     <ShareButton />
                     <PrintButton />
@@ -45,5 +47,3 @@ class Toolbar extends Component {
         );
     }
 }
-
-export default Toolbar;

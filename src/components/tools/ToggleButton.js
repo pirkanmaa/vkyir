@@ -10,7 +10,7 @@ const style = {
     position: 'absolute'
 }
 
-class ToggleButton extends Component {
+export default class ToggleButton extends Component {
     render() {
         return (
             <FloatingActionButton mini={true} style={style} onClick={() => this.props.handleClick()}>
@@ -19,5 +19,3 @@ class ToggleButton extends Component {
         );
     }
 }
-
-export default ToggleButton;

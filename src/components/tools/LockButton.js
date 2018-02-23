@@ -7,14 +7,12 @@ const style = {
     margin: 10
 }
 
-class LockButton extends Component {
+export default class LockButton extends Component {
     render() {
         return (
-            <FloatingActionButton mini={true} style={style}>
+            <FloatingActionButton mini={true} style={style} onClick={() => this.props.handleClick()}>
                 <ActionLock />
             </FloatingActionButton>
         );
     }
 }
-
-export default LockButton;
