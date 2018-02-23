@@ -6,15 +6,16 @@ const style = {
     display: 'flex',
     right: '1rem',
     bottom: '1rem',
-    position: 'absolute'
+    position: 'absolute',
+    zIndex: '1301'
 }
 
 export default class ToggleButton extends Component {
     render() {
         return (
-            <FloatingActionButton mini={true} style={style} onClick={() => this.props.handleClick()}>
+            <FloatingActionButton mini={true} style={style} onClick={() => this.props.toggleToolbar()}>
                 <ActionSettings />
             </FloatingActionButton>
         );
     }
-} 
+}

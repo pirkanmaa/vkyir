@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
-import ToggleButton from './tools/ToggleButton';
 import LockButton from './tools/LockButton';
 import LayerButton from './tools/LayerButton';
 import ShareButton from './tools/ShareButton';
@@ -15,17 +14,14 @@ const style = {
     justifyContent: 'center',
     alignItems: 'center',
     background: 'none',
-    height: '50%',
-    top: '25%',
-    bottom: '25%',
     right: '1rem',
     width: 'auto',
-    boxShadow: 'none'
+    boxShadow: 'none',
+    // pointerEvents: 'none'
 }
 
 export default class Toolbar extends Component {
 
-    toggleButtonClicked = () => { this.props.toggleToolbar(); }
     layerButtonClicked = () => { this.props.toggleLayerControl(); }
     lockClicked = () => { this.props.toggleLogin(); }
     zoomInClicked = () => { this.props.zoomIn(); }
@@ -34,7 +30,6 @@ export default class Toolbar extends Component {
     render() {
         return (
             <div>
-                <ToggleButton handleClick={this.toggleButtonClicked} />
                 <Drawer openSecondary={true} open={this.props.toolbarVisibility} containerStyle={style}>
                     <LockButton handleClick={this.lockClicked} />
                     <LayerButton handleClick={this.layerButtonClicked} />

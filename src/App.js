@@ -6,6 +6,7 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import LayerControl from './components/LayerControl';
 import Toolbar from './components/Toolbar';
 import LoginDialog from './components/LoginDialog';
+import ToggleButton from './components/ToggleButton';
 
 class App extends Component {
 
@@ -64,11 +65,13 @@ class App extends Component {
                         toolbarVisibility={this.state.showToolbar}
                         toggleLayerControl={this.toggleLayerControl}
                         toggleLogin={this.toggleLogin}
-                        toggleToolbar={this.toggleToolbar}
                         zoomIn={this.zoomIn}
                         zoomOut={this.zoomOut}
                     />
-                    <LoginDialog 
+                    <ToggleButton
+                        toggleToolbar={this.toggleToolbar}
+                    />
+                    <LoginDialog
                         toggleLogin={this.toggleLogin}
                         loginDialogVisibility={this.state.showLogin}
                     />
