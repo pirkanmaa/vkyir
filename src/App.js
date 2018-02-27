@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Map from './components/Map';
+import Theme from './Theme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import LayerControl from './components/LayerControl';
 import Toolbar from './components/Toolbar';
 import LoginDialog from './components/LoginDialog';
@@ -50,7 +49,7 @@ class App extends Component {
 
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+            <MuiThemeProvider muiTheme={Theme()}>
                 <div className='app'>
                     <Map
                         zoom={this.state.zoom}
