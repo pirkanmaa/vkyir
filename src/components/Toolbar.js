@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
 import LockButton from './tools/LockButton';
 import LayerButton from './tools/LayerButton';
+import ChartButton from './tools/ChartButton';
 import ShareButton from './tools/ShareButton';
 import PrintButton from './tools/PrintButton';
-import RaisedButton from 'material-ui/RaisedButton';
 import ZoomIn from './tools/ZoomIn';
 import ZoomOut from './tools/ZoomOut';
 
@@ -15,6 +15,7 @@ const style = {
     alignItems: 'center',
     background: 'none',
     right: '1rem',
+    top: '1rem',
     width: 'auto',
     boxShadow: 'none',
     // pointerEvents: 'none'
@@ -33,6 +34,7 @@ export default class Toolbar extends Component {
                 <Drawer openSecondary={true} open={this.props.toolbarVisibility} containerStyle={style}>
                     <LockButton handleClick={this.lockClicked} />
                     <LayerButton handleClick={this.layerButtonClicked} />
+                    <ChartButton />
                     <ShareButton />
                     <PrintButton />
                     <ZoomIn handleClick={this.zoomInClicked} />

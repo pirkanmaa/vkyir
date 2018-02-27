@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ActionPrint from 'material-ui/svg-icons/action/print';
+import EditorPieChart from 'material-ui/svg-icons/editor/pie-chart';
 
 const style = {
-    marginBottom: 100
+    marginBottom: 10
 }
 
-export default class PrintButton extends Component {
+export default class ShareButton extends Component {
     render() {
         return (
             <FloatingActionButton style={style}>
-                <ActionPrint />
+                <EditorPieChart />
             </FloatingActionButton>
         );
     }

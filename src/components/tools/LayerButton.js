@@ -10,7 +10,7 @@ const style = {
 export default class LayerButton extends Component {
     render() {
         return (
-            <FloatingActionButton mini={true} style={style} onClick={() => this.props.handleClick()}>
+            <FloatingActionButton style={style} onClick={() => this.props.handleClick()}>
                 <MapsLayers />
             </FloatingActionButton>
         );

@@ -4,13 +4,15 @@ import ActionLock from 'material-ui/svg-icons/action/lock';
 import ActionLockOpen from 'material-ui/svg-icons/action/lock-open';
 
 const style = {
-    marginBottom: 10
+    top: '0rem',
+    position: 'absolute',
+    display: 'flex'
 }
 
 export default class LockButton extends Component {
     render() {
         return (
-            <FloatingActionButton mini={true} style={style} onClick={() => this.props.handleClick()}>
+            <FloatingActionButton style={style} onClick={() => this.props.handleClick()}>
                 <ActionLock />
             </FloatingActionButton>
         );

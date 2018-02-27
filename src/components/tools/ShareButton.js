@@ -9,7 +9,7 @@ const style = {
 export default class ShareButton extends Component {
     render() {
         return (
-            <FloatingActionButton mini={true} style={style}>
+            <FloatingActionButton style={style}>
                 <Share />
             </FloatingActionButton>
         );

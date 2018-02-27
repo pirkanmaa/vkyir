@@ -13,7 +13,7 @@ const style = {
 export default class ToggleButton extends Component {
     render() {
         return (
-            <FloatingActionButton mini={true} style={style} onClick={() => this.props.toggleToolbar()}>
+            <FloatingActionButton style={style} onClick={() => this.props.toggleToolbar()}>
                 <ActionSettings />
             </FloatingActionButton>
         );
