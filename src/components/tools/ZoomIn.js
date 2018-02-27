@@ -3,7 +3,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 const style = {
-  marginBottom: 10
+  marginBottom: 5
 }
 
 export default class ZoomIn extends Component {
