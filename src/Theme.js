@@ -8,7 +8,7 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 const Theme = () => {
     let overwrites = {
         "floatingActionButton": {
-            "miniSize": 20,
+            "miniSize": 30,
             "buttonSize": 40
         }
     };

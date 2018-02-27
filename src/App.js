@@ -3,6 +3,7 @@ import Map from './components/Map';
 import Theme from './Theme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import LayerControl from './components/LayerControl';
+import ChartContainer from './components/ChartContainer';
 import Toolbar from './components/Toolbar';
 import LoginDialog from './components/LoginDialog';
 import ToggleButton from './components/ToggleButton';
@@ -60,6 +61,7 @@ class App extends Component {
                     <LayerControl
                         layerControlVisibility={this.state.showLayerControl}
                     />
+                    <ChartContainer/>
                     <Toolbar
                         toolbarVisibility={this.state.showToolbar}
                         toggleLayerControl={this.toggleLayerControl}
