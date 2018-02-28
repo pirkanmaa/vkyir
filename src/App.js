@@ -12,6 +12,7 @@ import ToggleButton from './components/ToggleButton';
 class App extends Component {
 
     state = {
+        showChart: false,
         showLayerControl: false,
         showToolbar: true,
         showLogin: false,
@@ -34,6 +35,10 @@ class App extends Component {
 
     toggleLogin = () => {
         this.setState({ showLogin: !this.state.showLogin });
+    }
+
+    toggleChart = () => {
+        this.setState({ showChart: !this.state.showChart });
     }
 
     /* Map Zoomers */
@@ -63,10 +68,14 @@ class App extends Component {
                     <LayerControl
                         layerControlVisibility={this.state.showLayerControl}
                     />
+                    <ChartContainer
+                        chartVisibility={this.state.showChart}
+                    />
                     <Toolbar
                         toolbarVisibility={this.state.showToolbar}
                         toggleLayerControl={this.toggleLayerControl}
                         toggleLogin={this.toggleLogin}
+                        toggleChart={this.toggleChart}
                         zoomIn={this.zoomIn}
                         zoomOut={this.zoomOut}
                     />

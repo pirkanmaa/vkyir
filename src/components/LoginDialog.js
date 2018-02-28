@@ -15,31 +15,26 @@ export default function LoginDialog(props) {
             >
                 <DialogTitle id="login-dialog-title">Log in</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        Enter your username
-                        </DialogContentText>
                     <TextField
                         autoFocus
                         type='email'
-                        label="username (e-mail)"
+                        helperText="username (e-mail)"
                         id='username'
                     //onChange={(event, newValue) => this.setState({ username: newValue })}
                     />
                     <br />
-                    <DialogContentText>
-                        Enter your password
-                        </DialogContentText>
                     <TextField
                         type="password"
-                        label="password"
+                        helperText="password"
+                        id="password"
                     //onChange={(event, newValue) => this.setState({ password: newValue })}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={props.toggleLogin} color="secondary">
+                    <Button onClick={props.toggleLogin} color="primary">
                         Cancel
                         </Button>
-                    <Button onClick={props.toggleLogin} color="secondary">
+                    <Button onClick={props.toggleLogin} color="primary">
                         Submit
                         </Button>
                 </DialogActions>

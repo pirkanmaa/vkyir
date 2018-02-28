@@ -29,7 +29,7 @@ function Toolbar(props) {
         <Drawer variant='persistent' anchor='right' open={props.toolbarVisibility} classes={{paper: classes.paper}}>
             <LockButton handleClick={() => props.toggleLogin()} />
             <LayerButton handleClick={() => props.toggleLayerControl()} />
-            <ChartButton />
+            <ChartButton handleClick={() => props.toggleChart()}/>
             <ShareButton />
             <PrintButton />
             <ZoomIn handleClick={() => props.zoomIn()} />
