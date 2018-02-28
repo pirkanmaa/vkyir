@@ -1,12 +1,11 @@
 .chartContainer {
     display: flex;
-    position: relative;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 20%;
-    min-width: 20%;
+    position: absolute;
+    background-color: $gray;
+    height: 35%;
+    width: 20%;
     margin: 0;
-    top: '1rem';
-    right: '1rem';
+    top: 1rem;
+    right: 6rem;
+    z-index: 1500;
 }

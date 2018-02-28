@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ActionSettings from 'material-ui/svg-icons/action/settings';
+import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
 
 const style = {
     display: 'flex',
@@ -13,9 +13,9 @@ const style = {
 export default class ToggleButton extends Component {
     render() {
         return (
-            <FloatingActionButton style={style} onClick={() => this.props.toggleToolbar()}>
-                <ActionSettings />
-            </FloatingActionButton>
+            <Button onClick={() => this.props.toggleToolbar()}>
+                <Icon>settings</Icon>
+            </Button>
         );
     }
 }

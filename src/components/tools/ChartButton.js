@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import EditorPieChart from 'material-ui/svg-icons/editor/pie-chart';
+import Button from 'material-ui/Button';
+import DonutSmall from 'material-ui-icons/DonutSmall';
 
 const style = {
     marginBottom: 10
@@ -9,9 +9,9 @@ const style = {
 export default class ShareButton extends Component {
     render() {
         return (
-            <FloatingActionButton style={style}>
-                <EditorPieChart />
-            </FloatingActionButton>
+            <Button variant="fab" color="secondary" style={style}>
+                <DonutSmall />
+            </Button>
         );
     }
 }

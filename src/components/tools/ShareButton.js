@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import Share from 'material-ui/svg-icons/social/share';
+import Button from 'material-ui/Button';
+import Share from 'material-ui-icons/Share';
 
 const style = {
     marginBottom: 10
@@ -9,9 +9,9 @@ const style = {
 export default class ShareButton extends Component {
     render() {
         return (
-            <FloatingActionButton style={style}>
+            <Button style={style}>
                 <Share />
-            </FloatingActionButton>
+            </Button>
         );
     }
 }

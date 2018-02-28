@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import React from 'react';
+import Button from 'material-ui/Button';
+import AddIcon from 'material-ui-icons/Add';
 
 const style = {
   marginBottom: 5
 }
 
-export default class ZoomIn extends Component {
-  render() {
+export default function ZoomIn(props) {
     return (
-      <FloatingActionButton mini={true} style={style} onClick={() => this.props.handleClick()}>
-        <ContentAdd />
-      </FloatingActionButton>
+      <Button mini={true} style={style} onClick={() => props.handleClick()}>
+        <AddIcon />
+      </Button>
     );
-  }
 }

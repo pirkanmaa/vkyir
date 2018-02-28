@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Paper from 'material-ui/Paper';
 
-export default class ChartContainer extends Component {
-  
-  render() {
-    return (
-      <div>
-        <Paper className='chartContainer'>
+export default function ChartContainer() {
+  return (
+    <div>
+      <Paper className='chartContainer'>
         Stuff
         </Paper>
-      </div>
-    );
-  }
+    </div>
+  );
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Reboot from 'material-ui/Reboot';
 import Map from './components/Map';
 import Theme from './Theme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { MuiThemeProvider } from 'material-ui/styles';
 import LayerControl from './components/LayerControl';
 import ChartContainer from './components/ChartContainer';
 import Toolbar from './components/Toolbar';
@@ -50,8 +51,9 @@ class App extends Component {
 
     render() {
         return (
-            <MuiThemeProvider muiTheme={Theme()}>
+            <MuiThemeProvider theme={Theme}>
                 <div className='app'>
+                    <Reboot />
                     <Map
                         zoom={this.state.zoom}
                         minZoom={this.state.minZoom}
