@@ -16,12 +16,7 @@ class App extends Component {
         showLayerControl: false,
         showToolbar: true,
         showLogin: false,
-        logged: false,
-        center: [1100000, 7600000],
-        zoom: 7,
-        maxZoom: 10,
-        minZoom: 7,
-        zoomStep: 0.25
+        logged: false
     };
 
     /* Toggle Map Layer Control Drawer */
@@ -39,19 +34,6 @@ class App extends Component {
 
     toggleChart = () => {
         this.setState({ showChart: !this.state.showChart });
-    }
-
-    /* Map Zoomers */
-    zoomIn = () => {
-        if (this.state.zoom < this.state.maxZoom) {
-            this.setState({ zoom: this.state.zoom + this.state.zoomStep });
-        }
-    }
-
-    zoomOut = () => {
-        if (this.state.zoom > this.state.minZoom) {
-            this.setState({ zoom: this.state.zoom - this.state.zoomStep });
-        }
     }
 
     render() {
@@ -76,8 +58,6 @@ class App extends Component {
                         toggleLayerControl={this.toggleLayerControl}
                         toggleLogin={this.toggleLogin}
                         toggleChart={this.toggleChart}
-                        zoomIn={this.zoomIn}
-                        zoomOut={this.zoomOut}
                     />
                     <ToggleButton
                         toggleToolbar={this.toggleToolbar}

@@ -4,10 +4,14 @@ import View from 'ol/view';
 import TileLayer from 'ol/layer/tile';
 import XYZ from 'ol/source/xyz';
 import Zoom from 'ol/control/zoom';
+import ZoomIn from './tools/ZoomIn';
+import ZoomOut from './tools/ZoomOut';
 
-const style = {
-    height: '100vh',
-    margin: 0,
+const styles = {
+    map: {
+        height: '100vh',
+        margin: 0
+    }
 }
 
 const basemaps = {
@@ -18,15 +22,22 @@ const basemaps = {
 let view = new View;
 
 class Map extends Component {
+    state = {
+        center: [1100000, 7600000],
+        zoom: 7,
+        maxZoom: 10,
+        minZoom: 7,
+        zoomStep: 0.1
+    };
 
     componentDidMount() {
 
-        view.setCenter(this.props.center);
-        view.setZoom(this.props.zoom);
-        view.setMaxZoom(this.props.maxZoom);
-        view.setMinZoom(this.props.minZoom);
+        view.setCenter(this.state.center);
+        view.setZoom(this.state.zoom);
+        view.setMaxZoom(this.state.maxZoom);
+        view.setMinZoom(this.state.minZoom);
 
-        let map = new OLMap({
+        var map = new OLMap({
             target: 'map',
             layers: [
                 new TileLayer({
@@ -38,25 +49,39 @@ class Map extends Component {
             view: view,
             controls: []
         });
-
-        map.on('pointermove', function () {
-            console.log(view.getCenter())
-        });
-
-        map.on('moveend', function () {
-            console.log(view.getZoom())
-        });
-
     }
 
-    // Tässä on nyt väärä logiikka. Nyt about aina kun joku DOMissa päivittyy tms, kartta heittää zuumit.
-    componentDidUpdate() {
-        view.setZoom(this.props.zoom);
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.zoom !== prevState.zoom) {
+            view.setZoom(this.state.zoom);
+        }
+    }
+
+    /* Map Zoomers */
+    wheelZoom = () => {
+        this.setState({zoom: view.getZoom()});
+    }
+
+    zoomIn = () => {
+        if (this.state.zoom < this.state.maxZoom) {
+            this.setState({ zoom: this.state.zoom + this.state.zoomStep });
+        }
+    }
+
+    zoomOut = () => {
+        if (this.state.zoom > this.state.minZoom) {
+            this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+        }
     }
 
     render() {
         return (
-            <div id='map' style={style}></div>
+            <div>
+                <ZoomIn handleClick={this.zoomIn} />
+                <ZoomOut handleClick={this.zoomOut} />
+                <div onWheel={this.wheelZoom} id='map' style={styles.map}>
+                </div>
+            </div>
         );
     }
 };
