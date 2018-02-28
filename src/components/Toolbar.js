@@ -11,22 +11,21 @@ import ZoomIn from './tools/ZoomIn';
 import ZoomOut from './tools/ZoomOut';
 
 const styles = {
-    drawer: {
+    paper: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         background: 'none',
-        right: '1rem',
-        top: '1rem',
         width: 'auto',
         boxShadow: 'none',
     }
 }
 
 function Toolbar(props) {
+    const { classes } = props;
     return (
-        <Drawer variant='persistent' anchor='right' open={props.toolbarVisibility} styles={styles.drawer}>
+        <Drawer variant='persistent' anchor='right' open={props.toolbarVisibility} classes={{paper: classes.paper}}>
             <LockButton handleClick={() => props.toggleLogin()} />
             <LayerButton handleClick={() => props.toggleLayerControl()} />
             <ChartButton />
@@ -37,5 +36,10 @@ function Toolbar(props) {
         </Drawer>
     );
 }
+
+
+Toolbar.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(Toolbar)

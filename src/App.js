@@ -63,7 +63,6 @@ class App extends Component {
                     <LayerControl
                         layerControlVisibility={this.state.showLayerControl}
                     />
-                    <ChartContainer/>
                     <Toolbar
                         toolbarVisibility={this.state.showToolbar}
                         toggleLayerControl={this.toggleLayerControl}
