@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentRemove from 'material-ui/svg-icons/content/remove';
+import React from 'react';
+import Button from 'material-ui/Button';
+import RemoveIcon from 'material-ui-icons/Remove';
 
-export default class ZoomOut extends Component {
-  render() {
-    return (
-      <FloatingActionButton mini={true} onClick={() => this.props.handleClick()}>
-        <ContentRemove />
-      </FloatingActionButton>
-    );
-  }
+export default function ZoomOut(props) {
+  return (
+    <Button mini={true} onClick={() => props.handleClick()}>
+      <RemoveIcon />
+    </Button>
+  );
 }

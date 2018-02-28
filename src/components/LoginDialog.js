@@ -1,50 +1,44 @@
-import React, { Component } from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import React from 'react';
+import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
 // Dialog with action buttons. The actions are passed in as an array of React objects.
 
-export default class LoginDialog extends Component {
-
-    render() {
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onClick={this.props.toggleLogin}
-            />,
-            <FlatButton
-                label="Submit"
-                primary={true}
-                keyboardFocused={true}
-                onClick={this.props.toggleLogin}
-            />,
-        ];
-
-        return (
-            <div>
-                <Dialog contentClassName="loginDialog"
-                    title="Log in"
-                    actions={actions}
-                    modal={false}
-                    open={this.props.loginDialogVisibility}
-                    onRequestClose={this.props.toggleLogin}
-                >
+export default function LoginDialog(props) {
+    return (
+        <div>
+            <Dialog
+                open={props.loginDialogVisibility}
+                aria-labelledby="login-dialog-title"
+                onClose={props.toggleLogin}
+            >
+                <DialogTitle id="login-dialog-title">Log in</DialogTitle>
+                <DialogContent>
                     <TextField
-                        hintText="Enter your username"
-                        floatingLabelText="Username"
-                        onChange={(event, newValue) => this.setState({ username: newValue })}
+                        autoFocus
+                        type='email'
+                        helperText="username (e-mail)"
+                        id='username'
+                    //onChange={(event, newValue) => this.setState({ username: newValue })}
                     />
                     <br />
                     <TextField
                         type="password"
-                        hintText="Enter your password"
-                        floatingLabelText="Password"
-                        onChange={(event, newValue) => this.setState({ password: newValue })}
+                        helperText="password"
+                        id="password"
+                    //onChange={(event, newValue) => this.setState({ password: newValue })}
                     />
-                </Dialog>
-            </div>
-        );
-    }
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={props.toggleLogin} color="primary">
+                        Cancel
+                        </Button>
+                    <Button onClick={props.toggleLogin} color="primary">
+                        Submit
+                        </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 }

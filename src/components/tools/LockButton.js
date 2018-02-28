@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ActionLock from 'material-ui/svg-icons/action/lock';
-import ActionLockOpen from 'material-ui/svg-icons/action/lock-open';
+import React from 'react';
+import Button from 'material-ui/Button';
+import Lock from 'material-ui-icons/Lock';
 
-const style = {
-    marginBottom: 10
-}
+/*const style = {
+    top: '0rem',
+    position: 'absolute',
+    display: 'flex'
+}*/
 
-export default class LockButton extends Component {
-    render() {
-        return (
-            <FloatingActionButton mini={true} style={style} onClick={() => this.props.handleClick()}>
-                <ActionLock />
-            </FloatingActionButton>
-        );
-    }
+export default function LockButton(props) {
+    return (
+        <Button /*style={style}*/ onClick={() => props.handleClick()}>
+            <Lock />
+        </Button>
+    );
 }

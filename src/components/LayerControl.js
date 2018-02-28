@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import { MenuItem } from 'material-ui/Menu';
 
-export default class LayerControl extends Component {
-  
-  render() {
+export default function LayerControl(props) {
     return (
       <div>
-        <Drawer open={this.props.layerControlVisibility}>
-          <MenuItem> Map Layers </MenuItem>
+        <Drawer
+          variant='persistent'
+          anchor='left'
+          open={props.layerControlVisibility}>
+
+          <MenuItem> Map layers </MenuItem>
           <MenuItem> Basemaps </MenuItem>
+
         </Drawer>
       </div>
     );
-  }
 }

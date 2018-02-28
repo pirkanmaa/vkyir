@@ -5,6 +5,11 @@ import TileLayer from 'ol/layer/tile';
 import XYZ from 'ol/source/xyz';
 import Zoom from 'ol/control/zoom';
 
+const style = {
+    height: '100vh',
+    margin: 0,
+}
+
 const basemaps = {
     osm: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     mapboxGray: 'https://api.mapbox.com/styles/v1/webigu/cjdwtqlgj7dev2snnlo0nfaiu/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2ViaWd1IiwiYSI6ImNqZHd0cTNidzBvM2kyeHM2Mjh2YzdiMGoifQ.3fbmDT3SZof-RM3uSpHMDg'
@@ -34,11 +39,11 @@ class Map extends Component {
             controls: []
         });
 
-        map.on('pointermove', function() {
+        map.on('pointermove', function () {
             console.log(view.getCenter())
         });
 
-        map.on('moveend', function() {
+        map.on('moveend', function () {
             console.log(view.getZoom())
         });
 
@@ -51,7 +56,7 @@ class Map extends Component {
 
     render() {
         return (
-            <div className='map' id='map'></div>
+            <div id='map' style={style}></div>
         );
     }
 };

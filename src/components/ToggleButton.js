@@ -1,21 +1,30 @@
-import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ActionSettings from 'material-ui/svg-icons/action/settings';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import Settings from 'material-ui-icons/Settings';
 
-const style = {
-    display: 'flex',
-    right: '1rem',
-    bottom: '1rem',
-    position: 'absolute',
-    zIndex: '1301'
-}
-
-export default class ToggleButton extends Component {
-    render() {
-        return (
-            <FloatingActionButton mini={true} style={style} onClick={() => this.props.toggleToolbar()}>
-                <ActionSettings />
-            </FloatingActionButton>
-        );
+const styles = {
+    button: {
+        display: 'flex',
+        right: '1rem',
+        bottom: '1rem',
+        position: 'absolute',
+        zIndex: '1301'
     }
 }
+
+function ToggleButton(props) {
+    const { classes } = props;
+    return (
+        <Button variant='fab' mini={true} aria-label='toggle' color='primary' className={classes.button} onClick={() => props.toggleToolbar()}>
+            <Settings />
+        </Button>
+    );
+}
+
+ToggleButton.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ToggleButton);

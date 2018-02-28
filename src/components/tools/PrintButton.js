@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ActionPrint from 'material-ui/svg-icons/action/print';
+import React from 'react';
+import Button from 'material-ui/Button';
+import Print from 'material-ui-icons/Print';
 
 const style = {
     marginBottom: 100
 }
 
-export default class PrintButton extends Component {
-    render() {
-        return (
-            <FloatingActionButton mini={true} style={style}>
-                <ActionPrint />
-            </FloatingActionButton>
-        );
-    }
+export default function PrintButton() {
+    return (
+        <Button style={style}>
+            <Print />
+        </Button>
+    );
 }

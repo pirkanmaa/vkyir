@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import Reboot from 'material-ui/Reboot';
 import Map from './components/Map';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import Theme from './Theme';
+import { MuiThemeProvider } from 'material-ui/styles';
 import LayerControl from './components/LayerControl';
+import ChartContainer from './components/ChartContainer';
 import Toolbar from './components/Toolbar';
 import LoginDialog from './components/LoginDialog';
 import ToggleButton from './components/ToggleButton';
@@ -11,6 +12,7 @@ import ToggleButton from './components/ToggleButton';
 class App extends Component {
 
     state = {
+        showChart: false,
         showLayerControl: false,
         showToolbar: true,
         showLogin: false,
@@ -35,6 +37,10 @@ class App extends Component {
         this.setState({ showLogin: !this.state.showLogin });
     }
 
+    toggleChart = () => {
+        this.setState({ showChart: !this.state.showChart });
+    }
+
     /* Map Zoomers */
     zoomIn = () => {
         if (this.state.zoom < this.state.maxZoom) {
@@ -50,8 +56,9 @@ class App extends Component {
 
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+            <MuiThemeProvider theme={Theme}>
                 <div className='app'>
+                    <Reboot />
                     <Map
                         zoom={this.state.zoom}
                         minZoom={this.state.minZoom}
@@ -61,10 +68,14 @@ class App extends Component {
                     <LayerControl
                         layerControlVisibility={this.state.showLayerControl}
                     />
+                    <ChartContainer
+                        chartVisibility={this.state.showChart}
+                    />
                     <Toolbar
                         toolbarVisibility={this.state.showToolbar}
                         toggleLayerControl={this.toggleLayerControl}
                         toggleLogin={this.toggleLogin}
+                        toggleChart={this.toggleChart}
                         zoomIn={this.zoomIn}
                         zoomOut={this.zoomOut}
                     />
