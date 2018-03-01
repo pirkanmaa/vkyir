@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Share from 'material-ui-icons/Share';
+import ShareBar from './../ShareBar';
+export default class ShareButton extends Component {
 
-const style = {
-    marginBottom: 10
-}
+    state = {
+        open: false
+    };
 
-export default function ShareButton() {
-    return (
-        <Button style={style}>
-            <Share />
-        </Button>
-    );
+    handleClick = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    render() {
+        return (
+            <div>
+                <Button onClick={this.handleClick}>
+                    <Share />
+                </Button>
+                <ShareBar shareBarVisibility={this.state.open} handleClose={this.handleClose}/>
+            </div>
+        );
+    }
 }

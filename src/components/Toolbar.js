@@ -7,8 +7,6 @@ import LayerButton from './tools/LayerButton';
 import ChartButton from './tools/ChartButton';
 import ShareButton from './tools/ShareButton';
 import PrintButton from './tools/PrintButton';
-import ZoomIn from './tools/ZoomIn';
-import ZoomOut from './tools/ZoomOut';
 
 const styles = {
     paper: {
@@ -32,8 +30,6 @@ function Toolbar(props) {
             <ChartButton handleClick={() => props.toggleChart()}/>
             <ShareButton />
             <PrintButton />
-            <ZoomIn handleClick={() => props.zoomIn()} />
-            <ZoomOut handleClick={() => props.zoomOut()} />
         </Drawer>
     );
 }
