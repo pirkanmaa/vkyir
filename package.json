@@ -30,6 +30,7 @@
     "file-saver": "^1.3.3",
     "material-ui": "^1.0.0-beta.35",
     "material-ui-icons": "^1.0.0-beta.35",
+    "nivo": "^0.31.0",
     "ol": "^4.6.4",
     "pdfmake": "^0.1.36",
     "prop-types": "^15.6.1",

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Share from 'material-ui-icons/Share';
 import ShareBar from './../ShareBar';
+
 export default class ShareButton extends Component {
 
     state = {
