@@ -19,7 +19,7 @@ export default class ShareButton extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.handleClick}>
+                <Button size='small' onClick={this.handleClick}>
                     <Share />
                 </Button>
                 <ShareBar shareBarVisibility={this.state.open} handleClose={this.handleClose}/>

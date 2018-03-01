@@ -22,6 +22,7 @@ const basemaps = {
 let view = new View;
 
 class Map extends Component {
+
     state = {
         center: [1100000, 7600000],
         zoom: 7,

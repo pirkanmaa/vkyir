@@ -4,7 +4,7 @@ import DonutSmall from 'material-ui-icons/DonutSmall';
 
 export default function ShareButton(props) {
     return (
-        <Button onClick={() => props.handleClick()}>
+        <Button size='small' onClick={() => props.handleClick()}>
             <DonutSmall />
         </Button>
     );

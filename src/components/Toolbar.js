@@ -11,13 +11,10 @@ import PrintButton from './tools/PrintButton';
 const styles = {
     paper: {
         display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         background: 'none',
-        border: 'none',
-        width: 'auto',
-        boxShadow: 'none',
+        border: 'none'
     }
 }
 

@@ -1,15 +1,30 @@
 import React from 'react';
-import Button from 'material-ui/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import IconButton from 'material-ui/IconButton';
 import AddIcon from 'material-ui-icons/Add';
 
-const style = {
-  marginBottom: 5
+const styles = {
+  button: {
+    display: 'flex',
+    right: '0rem',
+    bottom: '2.5rem',
+    position: 'absolute',
+    zIndex: 1500
+  }
 }
 
-export default function ZoomIn(props) {
-    return (
-      <Button mini={true} style={style} onClick={() => props.handleClick()}>
-        <AddIcon />
-      </Button>
-    );
+function ZoomIn(props) {
+  const { classes } = props;
+  return (
+    <IconButton className={classes.button} onClick={() => props.handleClick()}>
+      <AddIcon />
+    </IconButton>
+  );
 }
+
+ZoomIn.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ZoomIn);
