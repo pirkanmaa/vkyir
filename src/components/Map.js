@@ -49,6 +49,10 @@ class Map extends Component {
             view: view,
             controls: []
         });
+
+        map.on('moveend', () => {
+            this.setState({zoom: view.getZoom()});
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -58,10 +62,6 @@ class Map extends Component {
     }
 
     /* Map Zoomers */
-    wheelZoom = () => {
-        this.setState({zoom: view.getZoom()});
-    }
-
     zoomIn = () => {
         if (this.state.zoom < this.state.maxZoom) {
             this.setState({ zoom: this.state.zoom + this.state.zoomStep });
@@ -79,7 +79,7 @@ class Map extends Component {
             <div>
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
-                <div onWheel={this.wheelZoom} id='map' style={styles.map}>
+                <div id='map' style={styles.map}>
                 </div>
             </div>
         );
