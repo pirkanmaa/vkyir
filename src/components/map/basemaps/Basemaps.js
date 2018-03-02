@@ -4,12 +4,19 @@ import MapboxLight from './MapboxLight';
 import MapboxDark from './MapboxDark';
 import MapboxSatellite from './MapboxSatellite';
 
-const Basemaps = {
-    "OSM": OSM,
-    "CartoLight": CartoLight,
-    "MapboxLight": MapboxLight,
-    "MapboxDark": MapboxDark,
-    "MapboxSatellite": MapboxSatellite
-};
+// CHOOSE YOUR BASEMAPS!
+let Basemaps = [OSM, CartoLight, MapboxLight, MapboxDark, MapboxSatellite];
 
-export default Basemaps;
+// This converts the basemap array into an array of objects with keys "layer, name, title" with values from map layers
+function convert(array) {
+    let target = [];
+    for (let i = 0; i < array.length; i++) {
+        target.push({
+            layer: array[i],
+            name: array[i].getProperties().name,
+            title: array[i].getProperties().title
+        });
+    } return target;
+}
+
+export default Basemaps = convert(Basemaps);

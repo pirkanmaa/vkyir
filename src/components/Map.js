@@ -36,7 +36,7 @@ export default class Map extends Component {
 
         let map = new OLMap({
             target: 'map',
-            layers: [Basemaps[this.state.basemap]],
+            layers: [Basemaps[0].layer],
             view: view,
             controls: []
         });
