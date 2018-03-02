@@ -59,9 +59,9 @@ class App extends Component {
                         toggleLogin={this.toggleLogin}
                         toggleChart={this.toggleChart}
                     />
-                    <ToggleButton
+                    {/*<ToggleButton*
                         toggleToolbar={this.toggleToolbar}
-                    />
+                    />*/}
                     <LoginDialog
                         toggleLogin={this.toggleLogin}
                         loginDialogVisibility={this.state.showLogin}

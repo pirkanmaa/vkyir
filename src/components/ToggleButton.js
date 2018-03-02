@@ -6,9 +6,8 @@ import Settings from 'material-ui-icons/Settings';
 
 const styles = {
     button: {
-        display: 'flex',
         right: '1rem',
-        bottom: '1rem',
+        top: '1rem',
         position: 'absolute',
         zIndex: '1301'
     }
