@@ -13,6 +13,7 @@ const MapboxLight = new TileLayer({
     name: 'MapboxLight',
     type: 'base',
     opacity: 1,
+    theme: 'light',
     visible: false
 });
 

@@ -13,6 +13,7 @@ const CartoLight = new TileLayer({
     name: 'CartoLight',
     type: 'base',
     opacity: 1,
+    theme: 'light',
     visible: false
 });
 

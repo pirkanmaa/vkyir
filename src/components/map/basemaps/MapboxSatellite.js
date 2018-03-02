@@ -12,6 +12,7 @@ const MapboxSatellite = new TileLayer({
     title: 'Mapbox Satellite',
     name: 'MapboxSatellite',
     type: 'base',
+    theme: 'dark',
     opacity: 1,
     visible: false
 });

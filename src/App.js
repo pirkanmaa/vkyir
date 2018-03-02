@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Reboot from 'material-ui/Reboot';
 import Map from './components/Map';
-import Theme from './Theme';
+import { DarkTheme, LightTheme } from './Theme';
 import { MuiThemeProvider } from 'material-ui/styles';
 import LayerControl from './components/LayerControl';
 import ChartContainer from './components/ChartContainer';
@@ -16,7 +16,8 @@ class App extends Component {
         showLayerControl: false,
         showToolbar: true,
         showLogin: false,
-        logged: false
+        logged: false,
+        theme: DarkTheme
     };
 
     /* Toggle Map Layer Control Drawer */
@@ -38,7 +39,7 @@ class App extends Component {
 
     render() {
         return (
-            <MuiThemeProvider theme={Theme}>
+            <MuiThemeProvider theme={this.state.theme}>
                 <div className='app'>
                     <Reboot />
                     <Map
