@@ -34,12 +34,17 @@ export default class Map extends Component {
         view.setMaxZoom(this.state.maxZoom);
         view.setMinZoom(this.state.minZoom);
 
+        // Testin vuoksi mäpätty basemaps
+
         let map = new OLMap({
             target: 'map',
-            layers: [Basemaps[0].layer],
+            layers: Basemaps.map(function (layer) { return layer["layer"]; }),
             view: view,
             controls: []
         });
+
+        // Bind "map" to state
+        this.setState({ map: map });
 
         map.on('moveend', () => {
             this.setState({ zoom: view.getZoom() });
@@ -61,16 +66,22 @@ export default class Map extends Component {
 
     /* Basemap switcher */
     changeBasemap = (event, value) => {
-        this.setState({ basemap: value });       
+
+        let layers = this.state.map.getLayers().getArray();
+        layers.filter(function (item, index) {
+            return item.getProperties().type === 'base' && (item.getProperties().name === value && layers[index].setVisible(true) ||
+                item.getProperties().name !== value && layers[index].setVisible(false));
+        });
+
+        this.setState({ basemap: value });
     };
 
     componentDidUpdate(prevProps, prevState) {
         if (this.state.zoom !== prevState.zoom) {
             view.setZoom(this.state.zoom);
         }
-        if (this.state.basemap !== prevState.basemap) {
-            // TÄMÄ KESKEN
-        }
+        // Basemappia ei tarvii edes päivittää, ai että. 
+        console.log(this.state.basemap);
     }
 
     render() {
@@ -78,13 +89,11 @@ export default class Map extends Component {
             <div>
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
-                <ZoomOut handleClick={this.zoomOut} />
-                {<BasemapControl
+                <BasemapControl
                     handleChange={this.changeBasemap}
                     basemap={this.state.basemap}
-                />}
-                <div id='map' style={styles.map}>
-                </div>
+                />
+                <div id='map' style={styles.map} />
             </div>
         );
     }
