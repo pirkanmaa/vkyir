@@ -17,7 +17,7 @@ class App extends Component {
         showToolbar: true,
         showLogin: false,
         logged: false,
-        theme: DarkTheme
+        theme: LightTheme
     };
 
     /* Toggle Map Layer Control Drawer */
@@ -25,16 +25,24 @@ class App extends Component {
         this.setState({ showLayerControl: !this.state.showLayerControl });
     }
 
+    /* Toggle Toolbar */
     toggleToolbar = () => {
         this.setState({ showToolbar: !this.state.showToolbar });
     }
 
+    /* Toggle Login Dialog */
     toggleLogin = () => {
         this.setState({ showLogin: !this.state.showLogin });
     }
 
+    /* Toggle Chart Paper */
     toggleChart = () => {
         this.setState({ showChart: !this.state.showChart });
+    }
+
+    /* Switch Themes */
+    switchTheme = () => {
+        this.setState({ theme: this.state.theme === DarkTheme && LightTheme || this.state.theme === LightTheme && DarkTheme });
     }
 
     render() {
@@ -43,10 +51,12 @@ class App extends Component {
                 <div className='app'>
                     <Reboot />
                     <Map
-                        zoom={this.state.zoom}
-                        minZoom={this.state.minZoom}
-                        maxZoom={this.state.maxZoom}
-                        center={this.state.center}
+                        theme={this.state.theme}
+                        switchTheme={this.switchTheme}
+                        //zoom={this.state.zoom}
+                        //minZoom={this.state.minZoom}
+                        //maxZoom={this.state.maxZoom}
+                        //center={this.state.center}
                     />
                     <LayerControl
                         layerControlVisibility={this.state.showLayerControl}

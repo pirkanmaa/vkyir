@@ -74,6 +74,11 @@ export default class Map extends Component {
         });
 
         this.setState({ basemap: value });
+
+        // Change theme colour as well,
+        // Not yet bound to whether the selected basemap has "theme" value "dark" or "light"
+        this.props.switchTheme();
+
     };
 
     componentDidUpdate(prevProps, prevState) {
