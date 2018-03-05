@@ -1,11 +1,14 @@
 import React from 'react';
 import Button from 'material-ui/Button';
 import DonutSmall from 'material-ui-icons/DonutSmall';
+import Tooltip from 'material-ui/Tooltip';
 
-export default function ShareButton(props) {
+export default function ChartButton(props) {
     return (
-        <Button size='small' onClick={() => props.handleClick()}>
-            <DonutSmall />
-        </Button>
+        <Tooltip id="chartButtonTooltip" title="Charts" placement="bottom-start">
+            <Button size='small' onClick={() => props.handleClick()}>
+                <DonutSmall />
+            </Button>
+        </Tooltip>
     );
 }
