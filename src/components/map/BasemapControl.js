@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import { FormLabel, FormControl, FormControlLabel, FormHelperText } from 'material-ui/Form';
@@ -32,22 +31,16 @@ class BasemapControl extends Component {
             aria-label="basemap"
             name="basemap"
             value={this.props.basemap}
-            onChange={this.props.handleChange}
-          >
+            onChange={this.props.handleChange}>
 
             {Basemaps.map((item, index) => (
               <FormControlLabel key={index} value={item.name} control={<Radio />} label={item.title} />
             ))}
-
           </RadioGroup>
         </FormControl>
       </div>
     );
   }
 }
-
-BasemapControl.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(BasemapControl)

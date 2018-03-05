@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { MenuItem } from 'material-ui/Menu';
 import BasemapControl from './map/BasemapControl';
@@ -32,9 +31,5 @@ class LayerControl extends Component {
     );
   }
 }
-
-LayerControl.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(LayerControl)

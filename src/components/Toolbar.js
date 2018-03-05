@@ -1,6 +1,5 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import LoginButton from './tools/LoginButton';
 import LayerButton from './tools/LayerButton';
@@ -30,10 +29,5 @@ function Toolbar(props) {
         </Drawer>
     );
 }
-
-
-Toolbar.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Toolbar)

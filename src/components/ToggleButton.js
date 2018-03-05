@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import Settings from 'material-ui-icons/Settings';
@@ -21,9 +20,5 @@ function ToggleButton(props) {
         </Button>
     );
 }
-
-ToggleButton.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(ToggleButton);

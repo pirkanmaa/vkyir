@@ -24,7 +24,8 @@ export default class Map extends Component {
         maxZoom: 10,
         minZoom: 7,
         zoomStep: 0.1,
-        basemap: "CartoLight"
+        basemap: "CartoLight",
+        basemapOpacity: 1
     };
 
     componentDidMount() {
@@ -77,9 +78,12 @@ export default class Map extends Component {
 
         // Change theme colour as well,
         // Not yet bound to whether the selected basemap has "theme" value "dark" or "light"
-        this.props.switchTheme();
-
+        // this.props.switchTheme();
     };
+
+    changeBasemapOpacity = () => {
+
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (this.state.zoom !== prevState.zoom) {
@@ -96,6 +100,8 @@ export default class Map extends Component {
                     layerControlVisibility={this.props.layerControlVisibility}
                     handleChange={this.changeBasemap}
                     basemap={this.state.basemap}
+                    basemapOpacity={this.state.basemapOpacity}
+                    changeBasemapOpacity={this.changeBasemapOpacity}
                 />
                 <div id='map' style={styles.map} />
             </div>
