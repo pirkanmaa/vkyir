@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import OLMap from 'ol/map';
 import View from 'ol/view';
 import Zoom from 'ol/control/zoom';
+import ScaleLine from 'ol/control/scaleline';
 import ZoomIn from './map/ZoomIn';
 import ZoomOut from './map/ZoomOut';
 import Basemaps from './map/basemaps/Basemaps';
 import LayerControl from './LayerControl';
+//import './../styles/ol-styles.css';
 
 const styles = {
     map: {
@@ -15,6 +17,9 @@ const styles = {
 }
 
 let view = new View;
+let scaleLine = new ScaleLine({
+
+});
 
 export default class Map extends Component {
 
@@ -41,7 +46,7 @@ export default class Map extends Component {
             target: 'map',
             layers: Basemaps.map(function (layer) { return layer["layer"]; }),
             view: view,
-            controls: []
+            controls: [scaleLine]
         });
 
         // Bind "map" to state
