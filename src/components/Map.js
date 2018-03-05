@@ -17,9 +17,7 @@ const styles = {
 }
 
 let view = new View;
-let scaleLine = new ScaleLine({
-
-});
+let scaleLine = new ScaleLine;
 
 export default class Map extends Component {
 
@@ -46,7 +44,7 @@ export default class Map extends Component {
             target: 'map',
             layers: Basemaps.map(function (layer) { return layer["layer"]; }),
             view: view,
-            controls: [scaleLine]
+            controls: []
         });
 
         // Bind "map" to state
