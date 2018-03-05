@@ -3,7 +3,6 @@ import Reboot from 'material-ui/Reboot';
 import Map from './components/Map';
 import { DarkTheme, LightTheme } from './Theme';
 import { MuiThemeProvider } from 'material-ui/styles';
-import LayerControl from './components/LayerControl';
 import ChartContainer from './components/ChartContainer';
 import Toolbar from './components/Toolbar';
 import LoginDialog from './components/LoginDialog';
@@ -53,12 +52,6 @@ class App extends Component {
                     <Map
                         theme={this.state.theme}
                         switchTheme={this.switchTheme}
-                        //zoom={this.state.zoom}
-                        //minZoom={this.state.minZoom}
-                        //maxZoom={this.state.maxZoom}
-                        //center={this.state.center}
-                    />
-                    <LayerControl
                         layerControlVisibility={this.state.showLayerControl}
                     />
                     <ChartContainer

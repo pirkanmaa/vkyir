@@ -27,7 +27,7 @@ class BasemapControl extends Component {
     return (
       <div>
         <FormControl component="fieldset" required classes={{ root: classes.root }}>
-          <FormLabel component="legend">Basemap</FormLabel>
+          {/*<FormLabel component="legend">Basemap</FormLabel>*/}
           <RadioGroup
             aria-label="basemap"
             name="basemap"

@@ -4,8 +4,8 @@ import View from 'ol/view';
 import Zoom from 'ol/control/zoom';
 import ZoomIn from './map/ZoomIn';
 import ZoomOut from './map/ZoomOut';
-import BasemapControl from './map/BasemapControl';
 import Basemaps from './map/basemaps/Basemaps';
+import LayerControl from './LayerControl';
 
 const styles = {
     map: {
@@ -19,8 +19,8 @@ let view = new View;
 export default class Map extends Component {
 
     state = {
-        center: [1100000, 7600000],
-        zoom: 7,
+        center: [2650000, 8750000],
+        zoom: 10,
         maxZoom: 10,
         minZoom: 7,
         zoomStep: 0.1,
@@ -85,8 +85,6 @@ export default class Map extends Component {
         if (this.state.zoom !== prevState.zoom) {
             view.setZoom(this.state.zoom);
         }
-        // Basemappia ei tarvii edes päivittää, ai että. 
-        console.log(this.state.basemap);
     }
 
     render() {
@@ -94,7 +92,8 @@ export default class Map extends Component {
             <div>
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
-                <BasemapControl
+                <LayerControl
+                    layerControlVisibility={this.props.layerControlVisibility}
                     handleChange={this.changeBasemap}
                     basemap={this.state.basemap}
                 />

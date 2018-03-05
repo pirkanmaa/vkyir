@@ -9,7 +9,7 @@ const CartoLight = new TileLayer({
             '© <a href="https://www.osm.org/copyright">OpenStreetMap contributors</a>'
         ]
     }),
-    title: 'CARTO Positron (OSM)',
+    title: 'CARTO Positron',
     name: 'CartoLight',
     type: 'base',
     opacity: 1,
