@@ -15,7 +15,7 @@ const styles = {
 function ToggleButton(props) {
     const { classes } = props;
     return (
-        <Button variant='fab' mini={true} aria-label='toggle' color='primary' className={classes.button} onClick={() => props.toggleToolbar()}>
+        <Button variant='fab' mini={true} aria-label='toggle' className={classes.button} onClick={() => props.toggleToolbar()}>
             <Settings />
         </Button>
     );
