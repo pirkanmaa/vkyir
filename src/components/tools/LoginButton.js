@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import DonutSmall from 'material-ui-icons/DonutSmall';
+import Lock from 'material-ui-icons/Lock';
 import Tooltip from 'material-ui/Tooltip';
 
-export default function ChartButton(props) {
+export default function LoginButton(props) {
     return (
-        <Tooltip id="chartButtonTooltip" title="Charts" placement="bottom-start">
+        <Tooltip id="loginButtonTooltip" title="Login" placement="bottom-start">
             <Button size='small' onClick={() => props.handleClick()}>
-                <DonutSmall />
+                <Lock />
             </Button>
         </Tooltip>
     );

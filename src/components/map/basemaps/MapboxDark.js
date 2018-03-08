@@ -13,6 +13,7 @@ const MapboxDark = new TileLayer({
     name: 'MapboxDark',
     type: 'base',
     opacity: 1,
+    theme: 'dark',
     visible: false
 });
 

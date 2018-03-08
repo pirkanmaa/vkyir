@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Reboot from 'material-ui/Reboot';
 import Map from './components/Map';
-import Theme from './Theme';
+import { DarkTheme, LightTheme } from './Theme';
 import { MuiThemeProvider } from 'material-ui/styles';
-import LayerControl from './components/LayerControl';
 import ChartContainer from './components/ChartContainer';
 import Toolbar from './components/Toolbar';
 import LoginDialog from './components/LoginDialog';
@@ -16,7 +15,8 @@ class App extends Component {
         showLayerControl: false,
         showToolbar: true,
         showLogin: false,
-        logged: false
+        logged: false,
+        theme: LightTheme
     };
 
     /* Toggle Map Layer Control Drawer */
@@ -24,30 +24,34 @@ class App extends Component {
         this.setState({ showLayerControl: !this.state.showLayerControl });
     }
 
+    /* Toggle Toolbar */
     toggleToolbar = () => {
         this.setState({ showToolbar: !this.state.showToolbar });
     }
 
+    /* Toggle Login Dialog */
     toggleLogin = () => {
         this.setState({ showLogin: !this.state.showLogin });
     }
 
+    /* Toggle Chart Paper */
     toggleChart = () => {
         this.setState({ showChart: !this.state.showChart });
     }
 
+    /* Switch Themes */
+    switchTheme = () => {
+        this.setState({ theme: this.state.theme === DarkTheme && LightTheme || this.state.theme === LightTheme && DarkTheme });
+    }
+
     render() {
         return (
-            <MuiThemeProvider theme={Theme}>
+            <MuiThemeProvider theme={this.state.theme}>
                 <div className='app'>
                     <Reboot />
                     <Map
-                        zoom={this.state.zoom}
-                        minZoom={this.state.minZoom}
-                        maxZoom={this.state.maxZoom}
-                        center={this.state.center}
-                    />
-                    <LayerControl
+                        theme={this.state.theme}
+                        switchTheme={this.switchTheme}
                         layerControlVisibility={this.state.showLayerControl}
                     />
                     <ChartContainer

@@ -12,7 +12,8 @@ const OSM = new TileLayer({
     name: 'OSM',
     type: 'base',
     opacity: 1,
-    visible: true
+    theme: 'light',
+    visible: false
 });
 
 export default OSM;
