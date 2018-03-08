@@ -38,11 +38,17 @@ export default class Map extends Component {
         view.setMaxZoom(this.state.maxZoom);
         view.setMinZoom(this.state.minZoom);
 
-        // Testin vuoksi mäpätty basemaps
-
+        // Initiate basemap == Set the default Basemap selection visible
+        let BasemapSel = Basemaps.map((layer) => { return layer["layer"] });
+   
+        BasemapSel.filter((item, i) => {
+            return item.getProperties().name === this.state.basemap && BasemapSel[i].setVisible(true)
+        });
+        
+        // Initiate map
         let map = new OLMap({
             target: 'map',
-            layers: Basemaps.map(function (layer) { return layer["layer"]; }),
+            layers: BasemapSel,
             view: view,
             controls: []
         });
@@ -57,15 +63,11 @@ export default class Map extends Component {
 
     /* Map Zoomers */
     zoomIn = () => {
-        if (this.state.zoom < this.state.maxZoom) {
-            this.setState({ zoom: this.state.zoom + this.state.zoomStep });
-        }
+        this.state.zoom < this.state.maxZoom && this.setState({ zoom: this.state.zoom + this.state.zoomStep });
     }
 
     zoomOut = () => {
-        if (this.state.zoom > this.state.minZoom) {
-            this.setState({ zoom: this.state.zoom - this.state.zoomStep });
-        }
+        this.state.zoom > this.state.minZoom && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
     }
 
     /* Basemap switcher */
