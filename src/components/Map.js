@@ -31,11 +31,8 @@ export default class Map extends Component {
         view.setMinZoom(this.state.minZoom);
 
         /* Initiate basemap == Set the default Basemap selection visible */
-        let BasemapSel = Basemaps.map((layer) => { return layer["layer"] });
-
-        BasemapSel.find((layer) => {
-            return layer.getProperties().name === this.state.basemap && layer.setVisible(true);
-        });
+        let BasemapSel = Basemaps.map(layer => layer["layer"]);
+        BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && layer.setVisible(true));
 
         /* Initiate map */
         let map = new OLMap({
@@ -66,9 +63,8 @@ export default class Map extends Component {
         });
 
         /* Change Material-UI theme colour according to basemap colour */
-        layers.find(function (layer) {
-            return layer.getProperties().type === 'base' && layer.getProperties().name === value;
-        }).getProperties().theme !== this.props.theme.palette.type && this.props.switchTheme();
+        layers.find(layer => layer.getProperties().type === 'base' && layer.getProperties().name === value)
+        .getProperties().theme !== this.props.theme.palette.type && this.props.switchTheme();
 
         this.setState({ basemap: value });
 
