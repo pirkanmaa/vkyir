@@ -48,19 +48,12 @@ export default class Map extends Component {
         /* Bind "map" to state */
         this.setState({ map: map });
 
-        map.on('moveend', () => {
-            this.setState({ zoom: view.getZoom() });
-        });
+        map.on('moveend', () => this.setState({ zoom: view.getZoom() }));
     }
 
     /* Map Zoomers */
-    zoomIn = () => {
-        this.state.zoom < this.state.maxZoom && this.setState({ zoom: this.state.zoom + this.state.zoomStep });
-    }
-
-    zoomOut = () => {
-        this.state.zoom > this.state.minZoom && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
-    }
+    zoomIn = () => this.state.zoom < this.state.maxZoom && this.setState({ zoom: this.state.zoom + this.state.zoomStep });
+    zoomOut = () => this.state.zoom > this.state.minZoom && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
 
     /* Basemap switcher */
     changeBasemap = (event, value) => {

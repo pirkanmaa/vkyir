@@ -19,30 +19,14 @@ class App extends Component {
         theme: light
     };
 
-    /* Toggle Map Layer Control Drawer */
-    toggleLayerControl = () => {
-        this.setState({ showLayerControl: !this.state.showLayerControl });
-    }
-
-    /* Toggle Toolbar */
-    toggleToolbar = () => {
-        this.setState({ showToolbar: !this.state.showToolbar });
-    }
-
-    /* Toggle Login Dialog */
-    toggleLogin = () => {
-        this.setState({ showLogin: !this.state.showLogin });
-    }
-
-    /* Toggle Chart Paper */
-    toggleChart = () => {
-        this.setState({ showChart: !this.state.showChart });
-    }
+    /* Material UI togglers */
+    toggleLayerControl = () => this.setState({ showLayerControl: !this.state.showLayerControl });
+    toggleToolbar = () => this.setState({ showToolbar: !this.state.showToolbar });
+    toggleLogin = () => this.setState({ showLogin: !this.state.showLogin });
+    toggleChart = () => this.setState({ showChart: !this.state.showChart });
 
     /* Switch Themes */
-    switchTheme = () => {
-        this.setState({ theme: this.state.theme === dark && light || this.state.theme === light && dark });
-    }
+    switchTheme = () => this.setState({ theme: this.state.theme === dark && light || this.state.theme === light && dark });
 
     render() {
         return (
