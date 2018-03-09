@@ -7,7 +7,6 @@ import ZoomIn from './map/ZoomIn';
 import ZoomOut from './map/ZoomOut';
 import Basemaps from './map/basemaps/Basemaps';
 import LayerControl from './LayerControl';
-//import './../styles/ol-styles.css';
 
 const styles = {
     map: {
@@ -40,13 +39,11 @@ export default class Map extends Component {
 
         // Initiate basemap == Set the default Basemap selection visible
         let BasemapSel = Basemaps.map((layer) => { return layer["layer"] });
-   
+
         BasemapSel.find((layer) => {
-            return layer.getProperties().name === this.state.basemap && layer.setVisible(true)
+            return layer.getProperties().name === this.state.basemap && layer.setVisible(true);
         });
 
-        console.log(BasemapSel);
-        
         // Initiate map
         let map = new OLMap({
             target: 'map',
@@ -76,21 +73,22 @@ export default class Map extends Component {
     changeBasemap = (event, value) => {
 
         let layers = this.state.map.getLayers().getArray();
-        layers.filter(function (item, index) {
-            return item.getProperties().type === 'base' && (item.getProperties().name === value && layers[index].setVisible(true) ||
-                item.getProperties().name !== value && layers[index].setVisible(false));
+        layers.filter(function (item, i) {
+            return item.getProperties().type === 'base'
+                && (item.getProperties().name === value && layers[i].setVisible(true)
+                || item.getProperties().name !== value && layers[i].setVisible(false));
         });
+
+        // Change Material-UI theme colour according to basemap colour
+        layers.find(function (layer) {
+            return layer.getProperties().type === 'base' && layer.getProperties().name === value;
+        }).getProperties().theme !== this.props.theme.palette.type && this.props.switchTheme();
 
         this.setState({ basemap: value });
 
-        // Change theme colour as well,
-        // Not yet bound to whether the selected basemap has "theme" value "dark" or "light"
-        // this.props.switchTheme();
     };
 
-    changeBasemapOpacity = () => {
-
-    }
+    changeBasemapOpacity = () => {};
 
     componentDidUpdate(prevProps, prevState) {
         if (this.state.zoom !== prevState.zoom) {
