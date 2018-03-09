@@ -7,6 +7,8 @@ import ZoomIn from './map/ZoomIn';
 import ZoomOut from './map/ZoomOut';
 import Basemaps from './map/basemaps/Basemaps';
 import LayerControl from './LayerControl';
+import './map/layers/testLayer';
+import TestLayer from './map/layers/testLayer';
 
 let view = new View;
 let scaleLine = new ScaleLine;
@@ -37,7 +39,7 @@ export default class Map extends Component {
         /* Initiate map */
         let map = new OLMap({
             target: 'map',
-            layers: BasemapSel,
+            layers: [...BasemapSel, TestLayer],
             view: view,
             controls: []
         });
