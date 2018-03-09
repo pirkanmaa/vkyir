@@ -41,9 +41,11 @@ export default class Map extends Component {
         // Initiate basemap == Set the default Basemap selection visible
         let BasemapSel = Basemaps.map((layer) => { return layer["layer"] });
    
-        BasemapSel.filter((item, i) => {
-            return item.getProperties().name === this.state.basemap && BasemapSel[i].setVisible(true)
+        BasemapSel.find((layer) => {
+            return layer.getProperties().name === this.state.basemap && layer.setVisible(true)
         });
+
+        console.log(BasemapSel);
         
         // Initiate map
         let map = new OLMap({
