@@ -8,6 +8,7 @@ import ZoomOut from './map/ZoomOut';
 import Basemaps from './map/basemaps/Basemaps';
 import LayerControl from './LayerControl';
 import TestLayer from './map/layers/TestLayer';
+//import './ColorControl';
 
 let view = new View;
 let scaleLine = new ScaleLine;
@@ -38,17 +39,28 @@ export default class Map extends Component {
         /* Initiate map */
         let map = new OLMap({
             target: 'map',
-            layers: [...BasemapSel,TestLayer],
+            layers: [...BasemapSel, TestLayer],
             view: view,
             controls: []
         });
 
-        console.log(map);
+        //let currentExtent= map.getView().calculateExtent(map.getSize());
+
 
         /* Bind "map" to state */
         this.setState({ map: map });
 
         map.on('moveend', () => this.setState({ zoom: view.getZoom() }));
+
+        // Testing MVT interaction
+        /*map.on('click', function (e) {
+            map.forEachFeatureAtPixel(e.pixel, function (feature) {
+                const properties = feature.getProperties();
+                console.log(properties);
+            });
+        });
+        */
+        
     }
 
     /* Map Zoomers */
@@ -62,18 +74,18 @@ export default class Map extends Component {
         layers.filter(function (item, i) {
             return item.getProperties().type === 'base'
                 && (item.getProperties().name === value && layers[i].setVisible(true)
-                || item.getProperties().name !== value && layers[i].setVisible(false));
+                    || item.getProperties().name !== value && layers[i].setVisible(false));
         });
 
         /* Change Material-UI theme colour according to basemap colour */
         layers.find(layer => layer.getProperties().type === 'base' && layer.getProperties().name === value)
-        .getProperties().theme !== this.props.theme.palette.type && this.props.switchTheme();
+            .getProperties().theme !== this.props.theme.palette.type && this.props.switchTheme();
 
         this.setState({ basemap: value });
 
     };
 
-    changeBasemapOpacity = () => {};
+    changeBasemapOpacity = () => { };
 
     componentDidUpdate(prevProps, prevState) {
         this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
@@ -91,7 +103,7 @@ export default class Map extends Component {
                     basemapOpacity={this.state.basemapOpacity}
                     changeBasemapOpacity={this.changeBasemapOpacity}
                 />
-                <div id='map' style={{height: '100vh'}} />
+                <div id='map' style={{ height: '100vh' }} />
             </div>
         );
     }
