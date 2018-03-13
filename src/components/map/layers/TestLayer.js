@@ -1,7 +1,8 @@
 import VectorTileLayer from 'ol/layer/vectortile';
 import VectorTileSource from 'ol/source/vectortile';
-//import WMTSCapabilities from 'ol/format/wmtscapabilities';
-//import WMTS from 'ol/source/wmts';
+import VectorLayer from 'ol/layer/vector';
+import VectorSource from 'ol/source/vector';
+import WFS from 'ol/format/wfs';
 import MVT from 'ol/format/mvt';
 import tilegrid from 'ol/tilegrid';
 import Style from 'ol/style/style';
@@ -12,45 +13,66 @@ import Feature from 'ol/feature';
 import Circle from 'ol/style/circle';
 import GeoJSON from 'ol/format/geojson';
 import geojsonvt from 'geojson-vt';
-import Replacer from './../utils/replacer';
-//import GeoJSONVectorTileSource from './../utils/olgeojsonvt';
+import replacer from './../utils/replacer';
+import loadingstrategy from 'ol/loadingstrategy';
+import VectorTile from '@mapbox/vector-tile';
+import Protobuf from 'pbf';
+
+let url = 'https://tieto.pirkanmaa.fi/geoserver/maankaytto/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=maankaytto:Pirkanmaan_ekosysteemipalvelut&srsName=EPSG%3A900913&outputFormat=application%2Fjson';
+
+// WFS Request 
+let request = new WFS().writeGetFeature({
+  srsName: 'EPSG:900913',
+  featureTypes: ['Pirkanmaan_ekosysteemipalvelut'],
+  outputFormat: 'application/json',
+});
 
 let tilePixels = new Projection({
   code: 'TILE_PIXELS',
   units: 'tile-pixels'
 });
-
-let url = 'https://tieto.pirkanmaa.fi/geoserver/maankaytto/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=maankaytto:Pirkanmaan_ekosysteemipalvelut&outputFormat=application%2Fjson';
-
-let baseURL = 'https://tieto.pirkanmaa.fi/geoserver/gwc/service/tms/1.0.0/',
-  layer = 'maankaytto:Pirkanmaan_ekosysteemipalvelut',
-  proj_epsg = 'EPSG:900913',
-  format = 'pbf',
-  type = 'pbf';
-
 /*
-let TestLayer = new VectorTileLayer({
-  source: new GeoJSONVectorTileSource({
-    data: fetch(url).then(response => {return response.json()})
-  })
-})
-*/
-
-/*
-let TestLayer = new VectorTileLayer({
+let GJVTTestLayer = new VectorTileLayer({
   source: new VectorTileSource({
     format: new GeoJSON(),
-    loader: tile => {
+    tileLoadFunction: function (tile) {
+      tile.setLoader(function () {
+        fetch('https://openlayers.org/en/v4.6.4/examples/data/geojson/countries.geojson').then(function (response) {
+          return response.json();
+        }).then(function (json) {
+          let tileIndex = geojsonvt(json, {
+            extent: 4096,
+            debug: 1
+          });
 
-      fetch(url).then(response => {
-        return response.json();
-      }).then(json => {
+          let format = tile.getFormat();
+          let tileCoord = tile.getTileCoord();
+          let data = tileIndex.getTile(tileCoord[0], tileCoord[1], -tileCoord[2] - 1);
 
-        let tileIndex = geojsonvt(json, {
-          extent: 4096,
-          debug: 1
+          let features = format.readFeatures(
+            JSON.stringify({
+              type: 'FeatureCollection',
+              features: data ? data.features : []
+            }, replacer));
+
+          tile.setFeatures(features);
+          tile.setProjection(tilePixels);
         });
-
+      })
+    },
+    url: 'data:' // arbitrary url, we don't use it in the tileLoadFunction
+  })
+});
+*/
+/* GeoJSON-VT EXAMPLE */
+let GJVTTestLayer = () => {
+  return fetch('https://tieto.pirkanmaa.fi/geoserver/maankaytto/wfs?service=WFS&version=1.1.0&request=GetFeature&srsName=EPSG:900913&typeName=maankaytto:Pirkanmaan_ekosysteemipalvelut&outputFormat=application%2Fjson').then(response => response.json()
+  ).then(json => {
+    let tileIndex = geojsonvt(json);
+    let vectorSource = new VectorTileSource({
+      url: 'data:',
+      format: new GeoJSON(),
+      tileLoadFunction: function (tile) {
         let format = tile.getFormat();
         let tileCoord = tile.getTileCoord();
         let data = tileIndex.getTile(tileCoord[0], tileCoord[1], -tileCoord[2] - 1);
@@ -59,22 +81,29 @@ let TestLayer = new VectorTileLayer({
           JSON.stringify({
             type: 'FeatureCollection',
             features: data ? data.features : []
-          }, Replacer));
-
+          }, replacer));
         tile.setLoader(() => {
           tile.setFeatures(features);
           tile.setProjection(tilePixels);
         });
-      })
-    }
+      }
+    });
+    return new VectorTileLayer({
+      source: vectorSource
+    });
   })
-});
-*/
+}
 
-let TestLayer = new VectorTileLayer({
+/* VECTOR TILE EXAMPLE */
+let baseURL = 'https://tieto.pirkanmaa.fi/geoserver/gwc/service/tms/1.0.0/',
+  layer = 'maankaytto:Pirkanmaan_ekosysteemipalvelut',
+  proj_epsg = 'EPSG:900913',
+  format = 'pbf',
+  type = 'pbf';
+
+let VTTestLayer = new VectorTileLayer({
 
   style: new Style({
-    radius: 5,
     fill: new Fill({
       color: '#FFFFFF',
       opacity: '0.5'
@@ -87,11 +116,29 @@ let TestLayer = new VectorTileLayer({
 
   source: new VectorTileSource({
     url: `${baseURL}${layer}@${proj_epsg}@${format}/{z}/{x}/{-y}.${format}`,
-    format: new MVT({ featureClass: Feature }),
+    format: new MVT({ featureClass: Feature })
     //tilePixelRatio: 1,
     //tileGrid: tilegrid.createXYZ({maxZoom: 19})
   })
 })
 
+/* GeoJSON layer example */
 
-export default TestLayer;
+let GJTestLayer = new VectorLayer({
+  renderMode: 'image',
+  source: new VectorSource({
+    loader: () => {
+      fetch('https://tieto.pirkanmaa.fi/geoserver/maankaytto/ows?', {
+        method: 'POST',
+        body: new XMLSerializer().serializeToString(request)
+      }).then(response => {
+        return response.json();
+      }).then(json => {
+        let features = new GeoJSON().readFeatures(json);
+        GJTestLayer.getSource().addFeatures(features);
+      });
+    }
+  })
+});
+
+export { VTTestLayer, GJTestLayer, GJVTTestLayer };

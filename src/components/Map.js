@@ -7,7 +7,7 @@ import ZoomIn from './map/ZoomIn';
 import ZoomOut from './map/ZoomOut';
 import Basemaps from './map/basemaps/Basemaps';
 import LayerControl from './LayerControl';
-import TestLayer from './map/layers/TestLayer';
+import { VTTestLayer, GJTestLayer, GJVTTestLayer } from './map/layers/TestLayer';
 //import './ColorControl';
 
 let view = new View;
@@ -39,19 +39,21 @@ export default class Map extends Component {
         /* Initiate map */
         let map = new OLMap({
             target: 'map',
-            layers: [...BasemapSel, TestLayer],
+            layers: [...BasemapSel],
             view: view,
             controls: []
         });
 
         //let currentExtent= map.getView().calculateExtent(map.getSize());
 
-
         /* Bind "map" to state */
         this.setState({ map: map });
+        GJVTTestLayer().then(result => map.addLayer(result));
 
         map.on('moveend', () => this.setState({ zoom: view.getZoom() }));
-
+        /* map.on('moveend', () => {
+            console.log(GJTestLayer.getSource().getFeaturesInExtent(map.getView().calculateExtent(map.getSize())));
+        } ); */
         // Testing MVT interaction
         /*map.on('click', function (e) {
             map.forEachFeatureAtPixel(e.pixel, function (feature) {
