@@ -10,7 +10,9 @@ import LayerControl from './LayerControl';
 import { VTTestLayer, GJTestLayer, GJVTTestLayer } from './map/layers/TestLayer';
 //import './ColorControl';
 
-let view = new View;
+let view = new View({
+    projection: 'EPSG:3857'
+});
 let scaleLine = new ScaleLine;
 
 export default class Map extends Component {
