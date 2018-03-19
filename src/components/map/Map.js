@@ -3,11 +3,11 @@ import OLMap from 'ol/map';
 import View from 'ol/view';
 import Zoom from 'ol/control/zoom';
 import ScaleLine from 'ol/control/scaleline';
-import ZoomIn from './map/ZoomIn';
-import ZoomOut from './map/ZoomOut';
-import Basemaps from './map/basemaps/Basemaps';
+import ZoomIn from './ZoomIn';
+import ZoomOut from './ZoomOut';
+import Basemaps from './basemaps/Basemaps';
 import LayerControl from './LayerControl';
-import { VTTestLayer, GJTestLayer, GJVTTestLayer } from './map/layers/TestLayer';
+import { VTTestLayer, GJTestLayer, GJVTTestLayer } from './layers/TestLayer';
 //import './ColorControl';
 
 let view = new View({
@@ -64,7 +64,7 @@ export default class Map extends Component {
             });
         });
         */
-        
+
     }
 
     /* Map Zoomers */

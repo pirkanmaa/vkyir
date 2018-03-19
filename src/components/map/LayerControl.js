@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
 import { withStyles } from 'material-ui/styles';
 import { MenuItem } from 'material-ui/Menu';
-import BasemapControl from './map/BasemapControl';
+import BasemapControl from './BasemapControl';
 
 const styles = {
   paper: {
