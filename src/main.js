@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Gateway from './Gateway';
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-        React.createElement(App),
+        React.createElement(Gateway),
         document.getElementById('app')
     );
 });

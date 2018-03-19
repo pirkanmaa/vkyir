@@ -9,6 +9,9 @@ import LoginDialog from './components/LoginDialog';
 import ToggleButton from './components/ToggleButton';
 
 class App extends Component {
+    componentDidMount() {
+        console.log(this.props.location);
+    }
 
     state = {
         showChart: false,
