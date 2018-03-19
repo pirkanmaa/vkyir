@@ -1,11 +1,11 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import { withStyles } from 'material-ui/styles';
-import LoginButton from './tools/LoginButton';
-import LayerButton from './tools/LayerButton';
-import ChartButton from './tools/ChartButton';
-import ShareButton from './tools/ShareButton';
-import PrintButton from './tools/PrintButton';
+import LoginButton from './LoginButton';
+import LayerButton from './LayerButton';
+import ChartButton from './ChartButton';
+import ShareButton from './ShareButton';
+import PrintButton from './PrintButton';
 
 const styles = {
     paper: {

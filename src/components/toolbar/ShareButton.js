@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Share from 'material-ui-icons/Share';
-import ShareBar from './../ShareBar';
+import ShareBar from './ShareBar';
 import Tooltip from 'material-ui/Tooltip';
 
 export default class ShareButton extends Component {
@@ -28,6 +28,6 @@ export default class ShareButton extends Component {
                 </Tooltip>
                     <ShareBar shareBarVisibility={this.state.open} handleClose={this.handleClose} />
             </div>
-                );
-            }
+        );
+    }
 }

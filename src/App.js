@@ -3,10 +3,10 @@ import Reboot from 'material-ui/Reboot';
 import Map from './components/map/Map';
 import { dark, light } from './Theme';
 import { MuiThemeProvider } from 'material-ui/styles';
-import ChartContainer from './components/ChartContainer';
-import Toolbar from './components/Toolbar';
-import LoginDialog from './components/LoginDialog';
-import ToggleButton from './components/ToggleButton';
+import ChartContainer from './components/chart/ChartContainer';
+import Toolbar from './components/toolbar/Toolbar';
+import LoginDialog from './components/login/LoginDialog';
+import ToggleButton from './components/toolbar/ToggleButton';
 const queryString = require('query-string');
 
 class App extends Component {
