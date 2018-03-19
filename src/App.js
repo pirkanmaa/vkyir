@@ -7,12 +7,9 @@ import ChartContainer from './components/ChartContainer';
 import Toolbar from './components/Toolbar';
 import LoginDialog from './components/LoginDialog';
 import ToggleButton from './components/ToggleButton';
+const queryString = require('query-string');
 
 class App extends Component {
-    componentDidMount() {
-        console.log(this.props.location);
-    }
-
     state = {
         showChart: false,
         showLayerControl: false,
@@ -30,6 +27,14 @@ class App extends Component {
 
     /* Switch Themes */
     switchTheme = () => this.setState({ theme: this.state.theme === dark && light || this.state.theme === light && dark });
+
+    /* Get url query parameters. Is this the right place? Is it f*ck */
+    componentDidMount() {
+        let query = queryString.parse(this.props.location.search);
+        if (query.zoom) {
+            console.log(query.zoom);
+        }
+    }
 
     render() {
         return (
