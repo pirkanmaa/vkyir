@@ -19,16 +19,14 @@ export default class Map extends Component {
 
     state = {
         center: [2650000, 8750000],
-        zoom: 10,
         maxZoom: 10,
-        minZoom: 7,
+        minZoom: 3,
         zoomStep: 0.1,
         basemap: "CartoLight",
         basemapOpacity: 1
     };
 
     componentDidMount() {
-
         view.setCenter(this.state.center);
         view.setZoom(this.state.zoom);
         view.setMaxZoom(this.state.maxZoom);
@@ -91,6 +89,14 @@ export default class Map extends Component {
 
     changeBasemapOpacity = () => { };
 
+    /* Register changes if e.g. zoom is provided in the url query string */
+    componentWillUpdate(nextProps, nextState) {
+        if (nextProps.zoom !== this.state.zoom) {
+            this.setState({ zoom: nextProps.zoom });
+        }
+    }
+
+    /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
         this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
     }

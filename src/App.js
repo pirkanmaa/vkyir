@@ -16,7 +16,8 @@ class App extends Component {
         showToolbar: true,
         showLogin: false,
         logged: false,
-        theme: light
+        theme: light,
+        zoom: 7
     };
 
     /* Material UI togglers */
@@ -32,7 +33,7 @@ class App extends Component {
     componentDidMount() {
         let query = queryString.parse(this.props.location.search);
         if (query.zoom) {
-            console.log(query.zoom);
+            this.setState({ zoom: Number(query.zoom) });
         }
     }
 
@@ -42,6 +43,7 @@ class App extends Component {
                 <div className='app'>
                     <Reboot />
                     <Map
+                        zoom={this.state.zoom}
                         theme={this.state.theme}
                         switchTheme={this.switchTheme}
                         layerControlVisibility={this.state.showLayerControl}
