@@ -17,7 +17,9 @@ class App extends Component {
         showLogin: false,
         logged: false,
         theme: light,
-        zoom: 7
+        zoom: 7,
+        center: [2650000, 8750000],
+        extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
     };
 
     /* Material UI togglers */
@@ -32,8 +34,13 @@ class App extends Component {
     /* Get url query parameters. Is this the right place? Is it f*ck */
     componentDidMount() {
         let query = queryString.parse(this.props.location.search);
-        if (query.zoom) {
-            this.setState({ zoom: Number(query.zoom) });
+        if (query.z) { this.setState({ zoom: Number(query.z) }); }
+        if (query.x && query.y) {
+            /* Jatkossa nämä extentit pitäisi saada view.getProjection().getExtent():stä. Onnistuuko context APIlla? */
+            /* Tässä nyt vedetty nollille, pitäisi vaihtaa että ottaa initial centeristä koordinaatit, mutta mitäs jos centeriä on mennyt välissä räpläämään... */
+            if (query.x < this.state.extent[0] || query.x > this.state.extent[2]) { query.x = 0 };
+            if (query.y < this.state.extent[1] || query.y > this.state.extent[3]) { query.y = 0 };
+            this.setState({ center: [Number(query.x),Number(query.y)] });
         }
     }
 
@@ -44,6 +51,7 @@ class App extends Component {
                     <Reboot />
                     <Map
                         zoom={this.state.zoom}
+                        center={this.state.center}
                         theme={this.state.theme}
                         switchTheme={this.switchTheme}
                         layerControlVisibility={this.state.showLayerControl}

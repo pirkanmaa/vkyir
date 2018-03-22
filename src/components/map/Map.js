@@ -2,18 +2,16 @@ import React, { Component } from 'react';
 import OLMap from 'ol/map';
 import View from 'ol/view';
 import Zoom from 'ol/control/zoom';
-import ScaleLine from 'ol/control/scaleline';
 import ZoomIn from './ZoomIn';
 import ZoomOut from './ZoomOut';
 import Basemaps from './basemaps/Basemaps';
 import LayerControl from './LayerControl';
-import { VTTestLayer, GJTestLayer, GJVTTestLayer } from './layers/TestLayer';
+import { GJTestLayer } from './layers/TestLayer';
 //import './ColorControl';
 
 let view = new View({
     projection: 'EPSG:3857'
 });
-let scaleLine = new ScaleLine;
 
 export default class Map extends Component {
 
@@ -27,6 +25,7 @@ export default class Map extends Component {
     };
 
     componentDidMount() {
+
         view.setCenter(this.state.center);
         view.setZoom(this.state.zoom);
         view.setMaxZoom(this.state.maxZoom);
@@ -48,7 +47,7 @@ export default class Map extends Component {
 
         /* Bind "map" to state */
         this.setState({ map: map });
-        GJVTTestLayer().then(result => map.addLayer(result));
+        //GJVTTestLayer().then(result => map.addLayer(result));
 
         map.on('moveend', () => this.setState({ zoom: view.getZoom() }));
         /* map.on('moveend', () => {
@@ -94,11 +93,15 @@ export default class Map extends Component {
         if (nextProps.zoom !== this.state.zoom) {
             this.setState({ zoom: nextProps.zoom });
         }
+        if (nextProps.center !== this.state.center) {
+            this.setState({ center: nextProps.center });
+        }
     }
 
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
         this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
+        this.state.center !== prevState.center && view.setCenter(this.state.center);
     }
 
     render() {
