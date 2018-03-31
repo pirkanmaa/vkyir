@@ -53,10 +53,10 @@ export default class Map extends Component {
 
     /* Map Zoomers */
     zoomIn = () => {
+        let newZoom = this.state.zoom + this.state.zoomStep;
         this.state.zoom < this.state.maxZoom
-            && this.setState({ zoom: this.state.zoom + this.state.zoomStep });
+            && this.setState({ zoom: newZoom });
     }
-
     zoomOut = () => {
         this.state.zoom > this.state.minZoom
             && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
@@ -82,21 +82,23 @@ export default class Map extends Component {
 
     changeBasemapOpacity = () => { };
 
-    /* Register changes if e.g. zoom is provided in the url query string */
-    componentWillUpdate(nextProps, nextState) {
-        /*
-        if (nextProps.zoom !== this.state.zoom) {
-            this.setState({ zoom: nextProps.zoom });
-        }
-        if (nextProps.center !== this.state.center) {
-            this.setState({ center: nextProps.center });
-        }*/
-        console.log('meinaa päivitty');
-    }
-
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
-        console.log('componentti päivittyi');
+        if (this.state.zoom !== prevState.zoom) {
+            view.setZoom(this.state.zoom);
+        }
+        if (this.state.center !== prevState.center) {
+            view.setCenter(this.state.center);
+        }
+    }
+
+    /* Register changes from props changes (e.g. url query zoom from parent) */
+    /* returns new state / null depending on wether state should change */
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.zoom) {
+            return { zoom: nextProps.zoom };
+        }
+        return null;
     }
 
     render() {

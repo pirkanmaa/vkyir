@@ -38,9 +38,10 @@ class App extends Component {
 
     /* Get url query parameters. Is this the right place? Is it f*ck */
     componentDidMount() {
-        console.log('query muuttui');
         let query = queryString.parse(this.props.location.search);
-        if (query.z) { this.setState({ zoom: Number(query.z) }); }
+        if (query.z) {
+            this.setState({ zoom: Number(query.z) });
+        }
         if (query.x && query.y) {
             /* Jatkossa nämä extentit pitäisi saada view.getProjection().getExtent():stä. Onnistuuko context APIlla? */
             /* Tässä nyt vedetty nollille, pitäisi vaihtaa että ottaa initial centeristä koordinaatit, mutta mitäs jos centeriä on mennyt välissä räpläämään... */
