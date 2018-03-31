@@ -33,11 +33,12 @@ class App extends Component {
 
     handleTesti = (urlQuery) => {
         console.log('testi', urlQuery);
-        //this.props.history.push(({search: `z=${urlQuery.z}&c=${urlQuery.c}`}));
+        this.props.history.push(({search: 'zebra=ok'}));
     }
 
     /* Get url query parameters. Is this the right place? Is it f*ck */
     componentDidMount() {
+        console.log('query muuttui');
         let query = queryString.parse(this.props.location.search);
         if (query.z) { this.setState({ zoom: Number(query.z) }); }
         if (query.x && query.y) {

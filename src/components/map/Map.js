@@ -43,30 +43,24 @@ export default class Map extends Component {
             controls: []
         });
 
-        //let currentExtent= map.getView().calculateExtent(map.getSize());
 
         /* Bind "map" to state */
         this.setState({ map: map });
-        //GJVTTestLayer().then(result => map.addLayer(result));
 
+        /* Register wheel zoomin to view zoom */
         map.on('moveend', () => this.setState({ zoom: view.getZoom() }));
-        /* map.on('moveend', () => {
-            console.log(GJTestLayer.getSource().getFeaturesInExtent(map.getView().calculateExtent(map.getSize())));
-        } ); */
-        // Testing MVT interaction
-        /*map.on('click', function (e) {
-            map.forEachFeatureAtPixel(e.pixel, function (feature) {
-                const properties = feature.getProperties();
-                console.log(properties);
-            });
-        });
-        */
-
     }
 
     /* Map Zoomers */
-    zoomIn = () => this.state.zoom < this.state.maxZoom && this.setState({ zoom: this.state.zoom + this.state.zoomStep });
-    zoomOut = () => this.state.zoom > this.state.minZoom && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+    zoomIn = () => {
+        this.state.zoom < this.state.maxZoom
+            && this.setState({ zoom: this.state.zoom + this.state.zoomStep });
+    }
+
+    zoomOut = () => {
+        this.state.zoom > this.state.minZoom
+            && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+    }
 
     /* Basemap switcher */
     changeBasemap = (event, value) => {
@@ -93,33 +87,16 @@ export default class Map extends Component {
         /*
         if (nextProps.zoom !== this.state.zoom) {
             this.setState({ zoom: nextProps.zoom });
-        }*/
+        }
         if (nextProps.center !== this.state.center) {
             this.setState({ center: nextProps.center });
-        }
+        }*/
+        console.log('meinaa päivitty');
     }
 
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
-        let urlQuery = {};
-
-        //this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
-        console.log(this.state.center);
-        this.state.center !== prevState.center && view.setCenter(this.state.center);
-
-        if (this.state.zoom !== prevState.zoom) {
-            view.setZoom(this.state.zoom);
-            urlQuery.z = Number(this.state.zoom).toFixed(2);
-        }
-        /*
-        if (this.state.center !== prevState.center) {
-            view.setCenter(this.state.center);
-            urlQuery.c = this.state.center;
-            console.log(this.state.center);
-        }*/
-        console.log('update component');
-
-        this.props.testi(urlQuery);
+        console.log('componentti päivittyi');
     }
 
     render() {
