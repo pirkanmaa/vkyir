@@ -31,6 +31,11 @@ class App extends Component {
     /* Switch Themes */
     switchTheme = () => this.setState({ theme: this.state.theme === dark && light || this.state.theme === light && dark });
 
+    handleTesti = (urlQuery) => {
+        console.log('testi', urlQuery);
+        //this.props.history.push(({search: `z=${urlQuery.z}&c=${urlQuery.c}`}));
+    }
+
     /* Get url query parameters. Is this the right place? Is it f*ck */
     componentDidMount() {
         let query = queryString.parse(this.props.location.search);
@@ -38,8 +43,8 @@ class App extends Component {
         if (query.x && query.y) {
             /* Jatkossa nämä extentit pitäisi saada view.getProjection().getExtent():stä. Onnistuuko context APIlla? */
             /* Tässä nyt vedetty nollille, pitäisi vaihtaa että ottaa initial centeristä koordinaatit, mutta mitäs jos centeriä on mennyt välissä räpläämään... */
-            if (query.x < this.state.extent[0] || query.x > this.state.extent[2]) { query.x = 0 };
-            if (query.y < this.state.extent[1] || query.y > this.state.extent[3]) { query.y = 0 };
+            if (query.x < this.state.extent[0] || query.x > this.state.extent[2]) { query.x = this.state.center[0] };
+            if (query.y < this.state.extent[1] || query.y > this.state.extent[3]) { query.y = this.state.center[1] };
             this.setState({ center: [Number(query.x),Number(query.y)] });
         }
     }
@@ -55,6 +60,7 @@ class App extends Component {
                         theme={this.state.theme}
                         switchTheme={this.switchTheme}
                         layerControlVisibility={this.state.showLayerControl}
+                        testi={this.handleTesti}
                     />
                     <ChartContainer
                         chartVisibility={this.state.showChart}

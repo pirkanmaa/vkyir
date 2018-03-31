@@ -90,9 +90,10 @@ export default class Map extends Component {
 
     /* Register changes if e.g. zoom is provided in the url query string */
     componentWillUpdate(nextProps, nextState) {
+        /*
         if (nextProps.zoom !== this.state.zoom) {
             this.setState({ zoom: nextProps.zoom });
-        }
+        }*/
         if (nextProps.center !== this.state.center) {
             this.setState({ center: nextProps.center });
         }
@@ -100,8 +101,25 @@ export default class Map extends Component {
 
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
-        this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
+        let urlQuery = {};
+
+        //this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
+        console.log(this.state.center);
         this.state.center !== prevState.center && view.setCenter(this.state.center);
+
+        if (this.state.zoom !== prevState.zoom) {
+            view.setZoom(this.state.zoom);
+            urlQuery.z = Number(this.state.zoom).toFixed(2);
+        }
+        /*
+        if (this.state.center !== prevState.center) {
+            view.setCenter(this.state.center);
+            urlQuery.c = this.state.center;
+            console.log(this.state.center);
+        }*/
+        console.log('update component');
+
+        this.props.testi(urlQuery);
     }
 
     render() {
