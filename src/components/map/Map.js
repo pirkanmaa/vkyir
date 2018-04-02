@@ -129,7 +129,7 @@ export default class Map extends Component {
         if (nextProps.center && !prevState.centerFromUrl) {
             return { center: nextProps.center, centerFromUrl: true };
         }
-        if (nextProps.basemap && !prevState.testi) {
+        if (nextProps.basemap && !prevState.basemapFromUrl) {
             return { basemap: nextProps.basemap, basemapFromUrl: true};
         }
         return null;
