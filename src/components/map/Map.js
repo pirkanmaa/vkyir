@@ -21,11 +21,12 @@ export default class Map extends Component {
         minZoom: 3,
         zoomStep: 0.1,
         basemap: "CartoLight",
-        basemapOpacity: 1
+        basemapOpacity: 1,
+        centerFromUrl: false,
+        basemapFromUrl: false
     };
 
     componentDidMount() {
-
         view.setCenter(this.state.center);
         view.setZoom(this.state.zoom);
         view.setMaxZoom(this.state.maxZoom);
@@ -43,30 +44,32 @@ export default class Map extends Component {
             controls: []
         });
 
-        //let currentExtent= map.getView().calculateExtent(map.getSize());
-
         /* Bind "map" to state */
         this.setState({ map: map });
-        //GJVTTestLayer().then(result => map.addLayer(result));
 
-        map.on('moveend', () => this.setState({ zoom: view.getZoom() }));
-        /* map.on('moveend', () => {
-            console.log(GJTestLayer.getSource().getFeaturesInExtent(map.getView().calculateExtent(map.getSize())));
-        } ); */
-        // Testing MVT interaction
-        /*map.on('click', function (e) {
-            map.forEachFeatureAtPixel(e.pixel, function (feature) {
-                const properties = feature.getProperties();
-                console.log(properties);
-            });
+        /* Register state to listen for map events */
+        map.on('moveend', () => {
+            let newZoom = view.getZoom();
+            let newCenter = view.getCenter();
+            if (newZoom !== this.state.zoom) {
+                this.setState({ zoom: newZoom })
+            }
+            if (newCenter !== this.state.center) {
+                this.setState({ center: newCenter });
+            }
         });
-        */
-
     }
 
     /* Map Zoomers */
-    zoomIn = () => this.state.zoom < this.state.maxZoom && this.setState({ zoom: this.state.zoom + this.state.zoomStep });
-    zoomOut = () => this.state.zoom > this.state.minZoom && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+    zoomIn = () => {
+        let newZoom = this.state.zoom + this.state.zoomStep;
+        this.state.zoom < this.state.maxZoom
+            && this.setState({ zoom: newZoom });
+    }
+    zoomOut = () => {
+        this.state.zoom > this.state.minZoom
+            && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+    }
 
     /* Basemap switcher */
     changeBasemap = (event, value) => {
@@ -88,20 +91,48 @@ export default class Map extends Component {
 
     changeBasemapOpacity = () => { };
 
-    /* Register changes if e.g. zoom is provided in the url query string */
-    componentWillUpdate(nextProps, nextState) {
-        if (nextProps.zoom !== this.state.zoom) {
-            this.setState({ zoom: nextProps.zoom });
-        }
-        if (nextProps.center !== this.state.center) {
-            this.setState({ center: nextProps.center });
+    /* Register view to change along with this.state.zoom */
+    componentDidUpdate(prevProps, prevState) {
+        /* Check if zoom / center / basmap has changed from last time */
+        /* TODO: Figure out a better structure for this */
+        this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
+        this.state.center !== prevState.center && view.setCenter(this.state.center);
+        this.state.basemap !== prevState.basemap && this.changeBasemap(null, this.state.basemap);
+        if (this.state.zoom !== prevState.zoom ||
+            this.state.center !== prevState.center ||
+            this.state.basemap !== prevState.basemap) {
+            this._updateUrl();
         }
     }
 
-    /* Register view to change along with this.state.zoom */
-    componentDidUpdate(prevProps, prevState) {
-        this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
-        this.state.center !== prevState.center && view.setCenter(this.state.center);
+    /* Send new url query string to App */
+    _updateUrl = () => {
+        let urlQuery = [];
+        let zoom = Number(this.state.zoom).toFixed(2);
+        let x = Number(this.state.center[0]).toFixed(2);
+        let y = Number(this.state.center[1]).toFixed(2);
+        let basemap = this.state.basemap;
+        urlQuery.push({ zoom : zoom });
+        urlQuery.push({ x: x });
+        urlQuery.push({ y: y });
+        urlQuery.push({ basemap: basemap });
+        this.props.updateUrl(urlQuery);
+    }
+
+    /* Register changes from props changes (e.g. url query zoom from parent) */
+    /* returns new state / null depending on wether state should change */
+    /* TODO: Figure out how to props on state only once */
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.zoom && !prevState.zoom) {
+            return { zoom: nextProps.zoom };
+        }
+        if (nextProps.center && !prevState.centerFromUrl) {
+            return { center: nextProps.center, centerFromUrl: true };
+        }
+        if (nextProps.basemap && !prevState.testi) {
+            return { basemap: nextProps.basemap, basemapFromUrl: true};
+        }
+        return null;
     }
 
     render() {
