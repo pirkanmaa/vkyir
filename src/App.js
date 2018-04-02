@@ -17,7 +17,6 @@ class App extends Component {
         showLogin: false,
         logged: false,
         theme: light,
-        zoom: 7,
         center: [2650000, 8750000],
         extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
     };
@@ -32,8 +31,7 @@ class App extends Component {
     switchTheme = () => this.setState({ theme: this.state.theme === dark && light || this.state.theme === light && dark });
 
     handleTesti = (urlQuery) => {
-        console.log('testi', urlQuery);
-        this.props.history.push(({search: 'zebra=ok'}));
+        this.props.history.push(({search: `?z=${urlQuery.z}`}));
     }
 
     /* Get url query parameters. Is this the right place? Is it f*ck */

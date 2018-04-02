@@ -86,16 +86,18 @@ export default class Map extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.state.zoom !== prevState.zoom) {
             view.setZoom(this.state.zoom);
+            this.props.testi({z: Number(this.state.zoom).toFixed(2)});
         }
         if (this.state.center !== prevState.center) {
             view.setCenter(this.state.center);
+            this.props.testi();
         }
     }
 
     /* Register changes from props changes (e.g. url query zoom from parent) */
     /* returns new state / null depending on wether state should change */
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.zoom) {
+        if (nextProps.zoom && !prevState.zoom) {
             return { zoom: nextProps.zoom };
         }
         return null;
