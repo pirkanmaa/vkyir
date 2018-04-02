@@ -59,7 +59,6 @@ class App extends Component {
             if (query.y < this.state.extent[1] || query.y > this.state.extent[3]) {
                 query.y = this.state.center[1]
             } */
-            console.log(query.x, query.y);
             this.setState({ center: [Number(query.x), Number(query.y)] });
         }
     }

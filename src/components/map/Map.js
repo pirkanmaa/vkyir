@@ -21,7 +21,8 @@ export default class Map extends Component {
         minZoom: 3,
         zoomStep: 0.1,
         basemap: "CartoLight",
-        basemapOpacity: 1
+        basemapOpacity: 1,
+        centerFromUrl: false
     };
 
     componentDidMount() {
@@ -115,13 +116,11 @@ export default class Map extends Component {
     /* Register changes from props changes (e.g. url query zoom from parent) */
     /* returns new state / null depending on wether state should change */
     static getDerivedStateFromProps(nextProps, prevState) {
-        //console.log(nextProps, 'next props');
-        //console.log(prevState, 'prevstate');
         if (nextProps.zoom && !prevState.zoom) {
             return { zoom: nextProps.zoom };
         }
-        if (nextProps.center) {
-            return { center: nextProps.center };
+        if (nextProps.center && !prevState.centerFromUrl) {
+            return { center: nextProps.center, centerFromUrl: true };
         }
         return null;
     }
