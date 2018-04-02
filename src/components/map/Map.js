@@ -22,7 +22,8 @@ export default class Map extends Component {
         zoomStep: 0.1,
         basemap: "CartoLight",
         basemapOpacity: 1,
-        centerFromUrl: false
+        centerFromUrl: false,
+        basemapFromUrl: false
     };
 
     componentDidMount() {
@@ -42,7 +43,6 @@ export default class Map extends Component {
             view: view,
             controls: []
         });
-
 
         /* Bind "map" to state */
         this.setState({ map: map });
@@ -93,10 +93,14 @@ export default class Map extends Component {
 
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
-        /* Check if zoom / center has changed from last time */
+        /* Check if zoom / center / basmap has changed from last time */
+        /* TODO: Figure out a better structure for this */
         this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
         this.state.center !== prevState.center && view.setCenter(this.state.center);
-        if (this.state.zoom !== prevState.zoom || this.state.center !== prevState.center) {
+        this.state.basemap !== prevState.basemap && this.changeBasemap(null, this.state.basemap);
+        if (this.state.zoom !== prevState.zoom ||
+            this.state.center !== prevState.center ||
+            this.state.basemap !== prevState.basemap) {
             this._updateUrl();
         }
     }
@@ -107,20 +111,26 @@ export default class Map extends Component {
         let zoom = Number(this.state.zoom).toFixed(2);
         let x = Number(this.state.center[0]).toFixed(2);
         let y = Number(this.state.center[1]).toFixed(2);
+        let basemap = this.state.basemap;
         urlQuery.push({ zoom : zoom });
         urlQuery.push({ x: x });
         urlQuery.push({ y: y });
+        urlQuery.push({ basemap: basemap });
         this.props.updateUrl(urlQuery);
     }
 
     /* Register changes from props changes (e.g. url query zoom from parent) */
     /* returns new state / null depending on wether state should change */
+    /* TODO: Figure out how to props on state only once */
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.zoom && !prevState.zoom) {
             return { zoom: nextProps.zoom };
         }
         if (nextProps.center && !prevState.centerFromUrl) {
             return { center: nextProps.center, centerFromUrl: true };
+        }
+        if (nextProps.basemap && !prevState.testi) {
+            return { basemap: nextProps.basemap, basemapFromUrl: true};
         }
         return null;
     }

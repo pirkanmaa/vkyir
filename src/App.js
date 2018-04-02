@@ -17,8 +17,7 @@ class App extends Component {
         showLogin: false,
         logged: false,
         theme: light,
-        extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244],
-        queryString: ''
+        extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
     };
 
     /* Material UI togglers */
@@ -61,6 +60,10 @@ class App extends Component {
             } */
             this.setState({ center: [Number(query.x), Number(query.y)] });
         }
+        // Set basemap from url
+        if (query.basemap) {
+            this.setState({ basemap: query.basemap });
+        }
     }
 
     render() {
@@ -69,6 +72,7 @@ class App extends Component {
                 <div className='app'>
                     <Reboot />
                     <Map
+                        basemap={this.state.basemap}
                         zoom={this.state.zoom}
                         center={this.state.center}
                         theme={this.state.theme}
