@@ -47,8 +47,17 @@ export default class Map extends Component {
         /* Bind "map" to state */
         this.setState({ map: map });
 
-        /* Register wheel zoomin to view zoom */
-        map.on('moveend', () => this.setState({ zoom: view.getZoom() }));
+        /* Register state to listen for map events */
+        map.on('moveend', () => {
+            let newZoom = view.getZoom();
+            let newCenter = view.getCenter();
+            if (newZoom !== this.state.zoom) {
+                this.setState({ zoom: newZoom })
+            }
+            if (newCenter !== this.state.center) {
+                this.setState({ center: newCenter });
+            }
+        });
     }
 
     /* Map Zoomers */
@@ -84,14 +93,23 @@ export default class Map extends Component {
 
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.zoom !== prevState.zoom) {
-            view.setZoom(this.state.zoom);
-            this.props.testi({z: Number(this.state.zoom).toFixed(2)});
+        /* Check if zoom / center has changed from last time */
+        this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
+        this.state.center !== prevState.center && view.setCenter(this.state.center);
+        if (this.state.zoom !== prevState.zoom || this.state.center !== prevState.center) {
+            this._updateUrl();
         }
-        if (this.state.center !== prevState.center) {
-            view.setCenter(this.state.center);
-            this.props.testi();
-        }
+    }
+
+    _updateUrl = () => {
+        let urlQuery = [];
+        let zoom = Number(this.state.zoom).toFixed(2);
+        let lon = Number(this.state.center[0] / 100000).toFixed(4);
+        let lat = Number(this.state.center[1] / 100000).toFixed(4);
+        urlQuery.push({ zoom : zoom });
+        urlQuery.push({ lon: lon });
+        urlQuery.push({ lat: lat });
+        this.props.updateUrl(urlQuery);
     }
 
     /* Register changes from props changes (e.g. url query zoom from parent) */

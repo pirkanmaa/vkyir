@@ -30,16 +30,24 @@ class App extends Component {
     /* Switch Themes */
     switchTheme = () => this.setState({ theme: this.state.theme === dark && light || this.state.theme === light && dark });
 
-    handleTesti = (urlQuery) => {
-        this.props.history.push(({search: `?z=${urlQuery.z}`}));
+    /* Updates the url query string based on urlQuery object parameter */
+    urlQueryString = (urlQuery) => {
+        let newQuery = '?';
+        urlQuery.forEach(item => {
+            let key = Object.keys(item)[0];
+            let value = item[key];
+            newQuery += `&${key}=${value}`;
+        });
+        this.props.history.push(({search: newQuery}));
     }
 
     /* Get url query parameters. Is this the right place? Is it f*ck */
     componentDidMount() {
         let query = queryString.parse(this.props.location.search);
-        if (query.z) {
-            this.setState({ zoom: Number(query.z) });
+        if (query.zoom) {
+            this.setState({ zoom: Number(query.zoom) });
         }
+        // TODO: set lat lon to map view.setCenter();
         if (query.x && query.y) {
             /* Jatkossa nämä extentit pitäisi saada view.getProjection().getExtent():stä. Onnistuuko context APIlla? */
             /* Tässä nyt vedetty nollille, pitäisi vaihtaa että ottaa initial centeristä koordinaatit, mutta mitäs jos centeriä on mennyt välissä räpläämään... */
@@ -60,7 +68,7 @@ class App extends Component {
                         theme={this.state.theme}
                         switchTheme={this.switchTheme}
                         layerControlVisibility={this.state.showLayerControl}
-                        testi={this.handleTesti}
+                        updateUrl={this.urlQueryString}
                     />
                     <ChartContainer
                         chartVisibility={this.state.showChart}
