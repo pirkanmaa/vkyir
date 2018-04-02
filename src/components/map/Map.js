@@ -25,7 +25,6 @@ export default class Map extends Component {
     };
 
     componentDidMount() {
-
         view.setCenter(this.state.center);
         view.setZoom(this.state.zoom);
         view.setMaxZoom(this.state.maxZoom);
@@ -101,22 +100,28 @@ export default class Map extends Component {
         }
     }
 
+    /* Send new url query string to App */
     _updateUrl = () => {
         let urlQuery = [];
         let zoom = Number(this.state.zoom).toFixed(2);
-        let lon = Number(this.state.center[0] / 100000).toFixed(4);
-        let lat = Number(this.state.center[1] / 100000).toFixed(4);
+        let x = Number(this.state.center[0]).toFixed(2);
+        let y = Number(this.state.center[1]).toFixed(2);
         urlQuery.push({ zoom : zoom });
-        urlQuery.push({ lon: lon });
-        urlQuery.push({ lat: lat });
+        urlQuery.push({ x: x });
+        urlQuery.push({ y: y });
         this.props.updateUrl(urlQuery);
     }
 
     /* Register changes from props changes (e.g. url query zoom from parent) */
     /* returns new state / null depending on wether state should change */
     static getDerivedStateFromProps(nextProps, prevState) {
+        //console.log(nextProps, 'next props');
+        //console.log(prevState, 'prevstate');
         if (nextProps.zoom && !prevState.zoom) {
             return { zoom: nextProps.zoom };
+        }
+        if (nextProps.center) {
+            return { center: nextProps.center };
         }
         return null;
     }
