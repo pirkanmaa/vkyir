@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import CssBaseline from 'material-ui/CssBaseline';
 import Map from './components/map/Map';
 import { dark, light } from './Theme';
