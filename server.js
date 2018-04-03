@@ -6,11 +6,11 @@ const app = express();
 
 const compiler = webpack(webpackConfig);
 
-app.use(express.static(`${__dirname}/www`));
+app.use(express.static(`${__dirname}/dist`));
 
 app.use(webpackDevMiddleware(compiler, {
     hot: true,
-    filename: 'bundle.js',
+    filename: 'main.js',
     publicPath: '/',
     stats: {
         colors: true
