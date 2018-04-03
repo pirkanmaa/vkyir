@@ -112,10 +112,10 @@ export default class Map extends Component {
         let x = Number(this.state.center[0]).toFixed(2);
         let y = Number(this.state.center[1]).toFixed(2);
         let basemap = this.state.basemap;
-        urlQuery.push({ zoom : zoom });
+        urlQuery.push({ z: zoom });
         urlQuery.push({ x: x });
         urlQuery.push({ y: y });
-        urlQuery.push({ basemap: basemap });
+        urlQuery.push({ b: basemap });
         this.props.updateUrl(urlQuery);
     }
 

@@ -10,6 +10,7 @@ import ToggleButton from './components/toolbar/ToggleButton';
 const queryString = require('query-string');
 
 class App extends Component {
+
     state = {
         showChart: false,
         showLayerControl: false,
@@ -45,7 +46,7 @@ class App extends Component {
     componentDidMount() {
         let query = queryString.parse(this.props.location.search);
         // Set zoom from query string
-        if (query.zoom) {
+        if (query.z) {
             this.setState({ zoom: Number(query.zoom) });
         }
         // Set center from query string
@@ -61,7 +62,7 @@ class App extends Component {
             this.setState({ center: [Number(query.x), Number(query.y)] });
         }
         // Set basemap from url
-        if (query.basemap) {
+        if (query.b) {
             this.setState({ basemap: query.basemap });
         }
     }
@@ -101,4 +102,5 @@ class App extends Component {
         );
     }
 }
+
 export default App;
