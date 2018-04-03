@@ -4,6 +4,27 @@ import Share from 'material-ui-icons/Share';
 import ShareBar from './ShareBar';
 import Tooltip from 'material-ui/Tooltip';
 
+function copyTextToClipboard(text) {
+
+    let textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    try {
+        let successful = document.execCommand('copy');
+        let msg = successful ? 'successful' : 'unsuccessful';
+    } catch (err) {
+        console.log('Oops, unable to copy');
+    }
+
+    document.body.removeChild(textArea);
+}
+
+function CopyLink() {
+    copyTextToClipboard(location.href);
+}
+
 export default class ShareButton extends Component {
 
     state = {
@@ -12,6 +33,7 @@ export default class ShareButton extends Component {
 
     handleClick = () => {
         this.setState({ open: true });
+        CopyLink();
     };
 
     handleClose = () => {
@@ -26,7 +48,10 @@ export default class ShareButton extends Component {
                         <Share />
                     </Button>
                 </Tooltip>
-                    <ShareBar shareBarVisibility={this.state.open} handleClose={this.handleClose} />
+                <ShareBar
+                    shareBarVisibility={this.state.open}
+                    handleClose={this.handleClose}
+                />
             </div>
         );
     }
