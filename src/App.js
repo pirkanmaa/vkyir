@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Reboot from 'material-ui/Reboot';
+import CssBaseline from 'material-ui/CssBaseline';
 import Map from './components/map/Map';
 import { dark, light } from './Theme';
 import { MuiThemeProvider } from 'material-ui/styles';
@@ -71,7 +71,7 @@ class App extends Component {
         return (
             <MuiThemeProvider theme={this.state.theme}>
                 <div className='app'>
-                    <Reboot />
+                    <CssBaseline />
                     <Map
                         basemap={this.state.basemap}
                         zoom={this.state.zoom}
