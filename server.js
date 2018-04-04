@@ -3,6 +3,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const app = express();
+const port = process.env.PORT || 3000;
 
 const compiler = webpack(webpackConfig);
 
@@ -18,7 +19,7 @@ app.use(webpackDevMiddleware(compiler, {
     historyApiFallback: true
 }));
 
-const server = app.listen(3000, () => {
+const server = app.listen(port, () => {
     const host = server.address().address;
     const port = server.address().port;
     console.log(`App listening at https://${host}:${port}`);
