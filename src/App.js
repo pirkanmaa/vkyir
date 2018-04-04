@@ -47,7 +47,7 @@ class App extends Component {
         let query = queryString.parse(this.props.location.search);
         // Set zoom from query string
         if (query.z) {
-            this.setState({ zoom: Number(query.zoom) });
+            this.setState({ zoom: Number(query.z) });
         }
         // Set center from query string
         if (query.x && query.y) {
@@ -63,7 +63,7 @@ class App extends Component {
         }
         // Set basemap from url
         if (query.b) {
-            this.setState({ basemap: query.basemap });
+            this.setState({ basemap: query.b });
         }
     }
 
