@@ -49,6 +49,7 @@
     "react-dom": "^16.3.0",
     "react-router-dom": "^4.2.2",
     "style-loader": "^0.20.3",
+    "url-join": "^4.0.0",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
     "webpack-dev-middleware": "^3.1.0",
