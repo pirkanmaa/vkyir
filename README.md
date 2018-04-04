@@ -5,7 +5,8 @@ Data2Go location intelligence platform development branch
 Install:
 ```
 npm install
-
+```
+Run webpack dev-server:
 ```
 npm run dev-server
 ```
