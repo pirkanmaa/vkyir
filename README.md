@@ -6,8 +6,7 @@ Install:
 ```
 npm install
 ```
-
-Start webpack dev server:
+Run webpack dev-server:
 ```
 npm run dev-server
 ```
