@@ -9,6 +9,9 @@ import LoginDialog from './components/login/LoginDialog';
 import ToggleButton from './components/toolbar/ToggleButton';
 const queryString = require('query-string');
 
+/* Context for providing user information */
+const UserContext = React.createContext('peasant');
+
 class App extends Component {
 
     state = {
@@ -69,38 +72,40 @@ class App extends Component {
 
     render() {
         return (
-            <MuiThemeProvider theme={this.state.theme}>
-                <div className='app'>
-                    <CssBaseline />
-                    <Map
-                        basemap={this.state.basemap}
-                        zoom={this.state.zoom}
-                        center={this.state.center}
-                        theme={this.state.theme}
-                        switchTheme={this.switchTheme}
-                        layerControlVisibility={this.state.showLayerControl}
-                        updateUrl={this.urlQueryString}
-                    />
-                    <ChartContainer
-                        chartVisibility={this.state.showChart}
-                    />
-                    <Toolbar
-                        toolbarVisibility={this.state.showToolbar}
-                        toggleLayerControl={this.toggleLayerControl}
-                        toggleLogin={this.toggleLogin}
-                        toggleChart={this.toggleChart}
-                    />
-                    {/*<ToggleButton*
-                        toggleToolbar={this.toggleToolbar}
-                    />*/}
-                    <LoginDialog
-                        toggleLogin={this.toggleLogin}
-                        loginDialogVisibility={this.state.showLogin}
-                    />
-                </div>
-            </MuiThemeProvider>
+            <UserContext.Provider value="esa">
+                <MuiThemeProvider theme={this.state.theme}>
+                    <div className='app'>
+                        <CssBaseline />
+                        <Map
+                            basemap={this.state.basemap}
+                            zoom={this.state.zoom}
+                            center={this.state.center}
+                            theme={this.state.theme}
+                            switchTheme={this.switchTheme}
+                            layerControlVisibility={this.state.showLayerControl}
+                            updateUrl={this.urlQueryString}
+                        />
+                        <ChartContainer
+                            chartVisibility={this.state.showChart}
+                        />
+                        <Toolbar
+                            toolbarVisibility={this.state.showToolbar}
+                            toggleLayerControl={this.toggleLayerControl}
+                            toggleLogin={this.toggleLogin}
+                            toggleChart={this.toggleChart}
+                        />
+                        {/*<ToggleButton*
+                            toggleToolbar={this.toggleToolbar}
+                        />*/}
+                        <LoginDialog
+                            toggleLogin={this.toggleLogin}
+                            loginDialogVisibility={this.state.showLogin}
+                        />
+                    </div>
+                </MuiThemeProvider>
+            </UserContext.Provider>
         );
     }
 }
 
-export default App;
+export {App, UserContext};
