@@ -7,11 +7,25 @@ import ChartContainer from './components/chart/ChartContainer';
 import Toolbar from './components/toolbar/Toolbar';
 import LoginDialog from './components/login/LoginDialog';
 import ToggleButton from './components/toolbar/ToggleButton';
+import UserController from './controllers/UserController';
 const queryString = require('query-string');
+
+/* Context for providing user information */
+const UserContext = React.createContext('peasant');
+
+const userStyle = {
+    marginTop: '30px',
+    marginLeft: '50px',
+    fontFamily: 'courier',
+    color: 'rgb(255, 155, 0, 0.7)',
+    zIndex: 666,
+    position: 'absolute'
+}
 
 class App extends Component {
 
     state = {
+        user: {},
         showChart: false,
         showLayerControl: false,
         showToolbar: true,
@@ -19,6 +33,35 @@ class App extends Component {
         logged: false,
         theme: light,
         extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
+    };
+
+    /* API function calls */
+    handleLogin = (loginData) => {
+        // Close login dialog
+        this.toggleLogin();
+        console.log('Authentication user:', loginData);
+        UserController.authenticateUser().then((response) => {
+            if (response.ok) {
+                response.json().then(json => {
+                    // Authentication OK
+                    console.log(json);
+                    this.setState({user: json.user});
+                });
+            } else {
+                console.log('Auth failed, use dummy auth');
+                // Authentication FAILED, set dummy auth
+                if (loginData.username === 'admin' && loginData.password === 'password') {
+                    this.setState({user: loginData});
+                }
+            }
+        }).catch((err) => {
+            console.log('Error', err);
+        });
+    };
+
+    /* Handle logging out user */
+    handleLogout = () => {
+        this.setState({user: {}});
     };
 
     /* Material UI togglers */
@@ -69,38 +112,55 @@ class App extends Component {
 
     render() {
         return (
-            <MuiThemeProvider theme={this.state.theme}>
-                <div className='app'>
-                    <CssBaseline />
-                    <Map
-                        basemap={this.state.basemap}
-                        zoom={this.state.zoom}
-                        center={this.state.center}
-                        theme={this.state.theme}
-                        switchTheme={this.switchTheme}
-                        layerControlVisibility={this.state.showLayerControl}
-                        updateUrl={this.urlQueryString}
-                    />
-                    <ChartContainer
-                        chartVisibility={this.state.showChart}
-                    />
-                    <Toolbar
-                        toolbarVisibility={this.state.showToolbar}
-                        toggleLayerControl={this.toggleLayerControl}
-                        toggleLogin={this.toggleLogin}
-                        toggleChart={this.toggleChart}
-                    />
-                    {/*<ToggleButton*
-                        toggleToolbar={this.toggleToolbar}
-                    />*/}
-                    <LoginDialog
-                        toggleLogin={this.toggleLogin}
-                        loginDialogVisibility={this.state.showLogin}
-                    />
-                </div>
-            </MuiThemeProvider>
+            <UserContext.Provider value={this.state.user.username}>
+                <MuiThemeProvider theme={this.state.theme}>
+                    <div className='app'>
+                        <CssBaseline />
+                        <UserContext.Consumer>
+                            {user => {
+                                if (user === 'admin') {
+                                    return (
+                                        <div style={userStyle}>
+                                            <h1> {user} </h1>
+                                        </div>
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            }}
+                        </UserContext.Consumer>
+                        <Map
+                            basemap={this.state.basemap}
+                            zoom={this.state.zoom}
+                            center={this.state.center}
+                            theme={this.state.theme}
+                            switchTheme={this.switchTheme}
+                            layerControlVisibility={this.state.showLayerControl}
+                            updateUrl={this.urlQueryString}
+                        />
+                        <ChartContainer
+                            chartVisibility={this.state.showChart}
+                        />
+                        <Toolbar
+                            handleLogout={this.handleLogout}
+                            toolbarVisibility={this.state.showToolbar}
+                            toggleLayerControl={this.toggleLayerControl}
+                            toggleLogin={this.toggleLogin}
+                            toggleChart={this.toggleChart}
+                        />
+                        {/*<ToggleButton*
+                            toggleToolbar={this.toggleToolbar}
+                        />*/}
+                        <LoginDialog
+                            handleLogin={this.handleLogin}
+                            toggleLogin={this.toggleLogin}
+                            loginDialogVisibility={this.state.showLogin}
+                        />
+                    </div>
+                </MuiThemeProvider>
+            </UserContext.Provider>
         );
     }
 }
 
-export default App;
+export {App, UserContext};
