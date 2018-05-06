@@ -33,6 +33,13 @@ class App extends Component {
         extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
     };
 
+    /* API function calls */
+    handleLogin = (loginData) => {
+        // Close login dialog
+        this.toggleLogin();
+        console.log('Handling login', loginData);
+    };
+
     /* Material UI togglers */
     toggleLayerControl = () => this.setState({ showLayerControl: !this.state.showLayerControl });
     toggleToolbar = () => this.setState({ showToolbar: !this.state.showToolbar });
@@ -120,6 +127,7 @@ class App extends Component {
                             toggleToolbar={this.toggleToolbar}
                         />*/}
                         <LoginDialog
+                            handleLogin={this.handleLogin}
                             toggleLogin={this.toggleLogin}
                             loginDialogVisibility={this.state.showLogin}
                         />
