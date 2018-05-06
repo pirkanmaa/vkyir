@@ -7,6 +7,7 @@ import ChartContainer from './components/chart/ChartContainer';
 import Toolbar from './components/toolbar/Toolbar';
 import LoginDialog from './components/login/LoginDialog';
 import ToggleButton from './components/toolbar/ToggleButton';
+import UserController from './controllers/UserController';
 const queryString = require('query-string');
 
 /* Context for providing user information */
@@ -23,7 +24,7 @@ const userStyle = {
 class App extends Component {
 
     state = {
-        user: {username: 'admin'},
+        user: {},
         showChart: false,
         showLayerControl: false,
         showToolbar: true,
@@ -37,7 +38,24 @@ class App extends Component {
     handleLogin = (loginData) => {
         // Close login dialog
         this.toggleLogin();
-        console.log('Handling login', loginData);
+        console.log('Authentication user:', loginData);
+        UserController.authenticateUser().then((response) => {
+            if (response.ok) {
+                response.json().then(json => {
+                    // Authentication OK
+                    console.log(json);
+                    this.setState({user: json.user});
+                });
+            } else {
+                console.log('Auth failed');
+                // Authentication FAILED, set dummy auth
+                if (loginData.username === 'admin' && loginData.password === 'password') {
+                    this.setState({user: loginData});
+                }
+            }
+        }).catch((err) => {
+            console.log('Error', err);
+        });
     };
 
     /* Material UI togglers */
