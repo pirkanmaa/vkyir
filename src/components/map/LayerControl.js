@@ -1,32 +1,56 @@
 import React, { Component } from 'react';
-import Drawer from 'material-ui/Drawer';
 import { withStyles } from 'material-ui/styles';
-import { MenuItem } from 'material-ui/Menu';
-import BasemapControl from './BasemapControl';
+import Checkbox from 'material-ui/Checkbox';
+import { FormLabel, FormControl, FormGroup, FormControlLabel } from 'material-ui/Form';
+import Layers from './layers/Layers';
 
 const styles = {
-  paper: {
-    width: '250px'
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: '1rem',
+    paddingTop: '1rem',
   }
 }
 
 class LayerControl extends Component {
+
+  state = {
+    visibility: Layers.map((item, index) => item.visibility)
+  }
+
   render() {
 
     const { classes } = this.props;
 
     return (
       <div>
-        <Drawer
-          classes={{ paper: classes.paper }}
-          variant='persistent'
-          anchor='left'
-          open={this.props.layerControlVisibility}>
-          <BasemapControl
-            handleChange={this.props.handleChange}
-            basemap={this.props.basemap}
-          />
-        </Drawer>
+        <FormControl component="fieldset" required classes={{ root: classes.root }}>
+          <FormGroup
+            aria-label="layers"
+            name="layers"
+          >
+            {Layers.map((item, index) => (
+              <FormControlLabel
+                key={index}
+                label={item.title}
+                control={
+                  <Checkbox
+                    key={index}
+                    checked={this.state.visibility[index]}
+                    value={item.name}
+                    onChange={(event) => {
+                      this.props.toggleLayer(event)
+                      this.setState({visibility: this.state.visibility.map(function(item, i) { return i === index ? !item : item })})
+                    }}
+                  />
+                }
+              />
+            ))}
+          </FormGroup>
+        </FormControl>
       </div>
     );
   }

@@ -10,10 +10,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    left: '1rem',
-    top: '1rem',
-    position: 'absolute',
-    zIndex: 1500
+    paddingLeft: '1rem',
   }
 }
 
@@ -31,7 +28,7 @@ class BasemapControl extends Component {
             aria-label="basemap"
             name="basemap"
             value={this.props.basemap}
-            onChange={this.props.handleChange}>
+            onChange={this.props.changeBasemap}>
 
             {Basemaps.map((item, index) => (
               <FormControlLabel key={index} value={item.name} control={<Radio />} label={item.title} />

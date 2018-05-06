@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import OLMap from 'ol/map';
 import View from 'ol/view';
 import Zoom from 'ol/control/zoom';
-import ZoomIn from './ZoomIn';
-import ZoomOut from './ZoomOut';
+import ZoomIn from './zoom/ZoomIn';
+import ZoomOut from './zoom/ZoomOut';
+import LayerDrawer from './LayerDrawer';
 import Basemaps from './basemaps/Basemaps';
-import LayerControl from './LayerControl';
-import { GJTestLayer } from './layers/TestLayer';
-//import './ColorControl';
+import Layers from './layers/Layers';
+import KuntaFilter from './../../ikaalinen/KuntaFilter';
+import Kunnat from './../../ikaalinen/Kunnat';
+import { AvFeaturedPlayList } from 'material-ui';
 
 let view = new View({
     projection: 'EPSG:3857'
@@ -17,13 +19,15 @@ export default class Map extends Component {
 
     state = {
         center: [2650000, 8750000],
-        maxZoom: 10,
+        maxZoom: 18,
         minZoom: 3,
         zoomStep: 0.1,
         basemap: "CartoLight",
         basemapOpacity: 1,
         centerFromUrl: false,
-        basemapFromUrl: false
+        basemapFromUrl: false,
+        filterSelection: 0,
+        maplayers: []
     };
 
     componentDidMount() {
@@ -34,18 +38,30 @@ export default class Map extends Component {
 
         /* Initiate basemap == Set the default Basemap selection visible */
         let BasemapSel = Basemaps.map(layer => layer["layer"]);
+        let LayerSel = Layers.map(layer => layer["layer"]);
+        this.setState({ visibility: Layers.map((item,index) => item.visibility)});
+
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && layer.setVisible(true));
 
         /* Initiate map */
         let map = new OLMap({
             target: 'map',
-            layers: [...BasemapSel],
+            layers: [...BasemapSel, ...LayerSel, Kunnat],
             view: view,
             controls: []
         });
 
         /* Bind "map" to state */
         this.setState({ map: map });
+
+        /* Add visible non-basemap layers to map state */
+        this.setState({
+            maplayers: LayerSel.filter(layer => {
+                return layer.getProperties().type !== 'base' &&
+                    layer.getVisible() &&
+                    layer.getProperties().name !== 'Kunnat'
+            }).map(layer => layer.getProperties().name)
+        });
 
         /* Register state to listen for map events */
         map.on('moveend', () => {
@@ -60,6 +76,7 @@ export default class Map extends Component {
         });
     }
 
+
     /* Map Zoomers */
     zoomIn = () => {
         let newZoom = this.state.zoom + this.state.zoomStep;
@@ -71,29 +88,52 @@ export default class Map extends Component {
             && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
     }
 
+    /* Functionality for municipality filtering menu */
+    filterClick = (event, index, option) => {
+
+        let layers = this.state.map.getLayers().getArray();
+        layers.filter((layer) => {
+            return layer.getProperties().name === 'Kunnat' && layer.getSource().getFeatures().filter(feat => {
+                return feat.getProperties().nimi === option && this.state.map.getView().fit(feat.getGeometry().getExtent(), this.state.map.getSize());
+            })
+        });
+
+        this.setState({ filterSelection: index });
+
+    }
+
     /* Basemap switcher */
     changeBasemap = (event, value) => {
 
         let layers = this.state.map.getLayers().getArray();
-        layers.filter(function (item, i) {
-            return item.getProperties().type === 'base'
-                && (item.getProperties().name === value && layers[i].setVisible(true)
-                    || item.getProperties().name !== value && layers[i].setVisible(false));
+        layers.filter((layer, i) => {
+            return layer.getProperties().type === 'base'
+                && (layer.getProperties().name === value && layers[i].setVisible(true)
+                    || layer.getProperties().name !== value && layers[i].setVisible(false));
         });
-
-        /* Change Material-UI theme colour according to basemap colour */
-        layers.find(layer => layer.getProperties().type === 'base' && layer.getProperties().name === value)
-            .getProperties().theme !== this.props.theme.palette.type && this.props.switchTheme();
 
         this.setState({ basemap: value });
 
+        /* Change Material-UI theme colour according to basemap colour */
+        layers.find(layer => layer.getProperties().type === 'base' &&
+            layer.getProperties().name === value).getProperties().theme !== this.props.theme.palette.type &&
+            this.props.switchTheme();
+    };
+
+
+    /* Map Layer Toggler  */
+    toggleLayer = event => {
+        let name = event.target.value;
+        let index = this.state.maplayers.indexOf(event.target.value);
+        index == -1 ? this.setState({ maplayers: [...this.state.maplayers, name] }) : this.setState({ maplayers: this.state.maplayers.splice(index, 1) });
+        this.state.map.getLayers().getArray().find(layer => layer.getProperties().name === name && layer.setVisible(!layer.getVisible()));
     };
 
     changeBasemapOpacity = () => { };
 
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
-        /* Check if zoom / center / basmap has changed from last time */
+        /* Check if zoom / center / basemap has changed from last time */
         /* TODO: Figure out a better structure for this */
         this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
         this.state.center !== prevState.center && view.setCenter(this.state.center);
@@ -108,9 +148,9 @@ export default class Map extends Component {
     /* Send new url query string to App */
     _updateUrl = () => {
         let urlQuery = [];
-        let zoom = Number(this.state.zoom).toFixed(2);
-        let x = Number(this.state.center[0]).toFixed(2);
-        let y = Number(this.state.center[1]).toFixed(2);
+        let zoom = Number(this.state.zoom).toFixed(1);
+        let x = Number(this.state.center[0]).toFixed(0);
+        let y = Number(this.state.center[1]).toFixed(0);
         let basemap = this.state.basemap;
         urlQuery.push({ z: zoom });
         urlQuery.push({ x: x });
@@ -130,7 +170,7 @@ export default class Map extends Component {
             return { center: nextProps.center, centerFromUrl: true };
         }
         if (nextProps.basemap && !prevState.basemapFromUrl) {
-            return { basemap: nextProps.basemap, basemapFromUrl: true};
+            return { basemap: nextProps.basemap, basemapFromUrl: true };
         }
         return null;
     }
@@ -140,14 +180,20 @@ export default class Map extends Component {
             <div>
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
-                <LayerControl
-                    layerControlVisibility={this.props.layerControlVisibility}
-                    handleChange={this.changeBasemap}
+                <LayerDrawer
+                    layerDrawerVisibility={this.props.layerDrawerVisibility}
                     basemap={this.state.basemap}
+                    changeBasemap={this.changeBasemap}
+                    maplayers={this.state.maplayers}
+                    toggleLayer={this.toggleLayer}
                     basemapOpacity={this.state.basemapOpacity}
                     changeBasemapOpacity={this.changeBasemapOpacity}
                 />
                 <div id='map' style={{ height: '100vh' }} />
+                <KuntaFilter
+                    filterSelection={this.state.filterSelection}
+                    handleClick={this.filterClick}
+                />
             </div>
         );
     }

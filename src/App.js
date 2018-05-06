@@ -8,6 +8,7 @@ import Toolbar from './components/toolbar/Toolbar';
 import LoginDialog from './components/login/LoginDialog';
 import ToggleButton from './components/toolbar/ToggleButton';
 import UserController from './controllers/UserController';
+
 const queryString = require('query-string');
 
 /* Context for providing user information */
@@ -27,7 +28,7 @@ class App extends Component {
     state = {
         user: {},
         showChart: false,
-        showLayerControl: false,
+        showLayerDrawer: false,
         showToolbar: true,
         showLogin: false,
         logged: false,
@@ -65,7 +66,7 @@ class App extends Component {
     };
 
     /* Material UI togglers */
-    toggleLayerControl = () => this.setState({ showLayerControl: !this.state.showLayerControl });
+    toggleLayerDrawer = () => this.setState({ showLayerDrawer: !this.state.showLayerDrawer });
     toggleToolbar = () => this.setState({ showToolbar: !this.state.showToolbar });
     toggleLogin = () => this.setState({ showLogin: !this.state.showLogin });
     toggleChart = () => this.setState({ showChart: !this.state.showChart });
@@ -88,7 +89,7 @@ class App extends Component {
     /* Get url query parameters. Is this the right place? Is it f*ck */
     componentDidMount() {
         let query = queryString.parse(this.props.location.search);
-        // Set zoom from query string
+        // Set joom from query string
         if (query.z) {
             this.setState({ zoom: Number(query.z) });
         }
@@ -135,7 +136,7 @@ class App extends Component {
                             center={this.state.center}
                             theme={this.state.theme}
                             switchTheme={this.switchTheme}
-                            layerControlVisibility={this.state.showLayerControl}
+                            layerDrawerVisibility={this.state.showLayerDrawer}
                             updateUrl={this.urlQueryString}
                         />
                         <ChartContainer
@@ -144,7 +145,7 @@ class App extends Component {
                         <Toolbar
                             handleLogout={this.handleLogout}
                             toolbarVisibility={this.state.showToolbar}
-                            toggleLayerControl={this.toggleLayerControl}
+                            toggleLayerDrawer={this.toggleLayerDrawer}
                             toggleLogin={this.toggleLogin}
                             toggleChart={this.toggleChart}
                         />
