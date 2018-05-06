@@ -12,9 +12,18 @@ const queryString = require('query-string');
 /* Context for providing user information */
 const UserContext = React.createContext('peasant');
 
+const userStyle = {
+    margin: '50px',
+    fontFamily: 'courier',
+    color: 'orange',
+    zIndex: 666,
+    position: 'absolute'
+}
+
 class App extends Component {
 
     state = {
+        user: {username: 'admin'},
         showChart: false,
         showLayerControl: false,
         showToolbar: true,
@@ -72,10 +81,23 @@ class App extends Component {
 
     render() {
         return (
-            <UserContext.Provider value="esa">
+            <UserContext.Provider value={this.state.user.username}>
                 <MuiThemeProvider theme={this.state.theme}>
                     <div className='app'>
                         <CssBaseline />
+                        <UserContext.Consumer>
+                            {user => {
+                                if (user === 'admin') {
+                                    return (
+                                        <div style={userStyle}>
+                                            <h2> {user} </h2>
+                                        </div>
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            }}
+                        </UserContext.Consumer>
                         <Map
                             basemap={this.state.basemap}
                             zoom={this.state.zoom}

@@ -11,8 +11,7 @@ export default function LoginDialog(props) {
             <Dialog
                 open={props.loginDialogVisibility}
                 aria-labelledby="login-dialog-title"
-                onClose={props.toggleLogin}
-            >
+                onClose={props.toggleLogin}>
                 <DialogTitle id="login-dialog-title">Log in</DialogTitle>
                 <DialogContent>
                     <TextField
