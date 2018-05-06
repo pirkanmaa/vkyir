@@ -14,9 +14,10 @@ const queryString = require('query-string');
 const UserContext = React.createContext('peasant');
 
 const userStyle = {
-    margin: '50px',
+    marginTop: '30px',
+    marginLeft: '50px',
     fontFamily: 'courier',
-    color: 'orange',
+    color: 'rgb(255, 155, 0, 0.7)',
     zIndex: 666,
     position: 'absolute'
 }
@@ -47,7 +48,7 @@ class App extends Component {
                     this.setState({user: json.user});
                 });
             } else {
-                console.log('Auth failed');
+                console.log('Auth failed, use dummy auth');
                 // Authentication FAILED, set dummy auth
                 if (loginData.username === 'admin' && loginData.password === 'password') {
                     this.setState({user: loginData});
@@ -56,6 +57,11 @@ class App extends Component {
         }).catch((err) => {
             console.log('Error', err);
         });
+    };
+
+    /* Handle logging out user */
+    handleLogout = () => {
+        this.setState({user: {}});
     };
 
     /* Material UI togglers */
@@ -115,7 +121,7 @@ class App extends Component {
                                 if (user === 'admin') {
                                     return (
                                         <div style={userStyle}>
-                                            <h2> {user} </h2>
+                                            <h1> {user} </h1>
                                         </div>
                                     );
                                 } else {
@@ -136,6 +142,7 @@ class App extends Component {
                             chartVisibility={this.state.showChart}
                         />
                         <Toolbar
+                            handleLogout={this.handleLogout}
                             toolbarVisibility={this.state.showToolbar}
                             toggleLayerControl={this.toggleLayerControl}
                             toggleLogin={this.toggleLogin}

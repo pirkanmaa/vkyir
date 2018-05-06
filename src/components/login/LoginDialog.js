@@ -19,6 +19,10 @@ export default class LoginDialog extends Component {
         this.setState({passwordInput: event.target.value});
     };
 
+    resetFields = () => {
+        this.setState({usernameInput: '', passwordInput: ''});
+    };
+
     render() {
         return (
             <div>
@@ -46,10 +50,15 @@ export default class LoginDialog extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.props.toggleLogin} color="primary">
+                        <Button onClick={() => {
+                                this.resetFields();
+                                this.props.toggleLogin();
+                            }} color="primary">
                             Cancel
                             </Button>
-                        <Button onClick={() => {this.props.handleLogin(
+                        <Button onClick={() => {
+                                this.resetFields();
+                                this.props.handleLogin(
                                 {
                                     username: this.state.usernameInput,
                                     password: this.state.passwordInput
