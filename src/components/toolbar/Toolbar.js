@@ -22,7 +22,6 @@ function Toolbar(props) {
     const { classes } = props;
     return (
         <Drawer variant='persistent' anchor='right' open={props.toolbarVisibility} classes={{paper: classes.paper}}>
-            <LayerButton handleClick={() => props.toggleLayerDrawer()} />
             <UserContext.Consumer>
                 {user => {
                     if (user && user !== '') {
@@ -32,6 +31,7 @@ function Toolbar(props) {
                     }
                 }}
             </UserContext.Consumer>
+            <LayerButton handleClick={() => props.toggleLayerDrawer()} />
             <ChartButton handleClick={() => props.toggleChart()}/>
             <ShareButton />
             <PrintButton />

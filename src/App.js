@@ -5,6 +5,7 @@ import { dark, light } from './Theme';
 import { MuiThemeProvider } from 'material-ui/styles';
 import ChartContainer from './components/chart/ChartContainer';
 import Toolbar from './components/toolbar/Toolbar';
+import LoginBar from './components/toolbar/LoginBar';
 import LoginDialog from './components/login/LoginDialog';
 import ToggleButton from './components/toolbar/ToggleButton';
 import UserController from './controllers/UserController';
@@ -14,15 +15,6 @@ const queryString = require('query-string');
 /* Context for providing user information */
 const UserContext = React.createContext('peasant');
 
-const userStyle = {
-    marginTop: '30px',
-    marginLeft: '50px',
-    fontFamily: 'courier',
-    color: 'rgb(255, 155, 0, 0.7)',
-    zIndex: 666,
-    position: 'absolute'
-}
-
 class App extends Component {
 
     state = {
@@ -31,6 +23,7 @@ class App extends Component {
         showLayerDrawer: false,
         showToolbar: true,
         showLogin: false,
+        showLoginBar: false,
         logged: false,
         theme: light,
         extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
@@ -46,23 +39,27 @@ class App extends Component {
                 response.json().then(json => {
                     // Authentication OK
                     console.log(json);
-                    this.setState({user: json.user});
+                    this.setState({ user: json.user });
+                    this.setState({ showLoginBar: true });
                 });
             } else {
                 console.log('Auth failed, use dummy auth');
                 // Authentication FAILED, set dummy auth
                 if (loginData.username === 'admin' && loginData.password === 'password') {
-                    this.setState({user: loginData});
+                    this.setState({ user: loginData });
+                    this.setState({ showLoginBar: true });
                 }
             }
         }).catch((err) => {
             console.log('Error', err);
         });
+
     };
 
     /* Handle logging out user */
     handleLogout = () => {
-        this.setState({user: {}});
+        this.setState({ user: {} });
+        this.setState({ showLoginBar: true });
     };
 
     /* Material UI togglers */
@@ -70,6 +67,10 @@ class App extends Component {
     toggleToolbar = () => this.setState({ showToolbar: !this.state.showToolbar });
     toggleLogin = () => this.setState({ showLogin: !this.state.showLogin });
     toggleChart = () => this.setState({ showChart: !this.state.showChart });
+
+    loginBarClose = () => {
+        this.setState({ showLoginBar: false });
+    };
 
     /* Switch Themes */
     switchTheme = () => this.setState({ theme: this.state.theme === dark && light || this.state.theme === light && dark });
@@ -83,7 +84,7 @@ class App extends Component {
             (index !== 0) ? (newQuery += '&') : false;
             newQuery += `${key}=${value}`;
         });
-        this.props.history.push(({search: newQuery}));
+        this.props.history.push(({ search: newQuery }));
     }
 
     /* Get url query parameters. Is this the right place? Is it f*ck */
@@ -117,19 +118,6 @@ class App extends Component {
                 <MuiThemeProvider theme={this.state.theme}>
                     <div className='app'>
                         <CssBaseline />
-                        <UserContext.Consumer>
-                            {user => {
-                                if (user === 'admin') {
-                                    return (
-                                        <div style={userStyle}>
-                                            <h1> {user} </h1>
-                                        </div>
-                                    );
-                                } else {
-                                    return null;
-                                }
-                            }}
-                        </UserContext.Consumer>
                         <Map
                             basemap={this.state.basemap}
                             zoom={this.state.zoom}
@@ -157,6 +145,10 @@ class App extends Component {
                             toggleLogin={this.toggleLogin}
                             loginDialogVisibility={this.state.showLogin}
                         />
+                        <LoginBar
+                            loginBarVisibility={this.state.showLoginBar}
+                            handleClose={this.loginBarClose}
+                        />
                     </div>
                 </MuiThemeProvider>
             </UserContext.Provider>
@@ -164,4 +156,4 @@ class App extends Component {
     }
 }
 
-export {App, UserContext};
+export { App, UserContext };
