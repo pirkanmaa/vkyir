@@ -25,10 +25,10 @@ const Kuntarajat = new VectorLayer({
     visible: true,
     style: new Style({
         stroke: new Stroke({
-          color: '#A060C0',
-          width: 2
+            color: '#A060C0',
+            width: 2
         })
-      }),
+    }),
 });
 
 export default Kuntarajat;
