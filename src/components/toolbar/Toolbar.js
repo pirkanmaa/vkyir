@@ -33,7 +33,7 @@ function Toolbar(props) {
             </UserContext.Consumer>
             <LayerButton handleClick={() => props.toggleLayerDrawer()} />
             <ChartButton handleClick={() => props.toggleChart()}/>
-            <ShareButton />
+            <ShareButton handleClick={() => props.toggleShare()}/>
             <PrintButton />
         </Drawer>
     );
