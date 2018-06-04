@@ -4,7 +4,7 @@ import Vesty from './../../../ikaalinen/Vesty';
 import Grid250m from './Grid250m';
 
 /* Choose basemaps */
-let Layers = [Grid250m];
+let Layers = [Grid250m,Kuntarajat];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
 function convert(array) {
