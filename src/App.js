@@ -5,7 +5,7 @@ import { dark, light } from './Theme';
 import { MuiThemeProvider } from 'material-ui/styles';
 import ChartContainer from './components/chart/ChartContainer';
 import Toolbar from './components/toolbar/Toolbar';
-import LoginBar from './components/toolbar/LoginBar';
+import AlertBar from './components/AlertBar';
 import LoginDialog from './components/login/LoginDialog';
 import ToggleButton from './components/toolbar/ToggleButton';
 import UserController from './controllers/UserController';
@@ -15,6 +15,18 @@ const queryString = require('query-string');
 /* Context for providing user information */
 const UserContext = React.createContext('peasant');
 
+/* Context for in-app alerts */
+const AlertContext = React.createContext('alert');
+
+/* Context for data */
+const DataContext = React.createContext('data');
+
+const alerts = {
+    'login': 'You are now logged in',
+    'logout': 'You are now logged out',
+    'share': 'Link to map view copied to clipboard'
+};
+
 class App extends Component {
 
     state = {
@@ -23,10 +35,12 @@ class App extends Component {
         showLayerDrawer: false,
         showToolbar: true,
         showLogin: false,
-        showLoginBar: false,
+        showAlert: false,
         logged: false,
         theme: light,
-        extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
+        extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244],
+        alert: '',
+        data: ''
     };
 
     /* API function calls */
@@ -34,32 +48,38 @@ class App extends Component {
         // Close login dialog
         this.toggleLogin();
         console.log('Authentication user:', loginData);
-        UserController.authenticateUser().then((response) => {
+        UserController.authenticateUser().then(response => {
             if (response.ok) {
                 response.json().then(json => {
                     // Authentication OK
-                    console.log(json);
                     this.setState({ user: json.user });
-                    this.setState({ showLoginBar: true });
+                    this.setState({ alert: alerts.login });
+                    this.setState({ showAlert: true });
                 });
             } else {
                 console.log('Auth failed, use dummy auth');
                 // Authentication FAILED, set dummy auth
                 if (loginData.username === 'admin' && loginData.password === 'password') {
                     this.setState({ user: loginData });
-                    this.setState({ showLoginBar: true });
+                    this.setState({ alert: alerts.login });
+                    this.setState({ showAlert: true });
                 }
             }
         }).catch((err) => {
             console.log('Error', err);
         });
-
     };
 
     /* Handle logging out user */
     handleLogout = () => {
         this.setState({ user: {} });
-        this.setState({ showLoginBar: true });
+        this.setState({ alert: alerts.logout });
+        this.setState({ showAlert: true });
+    };
+
+    /* Set data*/
+    setData = data => {
+        this.setState({ data: data });
     };
 
     /* Material UI togglers */
@@ -67,10 +87,12 @@ class App extends Component {
     toggleToolbar = () => this.setState({ showToolbar: !this.state.showToolbar });
     toggleLogin = () => this.setState({ showLogin: !this.state.showLogin });
     toggleChart = () => this.setState({ showChart: !this.state.showChart });
+    toggleShare = () => {
+        this.setState({ alert: alerts.share });
+        this.setState({ showAlert: true });
+    }
 
-    loginBarClose = () => {
-        this.setState({ showLoginBar: false });
-    };
+    alertClose = () => { this.setState({ showAlert: false }); };
 
     /* Switch Themes */
     switchTheme = () => this.setState({ theme: this.state.theme === dark && light || this.state.theme === light && dark });
@@ -118,24 +140,28 @@ class App extends Component {
                 <MuiThemeProvider theme={this.state.theme}>
                     <div className='app'>
                         <CssBaseline />
-                        <Map
-                            basemap={this.state.basemap}
-                            zoom={this.state.zoom}
-                            center={this.state.center}
-                            theme={this.state.theme}
-                            switchTheme={this.switchTheme}
-                            layerDrawerVisibility={this.state.showLayerDrawer}
-                            updateUrl={this.urlQueryString}
-                        />
-                        <ChartContainer
-                            chartVisibility={this.state.showChart}
-                        />
+                        <DataContext.Provider value={this.state.data}>
+                            <Map
+                                basemap={this.state.basemap}
+                                zoom={this.state.zoom}
+                                center={this.state.center}
+                                theme={this.state.theme}
+                                switchTheme={this.switchTheme}
+                                layerDrawerVisibility={this.state.showLayerDrawer}
+                                updateUrl={this.urlQueryString}
+                                setData={this.setData}
+                            />
+                            <ChartContainer
+                                chartVisibility={this.state.showChart}
+                            />
+                        </DataContext.Provider>
                         <Toolbar
                             handleLogout={this.handleLogout}
                             toolbarVisibility={this.state.showToolbar}
                             toggleLayerDrawer={this.toggleLayerDrawer}
                             toggleLogin={this.toggleLogin}
                             toggleChart={this.toggleChart}
+                            toggleShare={this.toggleShare}
                         />
                         {/*<ToggleButton*
                             toggleToolbar={this.toggleToolbar}
@@ -145,10 +171,12 @@ class App extends Component {
                             toggleLogin={this.toggleLogin}
                             loginDialogVisibility={this.state.showLogin}
                         />
-                        <LoginBar
-                            loginBarVisibility={this.state.showLoginBar}
-                            handleClose={this.loginBarClose}
-                        />
+                        <AlertContext.Provider value={this.state.alert}>
+                            <AlertBar
+                                alertVisibility={this.state.showAlert}
+                                alertClose={this.alertClose}
+                            />
+                        </AlertContext.Provider>
                     </div>
                 </MuiThemeProvider>
             </UserContext.Provider>
@@ -156,4 +184,4 @@ class App extends Component {
     }
 }
 
-export { App, UserContext };
+export { App, UserContext, AlertContext, DataContext };
