@@ -12,15 +12,15 @@ export default class LoginDialog extends Component {
     };
 
     usernameChanged = (event) => {
-        this.setState({usernameInput: event.target.value});
+        this.setState({ usernameInput: event.target.value });
     };
 
     passwordChanged = (event) => {
-        this.setState({passwordInput: event.target.value});
+        this.setState({ passwordInput: event.target.value });
     };
 
     resetFields = () => {
-        this.setState({usernameInput: '', passwordInput: ''});
+        this.setState({ usernameInput: '', passwordInput: '' });
     };
 
     render() {
@@ -51,19 +51,20 @@ export default class LoginDialog extends Component {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => {
-                                this.resetFields();
-                                this.props.toggleLogin();
-                            }} color="primary">
+                            this.resetFields();
+                            this.props.toggleLogin();
+                        }} color="primary">
                             Cancel
                             </Button>
                         <Button onClick={() => {
-                                this.resetFields();
-                                this.props.handleLogin(
+                            this.resetFields();
+                            this.props.handleLogin(
                                 {
                                     username: this.state.usernameInput,
                                     password: this.state.passwordInput
                                 }
-                            )}} color="primary">
+                            )
+                        }} color="primary">
                             Submit
                             </Button>
                     </DialogActions>
