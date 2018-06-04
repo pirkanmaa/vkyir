@@ -9,13 +9,29 @@ import Basemaps from './basemaps/Basemaps';
 import Layers from './layers/Layers';
 import KuntaFilter from './../../ikaalinen/KuntaFilter';
 import Kunnat from './../../ikaalinen/Kunnat';
-import { AvFeaturedPlayList } from 'material-ui';
+import Popover from 'material-ui/Popover';
+import Typography from 'material-ui/Typography';
+import { withStyles } from 'material-ui/styles';
 
 let view = new View({
     projection: 'EPSG:3857'
 });
 
-export default class Map extends Component {
+let blackList = ['id', 'ID', 'FID', 'fid', 'bbox', 'geometry'];
+
+const styles = theme => ({
+    paper: {
+        padding: theme.spacing.unit,
+    },
+    popover: {
+        pointerEvents: 'none',
+    },
+    popperClose: {
+        pointerEvents: 'none',
+    },
+});
+
+class Map extends Component {
 
     state = {
         center: [2650000, 8750000],
@@ -27,7 +43,10 @@ export default class Map extends Component {
         centerFromUrl: false,
         basemapFromUrl: false,
         filterSelection: 0,
-        maplayers: []
+        maplayers: [],
+        popOpen: false,
+        popoverAnchor: null,
+        featureInfo: ''
     };
 
     componentDidMount() {
@@ -39,7 +58,7 @@ export default class Map extends Component {
         /* Initiate basemap == Set the default Basemap selection visible */
         let BasemapSel = Basemaps.map(layer => layer["layer"]);
         let LayerSel = Layers.map(layer => layer["layer"]);
-        this.setState({ visibility: Layers.map((item,index) => item.visibility)});
+        this.setState({ visibility: Layers.map((item, index) => item.visibility) });
 
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && layer.setVisible(true));
 
@@ -50,6 +69,8 @@ export default class Map extends Component {
             view: view,
             controls: []
         });
+
+        //console.log(map.getLayers().getArray());
 
         /* Bind "map" to state */
         this.setState({ map: map });
@@ -74,6 +95,22 @@ export default class Map extends Component {
                 this.setState({ center: newCenter });
             }
         });
+
+        map.on('click', e => {
+
+            let feature = map.forEachFeatureAtPixel(e.pixel, feature => { return feature });
+            //let info = document.getElementById('info');
+            //feature ? info.innerHTML = feature.getId() + ': ' + feature.get('name') : info.innerHTML = '&nbsp;';
+            if (feature) {
+                let properties = feature.getProperties();
+                blackList.map(key => delete properties[key]);
+                let keys = Object.keys(properties);
+                this.setState({ featureInfo: `${keys[0]}: ${properties[keys[0]]}` });
+                this.handlePopoverOpen();
+            } else { console.log('no feature data here'); }
+
+        });
+
     }
 
 
@@ -87,6 +124,15 @@ export default class Map extends Component {
         this.state.zoom > this.state.minZoom
             && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
     }
+
+    /* Popover controls */
+    handlePopoverOpen = event => {
+        this.setState({ popOpen: true });
+    };
+
+    handlePopoverClose = () => {
+        setTimeout(() => {this.setState({ popOpen: false })}, 1000);
+    };
 
     /* Functionality for municipality filtering menu */
     filterClick = (event, index, option) => {
@@ -176,10 +222,24 @@ export default class Map extends Component {
     }
 
     render() {
+
+        const { classes } = this.props;
+        const { popoverAnchor, popOpen } = this.state;
+
         return (
             <div>
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
+                <Popover id="popover"
+                    className={ classes.popover }
+                    classes={{ paper: classes.paper }}
+                    open={popOpen}
+                    anchorPosition={{top: 0, left: 0}}
+                    onClose={this.handlePopoverClose}
+                    onEntered={this.handlePopoverClose}
+                >
+                    <Typography>{this.state.featureInfo}</Typography>
+                </Popover>
                 <LayerDrawer
                     layerDrawerVisibility={this.props.layerDrawerVisibility}
                     basemap={this.state.basemap}
@@ -188,13 +248,17 @@ export default class Map extends Component {
                     toggleLayer={this.toggleLayer}
                     basemapOpacity={this.state.basemapOpacity}
                     changeBasemapOpacity={this.changeBasemapOpacity}
+                    map={this.state.map}
+                    setData={this.props.setData}
                 />
                 <div id='map' style={{ height: '100vh' }} />
-                <KuntaFilter
+                {/*<KuntaFilter
                     filterSelection={this.state.filterSelection}
                     handleClick={this.filterClick}
-                />
+                />*/}
             </div>
         );
     }
 };
+
+export default withStyles(styles)(Map);
