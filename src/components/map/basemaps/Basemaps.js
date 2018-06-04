@@ -5,7 +5,7 @@ import MapboxDark from './MapboxDark';
 import MapboxSatellite from './MapboxSatellite';
 
 /* Choose basemaps */
-let Basemaps = [OSM, CartoLight, MapboxLight, MapboxDark, MapboxSatellite];
+let Basemaps = [OSM, CartoLight, MapboxDark, MapboxSatellite];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
 function convert(array) {
