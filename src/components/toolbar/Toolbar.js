@@ -6,7 +6,7 @@ import LayerButton from './LayerButton';
 import ChartButton from './ChartButton';
 import ShareButton from './ShareButton';
 import PrintButton from './PrintButton';
-import {UserContext} from '../../App';
+import { UserContext } from '../../App';
 
 const styles = {
     paper: {
@@ -21,7 +21,7 @@ const styles = {
 function Toolbar(props) {
     const { classes } = props;
     return (
-        <Drawer variant='persistent' anchor='right' open={props.toolbarVisibility} classes={{paper: classes.paper}}>
+        <Drawer variant='persistent' anchor='right' open={props.toolbarVisibility} classes={{ paper: classes.paper }}>
             <UserContext.Consumer>
                 {user => {
                     if (user && user !== '') {
@@ -32,9 +32,9 @@ function Toolbar(props) {
                 }}
             </UserContext.Consumer>
             <LayerButton handleClick={() => props.toggleLayerDrawer()} />
-            <ChartButton handleClick={() => props.toggleChart()}/>
-            <ShareButton handleClick={() => props.toggleShare()}/>
-            <PrintButton />
+            <ChartButton handleClick={() => props.toggleChart()} />
+            <ShareButton handleClick={() => props.toggleShare()} />
+            <PrintButton handleClick={() => props.togglePrint()} />
         </Drawer>
     );
 }

@@ -12,6 +12,10 @@ import Kunnat from './../../ikaalinen/Kunnat';
 import Popover from 'material-ui/Popover';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
+import highlightFeature from './utils/highlightFeature';
+import featureOverlay from './layers/FeatureOverlay';
+import ImageGallery from './utils/ImageGallery';
+import ImageController from './../../controllers/ImageController';
 
 let view = new View({
     projection: 'EPSG:3857'
@@ -46,7 +50,9 @@ class Map extends Component {
         maplayers: [],
         popOpen: false,
         popoverAnchor: null,
-        featureInfo: ''
+        featureInfo: '',
+        galleryVisibility: false,
+        imageData: []
     };
 
     componentDidMount() {
@@ -65,7 +71,7 @@ class Map extends Component {
         /* Initiate map */
         let map = new OLMap({
             target: 'map',
-            layers: [...BasemapSel, ...LayerSel, Kunnat],
+            layers: [...BasemapSel, ...LayerSel, Kunnat, featureOverlay],
             view: view,
             controls: []
         });
@@ -97,20 +103,47 @@ class Map extends Component {
         });
 
         map.on('click', e => {
-
-            let feature = map.forEachFeatureAtPixel(e.pixel, feature => { return feature });
-            //let info = document.getElementById('info');
-            //feature ? info.innerHTML = feature.getId() + ': ' + feature.get('name') : info.innerHTML = '&nbsp;';
-            if (feature) {
-                let properties = feature.getProperties();
-                blackList.map(key => delete properties[key]);
-                let keys = Object.keys(properties);
-                this.setState({ featureInfo: `${keys[0]}: ${properties[keys[0]]}` });
-                this.handlePopoverOpen();
-            } else { console.log('no feature data here'); }
-
+            let feature = map.forEachFeatureAtPixel(e.pixel, feature => feature);
+            highlightFeature(feature, map);
+            if (feature && feature.get('tyyppi') && feature.get('nimi')) {
+                this.setState({ galleryVisibility: true });
+                ImageController.getImages(feature.get('id')).then(response => {
+                    if (response.ok) {
+                        response.json().then(json => {
+                            this.setState({
+                                imageData: json.map((image, index) => {
+                                    return { img: `${image}`, title: `image${index}`, folder: feature.get('id') }
+                                })
+                            })
+                        });
+                    } else {
+                        this.setState({
+                            imageData: []
+                        })
+                    }
+                    this.setState({ showPrint: !this.state.showPrint });
+                })
+            } else {
+                this.setState({ galleryVisibility: false });
+            }
         });
 
+        /*
+                map.on('click', e => {
+        
+                    let feature = map.forEachFeatureAtPixel(e.pixel, feature => { return feature });
+                    //let info = document.getElementById('info');
+                    //feature ? info.innerHTML = feature.getId() + ': ' + feature.get('name') : info.innerHTML = '&nbsp;';
+                    if (feature) {
+                        let properties = feature.getProperties();
+                        blackList.map(key => delete properties[key]);
+                        let keys = Object.keys(properties);
+                        this.setState({ featureInfo: `${keys[0]}: ${properties[keys[0]]}` });
+                        this.handlePopoverOpen();
+                    } else { console.log('no feature data here'); }
+        
+                });
+        */
     }
 
 
@@ -125,13 +158,17 @@ class Map extends Component {
             && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
     }
 
+    toggleGallery = feature => {
+        this.setState({ galleryVisibility: !this.state.galleryVisibility });
+    }
+
     /* Popover controls */
     handlePopoverOpen = event => {
         this.setState({ popOpen: true });
     };
 
     handlePopoverClose = () => {
-        setTimeout(() => {this.setState({ popOpen: false })}, 1000);
+        setTimeout(() => { this.setState({ popOpen: false }) }, 1000);
     };
 
     /* Functionality for municipality filtering menu */
@@ -140,7 +177,7 @@ class Map extends Component {
         let layers = this.state.map.getLayers().getArray();
         layers.filter((layer) => {
             return layer.getProperties().name === 'Kunnat' && layer.getSource().getFeatures().filter(feat => {
-                return feat.getProperties().nimi === option && this.state.map.getView().fit(feat.getGeometry().getExtent(), this.state.map.getSize());
+                return feat.getProperties().nimi === option && (this.state.map.getView().fit(feat.getGeometry().getExtent(), this.state.map.getSize()), highlightFeature(feat, this.state.map));
             })
         });
 
@@ -231,10 +268,10 @@ class Map extends Component {
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
                 <Popover id="popover"
-                    className={ classes.popover }
+                    className={classes.popover}
                     classes={{ paper: classes.paper }}
                     open={popOpen}
-                    anchorPosition={{top: 0, left: 0}}
+                    anchorPosition={{ top: 0, left: 0 }}
                     onClose={this.handlePopoverClose}
                     onEntered={this.handlePopoverClose}
                 >
@@ -252,10 +289,15 @@ class Map extends Component {
                     setData={this.props.setData}
                 />
                 <div id='map' style={{ height: '100vh' }} />
-                {/*<KuntaFilter
+                {<KuntaFilter
                     filterSelection={this.state.filterSelection}
                     handleClick={this.filterClick}
-                />*/}
+                />}
+                <ImageGallery
+                    imageData={this.state.imageData}
+                    galleryVisibility={this.state.galleryVisibility}
+                    toggleGallery={this.toggleGallery}
+                />
             </div>
         );
     }

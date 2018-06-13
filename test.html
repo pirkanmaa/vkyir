@@ -1,0 +1,339 @@
+<!doctype html>
+
+<head>
+    <script>
+        function min(x /*: Array<number> */)/*:number*/ {
+
+            if (x.length === 0) {
+                throw new Error('min requires at least one data point');
+            }
+
+            var value = x[0];
+            for (var i = 1; i < x.length; i++) {
+                if (x[i] < value) {
+                    value = x[i];
+                }
+            }
+            return value;
+        }
+
+
+        function max(x /*: Array<number> */) /*:number*/ {
+
+            if (x.length === 0) {
+                throw new Error('max requires at least one data point');
+            }
+
+            var value = x[0];
+            for (var i = 1; i < x.length; i++) {
+                if (x[i] > value) {
+                    value = x[i];
+                }
+            }
+            return value;
+        }
+
+        function equalIntervalBreaks(x/*: Array<number> */, nClasses/*:number*/)/*: Array<number> */ {
+
+            if (x.length < 2) {
+                return x;
+            }
+
+            var theMin = min(x);
+            var theMax = max(x);
+            var breaks = [theMin];
+            var breakSize = (theMax - theMin) / nClasses;
+
+            for (var i = 1; i < nClasses; i++) {
+                breaks.push(breaks[0] + breakSize * i);
+            }
+
+            breaks.push(theMax);
+            return breaks;
+        }
+
+        function quantile(x/*: Array<number> */, p/*: Array<number> | number */)/*: Array<number> | number */ {
+            var copy = x.slice();
+
+            if (Array.isArray(p)) {
+                // rearrange elements so that each element corresponding to a requested
+                // quantile is on a place it would be if the array was fully sorted
+                multiQuantileSelect(copy, p);
+                // Initialize the result array
+                var results = [];
+                // For each requested quantile
+                for (var i = 0; i < p.length; i++) {
+                    results[i] = quantileSorted(copy, p[i]);
+                }
+                return results;
+            } else {
+                var idx = quantileIndex(copy.length, p);
+                quantileSelect(copy, idx, 0, copy.length - 1);
+                return quantileSorted(copy, p);
+            }
+        }
+
+        function quantileSelect(arr, k, left, right) {
+            if (k % 1 === 0) {
+                quickselect(arr, k, left, right);
+            } else {
+                k = Math.floor(k);
+                quickselect(arr, k, left, right);
+                quickselect(arr, k + 1, k + 1, right);
+            }
+        }
+
+        function multiQuantileSelect(arr, p) {
+            var indices = [0];
+            for (var i = 0; i < p.length; i++) {
+                indices.push(quantileIndex(arr.length, p[i]));
+            }
+            indices.push(arr.length - 1);
+            indices.sort(compare);
+
+            var stack = [0, indices.length - 1];
+
+            while (stack.length) {
+                var r = Math.ceil(stack.pop());
+                var l = Math.floor(stack.pop());
+                if (r - l <= 1) continue;
+
+                var m = Math.floor((l + r) / 2);
+                quantileSelect(arr, indices[m], indices[l], indices[r]);
+
+                stack.push(l, m, m, r);
+            }
+        }
+
+        function compare(a, b) {
+            return a - b;
+        }
+
+        function quickselect(arr/*: Array<number> */, k/*: number */, left/*: ?number */, right/*: ?number */)/*: void */ {
+            left = left || 0;
+            right = right || (arr.length - 1);
+
+            while (right > left) {
+                // 600 and 0.5 are arbitrary constants chosen in the original paper to minimize execution time
+                if (right - left > 600) {
+                    var n = right - left + 1;
+                    var m = k - left + 1;
+                    var z = Math.log(n);
+                    var s = 0.5 * Math.exp(2 * z / 3);
+                    var sd = 0.5 * Math.sqrt(z * s * (n - s) / n);
+                    if (m - n / 2 < 0) sd *= -1;
+                    var newLeft = Math.max(left, Math.floor(k - m * s / n + sd));
+                    var newRight = Math.min(right, Math.floor(k + (n - m) * s / n + sd));
+                    quickselect(arr, k, newLeft, newRight);
+                }
+
+                var t = arr[k];
+                var i = left;
+                var j = right;
+
+                swap(arr, left, k);
+                if (arr[right] > t) swap(arr, left, right);
+
+                while (i < j) {
+                    swap(arr, i, j);
+                    i++;
+                    j--;
+                    while (arr[i] < t) i++;
+                    while (arr[j] > t) j--;
+                }
+
+                if (arr[left] === t) swap(arr, left, j);
+                else {
+                    j++;
+                    swap(arr, j, right);
+                }
+
+                if (j <= k) left = j + 1;
+                if (k <= j) right = j - 1;
+            }
+        }
+
+        function swap(arr, i, j) {
+            var tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+
+        function quantileSorted(x /*: Array<number> */, p /*: number */)/*: number */ {
+            var idx = x.length * p;
+            if (x.length === 0) {
+                throw new Error('quantile requires at least one data point.');
+            } else if (p < 0 || p > 1) {
+                throw new Error('quantiles must be between 0 and 1');
+            } else if (p === 1) {
+                // If p is 1, directly return the last element
+                return x[x.length - 1];
+            } else if (p === 0) {
+                // If p is 0, directly return the first element
+                return x[0];
+            } else if (idx % 1 !== 0) {
+                // If p is not integer, return the next element in array
+                return x[Math.ceil(idx) - 1];
+            } else if (x.length % 2 === 0) {
+                // If the list has even-length, we'll take the average of this number
+                // and the next value, if there is one
+                return (x[idx - 1] + x[idx]) / 2;
+            } else {
+                // Finally, in the simple case of an integer value
+                // with an odd-length list, return the x value at the index.
+                return x[idx];
+            }
+        }
+
+function quantileRankSorted(
+    x /*: Array<number> */,
+    value /*: number */)/*: number */ {
+
+    // Value is lesser than any value in the array
+    if (value < x[0]) {
+        return 0;
+    }
+
+    // Value is greater than any value in the array
+    if (value > x[x.length - 1]) {
+        return 1;
+    }
+
+    var l = lowerBound(x, value);
+
+    // Value is not in the array
+    if (x[l] !== value) {
+        return l / x.length;
+    }
+
+    l++;
+
+    var u = upperBound(x, value);
+
+    // The value exists only once in the array
+    if (u === l) {
+        return l / x.length;
+    }
+
+    // Here, we are basically computing the mean of the range of indices
+    // containing our searched value. But, instead, of initializing an
+    // array and looping over it, there is a dedicated math formula that
+    // we apply below to get the result.
+    var r = u - l + 1;
+    var sum = (r * (u + l)) / 2;
+    var mean = sum / r;
+
+    return mean / x.length;
+}
+
+function lowerBound(x, value) {
+    var mid = 0;
+    var lo = 0;
+    var hi = x.length;
+
+    while (lo < hi) {
+        mid = (lo + hi) >>> 1;
+
+        if (value <= x[mid]) {
+            hi = mid;
+        }
+        else {
+            lo = -~mid;
+        }
+    }
+
+    return lo;
+}
+
+function upperBound(x, value) {
+    var mid = 0;
+    var lo = 0;
+    var hi = x.length;
+
+    while (lo < hi) {
+        mid = (lo + hi) >>> 1;
+
+        if (value >= x[mid]) {
+            lo = -~mid;
+        }
+        else {
+            hi = mid;
+        }
+    }
+
+    return lo;
+}
+
+function quantileRank(
+    x /*: Array<number> */,
+    value /*: number */)/*: number */ {
+
+    // Cloning and sorting the array
+    var sortedCopy = numericSort(x);
+
+    return quantileRankSorted(sortedCopy, value);
+}
+
+function numericSort(x /*: Array<number> */) /*: Array<number> */ {
+    return x
+        // ensure the array is not changed in-place
+        .slice()
+        // comparator function that treats input as numeric
+        .sort(function(a, b) {
+            return a - b;
+        });
+}
+
+        function quantileIndex(len /*: number */, p /*: number */)/*:number*/ {
+            var idx = len * p;
+            if (p === 1) {
+                // If p is 1, directly return the last index
+                return len - 1;
+            } else if (p === 0) {
+                // If p is 0, directly return the first index
+                return 0;
+            } else if (idx % 1 !== 0) {
+                // If index is not integer, return the next index in array
+                return Math.ceil(idx) - 1;
+            } else if (len % 2 === 0) {
+                // If the list has even-length, we'll return the middle of two indices
+                // around quantile to indicate that we need an average value of the two
+                return idx - 0.5;
+            } else {
+                // Finally, in the simple case of an integer index
+                // with an odd-length list, return the index
+                return idx;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <script>
+        let data = [52, 23, 23, 45, 6, 25, 75, 13, 23, 34, 4, 61, 6, 4, 74, 45, 75, 4, 14, 5, 6, 24, 87, 65, 34, 65, 87, 8, 6, 56, 74, 83, 33, 55, 22, 33, 44, 56, 76, 49, 98, 65, 23];
+        let numClasses = 5;
+        let temp2 = data.sort((a, b) => a - b);
+        let temp3 = equalIntervalBreaks(data, numClasses);
+        let cursor;
+
+        let results = temp3.map((value, index) => {
+            if (temp2.find(val => val >= value) !== temp3[temp3.length - 1]) {
+                return {
+                    lowerBound: index === 0 ? value : temp2.find(val => val >= value),
+                    upperBound: index === temp3.length - 1 ? value : temp2[temp2.findIndex(finder => finder === temp2.find(val => val >= temp3[index + 1])) - 1]
+                }
+            } else if (temp2.find(val => val >= value) === temp3[temp3.length - 1] && cursor !== 1) {
+                cursor = 1;
+                return {
+                    lowerBound: temp2.find(val => val >= value),
+                    upperBound: temp2.find(val => val >= value)
+                }
+            }
+        }).filter(bounds => bounds);
+
+        let testing = new Array(numClasses).fill(0).map((value,index) => 1/numClasses*index);
+        console.log(testing)
+
+    </script>
+</body>

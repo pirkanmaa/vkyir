@@ -8,7 +8,7 @@ class Gateway extends Component {
         return (
             /* In the future there might be other resources other than the root */
             <Router>
-                <Route exact path='/' component={App}/>
+                <Route path='/' component={App}/>
             </Router>
         );
     }

@@ -36,6 +36,7 @@ class App extends Component {
         showToolbar: true,
         showLogin: false,
         showAlert: false,
+        showPrint: false,
         logged: false,
         theme: light,
         extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244],
@@ -87,6 +88,8 @@ class App extends Component {
     toggleToolbar = () => this.setState({ showToolbar: !this.state.showToolbar });
     toggleLogin = () => this.setState({ showLogin: !this.state.showLogin });
     toggleChart = () => this.setState({ showChart: !this.state.showChart });
+    togglePrint = () => {};
+
     toggleShare = () => {
         this.setState({ alert: alerts.share });
         this.setState({ showAlert: true });
@@ -162,6 +165,7 @@ class App extends Component {
                             toggleLogin={this.toggleLogin}
                             toggleChart={this.toggleChart}
                             toggleShare={this.toggleShare}
+                            togglePrint={this.togglePrint}
                         />
                         {/*<ToggleButton*
                             toggleToolbar={this.toggleToolbar}
