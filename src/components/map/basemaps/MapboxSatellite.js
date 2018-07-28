@@ -9,7 +9,7 @@ const MapboxSatellite = new TileLayer({
             '© <a href="https://www.osm.org/copyright">OpenStreetMap contributors</a>'
         ]
     }),
-    title: 'Mapbox Satellite',
+    title: 'Satelliitti (MapBox)',
     name: 'MapboxSatellite',
     type: 'base',
     theme: 'dark',

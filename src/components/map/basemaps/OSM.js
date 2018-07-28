@@ -8,7 +8,7 @@ const OSM = new TileLayer({
             '© <a href="https://www.osm.org/copyright">OpenStreetMap contributors</a>'
         ]
     }),
-    title: 'OpenStreetMap',
+    title: 'Opaskartta (OSM)',
     name: 'OSM',
     type: 'base',
     opacity: 1,

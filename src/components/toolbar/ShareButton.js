@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
-import Share from 'material-ui-icons/Share';
-import Tooltip from 'material-ui/Tooltip';
+import Button from '@material-ui/core/Button';
+import Share from '@material-ui/icons/Share';
+import Tooltip from '@material-ui/core/Tooltip';
 
 function copyTextToClipboard(text) {
 
@@ -26,7 +26,7 @@ export default class ShareButton extends Component {
         return (
             <div>
                 <Tooltip id="shareButtonTooltip" title="Share" placement="bottom-start">
-                    <Button size='small' onClick={() => {
+                    <Button variant="fab" color="primary"  onClick={() => {
                         this.props.handleClick();
                         copyTextToClipboard(location.href);
                     }}>

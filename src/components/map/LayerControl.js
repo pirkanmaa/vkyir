@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Checkbox from 'material-ui/Checkbox';
-import { FormLabel, FormControl, FormGroup, FormControlLabel } from 'material-ui/Form';
+import { withStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@material-ui/core/Button';
+import Add from '@material-ui/icons/Add';
+import IconButton from '@material-ui/core/IconButton';
+import Clear from '@material-ui/icons/Clear';
+
 import Layers from './layers/Layers';
-import { UserContext } from '../../App';
-import Clear from 'material-ui-icons/Clear';
-import IconButton from 'material-ui/IconButton';
-import Button from 'material-ui/Button';
-import LayerAdder from './LayerAdder';
-import Add from 'material-ui-icons/Add';
 
 const styles = theme => ({
   root: {
@@ -69,62 +71,34 @@ class LayerControl extends Component {
     const { classes } = this.props;
 
     return (
-      <UserContext.Consumer>
-        {user => {
-          return (
-            <div className={classes.superContainer}>
-              <FormControl component="fieldset" required classes={{ root: classes.root }}>
-                <FormGroup
-                  aria-label="layers"
-                  name="layers"
-                >
-                  {Layers.map((item, index) => (
-                    this.state.show.title.indexOf(item.title) > -1 &&
-                    <div key={index}>
-                      <FormControlLabel
-                        key={'A' + index}
-                        label={item.title}
-                        control={
-                          <Checkbox
-                            key={'B' + index}
-                            checked={this.state.show.visibility[this.state.show.title.indexOf(item.title)]}
-                            value={item.name}
-                            onChange={this.toggleVisibility}
-                          />
-                        }
-                      />
-                      {
-                        user && user !== '' && (
-                          <IconButton value={item.title} key={'C' + index} className={classes.button} onClick={() => this.removeLayer(item.title)}>
-                            <Clear />
-                          </IconButton>
-                        )
-                      }
-                    </div>
-                  ))}
-                </FormGroup>
-              </FormControl>
+      <div className={classes.superContainer}>
+        <FormControl component="fieldset" required classes={{ root: classes.root }}>
+          <FormGroup
+            aria-label="layers"
+            name="layers"
+          >
+            {Layers.map((item, index) => (
+              this.state.show.title.indexOf(item.title) > -1 &&
+              <div key={index}>
+                <FormControlLabel
+                  key={'A' + index}
+                  label={item.title}
+                  control={
+                    <Checkbox
+                      key={'B' + index}
+                      checked={this.state.show.visibility[this.state.show.title.indexOf(item.title)]}
+                      value={item.name}
+                      onChange={this.toggleVisibility}
+                    />
+                  }
+                />
+              </div>
+            ))}
+          </FormGroup>
+        </FormControl>
 
-              {user && user !== '' && (
+      </div>
 
-                <div>
-                  <Button onClick={this.toggleLayerAdder} className={classes.addButton}>
-                    <Add className={classes.leftIcon} />Add map layer
-                    </Button>
-                  <LayerAdder
-                    showLayerAdder={this.state.showLayerAdder}
-                    closeLayerAdder={this.closeLayerAdder}
-                    setData={this.props.setData}
-                    map={this.props.map}>
-                  </LayerAdder>
-                </div>
-              )
-              }
-
-            </div>
-          )
-        }}
-      </UserContext.Consumer>
     );
   }
 }

@@ -7,11 +7,11 @@ import ZoomOut from './zoom/ZoomOut';
 import LayerDrawer from './LayerDrawer';
 import Basemaps from './basemaps/Basemaps';
 import Layers from './layers/Layers';
-import KuntaFilter from './../../ikaalinen/KuntaFilter';
-import Kunnat from './../../ikaalinen/Kunnat';
-import Popover from 'material-ui/Popover';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
+import KuntaFilter from './layers/KuntaFilter';
+import Kunnat from './layers/Kunnat';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import highlightFeature from './utils/highlightFeature';
 import featureOverlay from './layers/FeatureOverlay';
 import ImageGallery from './utils/ImageGallery';
@@ -76,8 +76,6 @@ class Map extends Component {
             controls: []
         });
 
-        //console.log(map.getLayers().getArray());
-
         /* Bind "map" to state */
         this.setState({ map: map });
 
@@ -105,45 +103,34 @@ class Map extends Component {
         map.on('click', e => {
             let feature = map.forEachFeatureAtPixel(e.pixel, feature => feature);
             highlightFeature(feature, map);
-            if (feature && feature.get('tyyppi') && feature.get('nimi')) {
-                this.setState({ galleryVisibility: true });
-                ImageController.getImages(feature.get('id')).then(response => {
-                    if (response.ok) {
-                        response.json().then(json => {
-                            this.setState({
-                                imageData: json.map((image, index) => {
-                                    return { img: `${image}`, title: `image${index}`, folder: feature.get('id') }
+            if (feature) {
+                let properties = feature.getProperties();
+                blackList.map(key => delete properties[key]);
+                //let keys = Object.keys(properties);
+                this.setState({ featureInfo: properties });
+                //this.handlePopoverOpen();
+                if (feature.get('tyyppi') && feature.get('nimi')) {
+                    this.setState({ galleryVisibility: true });
+                    ImageController.getImages(feature.get('id')).then(response => {
+                        if (response.ok) {
+                            response.json().then(json => {
+                                this.setState({
+                                    imageData: json.map((image, index) => {
+                                        return { img: `${image}`, title: `image${index}`, folder: feature.get('id') }
+                                    })
                                 })
+                            });
+                        } else {
+                            this.setState({
+                                imageData: []
                             })
-                        });
-                    } else {
-                        this.setState({
-                            imageData: []
-                        })
-                    }
-                    this.setState({ showPrint: !this.state.showPrint });
-                })
-            } else {
-                this.setState({ galleryVisibility: false });
+                        }
+                    })
+                } else {
+                    this.setState({ galleryVisibility: false });
+                }
             }
         });
-
-        /*
-                map.on('click', e => {
-        
-                    let feature = map.forEachFeatureAtPixel(e.pixel, feature => { return feature });
-                    //let info = document.getElementById('info');
-                    //feature ? info.innerHTML = feature.getId() + ': ' + feature.get('name') : info.innerHTML = '&nbsp;';
-                    if (feature) {
-                        let properties = feature.getProperties();
-                        blackList.map(key => delete properties[key]);
-                        let keys = Object.keys(properties);
-                        this.setState({ featureInfo: `${keys[0]}: ${properties[keys[0]]}` });
-                        this.handlePopoverOpen();
-                    } else { console.log('no feature data here'); }
-        
-                });
-        */
     }
 
 
@@ -289,11 +276,12 @@ class Map extends Component {
                     setData={this.props.setData}
                 />
                 <div id='map' style={{ height: '100vh' }} />
-                {<KuntaFilter
+                <KuntaFilter
                     filterSelection={this.state.filterSelection}
                     handleClick={this.filterClick}
-                />}
+                />
                 <ImageGallery
+                    featureInfo={this.state.featureInfo}
                     imageData={this.state.imageData}
                     galleryVisibility={this.state.galleryVisibility}
                     toggleGallery={this.toggleGallery}

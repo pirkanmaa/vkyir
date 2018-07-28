@@ -1,7 +1,6 @@
-import Kuntarajat from './../../../ikaalinen/Kuntarajat';
-import Rusle from './../../../ikaalinen/Rusle';
-import Vesty from './../../../ikaalinen/Vesty';
-import Grid250m from './Grid250m';
+import Kuntarajat from './Kuntarajat';
+import Rusle from './Rusle';
+import Vesty from './Vesty';
 
 /* Choose basemaps */
 let Layers = [Kuntarajat,Vesty];

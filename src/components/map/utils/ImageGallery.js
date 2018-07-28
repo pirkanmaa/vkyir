@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 
-import Drawer from 'material-ui/Drawer';
+import Drawer from '@material-ui/core/Drawer';
+import { withStyles } from '@material-ui/core/styles';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 
-import { withStyles } from 'material-ui/styles';
-import GridList from 'material-ui/GridList';
-import GridListTile from 'material-ui/GridList';
-import GridListTileBar from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 
 const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
 
 const styles = theme => ({
     root: {
         position: 'absolute',
-        bottom: 0,
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
@@ -22,20 +20,14 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-        flexWrap: 'nowrap',
-        transform: 'translateZ(0)'
+        height: '100%',
+        width: 320
     },
     title: {
         color: theme.palette.primary.light,
     },
-    titleBar: {
-        background: '#FFF'
-    },
-    image: {
-        display: 'flex'
-    },
     paper: {
-        height: '184px'
+        width: 320
     }
 });
 
@@ -50,18 +42,21 @@ class ImageGallery extends Component {
                 <Drawer
                     classes={{ paper: classes.paper }}
                     variant='persistent'
-                    anchor='bottom'
+                    anchor='right'
                     open={this.props.galleryVisibility}
                     onClick={this.props.toggleGallery}>
 
                     <div className={classes.root}>
-                        <GridList className={classes.gridList} cols={3} cellHeight={'auto'}>
+                        {Object.entries(this.props.featureInfo).map(entry => {
+                            return <div><Typography variant="title">{entry[0]}</Typography><Typography>{entry[1]}</Typography></div>
+                        })}
+                        <GridList className={classes.gridList} cols={2} cellHeight={160}>
                             {
                                 this.props.imageData.length > 0 ? this.props.imageData.map(image => (
-                                    <GridListTile key={image.img} cols={1}>
+                                    <GridListTile key={image.img} cols={image.cols || 1}>
                                         <img src={imageBase(`./${image.folder}/${image.img}`)} alt={image.title} />
                                     </GridListTile>
-                                )) : <GridListTile key={0} className={classes.image}><Typography>Kohteesta ei ole saatavilla kuvia</Typography></GridListTile>
+                                )) : <GridListTile key={'empty'} cols={1}><Typography>Kohteesta ei ole saatavilla kuvia</Typography></GridListTile>
                             }
                         </GridList>
                     </div>
