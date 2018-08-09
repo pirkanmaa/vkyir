@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import OLMap from 'ol/map';
-import View from 'ol/view';
-import Zoom from 'ol/control/zoom';
+import OLMap from 'ol/Map';
+import View from 'ol/View';
+import Zoom from 'ol/control/Zoom';
 import ZoomIn from './zoom/ZoomIn';
 import ZoomOut from './zoom/ZoomOut';
 import LayerDrawer from './LayerDrawer';
@@ -9,7 +9,6 @@ import Basemaps from './basemaps/Basemaps';
 import Layers from './layers/Layers';
 import KuntaFilter from './layers/KuntaFilter';
 import Kunnat from './layers/Kunnat';
-import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import highlightFeature from './utils/highlightFeature';
@@ -17,22 +16,12 @@ import featureOverlay from './layers/FeatureOverlay';
 import ImageController from './../../controllers/ImageController';
 import SideDrawer from './utils/SideDrawer';
 
-let view = new View({
-    projection: 'EPSG:3857'
-});
-
-let blackList = ['id', 'ID', 'FID', 'fid', 'bbox', 'geometry'];
+let view = new View({ projection: 'EPSG:3857' });
 
 const styles = theme => ({
     paper: {
         padding: theme.spacing.unit,
-    },
-    popover: {
-        pointerEvents: 'none',
-    },
-    popperClose: {
-        pointerEvents: 'none',
-    },
+    }
 });
 
 class Map extends Component {
@@ -100,15 +89,14 @@ class Map extends Component {
             }
         });
 
+        /* Map click events */
         map.on('click', e => {
             let feature = map.forEachFeatureAtPixel(e.pixel, feature => feature);
             highlightFeature(feature, map);
             if (feature) {
                 let properties = feature.getProperties();
-                blackList.map(key => delete properties[key]);
-                //let keys = Object.keys(properties);
                 this.setState({ featureInfo: properties });
-                //this.handlePopoverOpen();
+
                 if (feature.get('tyyppi') && feature.get('nimi')) {
                     this.setState({ galleryVisibility: true });
                     ImageController.getImages(feature.get('id')).then(response => {
@@ -145,18 +133,10 @@ class Map extends Component {
             && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
     }
 
+    /* Toggle right side drawer + image gallery */
     toggleGallery = feature => {
         this.setState({ galleryVisibility: !this.state.galleryVisibility });
     }
-
-    /* Popover controls */
-    handlePopoverOpen = event => {
-        this.setState({ popOpen: true });
-    };
-
-    handlePopoverClose = () => {
-        setTimeout(() => { this.setState({ popOpen: false }) }, 1000);
-    };
 
     /* Functionality for municipality filtering menu */
     filterClick = (event, index, option) => {
@@ -190,6 +170,7 @@ class Map extends Component {
             this.props.switchTheme();
     };
 
+    /* basemap opacity changer */
     changeBasemapOpacity = (event, value) => {
         this.setState({ basemapOpacity: value });
         let layers = this.state.map.getLayers().getArray();
@@ -261,16 +242,6 @@ class Map extends Component {
             <div>
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
-                <Popover id="popover"
-                    className={classes.popover}
-                    classes={{ paper: classes.paper }}
-                    open={popOpen}
-                    anchorPosition={{ top: 0, left: 0 }}
-                    onClose={this.handlePopoverClose}
-                    onEntered={this.handlePopoverClose}
-                >
-                <Typography>{this.state.featureInfo}</Typography>
-                </Popover>
                 <LayerDrawer
                     layerDrawerVisibility={this.props.layerDrawerVisibility}
                     basemap={this.state.basemap}
@@ -280,7 +251,6 @@ class Map extends Component {
                     basemapOpacity={this.state.basemapOpacity}
                     changeBasemapOpacity={this.changeBasemapOpacity}
                     map={this.state.map}
-                    setData={this.props.setData}
                 />
                 <div id='map' style={{ height: '100vh' }} />
                 <KuntaFilter

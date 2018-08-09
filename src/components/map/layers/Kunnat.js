@@ -1,7 +1,7 @@
-import VectorLayer from 'ol/layer/vector';
-import VectorSource from 'ol/source/vector';
-import GeoJSON from 'ol/format/geojson';
-import loadingstrategy from 'ol/loadingstrategy';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import GeoJSON from 'ol/format/GeoJSON';
+import {all as loadingstrategy} from 'ol/loadingstrategy';
 
 const url = 'http://tieto.pirkanmaa.fi/geoserver/maankaytto/ows?service=WFS&version=1.0.0&request=GetFeature',
     layer = 'maankaytto:kunnat2018',
@@ -13,7 +13,7 @@ const source = new VectorSource({
     url: (extent) => {
         return `${url}&typename=${layer}&outputFormat=${format}&srsname=${proj}`
     },
-    strategy: loadingstrategy.all
+    strategy: loadingstrategy
 });
 
 const Kunnat = new VectorLayer({

@@ -4,15 +4,15 @@
   "main": "main.js",
   "author": "Ilpo Tammi",
   "license": "ISC",
-  "homepage": "https://github.com/pirkanmaa",
+  "homepage": "https://github.com/pirkanmaa/vkyir/",
   "description": "Yhteistyöllä vesistöt kuntoon Ikaalisten reitillä",
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ubigu/datatogo.git"
+    "url": "git+https://github.com/pirkanmaa/vkyir.git"
   },
   "bugs": {
-    "url": "https://github.com/ubigu/datatogo/issues"
+    "url": "https://github.com/pirkanmaa/vkyir/issues"
   },
   "scripts": {
     "build": "webpack --mode production",
@@ -41,7 +41,7 @@
     "html-webpack-plugin": "^3.2.0",
     "image-size": "^0.6.3",
     "image-webpack-loader": "^4.3.1",
-    "ol": "^4.6.5",
+    "ol": "^5.1.3",
     "proj4": "^2.4.4",
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",

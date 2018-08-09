@@ -60,7 +60,6 @@ class LayerControl extends Component {
   changeLayerOpacity = (name,index) => (event, value) => {
     let opacities = this.state.layerOpacity
     opacities[index] = value;
-    console.log(name);
     this.setState({ layerOpacity: opacities });
     let layers = this.props.map.getLayers().getArray();
     layers.find(layer => layer.getProperties().name === name).setOpacity(opacities[index]);

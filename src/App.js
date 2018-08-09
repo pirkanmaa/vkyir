@@ -35,11 +35,6 @@ class App extends Component {
         data: ''
     };
 
-    /* Set data*/
-    setData = data => {
-        this.setState({ data: data });
-    };
-
     /* Material UI togglers */
     toggleLayerDrawer = () => this.setState({ showLayerDrawer: !this.state.showLayerDrawer });
 

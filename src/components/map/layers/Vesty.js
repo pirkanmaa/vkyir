@@ -1,12 +1,12 @@
-import VectorLayer from 'ol/layer/vector';
-import VectorSource from 'ol/source/vector';
-import GeoJSON from 'ol/format/geojson';
-import loadingstrategy from 'ol/loadingstrategy';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import GeoJSON from 'ol/format/GeoJSON';
+import {all as loadingstrategy} from 'ol/loadingstrategy';
 
-import Style from 'ol/style/style';
-import Stroke from 'ol/style/stroke';
-import Fill from 'ol/style/fill';
-import Circle from 'ol/style/circle';
+import Style from 'ol/style/Style';
+import Stroke from 'ol/style/Stroke';
+import Fill from 'ol/style/Fill';
+import Circle from 'ol/style/Circle';
 
 const url = 'http://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature',
     layer = 'pirely:vesty',
@@ -16,7 +16,7 @@ const url = 'http://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=
 const source = new VectorSource({
     format: new GeoJSON(),
     url: `${url}&typename=${layer}&srsname=${proj}&outputFormat=${format}`,
-    strategy: loadingstrategy.all
+    strategy: loadingstrategy
 });
 
 let types = [

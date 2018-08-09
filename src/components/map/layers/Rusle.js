@@ -1,5 +1,5 @@
-import TileWMS from 'ol/source/tilewms';
-import Tile from 'ol/layer/tile';
+import TileWMS from 'ol/source/TileWMS';
+import Tile from 'ol/layer/Tile';
 
 const source = new TileWMS({
     url: 'https://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/RUSLE_2015_koko_Suomi_ja_kosteusindeksi_Puruvesi/MapServer/WMSServer?',

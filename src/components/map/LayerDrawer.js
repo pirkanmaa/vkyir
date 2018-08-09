@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+
+import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-import BasemapControl from './BasemapControl';
-import LayerControl from './LayerControl';
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 
+import BasemapControl from './BasemapControl';
+import LayerControl from './LayerControl';
 import Legend from './legend/Legend';
 
 const styles = {
@@ -60,7 +61,6 @@ class LayerDrawer extends Component {
               <LayerControl
                 maplayers={this.props.maplayers}
                 toggleLayer={this.props.toggleLayer}
-                setData={this.props.setData}
                 map={this.props.map}
               />
             </ExpansionPanelDetails>
@@ -84,8 +84,8 @@ class LayerDrawer extends Component {
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
               <Typography>Karttaselitteet</Typography>
             </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Legend map={this.props.map}></Legend>
+            <ExpansionPanelDetails classes={{ root: classes.root }}>
+              <Legend map={this.props.map} />
             </ExpansionPanelDetails>
           </ExpansionPanel>
 

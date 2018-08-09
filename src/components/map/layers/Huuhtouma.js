@@ -1,5 +1,5 @@
-import TileWMS from 'ol/source/tilewms';
-import Tile from 'ol/layer/tile';
+import TileWMS from 'ol/source/TileWMS';
+import Tile from 'ol/layer/Tile';
 
 const source = new TileWMS({
     url: 'https://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WMSServer?',

@@ -5,7 +5,6 @@ let highlight;
 /* Function for "highlighting" selected feature via style */
 const highlightFeature = (feature, map) => {
 
-    //let feature = map.forEachFeatureAtPixel(pixel, feature => feature);
     if (feature) {
         if (highlight === undefined) {
             featureOverlay.getSource().addFeature(feature);
