@@ -8,6 +8,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Basemaps from './basemaps/Basemaps';
 
+import Slider from '@material-ui/lab/Slider';
+
 const styles = {
   root: {
     display: 'flex',
@@ -15,6 +17,10 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: '1rem',
+  },
+  sliderRoot: {
+    maxWidth: '150px',
+    paddingLeft: 0
   }
 }
 
@@ -38,6 +44,8 @@ class BasemapControl extends Component {
               <FormControlLabel key={index} value={item.name} control={<Radio />} label={item.title} />
             ))}
           </RadioGroup>
+          <Slider value={this.props.basemapOpacity} aria-labelledby="bmopacitycontrol" onChange={this.props.changeBasemapOpacity} min={0} max={1}
+            classes={{root: classes.sliderRoot}}/>
         </FormControl>
       </div>
     );

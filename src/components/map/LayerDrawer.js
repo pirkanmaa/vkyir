@@ -12,11 +12,13 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import Layers from '@material-ui/icons/Layers';
+
+import Legend from './legend/Legend';
 
 const styles = {
   paper: {
-    width: '250px'
+    width: '250px',
+    opacity: 0.95
   },
   root: {
     paddingLeft: '8px',
@@ -33,7 +35,7 @@ class LayerDrawer extends Component {
 
   handleChange = panel => (event, expanded) => {
     this.setState({
-      expanded: expanded ? panel : false,
+      expanded: expanded ? panel : false
     });
   };
 
@@ -64,7 +66,7 @@ class LayerDrawer extends Component {
             </ExpansionPanelDetails>
           </ExpansionPanel>
 
-          <ExpansionPanel defaultExpanded expanded={expanded === 'panel'} onChange={this.handleChange('panel')}>
+          <ExpansionPanel defaultExpanded expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
               <Typography>Taustakartat</Typography>
             </ExpansionPanelSummary>
@@ -72,7 +74,18 @@ class LayerDrawer extends Component {
               <BasemapControl
                 changeBasemap={this.props.changeBasemap}
                 basemap={this.props.basemap}
+                basemapOpacity={this.props.basemapOpacity}
+                changeBasemapOpacity={this.props.changeBasemapOpacity}
               />
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+
+          <ExpansionPanel defaultExpanded expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
+            <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+              <Typography>Karttaselitteet</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <Legend map={this.props.map}></Legend>
             </ExpansionPanelDetails>
           </ExpansionPanel>
 

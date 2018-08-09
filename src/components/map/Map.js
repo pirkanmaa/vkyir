@@ -14,8 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import highlightFeature from './utils/highlightFeature';
 import featureOverlay from './layers/FeatureOverlay';
-import ImageGallery from './utils/ImageGallery';
 import ImageController from './../../controllers/ImageController';
+import SideDrawer from './utils/SideDrawer';
 
 let view = new View({
     projection: 'EPSG:3857'
@@ -190,6 +190,15 @@ class Map extends Component {
             this.props.switchTheme();
     };
 
+    changeBasemapOpacity = (event, value) => {
+        this.setState({ basemapOpacity: value });
+        let layers = this.state.map.getLayers().getArray();
+        layers.filter(layer => {
+            return layer.getProperties().type === 'base'
+        }).forEach(basemap => {
+            basemap.setOpacity(value);
+        })
+    };
 
     /* Map Layer Toggler  */
     toggleLayer = event => {
@@ -198,8 +207,6 @@ class Map extends Component {
         index == -1 ? this.setState({ maplayers: [...this.state.maplayers, name] }) : this.setState({ maplayers: this.state.maplayers.splice(index, 1) });
         this.state.map.getLayers().getArray().find(layer => layer.getProperties().name === name && layer.setVisible(!layer.getVisible()));
     };
-
-    changeBasemapOpacity = () => { };
 
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
@@ -262,7 +269,7 @@ class Map extends Component {
                     onClose={this.handlePopoverClose}
                     onEntered={this.handlePopoverClose}
                 >
-                    <Typography>{this.state.featureInfo}</Typography>
+                <Typography>{this.state.featureInfo}</Typography>
                 </Popover>
                 <LayerDrawer
                     layerDrawerVisibility={this.props.layerDrawerVisibility}
@@ -280,7 +287,7 @@ class Map extends Component {
                     filterSelection={this.state.filterSelection}
                     handleClick={this.filterClick}
                 />
-                <ImageGallery
+                <SideDrawer
                     featureInfo={this.state.featureInfo}
                     imageData={this.state.imageData}
                     galleryVisibility={this.state.galleryVisibility}

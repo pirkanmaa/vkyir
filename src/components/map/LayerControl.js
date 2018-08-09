@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Clear from '@material-ui/icons/Clear';
 
 import Layers from './layers/Layers';
+import Slider from '@material-ui/lab/Slider';
 
 const styles = theme => ({
   root: {
@@ -30,6 +31,10 @@ const styles = theme => ({
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
+  },
+  sliderRoot: {
+    maxWidth: '150px',
+    paddingLeft: 0
   }
 })
 
@@ -37,7 +42,8 @@ class LayerControl extends Component {
 
   state = {
     show: { "visibility": Layers.map(item => item.visibility), "title": Layers.map(item => item.title) },
-    showLayerAdder: false
+    showLayerAdder: false,
+    layerOpacity: Layers.map(item => item.layer.values_.opacity)
   }
 
   toggleLayerAdder = () => this.setState({ showLayerAdder: !this.state.showLayerAdder });
@@ -49,21 +55,16 @@ class LayerControl extends Component {
     let show = Object.assign({}, this.state.show);
     show.visibility = show.visibility.map((item, i) => { return i === index ? !item : item });
     this.setState({ show });
-    console.log(this.state.show);
   }
 
-  removeLayer = buttonName => {
-    let layer = this.props.map.getLayers().getArray().filter(layer => layer.getProperties().title === buttonName);
-    let index = this.state.show.title.findIndex(title => title === buttonName);
+  changeLayerOpacity = (name,index) => (event, value) => {
+    let opacities = this.state.layerOpacity
+    opacities[index] = value;
+    console.log(name);
+    this.setState({ layerOpacity: opacities });
+    let layers = this.props.map.getLayers().getArray();
+    layers.find(layer => layer.getProperties().name === name).setOpacity(opacities[index]);
 
-    this.setState({
-      show: {
-        "visibility": this.state.show.visibility.filter((item, i) => i !== index),
-        "title": this.state.show.title.filter((item, i) => i !== index)
-      }
-    });
-
-    this.props.map.removeLayer(...layer);
   };
 
   render() {
@@ -92,8 +93,11 @@ class LayerControl extends Component {
                     />
                   }
                 />
+                <Slider value={this.state.layerOpacity[index]} aria-labelledby="lyropacitycontrol" onChange={this.changeLayerOpacity(item.name,index)} min={0} max={1}
+                  classes={{ root: classes.sliderRoot }} />
               </div>
             ))}
+
           </FormGroup>
         </FormControl>
 
