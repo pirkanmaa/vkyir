@@ -84,7 +84,7 @@ class LayerDrawer extends Component {
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
               <Typography>Karttaselitteet</Typography>
             </ExpansionPanelSummary>
-            <ExpansionPanelDetails classes={{ root: classes.root }}>
+            <ExpansionPanelDetails>
               <Legend map={this.props.map} />
             </ExpansionPanelDetails>
           </ExpansionPanel>

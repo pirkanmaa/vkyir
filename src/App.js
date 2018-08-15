@@ -23,7 +23,7 @@ class App extends Component {
     state = {
         user: {},
         showChart: false,
-        showLayerDrawer: false,
+        showLayerDrawer: true,
         showToolbar: true,
         showLogin: false,
         showAlert: false,

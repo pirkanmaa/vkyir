@@ -54,23 +54,24 @@ const legend1 = [
 class Legend extends Component {
 
     /* Function for creating the legend for different kinds of layers */
+    /* For some reason this works only in production mode, made a non-automated version due to lack of time
     layerLegend() {
         const { classes } = this.props;
         let layerLegend = [];
         Layers.map((lyr, index) => {
-            if (lyr.layer.constructor.name.includes('Vector') && lyr.name !== 'Kuntarajat') {
+            if (lyr.layer.constructor.name === 'VectorLayer' && lyr.name !== 'Kuntarajat') {
                 layerLegend.push(
                     <div key={`${index}A`} classes={{ root: classes.root }}>
                         <Typography className={classes.typography} variant="body2">{lyr.name}</Typography>
-                        {legend1.map((types, index) =>
-                            <div key={`${index}B`} className={classes.slot}>
-                                <Avatar classes={{ root: classes.avatar }} style={{ background: `${types.color}` }}></Avatar>
+                        {legend1.map((types, i) =>
+                            <div key={`${i}B`} className={classes.slot}>
+                                <Avatar classes={{ root: classes.avatar }} style={{ "background": `${types.color}` }}></Avatar>
                                 <Typography variant="body1">{types.type}</Typography>
                             </div>
                         )}
                     </div>
                 );
-            } else if (lyr.layer.constructor.name.includes('Tile') || lyr.layer.constructor.name.includes('Image')) {
+            } else if (lyr.layer.constructor.name === 'TileLayer' || lyr.layer.constructor.name === 'ImageLayer') {
                 layerLegend.push(
                     <div key={`${index}C`} classes={{ root: classes.root }}>
                         <Typography variant="body2" className={classes.typography}>{lyr.name}</Typography>
@@ -80,12 +81,28 @@ class Legend extends Component {
             }
         });
         return layerLegend;
-    }
+    }*/
 
     render() {
 
+        const { classes } = this.props;
+
         return (
-            <div>{this.layerLegend()}</div>
+            <div>
+                <div classes={{ root: classes.root }}>
+                    <Typography className={classes.typography} variant="body2">Kunnostustoimenpiteet</Typography>
+                    {legend1.map((types, i) =>
+                        <div key={i} className={classes.slot}>
+                            <Avatar classes={{ root: classes.avatar }} style={{ "background": `${types.color}` }}></Avatar>
+                            <Typography variant="body1">{types.type}</Typography>
+                        </div>
+                    )}
+                </div>
+                <div classes={{ root: classes.root }}>
+                    <Typography variant="body2" className={classes.typography}>Eroosiomalli</Typography>
+                    <img src="http://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/RUSLE_2015_koko_Suomi_ja_kosteusindeksi_Puruvesi/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=10"></img>
+                </div>
+            </div>
         );
     }
 }

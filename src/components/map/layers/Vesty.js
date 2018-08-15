@@ -51,8 +51,8 @@ let style = feature => {
 
 const Vesty = new VectorLayer({
     source: source,
-    name: 'Toimenpiteet',
-    title: 'Toimenpiteet',
+    name: 'Kunnostustoimenpiteet',
+    title: 'Kunnostustoimenpiteet',
     visible: true,
     style: style
 });
