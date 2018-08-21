@@ -117,6 +117,8 @@ class Map extends Component {
                 } else {
                     this.setState({ galleryVisibility: false });
                 }
+            } else {
+                this.setState({ galleryVisibility: false });
             }
         });
     }

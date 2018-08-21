@@ -7,7 +7,7 @@ import Style from 'ol/style/Style';
 import Stroke from 'ol/style/Stroke';
 
 
-const url = 'http://tieto.pirkanmaa.fi/geoserver/maankaytto/ows?service=WFS&version=1.0.0&request=GetFeature',
+const url = 'https://tieto.pirkanmaa.fi/geoserver/maankaytto/ows?service=WFS&version=1.0.0&request=GetFeature',
     layer = 'maankaytto:kunnat2018',
     proj = 'EPSG:3857',
     format = 'application/json';
