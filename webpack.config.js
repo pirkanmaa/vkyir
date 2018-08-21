@@ -43,7 +43,7 @@ module.exports = {
             filename: "./index.html"
         }),
         new webpack.DefinePlugin({
-            CLIENT_APP_PATH: JSON.stringify('./../../../ikaalinen/api/images/images')
+            CLIENT_APP_PATH: JSON.stringify('./../../../api/images/images')
         })
     ]
 };

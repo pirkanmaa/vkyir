@@ -54,7 +54,8 @@ const Vesty = new VectorLayer({
     name: 'Kunnostustoimenpiteet',
     title: 'Kunnostustoimenpiteet',
     visible: true,
-    style: style
+    style: style,
+    description: 'Tämä karttataso on kopio VESTY-tietokannasta ja kuvaa vesistöjen kunnostustoimenpiteitä.'
 });
 
 export default Vesty;

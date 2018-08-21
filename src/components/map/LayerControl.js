@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
-import Add from '@material-ui/icons/Add';
-import IconButton from '@material-ui/core/IconButton';
-import Clear from '@material-ui/icons/Clear';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import Layers from './layers/Layers';
 import Slider from '@material-ui/lab/Slider';
+import LayerInfo from './LayerInfo';
 
 const styles = theme => ({
   root: {
@@ -35,15 +36,24 @@ const styles = theme => ({
   sliderRoot: {
     maxWidth: '150px',
     paddingLeft: 0
+  },
+  infoButton: {
+    textTransform: 'none',
+    textAlign: 'left'
   }
 })
 
 class LayerControl extends Component {
 
   state = {
-    show: { "visibility": Layers.map(item => item.visibility), "title": Layers.map(item => item.title) },
-    showLayerAdder: false,
-    layerOpacity: Layers.map(item => item.layer.values_.opacity)
+    show: {
+      "visibility": Layers.map(item => item.visibility),
+      "title": Layers.map(item => item.title)
+    },
+    layerOpacity: Layers.map(item => item.layer.values_.opacity),
+    layerInfoVisibility: false,
+    infoLayer: '',
+    layerInfo: ''
   }
 
   toggleLayerAdder = () => this.setState({ showLayerAdder: !this.state.showLayerAdder });
@@ -57,13 +67,21 @@ class LayerControl extends Component {
     this.setState({ show });
   }
 
-  changeLayerOpacity = (name,index) => (event, value) => {
+  changeLayerOpacity = (name, index) => (event, value) => {
     let opacities = this.state.layerOpacity
     opacities[index] = value;
     this.setState({ layerOpacity: opacities });
     let layers = this.props.map.getLayers().getArray();
     layers.find(layer => layer.getProperties().name === name).setOpacity(opacities[index]);
+  };
 
+  setLayerInfo = item => {
+    this.setState({ layerInfo: item.layer.values_.description || '' });
+    this.setState({ infoLayer: item.name });
+  }
+
+  toggleLayerInfo = () => {
+    this.setState({ layerInfoVisibility: !this.state.layerInfoVisibility });
   };
 
   render() {
@@ -82,7 +100,18 @@ class LayerControl extends Component {
               <div key={index}>
                 <FormControlLabel
                   key={'A' + index}
-                  label={item.title}
+                  label={
+                    <Tooltip id="layerInfoTooltip" title="lisätietoa" placement="right-start" leaveTouchDelay={250} enterTouchDelay={500}>
+                      <Button
+                        classes={{root: classes.infoButton}}
+                        variant='text'
+                        disableFocusRipple={true}
+                        disableRipple={true}
+                        onClick={() => { this.setLayerInfo(item); this.toggleLayerInfo(); }}>
+                        {item.title}
+                      </Button>
+                    </Tooltip>
+                  }
                   control={
                     <Checkbox
                       key={'B' + index}
@@ -92,14 +121,19 @@ class LayerControl extends Component {
                     />
                   }
                 />
-                <Slider value={this.state.layerOpacity[index]} aria-labelledby="lyropacitycontrol" onChange={this.changeLayerOpacity(item.name,index)} min={0} max={1}
+                <Slider value={this.state.layerOpacity[index]} aria-labelledby="lyropacitycontrol" onChange={this.changeLayerOpacity(item.name, index)} min={0} max={1}
                   classes={{ root: classes.sliderRoot }} />
               </div>
             ))}
-
           </FormGroup>
         </FormControl>
-
+        <LayerInfo
+          layerInfoVisibility={this.state.layerInfoVisibility}
+          toggleLayerInfo={this.toggleLayerInfo}
+          infoLayer={this.state.infoLayer}
+          layerInfo={this.state.layerInfo}
+        >
+        </LayerInfo>
       </div>
 
     );

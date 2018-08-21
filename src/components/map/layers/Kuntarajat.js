@@ -22,6 +22,7 @@ const Kuntarajat = new VectorLayer({
     source: source,
     title: 'Kuntarajat',
     name: 'Kuntarajat',
+    description: 'Suomen kuntarajat vuodelta 2018.',
     visible: true,
     opacity: 0.5,
     style: new Style({
@@ -32,4 +33,4 @@ const Kuntarajat = new VectorLayer({
     }),
 });
 
-export default Kuntarajat;
+export default Kuntarajat;  

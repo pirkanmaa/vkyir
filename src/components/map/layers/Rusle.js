@@ -17,7 +17,8 @@ const Rusle = new Tile({
     opacity: 0.75,
     title: 'Eroosiomalli',
     name: 'Eroosiomalli',
-    visible: false
+    visible: false,
+    description: 'Ei kuvausta olemassa.'
 });
 
 export default Rusle;
