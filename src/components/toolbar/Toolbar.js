@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import LayerButton from './LayerButton';
-import ShareButton from './ShareButton';
+import InfoButton from './InfoButton';
 
 const styles = {
     button: {
@@ -12,15 +12,24 @@ const styles = {
         bottom: '1rem',
         left: '1rem',
         zIndex: 9999
+    },
+    button2: {
+        position: 'absolute',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        bottom: '1rem',
+        left: '17rem',
+        zIndex: 9999
     }
 }
 
 function Toolbar(props) {
     const { classes } = props;
     return (
-        <div className={classes.button}>
+        <div className={props.showLayerDrawer ? classes.button2: classes.button}>
             <LayerButton handleClick={() => props.toggleLayerDrawer()} />
-            {/*<ShareButton handleClick={() => props.toggleShare()} />*/}
+            <InfoButton handleClick={() => props.toggleSplash()} />
         </div>
     );
 }

@@ -102,9 +102,15 @@ class Legend extends Component {
                     <Typography variant="body2" className={classes.typography}>Eroosiomalli</Typography>
                     <img src="http://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/RUSLE_2015_koko_Suomi_ja_kosteusindeksi_Puruvesi/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=10"></img>
                 </div>
+                <div classes={{ root: classes.root }}>
+                    <Typography variant="body2" className={classes.typography}>Pintavesien ekologinen tila</Typography>
+                    <img src="http://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_PintavesienEkologinenTila/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=1"></img>
+                </div>
             </div>
         );
     }
 }
+
+
 
 export default withStyles(styles)(Legend)

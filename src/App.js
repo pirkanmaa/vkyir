@@ -5,14 +5,12 @@ import { dark, light } from './Theme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import Toolbar from './components/toolbar/Toolbar';
 import AlertBar from './components/AlertBar';
+import Splash from './Splash';
 
 const queryString = require('query-string');
 
 /* Context for in-app alerts */
 const AlertContext = React.createContext('alert');
-
-/* Context for data */
-const DataContext = React.createContext('data');
 
 const alerts = {
     'share': 'Link to map view copied to clipboard'
@@ -21,24 +19,18 @@ const alerts = {
 class App extends Component {
 
     state = {
-        user: {},
-        showChart: false,
+        showSplash: true,
         showLayerDrawer: true,
-        showToolbar: true,
-        showLogin: false,
         showAlert: false,
-        showPrint: false,
         logged: false,
         theme: light,
         extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244],
-        alert: '',
-        data: ''
+        alert: ''
     };
 
     /* Material UI togglers */
     toggleLayerDrawer = () => this.setState({ showLayerDrawer: !this.state.showLayerDrawer });
-
-
+    toggleSplash = () => this.setState({ showSplash: !this.state.showSplash });
     toggleShare = () => {
         this.setState({ alert: alerts.share });
         this.setState({ showAlert: true });
@@ -91,21 +83,25 @@ class App extends Component {
             <MuiThemeProvider theme={this.state.theme}>
                 <div className='app'>
                     <CssBaseline />
-                    <DataContext.Provider value={this.state.data}>
-                        <Map
-                            basemap={this.state.basemap}
-                            zoom={this.state.zoom}
-                            center={this.state.center}
-                            theme={this.state.theme}
-                            switchTheme={this.switchTheme}
-                            layerDrawerVisibility={this.state.showLayerDrawer}
-                            updateUrl={this.urlQueryString}
-                            setData={this.setData}
-                        />
-                    </DataContext.Provider>
+                    <Map
+                        basemap={this.state.basemap}
+                        zoom={this.state.zoom}
+                        center={this.state.center}
+                        theme={this.state.theme}
+                        switchTheme={this.switchTheme}
+                        layerDrawerVisibility={this.state.showLayerDrawer}
+                        updateUrl={this.urlQueryString}
+                        setData={this.setData}
+                    />
                     <Toolbar
+                        showLayerDrawer={this.state.showLayerDrawer}
                         toggleLayerDrawer={this.toggleLayerDrawer}
                         toggleShare={this.toggleShare}
+                        toggleSplash={this.toggleSplash}
+                    />
+                    <Splash
+                        splashVisibility={this.state.showSplash}
+                        toggleSplash={this.toggleSplash}
                     />
                     <AlertContext.Provider value={this.state.alert}>
                         <AlertBar
@@ -119,4 +115,4 @@ class App extends Component {
     }
 }
 
-export { App, AlertContext, DataContext };
+export { App, AlertContext };

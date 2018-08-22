@@ -15,10 +15,10 @@ const source = new TileWMS({
 const Pintavesieko = new Tile({
     source: source,
     opacity: 0.75,
-    title: 'Pintavesien ekologinen luokitus',
-    name: 'Pintavesien ekologinen luokitus',
+    title: 'Pintavesien ekologinen tila',
+    name: 'Pintavesien ekologinen tila',
     visible: false,
-    description: 'Pintavesien (tässä: järvien) ekologinen luokitus vuodelta 2016.'
+    description: 'Pintavesien (tässä: järvien) ekologisen tilan luokitus vuodelta 2016.'
 });
 
 export default Pintavesieko;

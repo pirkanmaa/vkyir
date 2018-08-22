@@ -89,6 +89,7 @@ class Map extends Component {
             }
         });
 
+        let prevFeature;
         /* Map click events */
         map.on('click', e => {
             let feature = map.forEachFeatureAtPixel(e.pixel, feature => feature);
@@ -98,7 +99,11 @@ class Map extends Component {
                 this.setState({ featureInfo: properties });
 
                 if (feature.get('tyyppi') && feature.get('nimi')) {
-                    this.setState({ galleryVisibility: true });
+                    if (feature === prevFeature) {
+                        this.setState({ galleryVisibility: !this.state.galleryVisibility });
+                    } else {
+                        this.setState({ galleryVisibility: true });
+                    }
                     ImageController.getImages(feature.get('id')).then(response => {
                         if (response.ok) {
                             response.json().then(json => {
@@ -116,7 +121,7 @@ class Map extends Component {
                     })
                 } else {
                     this.setState({ galleryVisibility: false });
-                }
+                } prevFeature = feature;
             } else {
                 this.setState({ galleryVisibility: false });
             }

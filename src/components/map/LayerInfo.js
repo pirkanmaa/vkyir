@@ -11,7 +11,6 @@ import TextField from '@material-ui/core/TextField';
 // Dialog with action buttons. The actions are passed in as an array of React objects.
 
 export default class LayerInfo extends Component {
-
     render() {
         return (
             <div>
