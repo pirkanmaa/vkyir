@@ -1,17 +1,14 @@
-# Data2Go
-Data2Go location intelligence platform development branch
+# VKYIR
+Vesistöt kuntoon yhteistyöllä Ikaalisten reitillä
 ---
 
-Install:
+Asennus:
 ```
 npm install
-```
-Run webpack dev-server:
-```
-npm run dev-server
+
 ```
 
-Build:
+Buildaus:
 ```
 npm run build
 ```
