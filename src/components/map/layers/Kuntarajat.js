@@ -24,7 +24,7 @@ const Kuntarajat = new VectorLayer({
     name: 'Kuntarajat',
     description: 'Suomen kuntarajat vuodelta 2018.',
     visible: true,
-    opacity: 0.5,
+    opacity: 0.25,
     style: new Style({
         stroke: new Stroke({
             color: '#888',

@@ -18,7 +18,7 @@ const Rusle = new Tile({
     title: 'Eroosiomalli',
     name: 'Eroosiomalli',
     visible: false,
-    description: 'Ei kuvausta olemassa.'
+    description: `Karttapohjainen valtakunnallinen peltolohkojen eroosioriskimalli (kiintoainetta t/ha/vuosi). Mallin avulla voidaan löytää eroosioriskin hot spot – lohkot koko valtakunnan tasolla. Mallia voidaan käyttää apuna suunniteltaessa vesistöjen kunnostustoimenpiteitä ja niiden sijoittamista. Eroosion mukana kulkeutuu eteläisen Suomen oloissa pääosa vesistöihin päätyvästä fosforikuormasta.`
 });
 
 export default Rusle;

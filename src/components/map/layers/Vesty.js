@@ -55,7 +55,7 @@ const Vesty = new VectorLayer({
     title: 'Kunnostustoimenpiteet',
     visible: true,
     style: style,
-    description: 'Tämä karttataso on kopio VESTY-tietokannasta ja kuvaa vesistöjen kunnostustoimenpiteitä.'
+    description: `Kartalla esitetyt vesistöjen kunnostuskohteet ovat esimerkkejä suunnitelluista ja toteutuneista kunnostuksista järvillä, joilla ja niiden valuma-alueilla. Kohteista löytyvät kuvaukset, kuten mitä on tehty, kuka on tehnyt ja rahoittanut sekä mikä on hankkeen toteutusvaihe.`
 });
 
 export default Vesty;

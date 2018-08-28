@@ -5,7 +5,7 @@ import { dark, light } from './Theme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import Toolbar from './components/toolbar/Toolbar';
 import AlertBar from './components/AlertBar';
-import Splash from './Splash';
+import Splash from './components/Splash';
 
 const queryString = require('query-string');
 
@@ -21,6 +21,7 @@ class App extends Component {
     state = {
         showSplash: true,
         showLayerDrawer: true,
+        zoom: 9.5,
         showAlert: false,
         logged: false,
         theme: light,

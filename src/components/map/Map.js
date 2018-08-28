@@ -27,7 +27,7 @@ const styles = theme => ({
 class Map extends Component {
 
     state = {
-        center: [2650000, 8750000],
+        center: [2582597, 8821258],
         maxZoom: 18,
         minZoom: 3,
         zoomStep: 0.1,
@@ -56,6 +56,7 @@ class Map extends Component {
         this.setState({ visibility: Layers.map((item, index) => item.visibility) });
 
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && layer.setVisible(true));
+        BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && this.setState({basemapOpacity: layer.getOpacity()}));
 
         /* Initiate map */
         let map = new OLMap({

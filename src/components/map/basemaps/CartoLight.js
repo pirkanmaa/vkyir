@@ -12,7 +12,7 @@ const CartoLight = new TileLayer({
     title: 'Vaalea (CARTO)',
     name: 'CartoLight',
     type: 'base',
-    opacity: 1,
+    opacity: 0.66,
     theme: 'light',
     visible: false
 });
