@@ -24,9 +24,9 @@ class ImageGallery extends Component {
             <div>
                 <GridList className={classes.gridList} cols={2} cellHeight={160}>
                     {
-                        this.props.imageData.length > 0 ? this.props.imageData.map(image => (
-                            <GridListTile key={image.img} cols={image.cols || 1}>
-                                <img src={imageBase(`./${image.folder}/${image.img}`)} alt={image.title} />
+                        this.props.imageData.length > 0 ? this.props.imageData.map((image,index) => (
+                            <GridListTile key={index}>
+                                <a href={imageBase(`./${image.folder}/${image.src}`)}><img src={imageBase(`./${image.folder}/${image.thumb}`)} alt={image.caption} /></a>
                             </GridListTile>
                         )) : <GridListTile key={'empty'} cols={1}><Typography>Kohteesta ei ole saatavilla kuvia</Typography></GridListTile>
                     }

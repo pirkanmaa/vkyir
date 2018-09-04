@@ -1,4 +1,5 @@
 import TileWMS from 'ol/source/TileWMS';
+import ImageWMS from 'ol/source/ImageWMS';
 import Tile from 'ol/layer/Tile';
 
 const source = new TileWMS({
@@ -8,11 +9,15 @@ const source = new TileWMS({
         'FORMAT': 'image/png',
         'TRANSPARENT': true,
         'LAYERS': '10',
-        'TILED': true
+        'TILED': false,
+        //'BBOX': '240000,6800000,330000,6900000'
+        //'BBOX': '2500000, 8600000, 2700000, 8900000'
+        //'BBOX': '25,64,26,68'
     }
 });
 
 const Rusle = new Tile({
+    extent: [2500000, 8725000, 2652500, 8925000],
     source: source,
     opacity: 0.75,
     title: 'Eroosiomalli',

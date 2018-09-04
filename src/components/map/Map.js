@@ -56,7 +56,7 @@ class Map extends Component {
         this.setState({ visibility: Layers.map((item, index) => item.visibility) });
 
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && layer.setVisible(true));
-        BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && this.setState({basemapOpacity: layer.getOpacity()}));
+        BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && this.setState({ basemapOpacity: layer.getOpacity() }));
 
         /* Initiate map */
         let map = new OLMap({
@@ -106,12 +106,14 @@ class Map extends Component {
                         this.setState({ galleryVisibility: true });
                     }
                     ImageController.getImages(feature.get('id')).then(response => {
-                        if (response.ok) {
+                        if (response.ok || response.status === 304) {
                             response.json().then(json => {
-                                this.setState({
-                                    imageData: json.map((image, index) => {
-                                        return { img: `${image}`, title: `image${index}`, folder: feature.get('id') }
-                                    })
+                                json.map((image, index) => {
+                                    if (!image.includes('_thumb')) {
+                                        this.setState({
+                                            imageData: [...this.state.imageData, { src: image, thumb: `thumb_${image}`, caption: `image${index}`, folder: feature.get('id') }]
+                                        })
+                                    }
                                 })
                             });
                         } else {

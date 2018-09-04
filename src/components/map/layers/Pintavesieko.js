@@ -13,6 +13,7 @@ const source = new TileWMS({
 });
 
 const Pintavesieko = new Tile({
+    extent: [2500000, 8725000, 2652500, 8925000],
     source: source,
     opacity: 0.75,
     title: 'Pintavesien ekologinen tila',

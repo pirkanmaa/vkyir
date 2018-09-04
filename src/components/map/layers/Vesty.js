@@ -43,8 +43,12 @@ let style = feature => {
 
     return new Style({
         image: new Circle({
-            radius: 8,
-            fill: fill
+            radius: 7,
+            fill: fill,
+            stroke: new Stroke({
+                color: '#000',
+                width: 1.5
+            })
         })
     })
 };

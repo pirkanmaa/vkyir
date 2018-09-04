@@ -99,6 +99,10 @@ class Legend extends Component {
                     )}
                 </div>
                 <div classes={{ root: classes.root }}>
+                    <Typography variant="body2" className={classes.typography}>Vesienhoidon tehostamisalueet</Typography>
+                    <img src="https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=TPO&legend_options=fontName:Arial;fontSize:9;fontAntiAliasing:true"></img>
+                </div>
+                <div classes={{ root: classes.root }}>
                     <Typography variant="body2" className={classes.typography}>Eroosiomalli</Typography>
                     <img src="http://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/RUSLE_2015_koko_Suomi_ja_kosteusindeksi_Puruvesi/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=10"></img>
                 </div>

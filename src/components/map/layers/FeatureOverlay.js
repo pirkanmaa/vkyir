@@ -23,7 +23,7 @@ const highlightStyle = feature => {
         case 'MultiPoint': case 'Point':
             return new Style({
                 image: new Circle({
-                    radius: 8,
+                    radius: 7.5,
                     stroke: stroke2
                 })
             }); break;
