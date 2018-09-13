@@ -102,6 +102,7 @@ class Map extends Component {
                 if (feature.get('tyyppi') && feature.get('nimi')) {
                     if (feature === prevFeature) {
                         this.setState({ galleryVisibility: !this.state.galleryVisibility });
+                        this.setState({ imageData: [] })
                     } else {
                         this.setState({ galleryVisibility: true });
                     }
@@ -109,7 +110,7 @@ class Map extends Component {
                         if (response.ok || response.status === 304) {
                             response.json().then(json => {
                                 json.map((image, index) => {
-                                    if (!image.includes('_thumb')) {
+                                    if (!image.includes('thumb')) {
                                         this.setState({
                                             imageData: [...this.state.imageData, { src: image, thumb: `thumb_${image}`, caption: `image${index}`, folder: feature.get('id') }]
                                         })

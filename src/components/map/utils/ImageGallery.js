@@ -1,39 +1,51 @@
 import React, { Component } from 'react';
-
 import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+// import GridList from '@material-ui/core/GridList';
+// import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
+import Gallery from 'react-grid-gallery';
 
-const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
+//const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
 
-const styles = theme => ({
-    gridList: {
-        height: '100%',
-        width: 320
-    }
-});
+const URL = 'https://tieto.pirkanmaa.fi/data/vkyir/images/';
 
 class ImageGallery extends Component {
 
-    render() {
+    state = {
+        imageData: [],
+        images: []
+    }
 
-        const { classes } = this.props;
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.imageData !== prevState.imageData) {
+            return {
+                imageData: nextProps.imageData,
+                images: nextProps.imageData.length > 0 && nextProps.imageData.map(
+                    image => ({
+                        src: `${URL}/${image.folder}/${image.src}`,
+                        thumbnail: `${URL}/${image.folder}/${image.thumb}`,
+                        thumbnailWidth: 140,
+                        thumbnailHeight: 70,
+                        caption: 'seppo'
+                    })
+                )
+            }
+        }
+    }
+
+    render() {
 
         return (
             <div>
-                <GridList className={classes.gridList} cols={2} cellHeight={160}>
-                    {
-                        this.props.imageData.length > 0 ? this.props.imageData.map((image,index) => (
-                            <GridListTile key={index}>
-                                <a href={imageBase(`./${image.folder}/${image.src}`)}><img src={imageBase(`./${image.folder}/${image.thumb}`)} alt={image.caption} /></a>
-                            </GridListTile>
-                        )) : <GridListTile key={'empty'} cols={1}><Typography>Kohteesta ei ole saatavilla kuvia</Typography></GridListTile>
-                    }
-                </GridList>
+                {this.state.images.length > 0 ?
+                <Gallery
+                    images={this.state.images}
+                    enableImageSelection={false}
+                /> : <Typography>Kohteesta ei ole kuvia saatavilla.</Typography>
+            }
             </div>
         );
     }
 }
 
-export default withStyles(styles)(ImageGallery)
+export default ImageGallery;

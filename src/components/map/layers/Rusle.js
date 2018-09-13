@@ -1,5 +1,4 @@
 import TileWMS from 'ol/source/TileWMS';
-import ImageWMS from 'ol/source/ImageWMS';
 import Tile from 'ol/layer/Tile';
 
 const source = new TileWMS({
@@ -9,7 +8,7 @@ const source = new TileWMS({
         'FORMAT': 'image/png',
         'TRANSPARENT': true,
         'LAYERS': '10',
-        'TILED': false,
+        'TILED': true,
         //'BBOX': '240000,6800000,330000,6900000'
         //'BBOX': '2500000, 8600000, 2700000, 8900000'
         //'BBOX': '25,64,26,68'

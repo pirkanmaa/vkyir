@@ -4,12 +4,6 @@ var gm = require('gm');
 var fs = require('fs');
 var thumb = require('node-thumbnail').thumb;
 
-// let path = `${file}`;
-/* let thumb = gm(path).thumb(250, 250, `${__dirname}/images/${id}/thumbs/${file}`, 75, function (err, data) {
-    if (err) throw err;
-    console.log("Done!");
-}); */
-
 /* Get images */
 imageRouter.get('/:id', (req, res) => {
     let id = req.params.id;

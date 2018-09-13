@@ -53,7 +53,7 @@ class LayerControl extends Component {
     layerOpacity: Layers.map(item => item.layer.values_.opacity),
     layerInfoVisibility: false,
     infoLayer: '',
-    layerInfo: ''
+    layerInfo: null
   }
 
   toggleLayerAdder = () => this.setState({ showLayerAdder: !this.state.showLayerAdder });
@@ -76,7 +76,7 @@ class LayerControl extends Component {
   };
 
   setLayerInfo = item => {
-    this.setState({ layerInfo: item.layer.values_.description || '' });
+    this.setState({ layerInfo: <span>{item.layer.values_.description}</span> || '' });
     this.setState({ infoLayer: item.name });
   }
 
