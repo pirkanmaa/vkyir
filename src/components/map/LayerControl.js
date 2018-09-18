@@ -76,7 +76,7 @@ class LayerControl extends Component {
   };
 
   setLayerInfo = item => {
-    this.setState({ layerInfo: <span>{item.layer.values_.description}</span> || '' });
+    this.setState({ layerInfo: item.layer.values_.description || '' });
     this.setState({ infoLayer: item.name });
   }
 

@@ -4,20 +4,23 @@ var gm = require('gm');
 var fs = require('fs');
 var thumb = require('node-thumbnail').thumb;
 
+
 /* Get images */
 imageRouter.get('/:id', (req, res) => {
     let id = req.params.id;
     let images = [];
+    let dirname = '/var/www/public_html/tieto/data/vkyir/images';
+    // let dirname = `${__dirname}/images`;
 
     if (typeof id === 'string') {
-        let files = fs.readdirSync(`${__dirname}/images/${id}`);
+        let files = fs.readdirSync(`${dirname}/${id}`);
         files.forEach(file => {
 
             if (!file.includes('thumb_') && files.indexOf(`thumb_${file}`) === -1) {
 
                 thumb({
-                    source: `${__dirname}/images/${id}/${file}`,
-                    destination: `${__dirname}/images/${id}`,
+                    source: `${dirname}/${id}/${file}`,
+                    destination: `${dirname}/${id}`,
                     prefix: 'thumb_',
                     suffix: '',
                     concurrency: 2,

@@ -27,9 +27,9 @@ const styles = theme => ({
 class Map extends Component {
 
     state = {
-        center: [2582597, 8821258],
+        center: [2582597, 8820000],
         maxZoom: 18,
-        minZoom: 3,
+        minZoom: 8.5,
         zoomStep: 0.1,
         basemap: "CartoLight",
         basemapOpacity: 1,
