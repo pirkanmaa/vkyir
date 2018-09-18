@@ -13,7 +13,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Paper from '@material-ui/core/Paper';
 import Linkify from 'react-linkify';
 
-const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
+//const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
 
 const styles = theme => ({
     root: {
