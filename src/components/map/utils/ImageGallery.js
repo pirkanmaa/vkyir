@@ -4,14 +4,14 @@ import { withStyles } from '@material-ui/core/styles';
 // import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import Gallery from 'react-grid-gallery';
-
+import metaData from './../../../../public/images/metaData';
 //const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
 
-const URL = 'https://tieto.pirkanmaa.fi/data/vkyir/images/';
+const URL = `../../../../public/images`;
 const styles = {
     img: {
         width: '300px',
-        maxWidth: '300px' 
+        maxWidth: '300px'
     },
     gallery: {
         width: '300px',
@@ -37,7 +37,9 @@ class ImageGallery extends Component {
                         thumbnailWidth: 140,
                         thumbnailHeight: 70,
                         rowHeight: 120,
-                        caption: 'seppo'
+                        caption: metaData.filter(
+                            meta => parseInt(meta.kohde, 10) === parseInt(image.folder, 10)).map(
+                                data => { return `Kohteen kuvaajat: ${data.authors.length === 1 ? data.authors[0] : [...data.authors]}, ajankohta: ${data.startDate ? data.startDate + '-' + data.endDate : data.endDate}.` })
                     })
                 )
             }
@@ -55,7 +57,8 @@ class ImageGallery extends Component {
                         images={this.state.images}
                         enableImageSelection={false}
                         showLightboxThumbnails={true}
-                    /> : <Typography>Kohteesta ei ole kuvia saatavilla.</Typography>
+                    /> :
+                    <Typography>Kohteesta ei ole kuvia saatavilla.</Typography>
                 }
             </div>
         );

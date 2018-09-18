@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', express.static(`${__dirname}/dist`));
+app.use('/public', express.static('public'))
 app.use('/images', imageRouter)
 
 //app.get('*', (req, res) => { res.send({message: 'This is not the base you are looking for.'}); });

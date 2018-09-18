@@ -109,13 +109,13 @@ class Map extends Component {
                     ImageController.getImages(feature.get('id')).then(response => {
                         if (response.ok || response.status === 304) {
                             response.json().then(json => {
-                                json.map((image, index) => {
-                                    if (!image.includes('thumb')) {
-                                        this.setState({
-                                            imageData: [...this.state.imageData, { src: image, thumb: `thumb_${image}`, caption: `image${index}`, folder: feature.get('id') }]
-                                        })
-                                    }
-                                })
+                                this.setState({
+                                    imageData: json.reduce((arr, image) => {
+                                        if (!image.includes('thumb')) {
+                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: feature.get('id') });
+                                        } return arr;
+                                    }, [])
+                                });
                             });
                         } else {
                             this.setState({
