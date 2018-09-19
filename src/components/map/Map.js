@@ -132,7 +132,6 @@ class Map extends Component {
         });
     }
 
-
     /* Map Zoomers */
     zoomIn = () => {
         let newZoom = this.state.zoom + this.state.zoomStep;
@@ -206,42 +205,6 @@ class Map extends Component {
         /* TODO: Figure out a better structure for this */
         this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
         this.state.center !== prevState.center && view.setCenter(this.state.center);
-        this.state.basemap !== prevState.basemap && this.changeBasemap(null, this.state.basemap);
-        if (this.state.zoom !== prevState.zoom ||
-            this.state.center !== prevState.center ||
-            this.state.basemap !== prevState.basemap) {
-            this._updateUrl();
-        }
-    }
-
-    /* Send new url query string to App */
-    _updateUrl = () => {
-        let urlQuery = [];
-        let zoom = Number(this.state.zoom).toFixed(1);
-        let x = Number(this.state.center[0]).toFixed(0);
-        let y = Number(this.state.center[1]).toFixed(0);
-        let basemap = this.state.basemap;
-        urlQuery.push({ z: zoom });
-        urlQuery.push({ x: x });
-        urlQuery.push({ y: y });
-        urlQuery.push({ b: basemap });
-        this.props.updateUrl(urlQuery);
-    }
-
-    /* Register changes from props changes (e.g. url query zoom from parent) */
-    /* returns new state / null depending on wether state should change */
-    /* TODO: Figure out how to props on state only once */
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.zoom && !prevState.zoom) {
-            return { zoom: nextProps.zoom };
-        }
-        if (nextProps.center && !prevState.centerFromUrl) {
-            return { center: nextProps.center, centerFromUrl: true };
-        }
-        if (nextProps.basemap && !prevState.basemapFromUrl) {
-            return { basemap: nextProps.basemap, basemapFromUrl: true };
-        }
-        return null;
     }
 
     render() {
