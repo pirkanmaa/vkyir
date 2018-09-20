@@ -7,7 +7,7 @@ import Gallery from 'react-grid-gallery';
 import metaData from './../../../../public/images/metaData';
 //const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
 
-const URL = `../../../../images`;
+const URL = `https://tieto.pirkanmaa.fi/ikaalinen/images/`;
 const styles = {
     img: {
         width: '300px',
