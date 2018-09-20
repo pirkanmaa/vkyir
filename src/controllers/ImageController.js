@@ -2,7 +2,7 @@
 var ImageController = {
     /* Get list of image files */
     getImages(id) {
-        const url = `/images/${id}`;
+        const url = `/ikaalinen/images/${id}`;
         const request = new Request(url, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
