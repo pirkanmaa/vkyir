@@ -5,18 +5,25 @@ import Zoom from 'ol/control/Zoom';
 import ZoomIn from './zoom/ZoomIn';
 import ZoomOut from './zoom/ZoomOut';
 import LayerDrawer from './LayerDrawer';
+
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import highlightFeature from './utils/highlightFeature';
+
+import ImageController from './../../controllers/ImageController';
+import SideDrawer from './utils/SideDrawer';
+
 import Basemaps from './basemaps/Basemaps';
 import Layers from './layers/Layers';
 import KuntaFilter from './layers/KuntaFilter';
 import Kunnat from './layers/Kunnat';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import highlightFeature from './utils/highlightFeature';
 import featureOverlay from './layers/FeatureOverlay';
-import ImageController from './../../controllers/ImageController';
-import SideDrawer from './utils/SideDrawer';
 
 let view = new View({ projection: 'EPSG:3857' });
+
+/* Initiate basemap and layers */
+let BasemapSel = Basemaps.map(layer => layer["layer"]);
+let LayerSel = Layers.map(layer => layer["layer"]);
 
 const styles = theme => ({
     paper: {
@@ -25,6 +32,13 @@ const styles = theme => ({
 });
 
 class Map extends Component {
+
+    /* Initiate map */
+    map = new OLMap({
+        layers: [...BasemapSel, ...LayerSel, Kunnat, featureOverlay],
+        view: view,
+        controls: []
+    });
 
     state = {
         center: [2582597, 8820000],
@@ -44,30 +58,22 @@ class Map extends Component {
         imageData: []
     };
 
+    componentWillUnmount() {
+        this.map.setTarget(undefined)
+    }
+
     componentDidMount() {
+        this.map.setTarget('map')
+        
         view.setCenter(this.state.center);
         view.setZoom(this.state.zoom);
         view.setMaxZoom(this.state.maxZoom);
         view.setMinZoom(this.state.minZoom);
 
-        /* Initiate basemap == Set the default Basemap selection visible */
-        let BasemapSel = Basemaps.map(layer => layer["layer"]);
-        let LayerSel = Layers.map(layer => layer["layer"]);
         this.setState({ visibility: Layers.map((item, index) => item.visibility) });
-
+        
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && layer.setVisible(true));
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && this.setState({ basemapOpacity: layer.getOpacity() }));
-
-        /* Initiate map */
-        let map = new OLMap({
-            target: 'map',
-            layers: [...BasemapSel, ...LayerSel, Kunnat, featureOverlay],
-            view: view,
-            controls: []
-        });
-
-        /* Bind "map" to state */
-        this.setState({ map: map });
 
         /* Add visible non-basemap layers to map state */
         this.setState({
@@ -79,7 +85,7 @@ class Map extends Component {
         });
 
         /* Register state to listen for map events */
-        map.on('moveend', () => {
+        this.map.on('moveend', () => {
             let newZoom = view.getZoom();
             let newCenter = view.getCenter();
             if (newZoom !== this.state.zoom) {
@@ -92,8 +98,8 @@ class Map extends Component {
 
         let prevFeature;
         /* Map click events */
-        map.on('click', e => {
-            let feature = map.forEachFeatureAtPixel(e.pixel, feature => feature);
+        this.map.on('click', e => {
+            let feature = this.map.forEachFeatureAtPixel(e.pixel, feature => feature);
             highlightFeature(feature, map);
             if (feature) {
                 let properties = feature.getProperties();
@@ -151,10 +157,10 @@ class Map extends Component {
     /* Functionality for municipality filtering menu */
     filterClick = (event, index, option) => {
 
-        let layers = this.state.map.getLayers().getArray();
+        let layers = this.map.getLayers().getArray();
         layers.filter((layer) => {
             return layer.getProperties().name === 'Kunnat' && layer.getSource().getFeatures().filter(feat => {
-                return feat.getProperties().nimi === option && (this.state.map.getView().fit(feat.getGeometry().getExtent(), this.state.map.getSize()), highlightFeature(feat, this.state.map));
+                return feat.getProperties().nimi === option && (this.map.getView().fit(feat.getGeometry().getExtent(), this.map.getSize()), highlightFeature(feat, this.map));
             })
         });
 
@@ -165,7 +171,7 @@ class Map extends Component {
     /* Basemap switcher */
     changeBasemap = (event, value) => {
 
-        let layers = this.state.map.getLayers().getArray();
+        let layers = this.map.getLayers().getArray();
         layers.filter((layer, i) => {
             return layer.getProperties().type === 'base'
                 && (layer.getProperties().name === value && layers[i].setVisible(true)
@@ -183,7 +189,7 @@ class Map extends Component {
     /* basemap opacity changer */
     changeBasemapOpacity = (event, value) => {
         this.setState({ basemapOpacity: value });
-        let layers = this.state.map.getLayers().getArray();
+        let layers = this.map.getLayers().getArray();
         layers.filter(layer => {
             return layer.getProperties().type === 'base'
         }).forEach(basemap => {
@@ -196,13 +202,12 @@ class Map extends Component {
         let name = event.target.value;
         let index = this.state.maplayers.indexOf(event.target.value);
         index == -1 ? this.setState({ maplayers: [...this.state.maplayers, name] }) : this.setState({ maplayers: this.state.maplayers.splice(index, 1) });
-        this.state.map.getLayers().getArray().find(layer => layer.getProperties().name === name && layer.setVisible(!layer.getVisible()));
+        this.map.getLayers().getArray().find(layer => layer.getProperties().name === name && layer.setVisible(!layer.getVisible()));
     };
 
     /* Register view to change along with this.state.zoom */
     componentDidUpdate(prevProps, prevState) {
         /* Check if zoom / center / basemap has changed from last time */
-        /* TODO: Figure out a better structure for this */
         this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
         this.state.center !== prevState.center && view.setCenter(this.state.center);
     }
@@ -224,7 +229,7 @@ class Map extends Component {
                     toggleLayer={this.toggleLayer}
                     basemapOpacity={this.state.basemapOpacity}
                     changeBasemapOpacity={this.changeBasemapOpacity}
-                    map={this.state.map}
+                    map={this.map}
                 />
                 <div id='map' style={{ height: '100vh' }} />
                 <KuntaFilter
