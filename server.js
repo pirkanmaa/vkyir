@@ -12,13 +12,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', express.static(`${__dirname}/dist`));
-app.use('/public', express.static('public'))
 app.use('/images', imageRouter)
+app.use(express.static('public'))
 
 app.use(webpackDevMiddleware(compiler, {
     hot: true,
     filename: 'main.js',
-    publicPath: '/public',
+    publicPath: '/',
     stats: { colors: true },
     historyApiFallback: true
 }));
