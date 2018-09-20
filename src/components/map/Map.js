@@ -126,8 +126,7 @@ class Map extends Component {
     zoomIn = () => {
         let zoom = this.view.getZoom();
         if (zoom < this.view.getMaxZoom()) {
-            let newZoom = zoom + this.state.zoomFactor
-            this.view.setZoom(newZoom);
+            this.view.setZoom(zoom + this.state.zoomFactor);
         }
     }
 
@@ -135,8 +134,7 @@ class Map extends Component {
     zoomOut = () => {
         let zoom = this.view.getZoom();
         if (zoom > this.view.getMinZoom()) {
-            let newZoom = zoom - this.state.zoomFactor;
-            this.view.setZoom(newZoom);
+            this.view.setZoom(zoom - this.state.zoomFactor);
         }
     }
 
@@ -220,7 +218,7 @@ class Map extends Component {
                     galleryVisibility={this.state.galleryVisibility}
                     toggleGallery={this.toggleGallery}
                 />
-                <div id='map' className={classes.map}/>
+                <div id='map' className={classes.map} />
             </div>
         );
     }
