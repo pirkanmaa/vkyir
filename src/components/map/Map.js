@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import OLMap from 'ol/Map';
 import View from 'ol/View';
-import Zoom from 'ol/control/Zoom';
 import ZoomIn from './zoom/ZoomIn';
 import ZoomOut from './zoom/ZoomOut';
 import LayerDrawer from './LayerDrawer';
@@ -19,13 +18,14 @@ import KuntaFilter from './layers/KuntaFilter';
 import Kunnat from './layers/Kunnat';
 import featureOverlay from './layers/FeatureOverlay';
 
-let view = new View({ projection: 'EPSG:3857' });
-
 /* Initiate basemap and layers */
 let BasemapSel = Basemaps.map(layer => layer["layer"]);
 let LayerSel = Layers.map(layer => layer["layer"]);
 
 const styles = theme => ({
+    map: {
+        height: '100vh'
+    },
     paper: {
         padding: theme.spacing.unit,
     }
@@ -33,30 +33,31 @@ const styles = theme => ({
 
 class Map extends Component {
 
-    /* Initiate map */
-    map = new OLMap({
-        layers: [...BasemapSel, ...LayerSel, Kunnat, featureOverlay],
-        view: view,
-        controls: []
-    });
-
     state = {
-        center: [2582597, 8820000],
-        maxZoom: 18,
-        minZoom: 8.5,
-        zoomStep: 0.1,
         basemap: "CartoLight",
         basemapOpacity: 1,
-        centerFromUrl: false,
-        basemapFromUrl: false,
         filterSelection: 0,
+        zoomFactor: 0.1,
         maplayers: [],
-        popOpen: false,
-        popoverAnchor: null,
         featureInfo: '',
         galleryVisibility: false,
         imageData: []
     };
+
+    view = new View({
+        projection: 'EPSG:3857',
+        center: [2582597, 8820000],
+        zoom: 9.5,
+        maxZoom: 18,
+        minZoom: 8.5
+    });
+
+    /* Initiate map */
+    map = new OLMap({
+        layers: [...BasemapSel, ...LayerSel, Kunnat, featureOverlay],
+        view: this.view,
+        controls: []
+    });
 
     componentWillUnmount() {
         this.map.setTarget(undefined)
@@ -64,14 +65,9 @@ class Map extends Component {
 
     componentDidMount() {
         this.map.setTarget('map')
-        
-        view.setCenter(this.state.center);
-        view.setZoom(this.state.zoom);
-        view.setMaxZoom(this.state.maxZoom);
-        view.setMinZoom(this.state.minZoom);
 
         this.setState({ visibility: Layers.map((item, index) => item.visibility) });
-        
+
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && layer.setVisible(true));
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && this.setState({ basemapOpacity: layer.getOpacity() }));
 
@@ -82,18 +78,6 @@ class Map extends Component {
                     layer.getVisible() &&
                     layer.getProperties().name !== 'Kunnat'
             }).map(layer => layer.getProperties().name)
-        });
-
-        /* Register state to listen for map events */
-        this.map.on('moveend', () => {
-            let newZoom = view.getZoom();
-            let newCenter = view.getCenter();
-            if (newZoom !== this.state.zoom) {
-                this.setState({ zoom: newZoom })
-            }
-            if (newCenter !== this.state.center) {
-                this.setState({ center: newCenter });
-            }
         });
 
         let prevFeature;
@@ -138,39 +122,42 @@ class Map extends Component {
         });
     }
 
-    /* Map Zoomers */
+    /* Zoom In */
     zoomIn = () => {
-        let newZoom = this.state.zoom + this.state.zoomStep;
-        this.state.zoom < this.state.maxZoom
-            && this.setState({ zoom: newZoom });
+        let zoom = this.view.getZoom();
+        if (zoom < this.view.getMaxZoom()) {
+            let newZoom = zoom + this.state.zoomFactor
+            this.view.setZoom(newZoom);
+        }
     }
+
+    /* Zoom Out */
     zoomOut = () => {
-        this.state.zoom > this.state.minZoom
-            && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+        let zoom = this.view.getZoom();
+        if (zoom > this.view.getMinZoom()) {
+            let newZoom = zoom - this.state.zoomFactor;
+            this.view.setZoom(newZoom);
+        }
     }
 
     /* Toggle right side drawer + image gallery */
-    toggleGallery = feature => {
+    toggleGallery = () => {
         this.setState({ galleryVisibility: !this.state.galleryVisibility });
     }
 
     /* Functionality for municipality filtering menu */
     filterClick = (event, index, option) => {
-
         let layers = this.map.getLayers().getArray();
         layers.filter((layer) => {
-            return layer.getProperties().name === 'Kunnat' && layer.getSource().getFeatures().filter(feat => {
-                return feat.getProperties().nimi === option && (this.map.getView().fit(feat.getGeometry().getExtent(), this.map.getSize()), highlightFeature(feat, this.map));
+            layer.getProperties().name === 'Kunnat' && layer.getSource().getFeatures().filter(feat => {
+                return feat.getProperties().nimi === option && (this.view.fit(feat.getGeometry().getExtent(), this.map.getSize()), highlightFeature(feat, this.map));
             })
         });
-
         this.setState({ filterSelection: index });
-
     }
 
     /* Basemap switcher */
     changeBasemap = (event, value) => {
-
         let layers = this.map.getLayers().getArray();
         layers.filter((layer, i) => {
             return layer.getProperties().type === 'base'
@@ -205,17 +192,9 @@ class Map extends Component {
         this.map.getLayers().getArray().find(layer => layer.getProperties().name === name && layer.setVisible(!layer.getVisible()));
     };
 
-    /* Register view to change along with this.state.zoom */
-    componentDidUpdate(prevProps, prevState) {
-        /* Check if zoom / center / basemap has changed from last time */
-        this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
-        this.state.center !== prevState.center && view.setCenter(this.state.center);
-    }
-
     render() {
 
         const { classes } = this.props;
-        const { popoverAnchor, popOpen } = this.state;
 
         return (
             <div>
@@ -231,7 +210,6 @@ class Map extends Component {
                     changeBasemapOpacity={this.changeBasemapOpacity}
                     map={this.map}
                 />
-                <div id='map' style={{ height: '100vh' }} />
                 <KuntaFilter
                     filterSelection={this.state.filterSelection}
                     handleClick={this.filterClick}
@@ -242,6 +220,7 @@ class Map extends Component {
                     galleryVisibility={this.state.galleryVisibility}
                     toggleGallery={this.toggleGallery}
                 />
+                <div id='map' className={classes.map}/>
             </div>
         );
     }

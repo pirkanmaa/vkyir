@@ -27,7 +27,7 @@ const styles = {
 function Toolbar(props) {
     const { classes } = props;
     return (
-        <div className={props.showLayerDrawer ? classes.button2: classes.button}>
+        <div className={props.layerDrawerVisibility ? classes.button2: classes.button}>
             <LayerButton handleClick={() => props.toggleLayerDrawer()} />
             <InfoButton handleClick={() => props.toggleSplash()} />
         </div>

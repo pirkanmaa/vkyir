@@ -20,17 +20,15 @@ class App extends Component {
 
     state = {
         showSplash: true,
-        showLayerDrawer: true,
-        zoom: 9.5,
+        layerDrawerVisibility: true,
         showAlert: false,
         logged: false,
         theme: light,
-        extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244],
         alert: ''
     };
 
     /* Material UI togglers */
-    toggleLayerDrawer = () => this.setState({ showLayerDrawer: !this.state.showLayerDrawer });
+    toggleLayerDrawer = () => this.setState({ layerDrawerVisibility: !this.state.layerDrawerVisibility });
     toggleSplash = () => this.setState({ showSplash: !this.state.showSplash });
     toggleShare = () => {
         this.setState({ alert: alerts.share });
@@ -48,17 +46,14 @@ class App extends Component {
                 <div className='app'>
                     <CssBaseline />
                     <Map
-                        basemap={this.state.basemap}
-                        zoom={this.state.zoom}
-                        center={this.state.center}
                         theme={this.state.theme}
                         switchTheme={this.switchTheme}
-                        layerDrawerVisibility={this.state.showLayerDrawer}
+                        layerDrawerVisibility={this.state.layerDrawerVisibility}
                         updateUrl={this.urlQueryString}
                         setData={this.setData}
                     />
                     <Toolbar
-                        showLayerDrawer={this.state.showLayerDrawer}
+                        layerDrawerVisibility={this.state.layerDrawerVisibility}
                         toggleLayerDrawer={this.toggleLayerDrawer}
                         toggleShare={this.toggleShare}
                         toggleSplash={this.toggleSplash}
