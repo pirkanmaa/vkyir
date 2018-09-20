@@ -15,12 +15,10 @@ app.use('/', express.static(`${__dirname}/dist`));
 app.use('/public', express.static('public'))
 app.use('/images', imageRouter)
 
-//app.get('*', (req, res) => { res.send({message: 'This is not the base you are looking for.'}); });
-
 app.use(webpackDevMiddleware(compiler, {
     hot: true,
     filename: 'main.js',
-    publicPath: '/',
+    publicPath: '/public',
     stats: { colors: true },
     historyApiFallback: true
 }));
