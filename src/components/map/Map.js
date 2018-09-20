@@ -84,7 +84,7 @@ class Map extends Component {
         /* Map click events */
         this.map.on('click', e => {
             let feature = this.map.forEachFeatureAtPixel(e.pixel, feature => feature);
-            highlightFeature(feature, map);
+            highlightFeature(feature);
             if (feature) {
                 let properties = feature.getProperties();
                 this.setState({ featureInfo: properties });
@@ -140,6 +140,7 @@ class Map extends Component {
 
     /* Toggle right side drawer + image gallery */
     toggleGallery = () => {
+        this.state.galleryVisibility && highlightFeature();
         this.setState({ galleryVisibility: !this.state.galleryVisibility });
     }
 
