@@ -23,9 +23,9 @@ const styles = {
 
     },
     image: {
-        width: '200px',
+        width: '180px',
         paddingTop: '10px',
-        paddingRight: '20px'
+        paddingRight: '15px'
     }
 }
 

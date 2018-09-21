@@ -48,6 +48,7 @@ const taustakartta = new Tile({
   opacity: 0.33,
   visible: true,
   type: 'base',
+  theme: 'light',
   source: new WMTS({
     url: 'http://avoindata.maanmittauslaitos.fi/mapcache/wmts/',
     layer: 'taustakartta',
@@ -66,6 +67,7 @@ const maastokartta = new Tile({
   name: 'Maastokartta',
   opacity: 0.33,
   visible: false,
+  theme: 'light',
   type: 'base',
   source: new WMTS({
     url: 'http://avoindata.maanmittauslaitos.fi/mapcache/wmts/',
@@ -85,6 +87,7 @@ const ilmakuva = new Tile({
   name: 'Ilmakuva',
   opacity: 0.75,
   visible: false,
+  theme: 'light',
   type: 'base',
   source: new TileWMS({
     url: 'http://tiles.kartat.kapsi.fi/ortokuva?',
