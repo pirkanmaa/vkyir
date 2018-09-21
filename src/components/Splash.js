@@ -55,6 +55,7 @@ class Splash extends Component {
                         <div className={classes.imageContainer}>
                             <a href='https://www.ely-keskus.fi/web/ely/ely-pirkanmaa' target='_blank'><img className={classes.image} src='https://tieto.pirkanmaa.fi/img/ELYlogo.png'></img></a>
                             <a href='http://www.pirkanmaa.fi/' target='_blank'><img className={classes.image} src='https://tieto.pirkanmaa.fi/img/PirkanmaanLiitto.png'></img></a>
+                            <a href='https://valtioneuvosto.fi/hallitusohjelman-toteutus' target='_blank'><img className={classes.image} src='https://tieto.pirkanmaa.fi/img/PirkanmaanLiitto.png'></img></a>
                         </div>
                     </DialogContent>
                     <DialogActions>

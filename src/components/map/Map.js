@@ -197,6 +197,7 @@ class Map extends Component {
 
         return (
             <div>
+                <div id='map' className={classes.map} />
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
                 <LayerDrawer
@@ -219,7 +220,6 @@ class Map extends Component {
                     galleryVisibility={this.state.galleryVisibility}
                     toggleGallery={this.toggleGallery}
                 />
-                <div id='map' className={classes.map} />
             </div>
         );
     }

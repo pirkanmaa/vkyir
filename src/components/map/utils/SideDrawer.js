@@ -66,8 +66,8 @@ class SideDrawer extends Component {
             let title;
             if (blackList.indexOf(entry[0]) == -1) {
                 switch (entry[0]) {
-                    case 'toteutukse': title = 'Totetuksen tilanne'; break;
-                    case 'tyyppi': title = 'Toimenpito'; break;
+                    case 'toteutukse': title = 'Toteutuksen tilanne'; break;
+                    case 'tyyppi': title = 'Toimenpide'; break;
                     case 'nimi': title = 'Kohteen nimi'; break;
                     case 'kuvaus': title = 'Kohteen kuvaus'; break;
                     case 'kustannukset': title = 'Kustannukset'; break;
