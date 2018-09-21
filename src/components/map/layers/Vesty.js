@@ -10,7 +10,7 @@ import Circle from 'ol/style/Circle';
 
 const url = 'https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature',
     layer = 'pirely:vesty',
-    proj = 'EPSG:3857',
+    proj = 'EPSG:3067',
     format = 'application/json';
 
 const source = new VectorSource({

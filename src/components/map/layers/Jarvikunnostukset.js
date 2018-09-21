@@ -9,7 +9,7 @@ import Fill from 'ol/style/Fill';
 
 const url = 'https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature',
     layer = 'pirely:Jarvikunnostukset_Ikaalisten_Reitti',
-    proj = 'EPSG:3857',
+    proj = 'EPSG:3067',
     format = 'application/json';
 
 const source = new VectorSource({

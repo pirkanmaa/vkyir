@@ -13,7 +13,7 @@ const source = new TileWMS({
 });
 
 const Rusle = new Tile({
-    extent: [2500000, 8725000, 2652500, 8925000],
+    extent: [249165, 6821146, 326873, 6903282],
     source: source,
     opacity: 0.75,
     title: 'Eroosiomalli',

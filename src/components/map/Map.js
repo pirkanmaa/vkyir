@@ -18,6 +18,15 @@ import KuntaFilter from './layers/KuntaFilter';
 import Kunnat from './layers/Kunnat';
 import featureOverlay from './layers/FeatureOverlay';
 
+import Projection from 'ol/proj/Projection';
+import proj4 from 'proj4';
+
+proj4.defs( 'EPSG:3067', '+proj=utm +zone=35 +ellps=GRS80 +units=m +no_defs' );
+const proj = new Projection({
+  code: 'EPSG:3067',
+  extent: [-548576,6291456,1548576,8388608]
+});
+
 /* Initiate basemap and layers */
 let BasemapSel = Basemaps.map(layer => layer["layer"]);
 let LayerSel = Layers.map(layer => layer["layer"]);
@@ -34,7 +43,7 @@ const styles = theme => ({
 class Map extends Component {
 
     state = {
-        basemap: "CartoLight",
+        basemap: "Taustakartta",
         basemapOpacity: 1,
         filterSelection: 0,
         zoomFactor: 0.1,
@@ -45,11 +54,11 @@ class Map extends Component {
     };
 
     view = new View({
-        projection: 'EPSG:3857',
-        center: [2582597, 8820000],
-        zoom: 9.5,
+        projection: proj,
+        center: [288019, 6862214],
+        zoom: 7,
         maxZoom: 18,
-        minZoom: 8.5
+        minZoom: 6
     });
 
     /* Initiate map */
