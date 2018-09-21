@@ -1,54 +1,54 @@
 const metaData =
     [
         {
-            "kohde": 21,
+            "kohde": 20,
             "authors": ["Jari Pelkonen", "Anne Mäkynen", "Heikki Kallioniemi"],
             "startDate": "2017",
             "endDate": "2018"
         },
         {
-            "kohde": 22,
+            "kohde": 21,
             "authors": ["Heikki Holsti"],
             "startDate": null,
             "endDate": "2017"
         },
         {
-            "kohde": 23,
+            "kohde": 22,
             "authors": ["Anne Mäkynen"],
             "startDate": null,
             "endDate": "2018"
         },
         {
-            "kohde": 24,
+            "kohde": 23,
             "authors": ["Tapio Meisalmi"],
             "startDate": null,
             "endDate": "2014"
         },
         {
-            "kohde": 25,
+            "kohde": 24,
             "authors": ["Sami Moilanen"],
             "startDate": null,
             "endDate": "2015"
         },
         {
-            "kohde": 30,
+            "kohde": 29,
             "authors": ["Sami Moilanen"],
             "startDate": "2001",
             "endDate": "2017"
         },
         {
-            "kohde": 34,
+            "kohde": 33,
             "authors": ["Sami Moilanen"],
             "startDate": "2005",
             "endDate": "2008"
         }, {
-            "kohde": 32,
+            "kohde": 31,
             "authors": ["Panu Oulasvirta"],
             "startDate": null,
             "endDate": "2018"
         },
         {
-            "kohde": 43,
+            "kohde": 42,
             "authors": ["Pirkanmaan ELY-keskus"],
             "startDate": null,
             "endDate": "2018"
