@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
 import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-
-import IconButton from '@material-ui/core/IconButton';
+import AppBar from '@material-ui/core/AppBar';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import ImageGallery from './ImageGallery';
-import AppBar from '@material-ui/core/AppBar';
-import Paper from '@material-ui/core/Paper';
 import Linkify from 'react-linkify';
-
-//const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
 
 const styles = theme => ({
     root: {

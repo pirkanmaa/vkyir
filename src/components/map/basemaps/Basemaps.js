@@ -1,6 +1,6 @@
-import OSM from './OSM';
-import CartoLight from './CartoLight';
-import MapboxSatellite from './MapboxSatellite';
+// import OSM from './OSM';
+// import CartoLight from './CartoLight';
+// import MapboxSatellite from './MapboxSatellite';
 import {ilmakuva, maastokartta, taustakartta} from './MML';
 
 /* Choose basemaps */

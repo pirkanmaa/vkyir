@@ -30,18 +30,6 @@ const mml_tilegrid = new WMTSTileGrid({
   matrixIds: matrixIdsMML  
 })
 
-const mml_source = new WMTS({
-  url: 'http://avoindata.maanmittauslaitos.fi/mapcache/wmts/',
-  layer: '',
-  matrixSet: 'ETRS-TM35FIN',
-  format: 'image/png',
-  transitionEffect:'resize',
-  gutter:0,buffer:0,
-  projection: 'EPSG:3067',
-  style: 'default',
-  tileGrid: mml_tilegrid
-});
-
 const taustakartta = new Tile({
   title: ' Taustakartta (MML)',
   name: 'Taustakartta',

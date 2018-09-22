@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-// import GridList from '@material-ui/core/GridList';
-// import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import Gallery from 'react-grid-gallery';
 import metaData from './../../../../public/images/metaData';
-//const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
 
 const URL = `https://tieto.pirkanmaa.fi/ikaalinen/images/`;
 const styles = {
