@@ -41,6 +41,7 @@ const legend1 = [
     { "type": 'Kalataloudellinen kunnostus', "color": '#80b1d3' },
     { "type": 'Kalataloudellinen kunnostus, valuma-aluekunnostus', "color": '#fdb462' },
     { "type": 'Kalatie', "color": '#b3de69' },
+    { "type": 'Kalkitus', "color": '#d19581' },
     { "type": 'Kosteikko', "color": '#fccde5' },
     { "type": 'Lintuvesikunnostus', "color": '#d9d9d9' },
     { "type": 'Pato', "color": '#bc80bd' },
