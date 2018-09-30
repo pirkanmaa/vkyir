@@ -21,7 +21,7 @@ const getMeta = image => {
         response => response.json()
     ).then(
         metaData => metaData.features.filter(
-            meta => parseInt(meta.properties.kohde, 10) === parseInt(image.folder, 10)).map(
+            meta => meta.properties.kohde === parseInt(image.folder, 10)).map(
                 data => {
                     return `Kohteen kuvaaja(t): ${data.properties.authors}, ajankohta: ${data.properties.startDate ? data.properties.startDate + '-' + data.properties.endDate : data.properties.endDate}.`
                 })
