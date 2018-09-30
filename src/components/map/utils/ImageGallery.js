@@ -20,11 +20,7 @@ const getMeta = image => {
     fetch(url).then(
         response => response.json()
     ).then(
-        meta => {
-            return
-            `Kohteen kuvaaja(t): ${meta.features[0].properties.authors},
-            ajankohta: ${meta.features[0].properties.startDate ? meta.features[0].properties.startDate + '-' + meta.features[0].properties.endDate : meta.features[0].properties.endDate}.`
-        }
+        json => console.log(json)
     )
 };
 
