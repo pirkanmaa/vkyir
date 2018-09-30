@@ -15,25 +15,25 @@ const styles = {
     }
 }
 
+const getMeta = image => {
+    let url = 'https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json'
+    fetch(url).then(
+        response => response.json()
+    ).then(
+        metaData => metaData.filter(
+            meta => parseInt(meta.kohde, 10) === parseInt(image.folder, 10)).map(
+                data => {
+                    return `Kohteen kuvaaja(t): ${data.authors.length === 1 ? data.authors[0] : [...data.authors]}, ajankohta: ${data.startDate ? data.startDate + '-' + data.endDate : data.endDate}.`
+                })
+    )
+};
+
 class ImageGallery extends Component {
 
     state = {
         imageData: [],
         images: []
     }
-
-    getMeta = image => {
-        let url = 'https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json'
-        fetch(url).then(
-            response => response.json()
-        ).then(
-            metaData => metaData.filter(
-                meta => parseInt(meta.kohde, 10) === parseInt(image.folder, 10)).map(
-                    data => {
-                        return `Kohteen kuvaaja(t): ${data.authors.length === 1 ? data.authors[0] : [...data.authors]}, ajankohta: ${data.startDate ? data.startDate + '-' + data.endDate : data.endDate}.`
-                    })
-        )
-    };
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.imageData !== prevState.imageData) {
@@ -46,7 +46,7 @@ class ImageGallery extends Component {
                         thumbnailWidth: 140,
                         thumbnailHeight: 70,
                         rowHeight: 120,
-                        caption: this.getMeta(image)
+                        caption: getMeta(image)
                     })
                 )
             }
