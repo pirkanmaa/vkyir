@@ -21,10 +21,10 @@ import featureOverlay from './layers/FeatureOverlay';
 import Projection from 'ol/proj/Projection';
 import proj4 from 'proj4';
 
-proj4.defs( 'EPSG:3067', '+proj=utm +zone=35 +ellps=GRS80 +units=m +no_defs' );
+proj4.defs('EPSG:3067', '+proj=utm +zone=35 +ellps=GRS80 +units=m +no_defs');
 const proj = new Projection({
-  code: 'EPSG:3067',
-  extent: [-548576,6291456,1548576,8388608]
+    code: 'EPSG:3067',
+    extent: [-548576, 6291456, 1548576, 8388608]
 });
 
 /* Initiate basemap and layers */
@@ -105,13 +105,25 @@ class Map extends Component {
                     } else {
                         this.setState({ galleryVisibility: true });
                     }
+
+                    let metaURL = `https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json&PROPERTYNAME=kohde&CQL_FILTER=kohde=${feature.get('kohde')}`;
+
+                    fetch(metaURL).then(response => {
+                        if (response.ok || response.status === 304) {
+                            response.json().then(json => {
+                                let prop = json.features[0].properties;
+                                this.setState({metaData: `Kohteen kuvaaja(t): ${prop.authors}, ajankohta: ${prop.startDate ? prop.startDate + '-' + prop.endDate : prop.endDate}.`});
+                            })
+                        }
+                    });
+
                     ImageController.getImages(feature.get('kohde')).then(response => {
                         if (response.ok || response.status === 304) {
                             response.json().then(json => {
                                 this.setState({
                                     imageData: json.reduce((arr, image) => {
                                         if (!image.includes('thumb')) {
-                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: feature.get('kohde'), meta: this.getImageMeta(feature.get('kohde')) });
+                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: feature.get('kohde') });
                                         } return arr;
                                     }, [])
                                 });
@@ -131,17 +143,9 @@ class Map extends Component {
         });
     }
 
-    getImageMeta = kohde => {
-        let url = `https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json&PROPERTYNAME=kohde&CQL_FILTER=kohde=${parseInt(kohde, 10)}`
-        fetch(url).then(
-            response => response.json()
-        ).then(
-            json => { return `Kohteen kuvaaja(t): ${json.features[0].properties.authors}, ajankohta: ${json.features[0].properties.startDate ? json.features[0].properties.startDate + '-' + json.features[0].properties.endDate : json.features[0].properties.endDate}.`}
-        )
-    };
-
     /* Zoom In */
     zoomIn = () => {
+        console.log(this.state.imageData);
         let zoom = this.view.getZoom();
         if (zoom < this.view.getMaxZoom()) {
             this.view.setZoom(zoom + this.state.zoomFactor);
@@ -235,6 +239,7 @@ class Map extends Component {
                 <SideDrawer
                     featureInfo={this.state.featureInfo}
                     imageData={this.state.imageData}
+                    metaData={this.state.metaData}
                     galleryVisibility={this.state.galleryVisibility}
                     toggleGallery={this.toggleGallery}
                 />
