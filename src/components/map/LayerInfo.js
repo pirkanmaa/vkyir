@@ -6,12 +6,16 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 // Dialog with action buttons. The actions are passed in as an array of React objects.
 
-export default class LayerInfo extends Component {
+class LayerInfo extends Component {
+
     render() {
+
+        const classes = this.props;
+
         return (
             <div>
                 <Dialog
@@ -21,7 +25,8 @@ export default class LayerInfo extends Component {
                     onClose={this.props.toggleLayerInfo}>
                     <DialogTitle id="login-dialog-title">{this.props.infoLayer}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>{this.props.layerInfo}
+                        <DialogContentText paragraph={true} align='justify' style={{ color: 'black', marginBottom: 0 }}>
+                            {this.props.layerInfo && this.props.layerInfo.split('<br>').map((text, i) => { return i==0 ? text : <span><br /><br />{text}</span> })}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
@@ -32,3 +37,5 @@ export default class LayerInfo extends Component {
         );
     }
 }
+
+export default LayerInfo

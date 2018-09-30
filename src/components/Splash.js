@@ -2,30 +2,45 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-import Info from '@material-ui/icons/Info';
+import IconButton from '@material-ui/core/IconButton';
+import AppBar from '@material-ui/core/AppBar';
+import CloseIcon from '@material-ui/icons/Close'
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar'
 
 const styles = {
     root: {
         textAlign: 'justify',
-        paddingBottom: 0
+        paddingBottom: 0,
+        marginTop: '20px'
     },
     imageContainer: {
         flexDirection: 'row',
         display: 'flex',
         flexWrap: 'nowrap',
         justifyContent: 'flex-start',
-        alignItems: 'center'
-
+        alignItems: 'center',
+        marginBottom: '20px'
     },
     image: {
         width: '180px',
         paddingTop: '10px',
         paddingRight: '15px'
+    },
+    appBar: {
+        position: 'relative'
+    },
+    typography: {
+        color: 'white'
+    },
+    toolbarRoot: {
+        justifyContent: 'space-between'
+    },
+    buttonRoot: {
+        justifyContent: 'flex-end',
+        width: 'auto'
     }
 }
 
@@ -44,13 +59,20 @@ class Splash extends Component {
                     open={this.props.splashVisibility}
                     aria-labelledby="login-dialog-title"
                     onClose={this.props.toggleSplash}>
-                    <DialogTitle id="login-dialog-title">Tietoa palvelusta</DialogTitle>
+                    <AppBar className={classes.appBar}>
+                        <Toolbar classes={{root: classes.toolbarRoot}}>
+                            <Typography variant='title' className={classes.typography} id="login-dialog-title">Tietoa palvelusta</Typography>
+                            <IconButton color="inherit" classes={{root: classes.buttonRoot}} onClick={this.props.toggleSplash} aria-label="Close">
+                                <CloseIcon />
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
                     <DialogContent classes={{ root: classes.root }}>
-                        <DialogContentText>
+                        <DialogContentText style={{color: 'black'}}>
                             Tervetuloa <i>Yhteistyöllä vesistöt kuntoon Ikaalisten reitillä</i> –hankkeen sähköiselle mallikartalle! Pääset tutustumaan Ikaalisten reitin valuma-alueella suunniteltuihin ja toteutuneisiin vesistöjen kunnostuskohteisiin. Karttatasojen avulla pääset katsomaan alueen vesistöjen ekologista tilaa, maaston eroosioherkkyyttä sekä vesienhoidon toimenpideohjelman alueita, jotka ovat avuksi mm. uusia kunnostustoimenpiteitä suunnitteleville. Tutustu jo suunniteltuihin tai toteutettuihin kunnostustoimenpiteisiin klikkaamalla kohteita kartalla. Voit kohdentaa kartan kuntaasi valikosta oikeassa yläkulmassa.
-                            <br /><br />Kartan käyttöön suosittelemme <a href='https://www.google.com/chrome/' target='_blank'>Chrome</a>, <a href='https://www.mozilla.org/en-US/firefox/new/' target='_blank'>Firefox</a> tai <a href='https://support.apple.com/downloads/safari' target='_blank'>Safari</a>-selainta. Palvelun toimivuutta Internet Explorer-selaimilla ei voida taata. Voit tarkistaa selaimesi ajantasaisuuden <a href='https://browser-update.org/fi/update-browser.html#3' target='_blank'>tästä</a>.
+                            <br /><br />Kartan käyttöön suosittelemme <a href='https://www.google.com/chrome/' target='_blank'>Chrome</a>, <a href='https://www.mozilla.org/en-US/firefox/new/' target='_blank'>Firefox</a> tai <a href='https://support.apple.com/downloads/safari' target='_blank'>Safari</a>-selainta. Palvelun toimivuutta Internet Explorer-selaimilla ei voida taata. Voit tarkistaa selaimesi ajantasaisuuden <a href='https://browser-update.org/fi/update-browser.html#3' target='_blank'>tästä</a>. Karttaa voit liikuttaa hiirellä vetämällä ja lähentää tai loitontaa hiirtä vierittämällä tai +- -painikkeilla oikeassa alakulmassa. Mobiililaitteilla karttaa voi ohjata kosketuseleillä. Palvelu on optimoitu toimimaan desktop-selaimissa - mobiililaitteilla toimivuus voi olla puutteellista.
                             <br /><br />Ympäristöministeriö on myöntänyt Pirkanmaan ELY-keskukselle hankkeeseen hallituksen vesien- ja merenhoidon kärkihankerahoitusta vuosille 2017&mdash;2019. Yhteistyössä on ollut mukana Pirkanmaan liitto rakentamalla tätä palvelua.
-                            <br /><br /><b>Yhteystiedot:</b> Pirkanmaan ELY-keskus, vesitalousasiantuntija <a href="mailto:anne.makynen@ely-keskus.fi">Anne Mäkynen</a>
+                            <br /><br /><b>Yhteystiedot:</b> Pirkanmaan ELY-keskus (tiedustele vesitalousasiantuntijaa):<br /><a href="tel:0295 036 000">0295 036 000</a>
                         </DialogContentText>
                         <div className={classes.imageContainer}>
                             <a href='https://www.ely-keskus.fi/web/ely/ely-pirkanmaa' target='_blank'><img className={classes.image} src='https://tieto.pirkanmaa.fi/img/ELYlogo.png'></img></a>
@@ -58,9 +80,6 @@ class Splash extends Component {
                             <a href='https://valtioneuvosto.fi/hallitusohjelman-toteutus' target='_blank'><img className={classes.image} src='https://tieto.pirkanmaa.fi/img/karkihanke.jpg'></img></a>
                         </div>
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.props.toggleSplash} color="primary">OK</Button>
-                    </DialogActions>
                 </Dialog>
             </div >
         );
