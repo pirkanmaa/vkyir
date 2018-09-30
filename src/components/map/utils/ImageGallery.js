@@ -15,19 +15,6 @@ const styles = {
     }
 }
 
-const getMeta = image => {
-    let url = `https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json&PROPERTYNAME=kohde&CQL_FILTER=kohde=${parseInt(image.folder, 10)}`
-    return fetch(url).then(
-        response => response.json()
-    ).then(
-        json => {
-            return
-            `Kohteen kuvaaja(t): ${json.features[0].properties.authors},
-            ajankohta: ${json.features[0].properties.startDate ? json.features[0].properties.startDate + '-' + json.features[0].properties.endDate : json.features[0].properties.endDate}.`
-        }
-    )
-};
-
 class ImageGallery extends Component {
 
     state = {
@@ -46,7 +33,7 @@ class ImageGallery extends Component {
                         thumbnailWidth: 140,
                         thumbnailHeight: 70,
                         rowHeight: 120,
-                        caption: getMeta(image)
+                        caption: image.meta
                     })
                 )
             }

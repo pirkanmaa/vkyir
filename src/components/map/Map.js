@@ -111,7 +111,7 @@ class Map extends Component {
                                 this.setState({
                                     imageData: json.reduce((arr, image) => {
                                         if (!image.includes('thumb')) {
-                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: feature.get('kohde') });
+                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: feature.get('kohde'), meta: this.getImageMeta(feature.get('kohde')) });
                                         } return arr;
                                     }, [])
                                 });
@@ -130,6 +130,19 @@ class Map extends Component {
             }
         });
     }
+
+    getImageMeta = kohde => {
+        let url = `https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json&PROPERTYNAME=kohde&CQL_FILTER=kohde=${parseInt(kohde, 10)}`
+        fetch(url).then(
+            response => response.json()
+        ).then(
+            json => {
+                return
+                `Kohteen kuvaaja(t): ${json.features[0].properties.authors},
+                ajankohta: ${json.features[0].properties.startDate ? json.features[0].properties.startDate + '-' + json.features[0].properties.endDate : json.features[0].properties.endDate}.`
+            }
+        )
+    };
 
     /* Zoom In */
     zoomIn = () => {
