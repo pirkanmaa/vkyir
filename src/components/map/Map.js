@@ -136,11 +136,7 @@ class Map extends Component {
         fetch(url).then(
             response => response.json()
         ).then(
-            json => {
-                return
-                `Kohteen kuvaaja(t): ${json.features[0].properties.authors},
-                ajankohta: ${json.features[0].properties.startDate ? json.features[0].properties.startDate + '-' + json.features[0].properties.endDate : json.features[0].properties.endDate}.`
-            }
+            json => { return `Kohteen kuvaaja(t): ${json.features[0].properties.authors}, ajankohta: ${json.features[0].properties.startDate ? json.features[0].properties.startDate + '-' + json.features[0].properties.endDate : json.features[0].properties.endDate}.`}
         )
     };
 
