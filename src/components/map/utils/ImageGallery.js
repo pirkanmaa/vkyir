@@ -19,11 +19,12 @@ class ImageGallery extends Component {
 
     state = {
         imageData: [],
-        images: []
+        images: [],
+        metaData: this.props.metaData
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.imageData !== prevState.imageData) {
+        if (nextProps.imageData !== prevState.imageData || nextProps.metaData !== prevState.metaData) {
             return {
                 imageData: nextProps.imageData,
                 images: nextProps.imageData.length > 0 && nextProps.imageData.map(
@@ -33,7 +34,7 @@ class ImageGallery extends Component {
                         thumbnailWidth: 140,
                         thumbnailHeight: 70,
                         rowHeight: 120,
-                        caption: image.meta
+                        caption: nextProps.metaData
                     })
                 )
             }
