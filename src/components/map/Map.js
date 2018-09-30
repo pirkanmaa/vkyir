@@ -50,7 +50,8 @@ class Map extends Component {
         maplayers: [],
         featureInfo: '',
         galleryVisibility: false,
-        imageData: []
+        imageData: [],
+        metaData: ''
     };
 
     view = new View({
