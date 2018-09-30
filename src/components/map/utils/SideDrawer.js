@@ -48,7 +48,7 @@ const styles = theme => ({
     }
 });
 
-const blackList = ['id', 'vestyid', 'FID', 'fid', 'bbox', 'geometry', 'geom'];
+const blackList = ['id', 'vestyid', 'FID', 'fid', 'bbox', 'geometry', 'geom', 'kohde'];
 
 class SideDrawer extends Component {
 
