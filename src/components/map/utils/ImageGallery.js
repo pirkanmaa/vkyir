@@ -20,7 +20,7 @@ class ImageGallery extends Component {
     state = {
         imageData: [],
         images: [],
-        metaData: this.props.metaData
+        metaData: ''
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
