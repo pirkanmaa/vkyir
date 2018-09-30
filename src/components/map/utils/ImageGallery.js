@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Gallery from 'react-grid-gallery';
-import metaData from './../../../../public/images/metaData';
 
 const URL = `https://tieto.pirkanmaa.fi/ikaalinen/images/`;
 const styles = {
@@ -23,6 +22,19 @@ class ImageGallery extends Component {
         images: []
     }
 
+    getMeta = image => {
+        let url = 'https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json'
+        fetch(url).then(
+            response => response.json()
+        ).then(
+            metaData => metaData.filter(
+                meta => parseInt(meta.kohde, 10) === parseInt(image.folder, 10)).map(
+                    data => {
+                        return `Kohteen kuvaaja(t): ${data.authors.length === 1 ? data.authors[0] : [...data.authors]}, ajankohta: ${data.startDate ? data.startDate + '-' + data.endDate : data.endDate}.`
+                    })
+        )
+    };
+
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.imageData !== prevState.imageData) {
             return {
@@ -34,9 +46,7 @@ class ImageGallery extends Component {
                         thumbnailWidth: 140,
                         thumbnailHeight: 70,
                         rowHeight: 120,
-                        caption: metaData.filter(
-                            meta => parseInt(meta.kohde, 10) === parseInt(image.folder, 10)).map(
-                                data => { return `Kohteen kuvaaja(t): ${data.authors.length === 1 ? data.authors[0] : [...data.authors]}, ajankohta: ${data.startDate ? data.startDate + '-' + data.endDate : data.endDate}.` })
+                        caption: getMeta(image)
                     })
                 )
             }
