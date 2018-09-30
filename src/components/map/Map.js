@@ -105,13 +105,13 @@ class Map extends Component {
                     } else {
                         this.setState({ galleryVisibility: true });
                     }
-                    ImageController.getImages(feature.get('id')).then(response => {
+                    ImageController.getImages(feature.get('kohde')).then(response => {
                         if (response.ok || response.status === 304) {
                             response.json().then(json => {
                                 this.setState({
                                     imageData: json.reduce((arr, image) => {
                                         if (!image.includes('thumb')) {
-                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: feature.get('id') });
+                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: feature.get('kohde') });
                                         } return arr;
                                     }, [])
                                 });
