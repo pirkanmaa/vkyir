@@ -20,10 +20,10 @@ const getMeta = image => {
     fetch(url).then(
         response => response.json()
     ).then(
-        metaData => metaData.filter(
-            meta => parseInt(meta.kohde, 10) === parseInt(image.folder, 10)).map(
+        metaData => metaData.features.filter(
+            meta => parseInt(meta.properties.kohde, 10) === parseInt(image.folder, 10)).map(
                 data => {
-                    return `Kohteen kuvaaja(t): ${data.authors.length === 1 ? data.authors[0] : [...data.authors]}, ajankohta: ${data.startDate ? data.startDate + '-' + data.endDate : data.endDate}.`
+                    return `Kohteen kuvaaja(t): ${data.properties.authors}, ajankohta: ${data.properties.startDate ? data.properties.startDate + '-' + data.properties.endDate : data.properties.endDate}.`
                 })
     )
 };
