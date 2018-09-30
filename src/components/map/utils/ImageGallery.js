@@ -46,7 +46,7 @@ class ImageGallery extends Component {
                         thumbnailWidth: 140,
                         thumbnailHeight: 70,
                         rowHeight: 120,
-                        caption: getMeta(image)
+                        caption: this.getMeta(image)
                     })
                 )
             }
