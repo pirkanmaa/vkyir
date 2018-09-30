@@ -36,7 +36,7 @@ class ImageGallery extends Component {
                         rowHeight: 120,
                         caption: metaData.filter(
                             meta => parseInt(meta.kohde, 10) === parseInt(image.folder, 10)).map(
-                                data => { return `Kohteen kuvaajat: ${data.authors.length === 1 ? data.authors[0] : [...data.authors]}, ajankohta: ${data.startDate ? data.startDate + '-' + data.endDate : data.endDate}.` })
+                                data => { return `Kohteen kuvaaja(t): ${data.authors.length === 1 ? data.authors[0] : [...data.authors]}, ajankohta: ${data.startDate ? data.startDate + '-' + data.endDate : data.endDate}.` })
                     })
                 )
             }
