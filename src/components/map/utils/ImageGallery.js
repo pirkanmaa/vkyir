@@ -16,15 +16,15 @@ const styles = {
 }
 
 const getMeta = image => {
-    let url = 'https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json'
+    let url = `https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json&PROPERTYNAME=kohde&CQL_FILTER=kohde=${parseInt(image.folder, 10)}`
     fetch(url).then(
         response => response.json()
     ).then(
-        metaData => metaData.features.filter(
-            meta => parseInt(meta.properties.kohde, 10) === parseInt(image.folder, 10)).map(
-                data => {
-                    return `Kohteen kuvaaja(t): ${data.properties.authors}, ajankohta: ${data.properties.startDate ? data.properties.startDate + '-' + data.properties.endDate : data.properties.endDate}.`
-                })
+        meta => {
+            return
+            `Kohteen kuvaaja(t): ${meta.features[0].properties.authors},
+            ajankohta: ${meta.features[0].properties.startDate ? meta.features[0].properties.startDate + '-' + meta.features[0].properties.endDate : meta.features[0].properties.endDate}.`
+        }
     )
 };
 
