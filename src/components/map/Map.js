@@ -107,34 +107,37 @@ class Map extends Component {
                         this.setState({ galleryVisibility: true });
                     }
 
-                    let metaURL = `https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json&PROPERTYNAME=kohde&CQL_FILTER=kohde=${feature.get('kohde')}`;
+                    let meta;
+                    let id = feature.get('kohde');
+                    let metaURL = `https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json&PROPERTYNAME=kohde&CQL_FILTER=kohde=${id}`;
 
                     fetch(metaURL).then(response => {
                         if (response.ok || response.status === 304) {
-                            response.json().then(json => {
-                                let prop = json.features[0].properties;
-                                this.setState({metaData: `Kohteen kuvaaja(t): ${prop.authors}, ajankohta: ${prop.startDate ? prop.startDate + '-' + prop.endDate : prop.endDate}.`});
+                            response.json().then(metaData => {
+                                let prop = metaData.features[0].properties;
+                                meta = `Kohteen kuvaaja(t): ${prop.authors}, ajankohta: ${prop.startDate ? prop.startDate + '-' + prop.endDate : prop.endDate}.`;
+
+                                return ImageController.getImages(id).then(response => {
+                                    if (response.ok || response.status === 304) {
+                                        response.json().then(json => {
+                                            this.setState({
+                                                imageData: json.reduce((arr, image) => {
+                                                    if (!image.includes('thumb')) {
+                                                        arr.push({ src: image, thumb: `thumb_${image}`, folder: id, meta });
+                                                    } return arr;
+                                                }, [])
+                                            });
+                                        });
+                                    } else {
+                                        this.setState({
+                                            imageData: []
+                                        })
+                                    }
+                                })
                             })
                         }
                     });
 
-                    ImageController.getImages(feature.get('kohde')).then(response => {
-                        if (response.ok || response.status === 304) {
-                            response.json().then(json => {
-                                this.setState({
-                                    imageData: json.reduce((arr, image) => {
-                                        if (!image.includes('thumb')) {
-                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: feature.get('kohde') });
-                                        } return arr;
-                                    }, [])
-                                });
-                            });
-                        } else {
-                            this.setState({
-                                imageData: []
-                            })
-                        }
-                    })
                 } else {
                     this.setState({ galleryVisibility: false });
                 } prevFeature = feature;
@@ -146,7 +149,6 @@ class Map extends Component {
 
     /* Zoom In */
     zoomIn = () => {
-        console.log(this.state.imageData);
         let zoom = this.view.getZoom();
         if (zoom < this.view.getMaxZoom()) {
             this.view.setZoom(zoom + this.state.zoomFactor);
