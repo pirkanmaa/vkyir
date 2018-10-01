@@ -135,6 +135,8 @@ class Map extends Component {
                                     }
                                 })
                             })
+                        } else {
+                            this.setState({imageData: []})
                         }
                     });
 
