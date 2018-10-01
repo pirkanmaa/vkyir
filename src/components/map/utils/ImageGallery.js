@@ -41,6 +41,24 @@ class ImageGallery extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.imageData !== this.props.imageData) {
+            return {
+                imageData: this.props.imageData,
+                images: this.props.imageData.length > 0 && this.props.imageData.map(
+                    image => ({
+                        src: `${URL}/${image.folder}/${image.src}`,
+                        thumbnail: `${URL}/${image.folder}/${image.thumb}`,
+                        thumbnailWidth: 140,
+                        thumbnailHeight: 70,
+                        rowHeight: 120,
+                        caption: image.meta
+                    })
+                )
+            }
+        } 
+    }
+
     render() {
 
         const { classes } = this.props;
