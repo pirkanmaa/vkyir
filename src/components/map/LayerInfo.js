@@ -50,6 +50,7 @@ const legend1 = [
     { "type": 'Kalkitus', "color": '#d19581' },
     { "type": 'Kosteikko', "color": '#fccde5' },
     { "type": 'Lintuvesikunnostus', "color": '#d9d9d9' },
+    //{ "type": 'Virtaaman säätö', "color": '#bc80bd' },
     { "type": 'Ruoppaus', "color": '#ccebc5' },
     { "type": 'Tierumpu', "color": '#ffed6f' },
     { "type": 'Valuma-aluekunnostus', "color": '#1f78b4' },
