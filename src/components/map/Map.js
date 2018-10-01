@@ -114,29 +114,33 @@ class Map extends Component {
                     fetch(metaURL).then(response => {
                         if (response.ok || response.status === 304) {
                             response.json().then(metaData => {
-                                let prop = metaData.features[0].properties;
-                                meta = `Kohteen kuvaaja(t): ${prop.authors}, ajankohta: ${prop.startDate ? prop.startDate + '-' + prop.endDate : prop.endDate}.`;
+                                if (metaData.totalFeatures !== 0) {
+                                    let prop = metaData.features[0].properties;
+                                    meta = `Kohteen kuvaaja(t): ${prop.authors}, ajankohta: ${prop.startDate ? prop.startDate + '-' + prop.endDate : prop.endDate}.`;
 
-                                return ImageController.getImages(id).then(response => {
-                                    if (response.ok || response.status === 304) {
-                                        response.json().then(json => {
-                                            this.setState({
-                                                imageData: json.reduce((arr, image) => {
-                                                    if (!image.includes('thumb')) {
-                                                        arr.push({ src: image, thumb: `thumb_${image}`, folder: id, meta });
-                                                    } return arr;
-                                                }, [])
+                                    return ImageController.getImages(id).then(response => {
+                                        if (response.ok || response.status === 304) {
+                                            response.json().then(json => {
+                                                this.setState({
+                                                    imageData: json.reduce((arr, image) => {
+                                                        if (!image.includes('thumb')) {
+                                                            arr.push({ src: image, thumb: `thumb_${image}`, folder: id, meta });
+                                                        } return arr;
+                                                    }, [])
+                                                });
                                             });
-                                        });
-                                    } else {
-                                        this.setState({
-                                            imageData: []
-                                        })
-                                    }
-                                })
+                                        } else {
+                                            this.setState({
+                                                imageData: []
+                                            })
+                                        }
+                                    })
+                                } else {
+                                    this.setState({
+                                        imageData: []
+                                    })
+                                }
                             })
-                        } else {
-                            this.setState({imageData: []})
                         }
                     });
 
