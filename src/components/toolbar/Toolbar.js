@@ -11,7 +11,7 @@ const styles = {
         alignItems: 'center',
         bottom: '1rem',
         left: '1rem',
-        zIndex: 9999
+        zIndex: 2000
     },
     button2: {
         position: 'absolute',
@@ -20,14 +20,14 @@ const styles = {
         alignItems: 'center',
         bottom: '1rem',
         left: '17rem',
-        zIndex: 9999
+        zIndex: 2000
     }
 }
 
 function Toolbar(props) {
     const { classes } = props;
     return (
-        <div className={props.showLayerDrawer ? classes.button2: classes.button}>
+        <div className={props.layerDrawerVisibility ? classes.button2: classes.button}>
             <LayerButton handleClick={() => props.toggleLayerDrawer()} />
             <InfoButton handleClick={() => props.toggleSplash()} />
         </div>

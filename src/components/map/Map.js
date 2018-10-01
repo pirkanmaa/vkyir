@@ -1,24 +1,40 @@
 import React, { Component } from 'react';
 import OLMap from 'ol/Map';
 import View from 'ol/View';
-import Zoom from 'ol/control/Zoom';
 import ZoomIn from './zoom/ZoomIn';
 import ZoomOut from './zoom/ZoomOut';
 import LayerDrawer from './LayerDrawer';
+
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import highlightFeature from './utils/highlightFeature';
+
+import ImageController from './../../controllers/ImageController';
+import SideDrawer from './utils/SideDrawer';
+
 import Basemaps from './basemaps/Basemaps';
 import Layers from './layers/Layers';
 import KuntaFilter from './layers/KuntaFilter';
 import Kunnat from './layers/Kunnat';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import highlightFeature from './utils/highlightFeature';
 import featureOverlay from './layers/FeatureOverlay';
-import ImageController from './../../controllers/ImageController';
-import SideDrawer from './utils/SideDrawer';
 
-let view = new View({ projection: 'EPSG:3857' });
+import Projection from 'ol/proj/Projection';
+import proj4 from 'proj4';
+
+proj4.defs('EPSG:3067', '+proj=utm +zone=35 +ellps=GRS80 +units=m +no_defs');
+const proj = new Projection({
+    code: 'EPSG:3067',
+    extent: [-548576, 6291456, 1548576, 8388608]
+});
+
+/* Initiate basemap and layers */
+let BasemapSel = Basemaps.map(layer => layer["layer"]);
+let LayerSel = Layers.map(layer => layer["layer"]);
 
 const styles = theme => ({
+    map: {
+        height: '100vh'
+    },
     paper: {
         padding: theme.spacing.unit,
     }
@@ -27,47 +43,43 @@ const styles = theme => ({
 class Map extends Component {
 
     state = {
-        center: [2582597, 8820000],
-        maxZoom: 18,
-        minZoom: 8.5,
-        zoomStep: 0.1,
-        basemap: "CartoLight",
+        basemap: "Taustakartta",
         basemapOpacity: 1,
-        centerFromUrl: false,
-        basemapFromUrl: false,
         filterSelection: 0,
+        zoomFactor: 0.1,
         maplayers: [],
-        popOpen: false,
-        popoverAnchor: null,
         featureInfo: '',
         galleryVisibility: false,
-        imageData: []
+        imageData: [],
+        metaData: ''
     };
 
-    componentDidMount() {
-        view.setCenter(this.state.center);
-        view.setZoom(this.state.zoom);
-        view.setMaxZoom(this.state.maxZoom);
-        view.setMinZoom(this.state.minZoom);
+    view = new View({
+        projection: proj,
+        center: [288019, 6862214],
+        zoom: 7,
+        maxZoom: 18,
+        minZoom: 6
+    });
 
-        /* Initiate basemap == Set the default Basemap selection visible */
-        let BasemapSel = Basemaps.map(layer => layer["layer"]);
-        let LayerSel = Layers.map(layer => layer["layer"]);
+    /* Initiate map */
+    map = new OLMap({
+        layers: [...BasemapSel, ...LayerSel, Kunnat, featureOverlay],
+        view: this.view,
+        controls: []
+    });
+
+    componentWillUnmount() {
+        this.map.setTarget(undefined)
+    }
+
+    componentDidMount() {
+        this.map.setTarget('map')
+
         this.setState({ visibility: Layers.map((item, index) => item.visibility) });
 
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && layer.setVisible(true));
         BasemapSel.find(layer => layer.getProperties().name === this.state.basemap && this.setState({ basemapOpacity: layer.getOpacity() }));
-
-        /* Initiate map */
-        let map = new OLMap({
-            target: 'map',
-            layers: [...BasemapSel, ...LayerSel, Kunnat, featureOverlay],
-            view: view,
-            controls: []
-        });
-
-        /* Bind "map" to state */
-        this.setState({ map: map });
 
         /* Add visible non-basemap layers to map state */
         this.setState({
@@ -78,23 +90,11 @@ class Map extends Component {
             }).map(layer => layer.getProperties().name)
         });
 
-        /* Register state to listen for map events */
-        map.on('moveend', () => {
-            let newZoom = view.getZoom();
-            let newCenter = view.getCenter();
-            if (newZoom !== this.state.zoom) {
-                this.setState({ zoom: newZoom })
-            }
-            if (newCenter !== this.state.center) {
-                this.setState({ center: newCenter });
-            }
-        });
-
         let prevFeature;
         /* Map click events */
-        map.on('click', e => {
-            let feature = map.forEachFeatureAtPixel(e.pixel, feature => feature);
-            highlightFeature(feature, map);
+        this.map.on('click', e => {
+            let feature = this.map.forEachFeatureAtPixel(e.pixel, feature => feature);
+            highlightFeature(feature);
             if (feature) {
                 let properties = feature.getProperties();
                 this.setState({ featureInfo: properties });
@@ -106,23 +106,38 @@ class Map extends Component {
                     } else {
                         this.setState({ galleryVisibility: true });
                     }
-                    ImageController.getImages(feature.get('id')).then(response => {
+
+                    let meta;
+                    let id = feature.get('kohde');
+                    let metaURL = `https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pirely:vesty_images_meta&outputFormat=application/json&PROPERTYNAME=kohde&CQL_FILTER=kohde=${id}`;
+
+                    fetch(metaURL).then(response => {
                         if (response.ok || response.status === 304) {
-                            response.json().then(json => {
-                                json.map((image, index) => {
-                                    if (!image.includes('thumb')) {
+                            response.json().then(metaData => {
+                                let prop = metaData.features[0].properties;
+                                meta = `Kohteen kuvaaja(t): ${prop.authors}, ajankohta: ${prop.startDate ? prop.startDate + '-' + prop.endDate : prop.endDate}.`;
+
+                                return ImageController.getImages(id).then(response => {
+                                    if (response.ok || response.status === 304) {
+                                        response.json().then(json => {
+                                            this.setState({
+                                                imageData: json.reduce((arr, image) => {
+                                                    if (!image.includes('thumb')) {
+                                                        arr.push({ src: image, thumb: `thumb_${image}`, folder: id, meta });
+                                                    } return arr;
+                                                }, [])
+                                            });
+                                        });
+                                    } else {
                                         this.setState({
-                                            imageData: [...this.state.imageData, { src: image, thumb: `thumb_${image}`, caption: `image${index}`, folder: feature.get('id') }]
+                                            imageData: []
                                         })
                                     }
                                 })
-                            });
-                        } else {
-                            this.setState({
-                                imageData: []
                             })
                         }
-                    })
+                    });
+
                 } else {
                     this.setState({ galleryVisibility: false });
                 } prevFeature = feature;
@@ -132,41 +147,42 @@ class Map extends Component {
         });
     }
 
-
-    /* Map Zoomers */
+    /* Zoom In */
     zoomIn = () => {
-        let newZoom = this.state.zoom + this.state.zoomStep;
-        this.state.zoom < this.state.maxZoom
-            && this.setState({ zoom: newZoom });
+        let zoom = this.view.getZoom();
+        if (zoom < this.view.getMaxZoom()) {
+            this.view.setZoom(zoom + this.state.zoomFactor);
+        }
     }
+
+    /* Zoom Out */
     zoomOut = () => {
-        this.state.zoom > this.state.minZoom
-            && this.setState({ zoom: this.state.zoom - this.state.zoomStep });
+        let zoom = this.view.getZoom();
+        if (zoom > this.view.getMinZoom()) {
+            this.view.setZoom(zoom - this.state.zoomFactor);
+        }
     }
 
     /* Toggle right side drawer + image gallery */
-    toggleGallery = feature => {
+    toggleGallery = () => {
+        this.state.galleryVisibility && highlightFeature();
         this.setState({ galleryVisibility: !this.state.galleryVisibility });
     }
 
     /* Functionality for municipality filtering menu */
     filterClick = (event, index, option) => {
-
-        let layers = this.state.map.getLayers().getArray();
+        let layers = this.map.getLayers().getArray();
         layers.filter((layer) => {
-            return layer.getProperties().name === 'Kunnat' && layer.getSource().getFeatures().filter(feat => {
-                return feat.getProperties().nimi === option && (this.state.map.getView().fit(feat.getGeometry().getExtent(), this.state.map.getSize()), highlightFeature(feat, this.state.map));
+            layer.getProperties().name === 'Kunnat' && layer.getSource().getFeatures().filter(feat => {
+                return feat.getProperties().nimi === option && (this.view.fit(feat.getGeometry().getExtent(), this.map.getSize()), highlightFeature(feat, this.map));
             })
         });
-
         this.setState({ filterSelection: index });
-
     }
 
     /* Basemap switcher */
     changeBasemap = (event, value) => {
-
-        let layers = this.state.map.getLayers().getArray();
+        let layers = this.map.getLayers().getArray();
         layers.filter((layer, i) => {
             return layer.getProperties().type === 'base'
                 && (layer.getProperties().name === value && layers[i].setVisible(true)
@@ -184,7 +200,7 @@ class Map extends Component {
     /* basemap opacity changer */
     changeBasemapOpacity = (event, value) => {
         this.setState({ basemapOpacity: value });
-        let layers = this.state.map.getLayers().getArray();
+        let layers = this.map.getLayers().getArray();
         layers.filter(layer => {
             return layer.getProperties().type === 'base'
         }).forEach(basemap => {
@@ -197,60 +213,16 @@ class Map extends Component {
         let name = event.target.value;
         let index = this.state.maplayers.indexOf(event.target.value);
         index == -1 ? this.setState({ maplayers: [...this.state.maplayers, name] }) : this.setState({ maplayers: this.state.maplayers.splice(index, 1) });
-        this.state.map.getLayers().getArray().find(layer => layer.getProperties().name === name && layer.setVisible(!layer.getVisible()));
+        this.map.getLayers().getArray().find(layer => layer.getProperties().name === name && layer.setVisible(!layer.getVisible()));
     };
-
-    /* Register view to change along with this.state.zoom */
-    componentDidUpdate(prevProps, prevState) {
-        /* Check if zoom / center / basemap has changed from last time */
-        /* TODO: Figure out a better structure for this */
-        this.state.zoom !== prevState.zoom && view.setZoom(this.state.zoom);
-        this.state.center !== prevState.center && view.setCenter(this.state.center);
-        this.state.basemap !== prevState.basemap && this.changeBasemap(null, this.state.basemap);
-        if (this.state.zoom !== prevState.zoom ||
-            this.state.center !== prevState.center ||
-            this.state.basemap !== prevState.basemap) {
-            this._updateUrl();
-        }
-    }
-
-    /* Send new url query string to App */
-    _updateUrl = () => {
-        let urlQuery = [];
-        let zoom = Number(this.state.zoom).toFixed(1);
-        let x = Number(this.state.center[0]).toFixed(0);
-        let y = Number(this.state.center[1]).toFixed(0);
-        let basemap = this.state.basemap;
-        urlQuery.push({ z: zoom });
-        urlQuery.push({ x: x });
-        urlQuery.push({ y: y });
-        urlQuery.push({ b: basemap });
-        this.props.updateUrl(urlQuery);
-    }
-
-    /* Register changes from props changes (e.g. url query zoom from parent) */
-    /* returns new state / null depending on wether state should change */
-    /* TODO: Figure out how to props on state only once */
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.zoom && !prevState.zoom) {
-            return { zoom: nextProps.zoom };
-        }
-        if (nextProps.center && !prevState.centerFromUrl) {
-            return { center: nextProps.center, centerFromUrl: true };
-        }
-        if (nextProps.basemap && !prevState.basemapFromUrl) {
-            return { basemap: nextProps.basemap, basemapFromUrl: true };
-        }
-        return null;
-    }
 
     render() {
 
         const { classes } = this.props;
-        const { popoverAnchor, popOpen } = this.state;
 
         return (
             <div>
+                <div id='map' className={classes.map} />
                 <ZoomIn handleClick={this.zoomIn} />
                 <ZoomOut handleClick={this.zoomOut} />
                 <LayerDrawer
@@ -261,9 +233,8 @@ class Map extends Component {
                     toggleLayer={this.toggleLayer}
                     basemapOpacity={this.state.basemapOpacity}
                     changeBasemapOpacity={this.changeBasemapOpacity}
-                    map={this.state.map}
+                    map={this.map}
                 />
-                <div id='map' style={{ height: '100vh' }} />
                 <KuntaFilter
                     filterSelection={this.state.filterSelection}
                     handleClick={this.filterClick}
@@ -271,6 +242,7 @@ class Map extends Component {
                 <SideDrawer
                     featureInfo={this.state.featureInfo}
                     imageData={this.state.imageData}
+                    metaData={this.state.metaData}
                     galleryVisibility={this.state.galleryVisibility}
                     toggleGallery={this.toggleGallery}
                 />

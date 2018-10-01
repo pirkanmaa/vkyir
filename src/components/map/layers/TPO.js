@@ -16,7 +16,7 @@ const source = new TileWMS({
 });
 
 const TPO = new Tile({
-    extent: [2400000, 8725000, 2652500, 8975000],
+    extent: [249165, 6821146, 326873, 6903282],
     source: source,
     opacity: 0.75,
     title: 'Vesienhoidon tehostamisalueet',

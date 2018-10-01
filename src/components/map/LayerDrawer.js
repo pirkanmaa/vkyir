@@ -14,7 +14,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 
 import BasemapControl from './BasemapControl';
 import LayerControl from './LayerControl';
-import Legend from './legend/Legend';
+//import Legend from './legend/Legend';
 
 const styles = {
   paper: {
@@ -65,7 +65,16 @@ class LayerDrawer extends Component {
               />
             </ExpansionPanelDetails>
           </ExpansionPanel>
-
+          {/*
+          <ExpansionPanel defaultExpanded expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
+            <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+              <Typography>Karttaselitteet</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <Legend map={this.props.map} />
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          */}
           <ExpansionPanel defaultExpanded expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
               <Typography>Taustakartat</Typography>
@@ -77,15 +86,6 @@ class LayerDrawer extends Component {
                 basemapOpacity={this.props.basemapOpacity}
                 changeBasemapOpacity={this.props.changeBasemapOpacity}
               />
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-
-          <ExpansionPanel defaultExpanded expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
-            <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-              <Typography>Karttaselitteet</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Legend map={this.props.map} />
             </ExpansionPanelDetails>
           </ExpansionPanel>
 

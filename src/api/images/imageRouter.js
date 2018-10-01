@@ -1,16 +1,14 @@
 var express = require('express');
 var imageRouter = express.Router();
-var gm = require('gm');
 var fs = require('fs');
+var path = require('path');
 var thumb = require('node-thumbnail').thumb;
-
 
 /* Get images */
 imageRouter.get('/:id', (req, res) => {
     let id = req.params.id;
     let images = [];
-    let dirname = '/var/www/public_html/tieto/data/vkyir/images';
-    // let dirname = `${__dirname}/images`;
+    let dirname = `${__dirname}/../../../public/images`;
 
     if (typeof id === 'string') {
         let files = fs.readdirSync(`${dirname}/${id}`);

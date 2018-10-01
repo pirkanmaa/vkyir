@@ -6,9 +6,10 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 const styles = {
   button: {
+    color: 'black',
     display: 'flex',
-    bottom: '0rem',
     right: '0rem',
+    bottom: '0rem',
     position: 'absolute',
     zIndex: 1500
   }

@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 const styles = {
   button: {
+    color: 'black',
     display: 'flex',
     right: '0rem',
     bottom: '2.5rem',

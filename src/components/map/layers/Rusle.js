@@ -8,21 +8,18 @@ const source = new TileWMS({
         'FORMAT': 'image/png',
         'TRANSPARENT': true,
         'LAYERS': '10',
-        'TILED': true,
-        //'BBOX': '240000,6800000,330000,6900000'
-        //'BBOX': '2500000, 8600000, 2700000, 8900000'
-        //'BBOX': '25,64,26,68'
+        'TILED': true
     }
 });
 
 const Rusle = new Tile({
-    extent: [2500000, 8725000, 2652500, 8925000],
+    extent: [270000, 6815000, 330000, 6907500],
     source: source,
     opacity: 0.75,
     title: 'Eroosiomalli',
     name: 'Eroosiomalli',
     visible: false,
-    description: `Karttapohjainen valtakunnallinen peltolohkojen eroosioriskimalli (kiintoainetta t/ha/vuosi). Mallin avulla voidaan löytää eroosioriskin hot spot – lohkot koko valtakunnan tasolla. Mallia voidaan käyttää apuna suunniteltaessa vesistöjen kunnostustoimenpiteitä ja niiden sijoittamista. Eroosion mukana kulkeutuu eteläisen Suomen oloissa pääosa vesistöihin päätyvästä fosforikuormasta.`
+    description: `Karttapohjainen valtakunnallinen peltolohkojen eroosioriskimalli (kiintoainetta t/ha/vuosi). Mallin avulla voidaan löytää eroosioriskin hot spot – lohkot koko valtakunnan tasolla. Mallia voidaan käyttää apuna suunniteltaessa vesistöjen kunnostustoimenpiteitä ja niiden sijoittamista. Eroosion mukana kulkeutuu eteläisen Suomen oloissa pääosa vesistöihin päätyvästä fosforikuormasta. Mallin on tuottanut LUKE.`
 });
 
 export default Rusle;

@@ -10,7 +10,7 @@ import Circle from 'ol/style/Circle';
 
 const url = 'https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature',
     layer = 'pirely:vesty',
-    proj = 'EPSG:3857',
+    proj = 'EPSG:3067',
     format = 'application/json';
 
 const source = new VectorSource({
@@ -27,6 +27,7 @@ let types = [
     { type: 'Kalataloudellinen kunnostus', color: '#80b1d3' },
     { type: 'Kalataloudellinen kunnostus, valuma-aluekunnostus', color: '#fdb462' },
     { type: 'Kalatie', color: '#b3de69' },
+    { type: 'Kalkitus', color: '#d19581' },
     { type: 'Kosteikko', color: '#fccde5' },
     { type: 'Lintuvesikunnostus', color: '#d9d9d9' },
     { type: 'Pato', color: '#bc80bd' },

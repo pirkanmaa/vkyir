@@ -3,7 +3,7 @@ import featureOverlay from './../layers/FeatureOverlay';
 
 let highlight;
 /* Function for "highlighting" selected feature via style */
-const highlightFeature = (feature, map) => {
+const highlightFeature = feature => {
 
     if (feature) {
         if (highlight === undefined) {

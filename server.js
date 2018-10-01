@@ -13,8 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', express.static(`${__dirname}/dist`));
 app.use('/images', imageRouter)
-
-//app.get('*', (req, res) => { res.send({message: 'This is not the base you are looking for.'}); });
+app.use(express.static('public'))
 
 app.use(webpackDevMiddleware(compiler, {
     hot: true,

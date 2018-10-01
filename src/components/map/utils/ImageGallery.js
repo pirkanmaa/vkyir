@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-// import GridList from '@material-ui/core/GridList';
-// import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import Gallery from 'react-grid-gallery';
 
-//const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
-
-const URL = 'https://tieto.pirkanmaa.fi/data/vkyir/images/';
+const URL = `https://tieto.pirkanmaa.fi/ikaalinen/images/`;
 const styles = {
     img: {
         width: '300px',
-        maxWidth: '300px' 
+        maxWidth: '300px'
     },
     gallery: {
         width: '300px',
@@ -23,7 +19,8 @@ class ImageGallery extends Component {
 
     state = {
         imageData: [],
-        images: []
+        images: [],
+        metaData: ''
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -37,7 +34,7 @@ class ImageGallery extends Component {
                         thumbnailWidth: 140,
                         thumbnailHeight: 70,
                         rowHeight: 120,
-                        caption: 'seppo'
+                        caption: image.meta
                     })
                 )
             }
@@ -55,7 +52,8 @@ class ImageGallery extends Component {
                         images={this.state.images}
                         enableImageSelection={false}
                         showLightboxThumbnails={true}
-                    /> : <Typography>Kohteesta ei ole kuvia saatavilla.</Typography>
+                    /> :
+                    <Typography>Kohteesta ei ole kuvia saatavilla.</Typography>
                 }
             </div>
         );

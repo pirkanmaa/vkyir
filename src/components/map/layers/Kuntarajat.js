@@ -9,7 +9,7 @@ import Stroke from 'ol/style/Stroke';
 
 const url = 'https://tieto.pirkanmaa.fi/geoserver/maankaytto/ows?service=WFS&version=1.0.0&request=GetFeature',
     layer = 'maankaytto:kunnat2018',
-    proj = 'EPSG:3857',
+    proj = 'EPSG:3067',
     format = 'application/json';
 
 const source = new VectorSource({

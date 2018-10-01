@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
 import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-
-import IconButton from '@material-ui/core/IconButton';
+import AppBar from '@material-ui/core/AppBar';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import ImageGallery from './ImageGallery';
-import AppBar from '@material-ui/core/AppBar';
-import Paper from '@material-ui/core/Paper';
 import Linkify from 'react-linkify';
-
-//const imageBase = require.context(CLIENT_APP_PATH, true, /\.(gif|png|JPG|JPEG|jpe?g|svg)$/);
 
 const styles = theme => ({
     root: {
@@ -54,7 +48,7 @@ const styles = theme => ({
     }
 });
 
-const blackList = ['id', 'vestyid', 'FID', 'fid', 'bbox', 'geometry', 'geom'];
+const blackList = ['id', 'vestyid', 'FID', 'fid', 'bbox', 'geometry', 'geom', 'kohde'];
 
 class SideDrawer extends Component {
 
@@ -66,8 +60,8 @@ class SideDrawer extends Component {
             let title;
             if (blackList.indexOf(entry[0]) == -1) {
                 switch (entry[0]) {
-                    case 'toteutukse': title = 'Totetuksen tilanne'; break;
-                    case 'tyyppi': title = 'Toimenpito'; break;
+                    case 'toteutukse': title = 'Toteutuksen tilanne'; break;
+                    case 'tyyppi': title = 'Toimenpide'; break;
                     case 'nimi': title = 'Kohteen nimi'; break;
                     case 'kuvaus': title = 'Kohteen kuvaus'; break;
                     case 'kustannukset': title = 'Kustannukset'; break;
