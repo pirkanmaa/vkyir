@@ -1,37 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import MenuItem from '@material-ui/core/MenuItem';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import { withStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import Button from "@material-ui/core/Button";
+import Toolbar from "@material-ui/core/Toolbar";
+import MenuItem from "@material-ui/core/MenuItem";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 
-import BasemapControl from './BasemapControl';
-import LayerControl from './LayerControl';
+import BasemapControl from "./BasemapControl";
+import LayerControl from "./LayerControl";
 //import Legend from './legend/Legend';
 
 const styles = {
   paper: {
-    width: '250px',
+    width: "250px",
     opacity: 0.95
   },
   root: {
-    paddingLeft: '8px',
-    paddingTop: '0px',
-    paddingRight: '0px'
+    paddingLeft: "8px",
+    paddingTop: "0px",
+    paddingRight: "0px"
   }
-}
+};
 
 class LayerDrawer extends Component {
-
   state = {
-    expanded: 'panel',
+    expanded: "panel"
   };
 
   handleChange = panel => (event, expanded) => {
@@ -41,7 +40,6 @@ class LayerDrawer extends Component {
   };
 
   render() {
-
     const { classes } = this.props;
     const { expanded } = this.state;
 
@@ -49,13 +47,22 @@ class LayerDrawer extends Component {
       <div>
         <Drawer
           classes={{ paper: classes.paper }}
-          variant='persistent'
-          anchor='left'
-          open={this.props.layerDrawerVisibility}>
-
-          <ExpansionPanel defaultExpanded expanded={expanded === 'panel'} onChange={this.handleChange('panel')}>
+          variant="persistent"
+          anchor="left"
+          open={this.props.layerDrawerVisibility}
+        >
+          <ExpansionPanel
+            defaultExpanded
+            expanded={expanded === "panel"}
+            onChange={this.handleChange("panel")}
+          >
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-              <Typography>Karttatasot</Typography>
+              <Typography>
+                Karttatasot
+                <Typography variant="body1" gutterBottom>
+                  Klikkaamalla tason nimeä aukeaa tason kuvaus ja selite
+                </Typography>
+              </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails classes={{ root: classes.root }}>
               <LayerControl
@@ -75,7 +82,11 @@ class LayerDrawer extends Component {
             </ExpansionPanelDetails>
           </ExpansionPanel>
           */}
-          <ExpansionPanel defaultExpanded expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+          <ExpansionPanel
+            defaultExpanded
+            expanded={expanded === "panel1"}
+            onChange={this.handleChange("panel1")}
+          >
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
               <Typography>Taustakartat</Typography>
             </ExpansionPanelSummary>
@@ -88,11 +99,10 @@ class LayerDrawer extends Component {
               />
             </ExpansionPanelDetails>
           </ExpansionPanel>
-
         </Drawer>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(LayerDrawer)
+export default withStyles(styles)(LayerDrawer);
