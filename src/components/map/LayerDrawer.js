@@ -58,10 +58,10 @@ class LayerDrawer extends Component {
           >
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
               <Typography>
-                Karttatasot
-                <Typography variant="body1" gutterBottom>
-                  Klikkaamalla tason nimeä aukeaa tason kuvaus ja selite
-                </Typography>
+                <span>
+                  Karttatasot <br /> Klikkaamalla tason nimeä aukeaa tason
+                  kuvaus ja selite
+                </span>
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails classes={{ root: classes.root }}>
