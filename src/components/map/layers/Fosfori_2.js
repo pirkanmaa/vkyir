@@ -10,17 +10,17 @@ import Fill from "ol/style/Fill";
 
 //Spatial Reference: 102139  (3067)
 
-/* Vemala Pitoisuus P ug/l - fosfori */
+/* VEMALA Metsakuorma Kg/Km2/v 12/2018 IKAALINEN */
 
 var serviceUrl =
   "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/VemalaKuormitusFosforiIKAALINEN/FeatureServer/";
 
-var layer = "1";
+var layer = "2";
 
 var esrijsonFormat = new EsriJSON();
 
 let style = feature => {
-  const { PitP_ug_l } = feature.values_;
+  const { MetsaPKg_Km2 } = feature.values_;
 
   let baseStyle = new Style({
     fill: new Fill({
@@ -33,51 +33,51 @@ let style = feature => {
   });
 
   /*
-  0,01 - 20 -> rgb(191,233,255)
-  20,01 - 30 -> rgb(129,186,227)
-  30,01 - 50 -> rgb(77,141,201)
-  50,01 - 100 -> rgb(33,96,173)
-  100,01 - 310 -> rgb(0,57,148) */
+  0,01 - 1,5 -> rgba( 211, 255, 191, 1.00 )
+  1,51 - 3 -> rgba( 156, 219, 125, 1.00 )
+  3 - 4,5 -> rgba( 108, 184, 70, 1.00 )
+  4,5 - 6 -> rgba( 68, 148, 28, 1.00 )
+  6 - 17,8 -> rgba( 38, 115, 0, 1.00 ) */
 
-  switch (PitP_ug_l) {
-    case "0,01 - 20":
-      baseStyle.setFill(new Fill({ color: "rgba(192,192,192,0.22)" }));
+  switch (MetsaPKg_Km2) {
+    case "0,01 - 1,5":
+      baseStyle.setFill(new Fill({ color: "rgba(211, 255, 191,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(192,192,192, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(211, 255, 191, 0.66)", width: 1 })
       );
       break;
-    case "20,01 - 30":
-      baseStyle.setFill(new Fill({ color: "rgba(129,186,227,0.22)" }));
+    case "1,51 - 3":
+      baseStyle.setFill(new Fill({ color: "rgba(156, 219, 125,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(129,186,227, 0.66)",
+          color: "rgba(156, 219, 125, 0.66)",
           width: 1
         })
       );
       break;
-    case "30,01 - 50":
-      baseStyle.setFill(new Fill({ color: "rgba(77,141,201,0.22)" }));
+    case "3 - 4,5":
+      baseStyle.setFill(new Fill({ color: "rgba(108, 184, 70,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(77,141,201, 0.66)",
+          color: "rgba(108, 184, 70, 0.66)",
           width: 1
         })
       );
       break;
-    case "50,01 - 100":
-      baseStyle.setFill(new Fill({ color: "rgba(33,96,173,0.22)" }));
+    case "4,5 - 6":
+      baseStyle.setFill(new Fill({ color: "rgba(68, 148, 28,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(33,96,173, 0.66)",
+          color: "rgba(68, 148, 28, 0.66)",
           width: 1
         })
       );
       break;
-    case "100,01 - 310":
-      baseStyle.setFill(new Fill({ color: "rgba(0,57,148,0.22)" }));
+    case "6 - 17,8":
+      baseStyle.setFill(new Fill({ color: "rgba(38, 115, 0,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(0,57,148, 0.66)",
+          color: "rgba(38, 115, 0, 0.66)",
           width: 1
         })
       );
@@ -127,13 +127,13 @@ const vectorSource = new VectorSource({
   )
 });
 
-const Fosforit_pitoisuus = new VectorLayer({
+const Fosforit_metsakuorma = new VectorLayer({
   source: vectorSource,
-  name: "Pitoisuus P [ug/l]",
-  title: "Pitoisuus P [ug/l]",
+  name: "Metsakuorma [Kg/Km2/v] 12/2018",
+  title: "Metsakuorma [Kg/Km2/v] 12/2018",
   visible: false,
   style: style,
-  description: `Pitoisuus P [ug/l].`
+  description: `Metsakuorma [Kg/Km2/v] 12/2018.`
 });
 
-export default Fosforit_pitoisuus;
+export default Fosforit_metsakuorma;
