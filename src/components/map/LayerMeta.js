@@ -94,6 +94,26 @@ const legend_vemana_metsakuorma = [
   { type: "4,5 - 6", color: "#44941c" },
   { type: "6 - 17,8", color: "#267300" }
 ];
+
+/*
+  legend_vemana_peltokuorma
+  0,01 - 10 -> rgba( 255, 255, 191, 1.00 ) #ffffbf
+  10,01 - 20 -> rgba( 237, 231, 142, 1.00 ) #ede78e
+  20,01 - 40 -> rgba( 219, 203, 99, 1.00 ) #dbcb63
+  40,01 - 60 -> rgba( 201, 173, 60, 1.00 ) #c9ad3c
+  60,01 - 80-> rgba( 184, 142, 28, 1.00 ) #b88e1c
+  80,01 - 117,07-> rgba( 168, 112, 0, 1.00 ) #a87000
+  PeltoPKg_Km2
+  */
+const legend_vemana_peltokuorma = [
+  { type: "0,01 - 10", color: "#ffffbf" },
+  { type: "10,01 - 20", color: "#ede78e" },
+  { type: "20,01 - 40", color: "#dbcb63" },
+  { type: "40,01 - 60", color: "#c9ad3c" },
+  { type: "60,01 - 80", color: "#b88e1c" },
+  { type: "80,01 - 117,07", color: "#a87000" }
+];
+
 class LayerMeta extends Component {
   showMeta = layer => {
     const { classes } = this.props;
@@ -160,7 +180,7 @@ class LayerMeta extends Component {
             ))}
           </div>
         );
-      case "Pitoisuus P [ug/l]":
+      case "Fostorin [P] pitoisuus [ug/l]":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
@@ -218,6 +238,31 @@ class LayerMeta extends Component {
               Fosfori pitoisuudet
             </Typography>
             {legend_vemana_metsakuorma.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+      case "Peltokuorma [Kg/Km2/v] 12/2018":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Fosfori pitoisuudet
+            </Typography>
+            {legend_vemana_peltokuorma.map((types, i) => (
               <div key={i} className={classes.slot}>
                 <Avatar
                   classes={{ root: classes.avatar }}

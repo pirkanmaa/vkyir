@@ -10,17 +10,17 @@ import Fill from "ol/style/Fill";
 
 //Spatial Reference: 102139  (3067)
 
-/* Vemala Pitoisuus P ug/l - fosfori */
+/* VEMALA Metsakuorma Kg/Km2/v 12/2018 IKAALINEN */
 
 var serviceUrl =
   "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/VemalaKuormitusFosforiIKAALINEN/FeatureServer/";
 
-var layer = "1";
+var layer = "3";
 
 var esrijsonFormat = new EsriJSON();
 
 let style = feature => {
-  const { PitP_ug_l } = feature.values_;
+  const { PeltoPKg_Km2 } = feature.values_;
 
   let baseStyle = new Style({
     fill: new Fill({
@@ -33,51 +33,62 @@ let style = feature => {
   });
 
   /*
-  0,01 - 20 -> rgb(191,233,255)
-  20,01 - 30 -> rgb(129,186,227)
-  30,01 - 50 -> rgb(77,141,201)
-  50,01 - 100 -> rgb(33,96,173)
-  100,01 - 310 -> rgb(0,57,148) */
-
-  switch (PitP_ug_l) {
-    case "0,01 - 20":
-      baseStyle.setFill(new Fill({ color: "rgba(192,192,192,0.22)" }));
+  0,01 - 10 -> rgba( 255, 255, 191, 1.00 ) #ffffbf
+  10,01 - 20 -> rgba( 237, 231, 142, 1.00 ) #ede78e
+  20,01 - 40 -> rgba( 219, 203, 99, 1.00 ) #dbcb63
+  40,01 - 60 -> rgba( 201, 173, 60, 1.00 ) #c9ad3c
+  60,01 - 80-> rgba( 184, 142, 28, 1.00 ) #b88e1c
+  80,01 - 117,07-> rgba( 168, 112, 0, 1.00 ) #a87000
+  PeltoPKg_Km2
+  */
+  switch (PeltoPKg_Km2) {
+    case "0,01 - 10":
+      baseStyle.setFill(new Fill({ color: "rgba(255, 255, 191,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(192,192,192, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(255, 255, 191, 0.66)", width: 1 })
       );
       break;
-    case "20,01 - 30":
-      baseStyle.setFill(new Fill({ color: "rgba(129,186,227,0.22)" }));
+    case "10,01 - 20":
+      baseStyle.setFill(new Fill({ color: "rgba(237, 231, 142,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(129,186,227, 0.66)",
+          color: "rgba(237, 231, 142, 0.66)",
           width: 1
         })
       );
       break;
-    case "30,01 - 50":
-      baseStyle.setFill(new Fill({ color: "rgba(77,141,201,0.22)" }));
+    case "20,01 - 40":
+      baseStyle.setFill(new Fill({ color: "rgba(219, 203, 99,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(77,141,201, 0.66)",
+          color: "rgba(219, 203, 99, 0.66)",
           width: 1
         })
       );
       break;
-    case "50,01 - 100":
-      baseStyle.setFill(new Fill({ color: "rgba(33,96,173,0.22)" }));
+    case "40,01 - 60":
+      baseStyle.setFill(new Fill({ color: "rgba(40,01 - 60,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(33,96,173, 0.66)",
+          color: "rgba(40,01 - 60, 0.66)",
           width: 1
         })
       );
       break;
-    case "100,01 - 310":
-      baseStyle.setFill(new Fill({ color: "rgba(0,57,148,0.22)" }));
+    case "60,01 - 80":
+      baseStyle.setFill(new Fill({ color: "rgba(184, 142, 28,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(0,57,148, 0.66)",
+          color: "rgba(184, 142, 28, 0.66)",
+          width: 1
+        })
+      );
+      break;
+    case "80,01 - 117,07":
+      baseStyle.setFill(new Fill({ color: "rgba(168, 112, 0,0.22)" }));
+      baseStyle.setStroke(
+        new Stroke({
+          color: "rgba(168, 112, 0, 0.66)",
           width: 1
         })
       );
@@ -127,15 +138,13 @@ const vectorSource = new VectorSource({
   )
 });
 
-const Fosforit_pitoisuus = new VectorLayer({
+const Fosforit_peltokuorma = new VectorLayer({
   source: vectorSource,
-  name: "Pitoisuus P [ug/l]",
-  title: "Pitoisuus P [ug/l]",
+  name: "Peltokuorma [Kg/Km2/v] 12/2018",
+  title: "Peltokuorma [Kg/Km2/v] 12/2018",
   visible: false,
   style: style,
-  description: `VEMALA-malli laskee alueella syntyvän, alueelle tulevan ja alueelta lähtevän kuormituksen arvoja peltoviljelylle, luonnonhuuhtoumalle pelloilta ja metsistä, metsätaloudelle (hakkuut, lannoitus, kunnostusojitus ja vanhat ojitetut suo), haja-asutukselle (vakituinen ja loma-asutus), hulevesille, laskeumalle sekä pistekuormitukselle. 
-  <br>
-  Hydrologiset arvot saadaan WSFS-vesistömallista, jonka jälkeen VEMALA laskee kuormituksen syntymistä maa-alueilta (pellot/muu alue), lisää eri lähteistä saatavia kuormitustietoja (haja-asutus, pistekuormitus, laskeuma, turvetuotanto) ja lopulta kuormituksen etenemisen ja pidättymisen vesistössä (sekoittuminen, sedimentoituminen, eroosio). Näiden laskennallisten tietojen avulla muodostuu laskennallinen pitoisuus järvissä tai uomissa esim. fosforipitoisuus.`
+  description: `Peltokuorma [Kg/Km2/v] 12/2018.`
 });
 
-export default Fosforit_pitoisuus;
+export default Fosforit_peltokuorma;
