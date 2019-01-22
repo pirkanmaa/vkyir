@@ -81,14 +81,19 @@ const legend_vemana_pitoisuus = [
 ];
 
 /*
-  0,01 - 1,5 -> rgba( 211, 255, 191, 1.00 )
-  1,51 - 3 -> rgba( 156, 219, 125, 1.00 )
-  3 - 4,5 -> rgba( 108, 184, 70, 1.00 )
-  4,5 - 6 -> rgba( 68, 148, 28, 1.00 )
-  6 - 17,8 -> rgba( 38, 115, 0, 1.00 ) */
-//Metsakuorma [Kg/Km2/v] 12/2018
-const legend_vemana_metsakuorma = [{ type: "0,01 - 20", color: "#bfe9ff" }];
+  0,01 - 1,5 -> rgba( 211, 255, 191, 1.00 ) #d3ffbf
+  1,51 - 3 -> rgba( 156, 219, 125, 1.00 )   #9cdb7d
+  3 - 4,5 -> rgba( 108, 184, 70, 1.00 )     #6cb846
+  4,5 - 6 -> rgba( 68, 148, 28, 1.00 )      #44941c
+  6 - 17,8 -> rgba( 38, 115, 0, 1.00 )      #267300 */
 
+const legend_vemana_metsakuorma = [
+  { type: "0,01 - 1,5", color: "#d3ffbf" },
+  { type: "1,51 - 3", color: "#9cdb7d" },
+  { type: "3 - 4,5", color: "#6cb846" },
+  { type: "4,5 - 6", color: "#44941c" },
+  { type: "6 - 17,8", color: "#267300" }
+];
 class LayerMeta extends Component {
   showMeta = layer => {
     const { classes } = this.props;
@@ -205,7 +210,32 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-    }
+      case "Metsakuorma [Kg/Km2/v] 12/2018":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Fosfori pitoisuudet
+            </Typography>
+            {legend_vemana_metsakuorma.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+    } // end switch
   };
 
   render() {
