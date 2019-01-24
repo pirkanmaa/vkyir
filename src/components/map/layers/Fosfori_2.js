@@ -20,7 +20,7 @@ var layer = "2";
 var esrijsonFormat = new EsriJSON();
 
 let style = feature => {
-  const { MetsaPKg_Km2 } = feature.values_;
+  const { Metsa_P_Kg_Km2_v } = feature.values_;
 
   let baseStyle = new Style({
     fill: new Fill({
@@ -39,7 +39,7 @@ let style = feature => {
   4,5 - 6 -> rgba( 68, 148, 28, 1.00 )
   6 - 17,8 -> rgba( 38, 115, 0, 1.00 ) */
 
-  switch (MetsaPKg_Km2) {
+  switch (Metsa_P_Kg_Km2_v) {
     case "0,01 - 1,5":
       baseStyle.setFill(new Fill({ color: "rgba(211, 255, 191,0.22)" }));
       baseStyle.setStroke(
