@@ -112,7 +112,7 @@ const Fosforit_pistekuorma = new VectorLayer({
   source: vectorSource,
   name: "Pistekuorma Kg/v 12/2018",
   title: "Pistekuorma Kg/v 12/2018",
-  visible: true,
+  visible: false,
   style: style,
   description: `Pistekuorma Kg/v 12/2018 .`
 });

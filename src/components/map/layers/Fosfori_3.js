@@ -20,14 +20,14 @@ var layer = "3";
 var esrijsonFormat = new EsriJSON();
 
 let style = feature => {
-  const { PeltoPKg_Km2 } = feature.values_;
+  const { PeltoP_Kg_v } = feature.values_;
 
   let baseStyle = new Style({
     fill: new Fill({
-      color: "rgba(192,192,192,0.22)"
+      color: "rgba(192,192,192,0)"
     }),
     stroke: new Stroke({
-      color: "rgba(0, 0, 0, 0.66)",
+      color: "rgba(0, 0, 0, 0)",
       width: 1
     })
   });
@@ -41,7 +41,7 @@ let style = feature => {
   80,01 - 117,07-> rgba( 168, 112, 0, 1.00 ) #a87000
   PeltoPKg_Km2
   */
-  switch (PeltoPKg_Km2) {
+  switch (PeltoP_Kg_v) {
     case "0,01 - 10":
       baseStyle.setFill(new Fill({ color: "rgba(255, 255, 191,0.22)" }));
       baseStyle.setStroke(

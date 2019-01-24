@@ -180,7 +180,7 @@ class LayerMeta extends Component {
             ))}
           </div>
         );
-      case "Fostorin [P] pitoisuus [ug/l]":
+      case "Pitoisuus P [ug/l]":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
@@ -210,7 +210,7 @@ class LayerMeta extends Component {
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Fosfori pitoisuudet
+              Fosfori pistekuorma
             </Typography>
             {legend_vemana_pistekuorma.map((types, i) => (
               <div key={i} className={classes.slot}>
