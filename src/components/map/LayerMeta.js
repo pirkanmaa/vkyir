@@ -205,7 +205,7 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-      case "Pistekuorma Kg/v 12/2018":
+      case "Pistekuorma [Kg/v] 12/2018":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />

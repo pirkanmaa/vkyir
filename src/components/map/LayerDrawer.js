@@ -18,7 +18,7 @@ import LayerControl from "./LayerControl";
 
 const styles = {
   paper: {
-    width: "250px",
+    width: "320px",
     opacity: 0.95
   },
   root: {

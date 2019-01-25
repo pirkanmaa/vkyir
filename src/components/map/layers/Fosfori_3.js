@@ -144,7 +144,7 @@ const Fosforit_peltokuorma = new VectorLayer({
   title: "Peltokuorma [Kg/Km2/v] 12/2018",
   visible: false,
   style: style,
-  description: `Peltokuorma [Kg/Km2/v] 12/2018.`
+  description: `Peltotalouden kuormitus kuvaa kussakin 4. jakovaiheen alueella syntyvää suhteellista vuosittaista kuormitusta maapinta-alaan nähden, kg/km2/v. `
 });
 
 export default Fosforit_peltokuorma;

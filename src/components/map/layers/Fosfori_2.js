@@ -133,7 +133,7 @@ const Fosforit_metsakuorma = new VectorLayer({
   title: "Metsakuorma [Kg/Km2/v] 12/2018",
   visible: false,
   style: style,
-  description: `Metsakuorma [Kg/Km2/v] 12/2018.`
+  description: `Metsätalouden kuormitus kuvaa kussakin 4. jakovaiheen alueella syntyvää suhteellista vuosittaista kuormitusta maapinta-alaan nähden, kg/km2/v.`
 });
 
 export default Fosforit_metsakuorma;

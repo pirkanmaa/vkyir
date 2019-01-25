@@ -110,11 +110,11 @@ const vectorSource = new VectorSource({
 
 const Fosforit_pistekuorma = new VectorLayer({
   source: vectorSource,
-  name: "Pistekuorma Kg/v 12/2018",
-  title: "Pistekuorma Kg/v 12/2018",
+  name: "Pistekuorma [Kg/v] 12/2018",
+  title: "Pistekuorma [Kg/v] 12/2018",
   visible: false,
   style: style,
-  description: `Pistekuorma Kg/v 12/2018 .`
+  description: `Pistekuormitus on 4. jakovaiheen alueella syntyvän pistekuormituksen summa kg/v. Pyritään sijoittamaan tarkasti alueelle lähitulevaisuudessa.`
 });
 
 export default Fosforit_pistekuorma;
