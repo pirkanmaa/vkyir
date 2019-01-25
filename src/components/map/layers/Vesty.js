@@ -7,6 +7,7 @@ import Style from "ol/style/Style";
 import Stroke from "ol/style/Stroke";
 import Fill from "ol/style/Fill";
 import Circle from "ol/style/Circle";
+import { generateKeyPair } from "crypto";
 
 const url =
     "https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WFS&version=1.0.0&request=GetFeature",
@@ -43,13 +44,16 @@ let types = [
 ];
 
 let style = feature => {
+  console.log("vesty", feature.values_.toteutukse);
   let fill = new Fill({
     color: types.find(type => type.type === feature.get("tyyppi")).color
   });
 
-  return new Style({
+  const { toteutukse } = feature.values_;
+
+  const baseStyle = new Style({
     image: new Circle({
-      radius: 7,
+      radius: 9,
       fill: fill,
       stroke: new Stroke({
         color: "#000",
@@ -57,6 +61,44 @@ let style = feature => {
       })
     })
   });
+
+  /*
+   On joo. Mietin, että voisi olla "toteutuneet" mustalla paksulla reunaviivalla, "kesken" harmaalla paksulla reunalla ja "suunnitteilla" olevat siten kun nämä on nyt.
+Ei välttämättä ole vielä suunnitteilla olevia mutta voi tulla
+vesty Kesken
+vesty Toteutunut
+*/
+
+  switch (toteutukse) {
+    case "Kesken":
+      console.log("kesken");
+      baseStyle.setImage(
+        new Circle({
+          radius: 9,
+          fill: fill,
+          stroke: new Stroke({
+            color: "#808080",
+            width: 6
+          })
+        })
+      );
+      break;
+    case "Toteutunut":
+      console.log("Toteutunut");
+      baseStyle.setImage(
+        new Circle({
+          radius: 9,
+          fill: fill,
+          stroke: new Stroke({
+            color: "#000000",
+            width: 6
+          })
+        })
+      );
+      break;
+  }
+
+  return baseStyle;
 };
 
 const Vesty = new VectorLayer({

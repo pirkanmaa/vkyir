@@ -55,7 +55,7 @@ let style = feature => {
         })
       );
       break;
-    case "3 - 4,5":
+    case "3,01 - 4,5":
       baseStyle.setFill(new Fill({ color: "rgba(108, 184, 70,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
@@ -64,7 +64,7 @@ let style = feature => {
         })
       );
       break;
-    case "4,5 - 6":
+    case "4,51 - 6":
       baseStyle.setFill(new Fill({ color: "rgba(68, 148, 28,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
@@ -73,7 +73,7 @@ let style = feature => {
         })
       );
       break;
-    case "6 - 17,8":
+    case "6,01 - 17,8":
       baseStyle.setFill(new Fill({ color: "rgba(38, 115, 0,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
