@@ -24,10 +24,10 @@ let style = feature => {
 
   let baseStyle = new Style({
     fill: new Fill({
-      color: "rgba(192,192,192,0.22)"
+      color: "rgba(192,192,192,0)"
     }),
     stroke: new Stroke({
-      color: "rgba(0, 0, 0, 0.66)",
+      color: "rgba(0, 0, 0, 0)",
       width: 1
     })
   });
