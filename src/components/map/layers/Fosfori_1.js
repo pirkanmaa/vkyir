@@ -41,9 +41,9 @@ let style = feature => {
 
   switch (PitP_ug_l) {
     case "0,01 - 20":
-      baseStyle.setFill(new Fill({ color: "rgba(192,192,192,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(191, 233, 255,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(192,192,192, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(191, 233, 255, 0.66)", width: 1 })
       );
       break;
     case "20,01 - 30":

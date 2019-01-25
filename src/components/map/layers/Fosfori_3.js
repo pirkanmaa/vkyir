@@ -67,10 +67,10 @@ let style = feature => {
       );
       break;
     case "40,01 - 60":
-      baseStyle.setFill(new Fill({ color: "rgba(40,01 - 60,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(201, 173, 60,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(40,01 - 60, 0.66)",
+          color: "rgba(201, 173, 60, 0.66)",
           width: 1
         })
       );
