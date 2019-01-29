@@ -40,6 +40,19 @@ const styles = {
 };
 
 const legend1 = [
+  {
+    type: "Toteutuneita (kehys toimenpiteen alla)",
+    color: "#000000",
+    width: "18px",
+    height: "18px"
+  },
+  {
+    type: "Kesken (kehys toimenpiteen alla)",
+    color: "#808080",
+    width: "18px",
+    height: "18px"
+  },
+
   { type: "Elinympäristökunnostus", color: "#8dd3c7" },
   { type: "Hapettaminen", color: "#ffffb3" },
   { type: "Hoitokalastus", color: "#bebada" },
@@ -95,10 +108,38 @@ class LayerInfo extends Component {
           <div classes={{ root: classes.root }}>
             <br />
             <Divider />
+            <br />
+            <span>
+              <a
+                href="https://www.ymparisto.fi/fi-FI/Vesi/Vesiensuojelu/Vesienhoidon_suunnittelu_ja_yhteistyo/Vesienhoito_ELYkeskuksissa/Pirkanmaa/Toimenpideohjelmat_ja_toimenpiteiden_toteutus"
+                target="_blank"
+                key="tpo1"
+              >
+                Toimenpideohjelma (TPO)
+              </a>
+            </span>
             <Typography variant="body2" className={classes.typography}>
               Vesienhoidon tehostamisalueet
             </Typography>
             <img src="https://tieto.pirkanmaa.fi/geoserver/pirely/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=24&height=24&layer=TPO&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
+          </div>
+        );
+        break;
+      case "Järvi- ja jokikunnostusalueet":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <br />
+            <span>
+              <a
+                href="https://www.ymparisto.fi/fi-FI/Vesi/Vesiensuojelu/Vesienhoidon_suunnittelu_ja_yhteistyo/Vesienhoito_ELYkeskuksissa/Pirkanmaa/Toimenpideohjelmat_ja_toimenpiteiden_toteutus"
+                target="_blank"
+                key="tpo2"
+              >
+                Toimenpideohjelma (TPO)
+              </a>
+            </span>
           </div>
         );
         break;
@@ -114,7 +155,11 @@ class LayerInfo extends Component {
               <div key={i} className={classes.slot}>
                 <Avatar
                   classes={{ root: classes.avatar }}
-                  style={{ background: `${types.color}` }}
+                  style={{
+                    background: `${types.color}`,
+                    width: `${types.width}`,
+                    height: `${types.height}`
+                  }}
                 />
                 <Typography
                   variant="body1"
