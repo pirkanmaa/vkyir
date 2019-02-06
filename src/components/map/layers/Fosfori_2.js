@@ -32,52 +32,59 @@ let style = feature => {
     })
   });
 
-  /*
+  /* olds 
   0,01 - 1,5 -> rgba( 211, 255, 191, 1.00 )
   1,51 - 3 -> rgba( 156, 219, 125, 1.00 )
   3 - 4,5 -> rgba( 108, 184, 70, 1.00 )
   4,5 - 6 -> rgba( 68, 148, 28, 1.00 )
   6 - 17,8 -> rgba( 38, 115, 0, 1.00 ) */
 
+  /* new
+  0,01 - 1,5 -> rgba( 109,  153,  89, 1.00 )
+  1,51 - 3 -> rgba( 84,  128,  64, 1.00 )
+  3 - 4,5 -> rgba( 58,  102,  38, 1.00 )
+  4,5 - 6 -> rgba( 33,  77,  13, 1.00 )
+  6 - 17,8 -> rgba( 7,  51,  0, 1.00 ) */
+
   switch (Metsa_P_Kg_Km2_v) {
     case "0,01 - 1,5":
-      baseStyle.setFill(new Fill({ color: "rgba(211, 255, 191,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(109,153,89,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(211, 255, 191, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(109,153,89, 0.66)", width: 1 })
       );
       break;
     case "1,51 - 3":
-      baseStyle.setFill(new Fill({ color: "rgba(156, 219, 125,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(84,  128,  64,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(156, 219, 125, 0.66)",
+          color: "rgba(84,  128,  64, 0.66)",
           width: 1
         })
       );
       break;
     case "3,01 - 4,5":
-      baseStyle.setFill(new Fill({ color: "rgba(108, 184, 70,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(58,  102,  38,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(108, 184, 70, 0.66)",
+          color: "rgba(58,  102,  38, 0.66)",
           width: 1
         })
       );
       break;
     case "4,51 - 6":
-      baseStyle.setFill(new Fill({ color: "rgba(68, 148, 28,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(33,  77,  13,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(68, 148, 28, 0.66)",
+          color: "rgba(33,  77,  13, 0.66)",
           width: 1
         })
       );
       break;
     case "6,01 - 17,8":
-      baseStyle.setFill(new Fill({ color: "rgba(38, 115, 0,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(7,  51,  0,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(38, 115, 0, 0.66)",
+          color: "rgba(7,  51,  0, 0.66)",
           width: 1
         })
       );

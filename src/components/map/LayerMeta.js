@@ -87,15 +87,23 @@ const legend_vemana_pitoisuus = [
   4,5 - 6 -> rgba( 68, 148, 28, 1.00 )      #44941c
   6 - 17,8 -> rgba( 38, 115, 0, 1.00 )      #267300 */
 
+/* new
+  0,01 - 1,5 -> rgba( 109,  153,  89, 1.00 )  #6d9959
+  1,51 - 3 -> rgba( 84,  128,  64, 1.00 )     #548040
+  3 - 4,5 -> rgba( 58,  102,  38, 1.00 )      #3a6626
+  4,5 - 6 -> rgba( 33,  77,  13, 1.00 )       #214d0d
+  6 - 17,8 -> rgba( 7,  51,  0, 1.00 )        #073300
+  */
+
 const legend_vemana_metsakuorma = [
-  { type: "0,01 - 1,5", color: "#d3ffbf" },
-  { type: "1,51 - 3", color: "#9cdb7d" },
-  { type: "3 - 4,5", color: "#6cb846" },
-  { type: "4,5 - 6", color: "#44941c" },
-  { type: "6 - 17,8", color: "#267300" }
+  { type: "0,01 - 1,5", color: "#6d9959" },
+  { type: "1,51 - 3", color: "#548040" },
+  { type: "3 - 4,5", color: "#3a6626" },
+  { type: "4,5 - 6", color: "#214d0d" },
+  { type: "6 - 17,8", color: "#073300" }
 ];
 
-/*
+/* old
   legend_vemana_peltokuorma
   0,01 - 10 -> rgba( 255, 255, 191, 1.00 ) #ffffbf
   10,01 - 20 -> rgba( 237, 231, 142, 1.00 ) #ede78e
@@ -105,13 +113,23 @@ const legend_vemana_metsakuorma = [
   80,01 - 117,07-> rgba( 168, 112, 0, 1.00 ) #a87000
   PeltoPKg_Km2
   */
+/* new
+  0,01 - 10 -> rgba( 204,  204,  140, 1.00 ) #CCCC8C
+  10,01 - 20 -> rgba( 179,  179,  115, 1.00 ) #B3B373
+  20,01 - 40 -> rgba( 153,  153,  89, 1.00 ) #999959
+  40,01 - 60 -> rgba( 128,  128, 64, 1.00 ) #808040
+  60,01 - 80-> rgba( 102,  102,  38, 1.00 ) #666626
+  80,01 - 117,07-> rgba( 77,  77,  13, 1.00 ) #4D4D0D
+  PeltoPKg_Km2
+  */
+
 const legend_vemana_peltokuorma = [
-  { type: "0,01 - 10", color: "#ffffbf" },
-  { type: "10,01 - 20", color: "#ede78e" },
-  { type: "20,01 - 40", color: "#dbcb63" },
-  { type: "40,01 - 60", color: "#c9ad3c" },
-  { type: "60,01 - 80", color: "#b88e1c" },
-  { type: "80,01 - 117,07", color: "#a87000" }
+  { type: "0,01 - 10", color: "#CCCC8C" },
+  { type: "10,01 - 20", color: "#B3B373" },
+  { type: "20,01 - 40", color: "#999959" },
+  { type: "40,01 - 60", color: "#808040" },
+  { type: "60,01 - 80", color: "#666626" },
+  { type: "80,01 - 117,07", color: "#4D4D0D" }
 ];
 
 class LayerMeta extends Component {

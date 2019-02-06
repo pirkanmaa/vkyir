@@ -32,7 +32,7 @@ let style = feature => {
     })
   });
 
-  /*
+  /* olds
   0,01 - 10 -> rgba( 255, 255, 191, 1.00 ) #ffffbf
   10,01 - 20 -> rgba( 237, 231, 142, 1.00 ) #ede78e
   20,01 - 40 -> rgba( 219, 203, 99, 1.00 ) #dbcb63
@@ -41,54 +41,65 @@ let style = feature => {
   80,01 - 117,07-> rgba( 168, 112, 0, 1.00 ) #a87000
   PeltoPKg_Km2
   */
+
+  /* new
+  0,01 - 10 -> rgba( 204,  204,  140, 1.00 ) #CCCC8C
+  10,01 - 20 -> rgba( 179,  179,  115, 1.00 ) #B3B373
+  20,01 - 40 -> rgba( 153,  153,  89, 1.00 ) #999959
+  40,01 - 60 -> rgba( 128,  128, 64, 1.00 ) #808040
+  60,01 - 80-> rgba( 102,  102,  38, 1.00 ) #666626
+  80,01 - 117,07-> rgba( 77,  77,  13, 1.00 ) #4D4D0D
+  PeltoPKg_Km2
+  */
+
   switch (Pelto_P_Kg_Km2_v) {
     case "0,01 - 10":
-      baseStyle.setFill(new Fill({ color: "rgba(255, 255, 191,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(204,  204,  140,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(255, 255, 191, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(204,  204,  140, 0.66)", width: 1 })
       );
       break;
     case "10,01 - 20":
-      baseStyle.setFill(new Fill({ color: "rgba(237, 231, 142,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(179,  179,  115,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(237, 231, 142, 0.66)",
+          color: "rgba(179,  179,  115, 0.66)",
           width: 1
         })
       );
       break;
     case "20,01 - 40":
-      baseStyle.setFill(new Fill({ color: "rgba(219, 203, 99,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(153,  153,  89,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(219, 203, 99, 0.66)",
+          color: "rgba(153,  153,  89, 0.66)",
           width: 1
         })
       );
       break;
     case "40,01 - 60":
-      baseStyle.setFill(new Fill({ color: "rgba(201, 173, 60,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(128,  128, 64,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(201, 173, 60, 0.66)",
+          color: "rgba(128,  128, 64, 0.66)",
           width: 1
         })
       );
       break;
     case "60,01 - 80":
-      baseStyle.setFill(new Fill({ color: "rgba(184, 142, 28,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(102,  102,  38,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(184, 142, 28, 0.66)",
+          color: "rgba(102,  102,  38, 0.66)",
           width: 1
         })
       );
       break;
     case "80,01 - 117,07":
-      baseStyle.setFill(new Fill({ color: "rgba(168, 112, 0,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba( 77,  77,  13,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(168, 112, 0, 0.66)",
+          color: "rgba( 77,  77,  13, 0.66)",
           width: 1
         })
       );
