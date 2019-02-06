@@ -132,6 +132,17 @@ const legend_vemana_peltokuorma = [
   { type: "80,01 - 117,07", color: "#4D4D0D" }
 ];
 
+/*
+  "Kipsin levitys ei ole sallittua" -> rgba( 7255, 0, 0, 1.00 ) #FF0000
+  "Kipsin levitys on sallittua" -> rgba( 255, 255, 0, 1.00 ) #FFFF00
+  "Kipsin levitys on suositeltavaa" -> rgba( 0, 255, 0, 1.00 ) #008000
+  */
+const legend_vemana_kipsi = [
+  { type: "Kipsin levitys ei ole sallittua", color: "#FF0000" },
+  { type: "Kipsin levitys on sallittua", color: "#FFFF00" },
+  { type: "Kipsin levitys on suositeltavaa", color: "#008000" }
+];
+
 class LayerMeta extends Component {
   showMeta = layer => {
     const { classes } = this.props;
@@ -281,6 +292,31 @@ class LayerMeta extends Component {
               Fosfori pitoisuudet
             </Typography>
             {legend_vemana_peltokuorma.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+      case "Kipsi":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Kipsi
+            </Typography>
+            {legend_vemana_kipsi.map((types, i) => (
               <div key={i} className={classes.slot}>
                 <Avatar
                   classes={{ root: classes.avatar }}

@@ -11,6 +11,7 @@ import Fosforit_pistekuorma from "./Fosfori_0";
 import Fosforit_pitoisuus from "./Fosfori_1";
 import Forforit_metsakuorma from "./Fosfori_2";
 import Forforit_peltokuorma from "./Fosfori_3";
+import Kipsi from "./Kipsi";
 
 /* Choose basemaps */
 let Layers = [
@@ -23,7 +24,8 @@ let Layers = [
   Fosforit_pitoisuus,
   Fosforit_pistekuorma,
   Forforit_metsakuorma,
-  Forforit_peltokuorma
+  Forforit_peltokuorma,
+  Kipsi
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
