@@ -103,44 +103,44 @@ const legend_vemana_metsakuorma = [
   { type: "6 - 17,8", color: "#073300" }
 ];
 
-/* old
-  legend_vemana_peltokuorma
-  0,01 - 10 -> rgba( 255, 255, 191, 1.00 ) #ffffbf
-  10,01 - 20 -> rgba( 237, 231, 142, 1.00 ) #ede78e
-  20,01 - 40 -> rgba( 219, 203, 99, 1.00 ) #dbcb63
-  40,01 - 60 -> rgba( 201, 173, 60, 1.00 ) #c9ad3c
-  60,01 - 80-> rgba( 184, 142, 28, 1.00 ) #b88e1c
-  80,01 - 117,07-> rgba( 168, 112, 0, 1.00 ) #a87000
+/* newer
+  0,01 - 10 -> rgba( 220,  220,  102, 1.00 ) #DCDC66
+  10,01 - 20 -> rgba( 220,  220,  51, 1.00 ) #DCDC33
+  20,01 - 40 -> rgba( 220,  220,  0, 1.00 ) #DCDC00
+  40,01 - 60 -> rgba( 204,  204, 0, 1.00 ) #CCCC00
+  60,01 - 80-> rgba( 153,  153,  0, 1.00 ) #999900
+  80,01 - 117,07-> rgba( 102,  102,  0, 1.00 ) #666600
   PeltoPKg_Km2
   */
-/* new
-  0,01 - 10 -> rgba( 204,  204,  140, 1.00 ) #CCCC8C
-  10,01 - 20 -> rgba( 179,  179,  115, 1.00 ) #B3B373
-  20,01 - 40 -> rgba( 153,  153,  89, 1.00 ) #999959
-  40,01 - 60 -> rgba( 128,  128, 64, 1.00 ) #808040
-  60,01 - 80-> rgba( 102,  102,  38, 1.00 ) #666626
-  80,01 - 117,07-> rgba( 77,  77,  13, 1.00 ) #4D4D0D
-  PeltoPKg_Km2
-  */
-
 const legend_vemana_peltokuorma = [
-  { type: "0,01 - 10", color: "#CCCC8C" },
-  { type: "10,01 - 20", color: "#B3B373" },
-  { type: "20,01 - 40", color: "#999959" },
-  { type: "40,01 - 60", color: "#808040" },
-  { type: "60,01 - 80", color: "#666626" },
-  { type: "80,01 - 117,07", color: "#4D4D0D" }
+  { type: "0,01 - 10", color: "#DCDC66" },
+  { type: "10,01 - 20", color: "#DCDC33" },
+  { type: "20,01 - 40", color: "#DCDC00" },
+  { type: "40,01 - 60", color: "#CCCC00" },
+  { type: "60,01 - 80", color: "#999900" },
+  { type: "80,01 - 117,07", color: "#666600" }
 ];
 
 /*
   "Kipsin levitys ei ole sallittua" -> rgba( 7255, 0, 0, 1.00 ) #FF0000
-  "Kipsin levitys on sallittua" -> rgba( 255, 255, 0, 1.00 ) #FFFF00
-  "Kipsin levitys on suositeltavaa" -> rgba( 0, 255, 0, 1.00 ) #008000
+  "Kipsin levitys on sallittua" -> rgba( 220, 220, 0, 1.00 ) #dcdc00
+  "Kipsin levitys on suositeltavaa" -> rgba( 0, 200, 0, 1.00 ) #008000
   */
 const legend_vemana_kipsi = [
   { type: "Kipsin levitys ei ole sallittua", color: "#FF0000" },
-  { type: "Kipsin levitys on sallittua", color: "#FFFF00" },
-  { type: "Kipsin levitys on suositeltavaa", color: "#008000" }
+  { type: "Kipsin levitys on sallittua", color: "#dcdc00" },
+  { type: "Kipsin levitys on suositeltavaa", color: "#00c600" }
+];
+
+/*
+  "Biohiilen ei ole sallittua" -> rgba( 7255, 0, 0, 1.00 ) #FF0000
+  "Biohiilen on sallittua" -> rgba( 220, 220, 0, 1.00 ) #dcdc00
+  "Biohiilen on suositeltavaa" -> rgba( 0, 200, 0, 1.00 ) #00c600
+  */
+const legend_vemana_biohiili = [
+  { type: "Biohiilen ei ole sallittua", color: "#FF0000" },
+  { type: "Biohiilen on sallittua", color: "#dcdc00" },
+  { type: "Biohiilen on suositeltavaa", color: "#00c600" }
 ];
 
 class LayerMeta extends Component {
@@ -317,6 +317,31 @@ class LayerMeta extends Component {
               Kipsi
             </Typography>
             {legend_vemana_kipsi.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+      case "Biohiili":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Biohiili
+            </Typography>
+            {legend_vemana_biohiili.map((types, i) => (
               <div key={i} className={classes.slot}>
                 <Avatar
                   classes={{ root: classes.avatar }}

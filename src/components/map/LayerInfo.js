@@ -143,6 +143,64 @@ class LayerInfo extends Component {
           </div>
         );
         break;
+      case "Kipsi":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <br />
+            <span>
+              <a
+                href="http://ely.maps.arcgis.com/apps/MapSeries/index.html?appid=a4304635a6de41afb7c736c51b1ae3cf"
+                target="_blank"
+                key="tpo2"
+              >
+                Lisätietoja aineistosta
+              </a>
+            </span>
+            <br />
+            <br />
+            <span>
+              <a
+                href="https://www.ymparisto.fi/kotoma"
+                target="_blank"
+                key="tpo2"
+              >
+                Lisätietoja Kotoma
+              </a>
+            </span>
+          </div>
+        );
+        break;
+      case "Biohiili":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <br />
+            <span>
+              <a
+                href="http://ely.maps.arcgis.com/apps/MapSeries/index.html?appid=a4304635a6de41afb7c736c51b1ae3cf"
+                target="_blank"
+                key="tpo2"
+              >
+                Lisätietoja aineistosta
+              </a>
+            </span>
+            <br />
+            <br />
+            <span>
+              <a
+                href="https://www.ymparisto.fi/kotoma"
+                target="_blank"
+                key="tpo2"
+              >
+                Lisätietoja Kotoma
+              </a>
+            </span>
+          </div>
+        );
+        break;
       case "Kunnostustoimenpiteet":
         return (
           <div classes={{ root: classes.root }}>

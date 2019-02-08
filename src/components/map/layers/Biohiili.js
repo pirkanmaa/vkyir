@@ -12,14 +12,15 @@ import Fill from "ol/style/Fill";
 
 //"https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/VemalaKuormitusFosforiIKAALINEN/FeatureServer/";
 var serviceUrl =
-  "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/IkaalistenReittiKipsi/FeatureServer/";
+  "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/IkaalistenReittiBiohili/FeatureServer/";
 
 var layer = "0";
 
 var esrijsonFormat = new EsriJSON();
 
 let style = feature => {
-  const { KipsinLevitys } = feature.values_;
+  //console.log(feature);
+  const { Biohiili } = feature.values_;
 
   let baseStyle = new Style({
     fill: new Fill({
@@ -32,24 +33,24 @@ let style = feature => {
   });
 
   /*
-  "Kipsin levitys ei ole sallittua" -> rgba( 7255, 0, 0, 1.00 ) #FF0000
-  "Kipsin levitys on sallittua" -> rgba( 220, 220, 0, 1.00 ) #dcdc00
-  "Kipsin levitys on suositeltavaa" -> rgba( 0, 200, 0, 1.00 ) #00c600
+  "Biohiilen ei ole sallittua" -> rgba( 255, 0, 0, 1.00 ) #FF0000
+  "Biohiilen on sallittua" -> rgba( 220, 220, 0, 1.00 ) #dcdc00
+  "Biohiilen on suositeltavaa" -> rgba( 0, 200, 0, 1.00 ) #00c600
   */
-  switch (KipsinLevitys) {
-    case "Kipsin levitys ei ole sallittua":
+  switch (Biohiili) {
+    case "Biohiilen levitys ei ole sallittua":
       baseStyle.setFill(new Fill({ color: "rgba(255, 0, 0,0.22)" }));
       baseStyle.setStroke(
         new Stroke({ color: "rgba(255, 0, 0, 0.66)", width: 1 })
       );
       break;
-    case "Kipsin levitys on sallittua":
+    case "Biohiilen levitys on sallittua":
       baseStyle.setFill(new Fill({ color: "rgba(220, 220, 0,0.22)" }));
       baseStyle.setStroke(
         new Stroke({ color: "rgba(220, 220, 0, 0.66)", width: 1 })
       );
       break;
-    case "Kipsin levitys on suositeltavaa":
+    case "Biohiilen levitys on suositeltavaa":
       baseStyle.setFill(new Fill({ color: "rgba(0, 200, 0,0.22)" }));
       baseStyle.setStroke(
         new Stroke({ color: "rgba(0, 200, 0, 0.66)", width: 1 })
@@ -100,15 +101,15 @@ const vectorSource = new VectorSource({
   )
 });
 
-const Kipsi = new VectorLayer({
+const Biohiili = new VectorLayer({
   source: vectorSource,
-  name: "Kipsi",
-  title: "Kipsi",
+  name: "Biohiili",
+  title: "Biohiili",
   visible: false,
   style: style,
-  description: `KOTOMA paikkatietoanalyysilla arvioitu peltolohkojen soveltuvuus kipsin levitykseen Ikaalisten reitin alueella.
-  <br>Analyysi pohjautuu vuoden 2017 peltolohkoaineistoon, vuoden 2018 Rusle aineistoon, sekä sen ympäristöhallinnon aineistoihin. <br>
-  Huomioitava aineistoa tulkittaessa! <br>Aineisto on suuntaa antava. Analyysissä, jossa aineisto on tuotettu, tulee aina koko peltolohko luokitetuksi tiettyyn luokkaan, jos jokin osa peltolohkosta täyttää analyysissä käytettävät kriteerit.`
+  description: `KOTOMA paikkatietoanalyysilla arvioitu peltolohkojen soveltuvuus biohiilen levitykseen Ikaalisten reitin alueella.<br>
+  Analyysi pohjautuu vuoden 2017 peltolohkoaineistoon, vuoden 2018 Rusle aineistoon, sekä sen ympäristöhallinnon aineistoihin. <br>
+  Huomioitava aineistoa tulkittaessa! Aineisto on suuntaa antava. Analyysissä, jossa aineisto on tuotettu, tulee aina koko peltolohko luokitetuksi tiettyyn luokkaan, jos jokin osa peltolohkosta täyttää analyysissä käytettävät kriteerit. `
 });
 
-export default Kipsi;
+export default Biohiili;
