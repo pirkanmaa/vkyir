@@ -32,84 +32,64 @@ let style = feature => {
     })
   });
 
-  /* olds
-  0,01 - 10 -> rgba( 255, 255, 191, 1.00 ) #ffffbf
-  10,01 - 20 -> rgba( 237, 231, 142, 1.00 ) #ede78e
-  20,01 - 40 -> rgba( 219, 203, 99, 1.00 ) #dbcb63
-  40,01 - 60 -> rgba( 201, 173, 60, 1.00 ) #c9ad3c
-  60,01 - 80-> rgba( 184, 142, 28, 1.00 ) #b88e1c
-  80,01 - 117,07-> rgba( 168, 112, 0, 1.00 ) #a87000
-  PeltoPKg_Km2
-  */
-
-  /* new
-  0,01 - 10 -> rgba( 204,  204,  140, 1.00 ) #CCCC8C
-  10,01 - 20 -> rgba( 179,  179,  115, 1.00 ) #B3B373
-  20,01 - 40 -> rgba( 153,  153,  89, 1.00 ) #999959
-  40,01 - 60 -> rgba( 128,  128, 64, 1.00 ) #808040
-  60,01 - 80-> rgba( 102,  102,  38, 1.00 ) #666626
-  80,01 - 117,07-> rgba( 77,  77,  13, 1.00 ) #4D4D0D
-  PeltoPKg_Km2
-  */
-
-  /* newer
-  0,01 - 10 -> rgba( 220,  220,  102, 1.00 ) #DCDC66
-  10,01 - 20 -> rgba( 220,  220,  51, 1.00 ) #DCDC33
-  20,01 - 40 -> rgba( 220,  220,  0, 1.00 ) #DCDC00
-  40,01 - 60 -> rgba( 204,  204, 0, 1.00 ) #CCCC00
-  60,01 - 80-> rgba( 153,  153,  0, 1.00 ) #999900
-  80,01 - 117,07-> rgba( 102,  102,  0, 1.00 ) #666600
+  /* 
+  0,01 - 10 -> rgba( 230,217,13, 1.00 ) #e6d90d
+  10,01 - 20 -> rgba( 214,194,20, 1.00 ) #d6c214
+  20,01 - 40 -> rgba( 199,171,28, 1.00 ) #c7ab1c
+  40,01 - 60 -> rgba( 184,148,36, 1.00 ) #b89424
+  60,01 - 80-> rgba( 168,125,43, 1.00 ) #a87d2b
+  80,01 - 117,07-> rgba( 153,102,51, 1.00 ) #996633
   PeltoPKg_Km2
   */
 
   switch (Pelto_P_Kg_Km2_v) {
     case "0,01 - 10":
-      baseStyle.setFill(new Fill({ color: "rgba(220,  220,  102,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(230,217,13,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(220,  220,  102, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(230,217,13, 0.66)", width: 1 })
       );
       break;
     case "10,01 - 20":
-      baseStyle.setFill(new Fill({ color: "rgba(220,  220,  51,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(214,194,20,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(220,  220,  51, 0.66)",
+          color: "rgba(214,194,20, 0.66)",
           width: 1
         })
       );
       break;
     case "20,01 - 40":
-      baseStyle.setFill(new Fill({ color: "rgba(220,220,  0,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(199,171,28,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(220,220,  0, 0.66)",
+          color: "rgba(199,171,28, 0.66)",
           width: 1
         })
       );
       break;
     case "40,01 - 60":
-      baseStyle.setFill(new Fill({ color: "rgba(204,  204, 0,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(184,148,36,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(204,  204, 0, 0.66)",
+          color: "rgba(184,148,36, 0.66)",
           width: 1
         })
       );
       break;
     case "60,01 - 80":
-      baseStyle.setFill(new Fill({ color: "rgba(153,  153,  0,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(168,125,43,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(153,  153,  0, 0.66)",
+          color: "rgba(168,125,43, 0.66)",
           width: 1
         })
       );
       break;
     case "80,01 - 117,07":
-      baseStyle.setFill(new Fill({ color: "rgba( 102,  102,  0,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba( 153,102,51,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba( 102,  102,  0, 0.66)",
+          color: "rgba( 153,102,51, 0.66)",
           width: 1
         })
       );
