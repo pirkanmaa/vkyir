@@ -152,7 +152,18 @@ class LayerMeta extends Component {
     console.log("visible", this.props.visibility);*/
 
     switch (layer) {
-      case "Eroosiomalli, Metsä":
+      case "Eroosiomalli, Pelto [t/ha/v]":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <Typography variant="body2" className={classes.typography}>
+              Eroosiomalli
+            </Typography>
+            <img src="https://georaster.tampere.fi/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=georaster:rusle_eroosioaineistot" />
+          </div>
+        );
+      case "Eroosiomalli, Metsä [kg/ha/v]":
         return (
           <div classes={{ root: classes.root }}>
             <br />

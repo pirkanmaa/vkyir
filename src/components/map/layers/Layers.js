@@ -14,9 +14,12 @@ import Forforit_peltokuorma from "./Fosfori_3";
 import Kipsi from "./Kipsi";
 import Biohiili from "./Biohiili";
 
+import Rusle2 from "./Rusle2";
+
 /* Choose basemaps */
 let Layers = [
   Rusle,
+  Rusle2,
   Pintavesieko,
   Kuntarajat,
   TPO,
