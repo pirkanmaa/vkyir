@@ -143,6 +143,17 @@ const legend_vemana_biohiili = [
   { type: "Biohiilen on suositeltavaa", color: "#00c600" }
 ];
 
+/* 
+  Kuiva- ja lietelannan levitys on sallittua -> rgba( 115,  178,  115, 1.00 ) / #73B273
+  Lannan levitys ei ole sallittua -> rgba( 255,  0,  0, 1.00 ) / #FF0000
+  Lietelannan levitys on sallittua -> rgba( 168,  168,  0, 1.00 ) / #A8A800
+  */
+const legend_vemana_lanta = [
+  { type: "Kuiva- ja lietelannan levitys on sallittua", color: "#73B273" },
+  { type: "Lannan levitys ei ole sallittua", color: "#FF0000" },
+  { type: "Lietelannan levitys on sallittua", color: "#A8A800" }
+];
+
 class LayerMeta extends Component {
   showMeta = layer => {
     const { classes } = this.props;
@@ -353,6 +364,31 @@ class LayerMeta extends Component {
               Biohiili
             </Typography>
             {legend_vemana_biohiili.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+      case "Lanta":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Lanta
+            </Typography>
+            {legend_vemana_lanta.map((types, i) => (
               <div key={i} className={classes.slot}>
                 <Avatar
                   classes={{ root: classes.avatar }}

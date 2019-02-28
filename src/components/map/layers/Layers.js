@@ -13,6 +13,7 @@ import Forforit_metsakuorma from "./Fosfori_2";
 import Forforit_peltokuorma from "./Fosfori_3";
 import Kipsi from "./Kipsi";
 import Biohiili from "./Biohiili";
+import Lanta from "./Lanta";
 
 import Rusle2 from "./Rusle2";
 
@@ -30,7 +31,8 @@ let Layers = [
   Forforit_metsakuorma,
   Forforit_peltokuorma,
   Kipsi,
-  Biohiili
+  Biohiili,
+  Lanta
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
