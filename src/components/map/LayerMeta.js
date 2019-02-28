@@ -144,14 +144,14 @@ const legend_vemana_biohiili = [
 ];
 
 /* 
-  Kuiva- ja lietelannan levitys on sallittua -> rgba( 115,  178,  115, 1.00 ) / #73B273
+  Kuiva- ja lietelannan levitys on sallittua -> rgba( 0,102,0, 1.00 ) / #006600
   Lannan levitys ei ole sallittua -> rgba( 255,  0,  0, 1.00 ) / #FF0000
-  Lietelannan levitys on sallittua -> rgba( 168,  168,  0, 1.00 ) / #A8A800
+  Lietelannan levitys on sallittua -> rgba( 115,77,38, 1.00 ) / #734d26
   */
 const legend_vemana_lanta = [
-  { type: "Kuiva- ja lietelannan levitys on sallittua", color: "#73B273" },
+  { type: "Kuiva- ja lietelannan levitys on sallittua", color: "#006600" },
   { type: "Lannan levitys ei ole sallittua", color: "#FF0000" },
-  { type: "Lietelannan levitys on sallittua", color: "#A8A800" }
+  { type: "Lietelannan levitys on sallittua", color: "#734d26" }
 ];
 
 class LayerMeta extends Component {
