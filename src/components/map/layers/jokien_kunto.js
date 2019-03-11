@@ -12,7 +12,7 @@ import Fill from "ol/style/Fill";
 
 //"https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/VemalaKuormitusFosforiIKAALINEN/FeatureServer/";
 var serviceUrl =
-  "http://paikkatieto.ymparisto.fi/arcgis/rest/services/SYKE/SYKE_PintavesienEkologinenTila/MapServer/";
+  "https://paikkatieto.ymparisto.fi/arcgis/rest/services/SYKE/SYKE_PintavesienEkologinenTila/MapServer/";
 
 var layer = "1";
 
