@@ -44,7 +44,7 @@ let types = [
 ];
 
 let style = feature => {
-  console.log("vesty", feature.values_.toteutukse);
+  //console.log("vesty", feature.values_.toteutukse);
   let fill = new Fill({
     color: types.find(type => type.type === feature.get("tyyppi")).color
   });
@@ -71,7 +71,7 @@ vesty Toteutunut
 
   switch (toteutukse) {
     case "Kesken":
-      console.log("kesken");
+      //console.log("kesken");
       baseStyle.setImage(
         new Circle({
           radius: 9,
@@ -84,7 +84,7 @@ vesty Toteutunut
       );
       break;
     case "Toteutunut":
-      console.log("Toteutunut");
+      //console.log("Toteutunut");
       baseStyle.setImage(
         new Circle({
           radius: 9,

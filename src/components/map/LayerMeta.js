@@ -33,25 +33,60 @@ const styles = {
 };
 
 const legend1 = [
-  { type: "Elinympäristökunnostus", color: "#8dd3c7" },
-  { type: "Hapettaminen", color: "#ffffb3" },
-  { type: "Hoitokalastus", color: "#bebada" },
-  { type: "Järven nosto", color: "#fb8072" },
-  { type: "Kalataloudellinen kunnostus", color: "#80b1d3" },
+  {
+    type: "Toteutuneita (kehys toimenpiteen alla)",
+    color: "#000000",
+    width: 15,
+    height: 15
+  },
+  {
+    type: "Kesken (kehys toimenpiteen alla)",
+    color: "#808080",
+    width: 15,
+    height: 15
+  },
+
+  {
+    type: "Elinympäristökunnostus",
+    color: "#8dd3c7",
+    width: 10,
+    height: 10
+  },
+  { type: "Hapettaminen", color: "#ffffb3", width: 10, height: 10 },
+  { type: "Hoitokalastus", color: "#bebada", width: 10, height: 10 },
+  { type: "Järven nosto", color: "#fb8072", width: 10, height: 10 },
+  {
+    type: "Kalataloudellinen kunnostus",
+    color: "#80b1d3",
+    width: 10,
+    height: 10
+  },
   {
     type: "Kalataloudellinen kunnostus, valuma-aluekunnostus",
-    color: "#fdb462"
+    color: "#fdb462",
+    width: 10,
+    height: 10
   },
-  { type: "Kalatie", color: "#b3de69" },
-  { type: "Kalkitus", color: "#d19581" },
-  { type: "Kosteikko", color: "#fccde5" },
-  { type: "Lintuvesikunnostus", color: "#d9d9d9" },
-  //{ "type": 'Virtaaman säätö', "color": '#bc80bd' },
-  { type: "Ruoppaus", color: "#ccebc5" },
-  { type: "Tierumpu", color: "#ffed6f" },
-  { type: "Valuma-aluekunnostus", color: "#1f78b4" },
-  { type: "Vesialueen täyttö, rantaviivan muotoilu", color: "#b2df8a" },
-  { type: "Vesikasvillisuuden mekaaninen vähentäminen", color: "#33a02c" }
+  { type: "Kalatie", color: "#b3de69", width: 10, height: 10 },
+  { type: "Kalkitus", color: "#d19581", width: 10, height: 10 },
+  { type: "Kosteikko", color: "#fccde5", width: 10, height: 10 },
+  { type: "Lintuvesikunnostus", color: "#d9d9d9", width: 10, height: 10 },
+
+  { type: "Ruoppaus", color: "#ccebc5", width: 10, height: 10 },
+  { type: "Tierumpu", color: "#ffed6f", width: 10, height: 10 },
+  { type: "Valuma-aluekunnostus", color: "#1f78b4", width: 10, height: 10 },
+  {
+    type: "Vesialueen täyttö, rantaviivan muotoilu",
+    color: "#b2df8a",
+    width: 10,
+    height: 10
+  },
+  {
+    type: "Vesikasvillisuuden mekaaninen vähentäminen",
+    color: "#33a02c",
+    width: 10,
+    height: 10
+  }
 ];
 
 /*
@@ -154,6 +189,23 @@ const legend_vemana_lanta = [
   { type: "Lietelannan levitys on sallittua", color: "#734d26" }
 ];
 
+/*
+  "Erinomainen" -> rgba( 0, 0, 255, 1.00 ) #0000FF
+  "Hyvä" -> rgba( 0, 255, 0, 1.00 ) #00FF00
+  "Tyydyttävä" -> rgba( 255, 255, 0, 1.00 ) #FFFF00
+  "Välttävä" -> rgba( 242, 148, 0, 1.00 ) #F29400
+  "Huono" -> rgba( 237, 25, 36, 1.00 ) #ED1924
+  "Ekologinen luokittelu puuttuu" -> rgba( 171, 167, 181, 1.00 ) #ABA7B5
+  */
+const legend_syke_joki = [
+  { type: "Erinomainen", color: "#0000FF" },
+  { type: "Hyvä", color: "#00FF00" },
+  { type: "Tyydyttävä", color: "#FFFF00" },
+  { type: "Välttävä", color: "#F29400" },
+  { type: "Huono", color: "#ED1924" },
+  { type: "Ekologinen luokittelu puuttuu", color: "#ABA7B5" }
+];
+
 class LayerMeta extends Component {
   showMeta = layer => {
     const { classes } = this.props;
@@ -219,7 +271,11 @@ class LayerMeta extends Component {
               <div key={i} className={classes.slot}>
                 <Avatar
                   classes={{ root: classes.avatar }}
-                  style={{ background: `${types.color}` }}
+                  style={{
+                    background: `${types.color}`,
+                    width: types.width,
+                    height: types.height
+                  }}
                 />
                 <Typography
                   variant="body1"
@@ -389,6 +445,31 @@ class LayerMeta extends Component {
               Lanta
             </Typography>
             {legend_vemana_lanta.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+      case "Jokien kunto":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Jokien kunto
+            </Typography>
+            {legend_syke_joki.map((types, i) => (
               <div key={i} className={classes.slot}>
                 <Avatar
                   classes={{ root: classes.avatar }}
