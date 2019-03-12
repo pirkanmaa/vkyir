@@ -4,7 +4,7 @@ import Tile from "ol/layer/Tile";
 
 const source = new TileWMS({
   url:
-    "http://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_PintavesienEkologinenTila/MapServer/WMSServer?",
+    "https://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_PintavesienEkologinenTila/MapServer/WMSServer?",
   params: {
     VERSION: "1.3.0",
     FORMAT: "image/png",
