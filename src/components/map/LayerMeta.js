@@ -245,7 +245,7 @@ class LayerMeta extends Component {
             <Typography variant="body2" className={classes.typography}>
               Pintavesien ekologinen tila, järvet
             </Typography>
-            <img src="http://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_PintavesienEkologinenTila/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=1" />
+            <img src="https://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_PintavesienEkologinenTila/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=1" />
           </div>
         );
       case "Vesienhoidon tehostamisalueet":
