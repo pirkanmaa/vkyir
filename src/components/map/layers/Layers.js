@@ -22,6 +22,7 @@ let Layers = [
   Rusle,
   Rusle2,
   Pintavesieko,
+  JokienKunto,
   Kuntarajat,
   TPO,
   Kunnostusalueet,
@@ -30,10 +31,9 @@ let Layers = [
   Fosforit_pistekuorma,
   Forforit_metsakuorma,
   Forforit_peltokuorma,
-  Kipsi,
+  /*Kipsi,*/
   Biohiili,
-  Lanta,
-  JokienKunto
+  Lanta
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */

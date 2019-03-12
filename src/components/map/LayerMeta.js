@@ -237,13 +237,13 @@ class LayerMeta extends Component {
             <img src="http://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/RUSLE_2015_koko_Suomi_ja_kosteusindeksi_Puruvesi/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=10" />
           </div>
         );
-      case "Pintavesien ekologinen tila":
+      case "Pintavesien ekologinen tila, järvet":
         return (
           <div classes={{ root: classes.root }}>
             <br />
             <Divider />
             <Typography variant="body2" className={classes.typography}>
-              Pintavesien ekologinen tila
+              Pintavesien ekologinen tila, järvet
             </Typography>
             <img src="http://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_PintavesienEkologinenTila/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=1" />
           </div>
@@ -462,12 +462,12 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-      case "Jokien kunto":
+      case "Pintavesien ekologinen tila, joet":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Jokien kunto
+              Pintavesien ekologinen tila, joet
             </Typography>
             {legend_syke_joki.map((types, i) => (
               <div key={i} className={classes.slot}>

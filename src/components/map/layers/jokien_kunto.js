@@ -124,11 +124,11 @@ const vectorSource = new VectorSource({
 
 const JokienKunto = new VectorLayer({
   source: vectorSource,
-  name: "Jokien kunto",
-  title: "Jokien kunto",
+  name: "Pintavesien ekologinen tila, joet",
+  title: "Pintavesien ekologinen tila, joet",
   visible: false,
   style: style,
-  description: `Aineisto kuvaa vesipuitedirektiivin mukaisten pintavesimuodostumien ekologista tilaa vuonna 2016.<br> Vesipuitedirektiivin (Euroopan parlamentin ja neuvoston direktiivi 2000/60/EY, 23.10.2000 ) mukaisella pintavesimuodostumalla tarkoitetaan pintavesien erillistä ja merkittävää osaa, kuten järveä, tekoallasta, puroa, jokea tai kanavaa, puron, joen tai kanavan osaa, jokisuun vaihettumisaluetta tai rannikkovesien osaa. <br>Pintavedet jaotellaan vesienhoidon järjestämiseksi maantieteellisten ja luonnontieteellisten ominaispiirteiden mukaan tyyppeihin. Pintavedet voidaan nimetä tietyin edellytyksin keinotekoisiksi tai voimakkaasti muutetuiksi. Pintavesimuodostumat kuuluvat johonkin seuraavista jaotteluryhmistä: järvi, joki ja rannikkovesi. Tämä paikkatietoaineisto on vesipuitedirektiivin 2. suunnittelukauden EU:lle raportoitu tulos.`
+  description: `Ekologisessa luokittelussa käytetään viisiportaista asteikkoa (huono, välttävä, tyydyttävä, hyvä, erinomainen). Luokittelussa huomioidaan biologisista tekijöistä kalasto, pohjaeläimet, päällyslevät sekä järvissä lisäksi vesikasvillisuus ja kasviplankton ml. klorofyllipitoisuus. Biologinen aineisto koostuu jokien koskinäytteistä ja järvien ranta-, ulappa ja syvännenäytteistä. Lisäksi ekologisessa luokituksessa huomioidaan myös vesistöjen tilaan vaikuttavat ihmistoiminnasta johtuvat tekijät, kuten veden laatu, kuormitus sekä erilaiset vesirakentamisen aiheuttamat rakenteelliset muutokset, kuten padot ja perkaukset.<br>Suurin osa Pirkanmaan pintavesistä on ekologiselta tilaltaan hyviä tai erinomaisia. Järvet ovat paremmassa kunnossa kuin joet. Pirkanmaan järvien lukumäärästä 75 % ja pinta-alasta 79 % on erinomaisessa tai hyvässä ekologisessa tilassa. Jokien määrästä erinomaisessa tai hyvässä luokassa on 53 % ja jokipituudesta 40 %. Hyvää heikommassa tilassa on järvien määrästä 25 % ja pinta-alasta 21 % sekä jokien määrästä 47 % ja jokipituudesta 60 %. Arvio perustuu pääosin vuosien 2006-2012 seurantatietoihin. Pirkanmaalla on luokiteltu kaikkiaan 399 järveä ja jokea. Luokittelussa ovat mukana kaikki pinta-alaltaan yli 50 hehtaarin suuruiset järvet ja niiden laskujoet.`
 });
 
 export default JokienKunto;
