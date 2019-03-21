@@ -487,6 +487,27 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
+      case "Tulvariskivyöhykkeet (vesistö)":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <Typography variant="body2" className={classes.typography}>
+              Tulvariskivyöhykkeet (vesistö)
+            </Typography>
+            <img src="http://paikkatieto.ymparisto.fi/arcgis/services/INSPIRE/SYKE_Luonnonriskialueet/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=Tulvavaaravyohykkeet_Vesistotulva_1_1000a" />
+          </div>
+        );
+      case "Pohjavesialueet":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <Typography variant="body2" className={classes.typography}>
+              Pohjavesialueet
+            </Typography>
+          </div>
+        );
     } // end switch
   };
 

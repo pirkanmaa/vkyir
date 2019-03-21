@@ -16,6 +16,9 @@ import Biohiili from "./Biohiili";
 import Lanta from "./Lanta";
 import Rusle2 from "./Rusle2";
 import JokienKunto from "./jokien_kunto";
+import Tulvariski_1000 from "./Tulvaalueet";
+import Pohjavesialueet from "./Pohjavesialueet";
+import NaturaSuojelualueet from "./Natura_suojelualueet";
 
 /* Choose basemaps */
 let Layers = [
@@ -33,7 +36,10 @@ let Layers = [
   Forforit_peltokuorma,
   /*Kipsi,*/
   Biohiili,
-  Lanta
+  Lanta,
+  Tulvariski_1000,
+  Pohjavesialueet,
+  NaturaSuojelualueet
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
