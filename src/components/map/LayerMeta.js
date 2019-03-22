@@ -173,9 +173,9 @@ const legend_vemana_kipsi = [
   "Biohiilen on suositeltavaa" -> rgba( 0, 200, 0, 1.00 ) #00c600
   */
 const legend_vemana_biohiili = [
-  { type: "Biohiilen ei ole sallittua", color: "#FF0000" },
-  { type: "Biohiilen on sallittua", color: "#dcdc00" },
-  { type: "Biohiilen on suositeltavaa", color: "#00c600" }
+  { type: "Biohiilen käyttö ei ole sallittua", color: "#FF0000" },
+  { type: "Biohiilen käyttö on sallittua", color: "#dcdc00" },
+  { type: "Biohiilen käyttö on suositeltavaa", color: "#00c600" }
 ];
 
 /* 
