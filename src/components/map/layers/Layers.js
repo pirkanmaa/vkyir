@@ -19,6 +19,8 @@ import JokienKunto from "./jokien_kunto";
 import Tulvariski_1000 from "./Tulvaalueet";
 import Pohjavesialueet from "./Pohjavesialueet";
 import NaturaSuojelualueet from "./Natura_suojelualueet";
+import YksityisetSuojelualueet from "./YksityisetSuojeluAlueet";
+import ValtionSuojeluAlueet from "./ValtionmaidenSuojeluAlueet";
 
 /* Choose basemaps */
 let Layers = [
@@ -39,7 +41,9 @@ let Layers = [
   Lanta,
   Tulvariski_1000,
   Pohjavesialueet,
-  NaturaSuojelualueet
+  NaturaSuojelualueet,
+  YksityisetSuojelualueet,
+  ValtionSuojeluAlueet
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */

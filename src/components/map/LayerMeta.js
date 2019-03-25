@@ -495,7 +495,7 @@ class LayerMeta extends Component {
             <Typography variant="body2" className={classes.typography}>
               Tulvariskivyöhykkeet (vesistö)
             </Typography>
-            <img src="http://paikkatieto.ymparisto.fi/arcgis/services/INSPIRE/SYKE_Luonnonriskialueet/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=Tulvavaaravyohykkeet_Vesistotulva_1_1000a" />
+            <img src="http://paikkatieto.ymparisto.fi/arcgis/services/INSPIRE/SYKE_Luonnonriskialueet/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=Tulvavaaravyohykkeet_Vesistotulva_1_1000a&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
           </div>
         );
       case "Pohjavesialueet":
@@ -506,6 +506,40 @@ class LayerMeta extends Component {
             <Typography variant="body2" className={classes.typography}>
               Pohjavesialueet
             </Typography>
+            <img src="https://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_Pohjavesialueet/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=Pohjavesialuerajat&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
+          </div>
+        );
+      case "Natura 2000 - SAC Manner-Suomi aluemaiset":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <Typography variant="body2" className={classes.typography}>
+              Natura 2000 - SAC Manner-Suomi aluemaiset
+            </Typography>
+            <img src="https://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_SuojellutAlueet/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=Natura 2000 - SAC Manner-Suomi aluemaiset&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
+          </div>
+        );
+      case "Yksityiset suojelualueet":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <Typography variant="body2" className={classes.typography}>
+              Yksityiset suojelualueet
+            </Typography>
+            <img src="https://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_SuojellutAlueet/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=Yksityiset suojelualueet&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
+          </div>
+        );
+      case "Valtion maiden luonnonsuojelualueet":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <Typography variant="body2" className={classes.typography}>
+              Valtion maiden luonnonsuojelualueet
+            </Typography>
+            <img src="https://paikkatieto.ymparisto.fi/arcgis/services/SYKE/SYKE_SuojellutAlueet/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=Valtion maiden luonnonsuojelualueet&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
           </div>
         );
     } // end switch
