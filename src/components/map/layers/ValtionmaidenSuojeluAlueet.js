@@ -25,8 +25,8 @@ const ValtionSuojeluAlueet = new Tile({
   name: "Valtion maiden luonnonsuojelualueet",
   visible: false,
   description: `Luonnonsuojelu- ja erämaa-alueet<br>
-  Luonnonsuojelu- ja erämaa-alueet –aineisto koostuu luonnonsuojelulain nojalla tai asetuksella valtion maille tai lääninhallituksen päätöksellä yksityismaille perustetuista luonnonsuojelualueista. Aineistoon kuuluvat myös luonnontilaisina säilytettävät ja osittain luonnonmukaisesti käsiteltävät laaja-alaiset erämaa-alueet. 1.9.2014 alkaen aineisto on tuotettu kokonaisuudessaan Metsähallituksen SATJ-järjestelmässä. Aineisto kuuluu SYKEn avoimiin aineistoihin (CC BY 4.0).<br>
-  Lisätietoja aineistosta: http://metatieto.ymparisto.fi:8080/geoportal/catalog/search/resource/details.page?uuid=%7B2627E9FE-B657-48E1-A98D-000D4CD5CA38%7D`
+  Luonnonsuojelu- ja erämaa-alueet –aineisto koostuu luonnonsuojelulain nojalla tai asetuksella valtion maille tai lääninhallituksen päätöksellä yksityismaille perustetuista luonnonsuojelualueista. Aineistoon kuuluvat myös luonnontilaisina säilytettävät ja osittain luonnonmukaisesti käsiteltävät laaja-alaiset erämaa-alueet. 1.9.2014 alkaen aineisto on tuotettu kokonaisuudessaan Metsähallituksen SATJ-järjestelmässä. Aineisto kuuluu SYKEn avoimiin aineistoihin (CC BY 4.0).
+  `
 });
 
 export default ValtionSuojeluAlueet;
