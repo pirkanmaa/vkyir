@@ -230,6 +230,61 @@ class LayerInfo extends Component {
           </div>
         );
         break;
+      case "Pohjavesialueet":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <br />
+            <span>
+              <a
+                href="http://metatieto.ymparisto.fi:8080/geoportal/catalog/search/resource/details.page?uuid=%7BF8321822-0A0D-4AC4-81E3-B9E3BE6386A2%7D"
+                target="_blank"
+                key="tpo2"
+              >
+                Lisätietoja aineistosta
+              </a>
+            </span>
+          </div>
+        );
+        break;
+      case "Valtion maiden luonnonsuojelualueet":
+      case "Yksityiset suojelualueet":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <br />
+            <span>
+              <a
+                href="http://metatieto.ymparisto.fi:8080/geoportal/catalog/search/resource/details.page?uuid=%7B2627E9FE-B657-48E1-A98D-000D4CD5CA38%7D"
+                target="_blank"
+                key="tpo2"
+              >
+                Lisätietoja aineistosta
+              </a>
+            </span>
+          </div>
+        );
+        break;
+      case "Natura 2000 - SAC Manner-Suomi aluemaiset":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <br />
+            <span>
+              <a
+                href="http://metatieto.ymparisto.fi:8080/geoportal/catalog/search/resource/details.page?uuid=%7B36FA93DC-F156-427E-973E-E83F7AFC6306%7D"
+                target="_blank"
+                key="tpo2"
+              >
+                Lisätietoja aineistosta
+              </a>
+            </span>
+          </div>
+        );
+        break;
     }
   };
 

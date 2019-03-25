@@ -20,9 +20,7 @@ const NaturaSuojelualueet = new Tile({
   name: "Natura 2000 - SAC Manner-Suomi aluemaiset",
   visible: false,
   description: `
-  Natura 2000 - SAC Manner-Suomi. Erityisten suojelutoimien alue.<br>
-  Lisätietoja aineistosta:  
-  http://metatieto.ymparisto.fi:8080/geoportal/catalog/search/resource/details.page?uuid=%7B36FA93DC-F156-427E-973E-E83F7AFC6306%7D`
+  Natura 2000 - SAC Manner-Suomi. Erityisten suojelutoimien alue.`
 });
 
 export default NaturaSuojelualueet;

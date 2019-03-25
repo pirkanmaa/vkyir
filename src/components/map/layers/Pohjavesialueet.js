@@ -20,8 +20,8 @@ const Pohjavesialueet = new Tile({
   name: "Pohjavesialueet",
   visible: false,
   description: `Aineisto sisältää vedenhankintaa varten kartoitetut ja luokitellut pohjavesialueet.
-  Aineisto kuuluu SYKEn avoimiin aineistoihin (CC BY 4.0) lukuunottamatta pistemäisiä pohjavesialueita.<br> 
-  Lisätietoja aineistosta: http://metatieto.ymparisto.fi:8080/geoportal/catalog/search/resource/details.page?uuid=%7BF8321822-0A0D-4AC4-81E3-B9E3BE6386A2%7D`
+  Aineisto kuuluu SYKEn avoimiin aineistoihin (CC BY 4.0) lukuunottamatta pistemäisiä pohjavesialueita. 
+  `
 });
 
 export default Pohjavesialueet;
