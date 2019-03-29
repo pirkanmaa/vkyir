@@ -550,7 +550,7 @@ class LayerMeta extends Component {
             <Typography variant="body2" className={classes.typography}>
               Huuhtouma (maalajin rajanopeus ylittyy)
             </Typography>
-            <img src="http://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=1&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
+            <img src="https://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=1&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
           </div>
         );
       case "Huuhtouma (Maaperä 1:20 000)":
@@ -561,7 +561,7 @@ class LayerMeta extends Component {
             <Typography variant="body2" className={classes.typography}>
               Huuhtouma (Maaperä 1:20 000)
             </Typography>
-            <img src="http://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=2&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
+            <img src="https://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=2&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
           </div>
         );
       case "Huuhtouma (Maaperä 1:50 000)":
@@ -572,7 +572,7 @@ class LayerMeta extends Component {
             <Typography variant="body2" className={classes.typography}>
               Huuhtouma (Maaperä 1:50 000)
             </Typography>
-            <img src="http://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=3&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
+            <img src="https://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=3&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
           </div>
         );
     } // end switch
