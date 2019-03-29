@@ -22,6 +22,10 @@ import NaturaSuojelualueet from "./Natura_suojelualueet";
 import YksityisetSuojelualueet from "./YksityisetSuojeluAlueet";
 import ValtionSuojeluAlueet from "./ValtionmaidenSuojeluAlueet";
 
+import Huuhtouma20K from "./Huuhtouma20K";
+import Huuhtouma50K from "./Huuhtouma50K";
+import HuuhtoumaRajanopeus from "./HuuhtoumariskiRajanopeus";
+
 /* Choose basemaps */
 let Layers = [
   Rusle,
@@ -41,9 +45,12 @@ let Layers = [
   Lanta,
   Tulvariski_1000,
   Pohjavesialueet,
-  NaturaSuojelualueet,
-  YksityisetSuojelualueet,
-  ValtionSuojeluAlueet
+  /*NaturaSuojelualueet,
+  YksityisetSuojelualueet,*/
+  ValtionSuojeluAlueet,
+  Huuhtouma20K,
+  Huuhtouma50K,
+  HuuhtoumaRajanopeus
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
