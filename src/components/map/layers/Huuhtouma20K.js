@@ -9,18 +9,18 @@ const source = new TileWMS({
     VERSION: "1.3.0",
     FORMAT: "image/png",
     TRANSPARENT: true,
-    LAYERS: "2",
+    LAYERS: "1",
     TILED: true
   }
 });
 
-const Huuhtouma20K = new Tile({
+const Huuhtouma_20K_maapera = new Tile({
   source: source,
   opacity: 0.75,
-  title: "Huuhtouma (Maaperä 1:20 000)",
-  name: "Huuhtouma (Maaperä 1:20 000)",
+  title: "Maaperä 1:20 000",
+  name: "Maaperä 1:20 000",
   visible: false,
   description: `Riskianalyysi, joka on laskettu GTK:n maaperäaineiston, eri maalajien rajanopeusarvojen sekä aikaisemmin Suomen metsäkeskuksessa tehdyn veden virtausmallin perusteella. Veden virtausmalliaineistosta on tässä analyysissä käytetty veden virtausnopeutta. Tuloksena on tieto kohteista, joissa ojan virtausnopeus ylittää maalajin rajanopeuden. Maalajin rajanopeudella tarkoitetaan suurinta veden virtausnopeutta, jolloin maalajite ei vielä lähde liikkeelle eli ei synny eroosiota.`
 });
 
-export default Huuhtouma20K;
+export default Huuhtouma_20K_maapera;

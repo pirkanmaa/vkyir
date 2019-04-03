@@ -22,9 +22,9 @@ import NaturaSuojelualueet from "./Natura_suojelualueet";
 import YksityisetSuojelualueet from "./YksityisetSuojeluAlueet";
 import ValtionSuojeluAlueet from "./ValtionmaidenSuojeluAlueet";
 
-import Huuhtouma20K from "./Huuhtouma20K";
-import Huuhtouma50K from "./Huuhtouma50K";
-import HuuhtoumaRajanopeus from "./HuuhtoumariskiRajanopeus";
+import Huuhtouma_20K_maapera from "./Huuhtouma20K";
+
+import Maalajinrajanopeus from "./HuuhtoumariskiRajanopeus";
 
 /* Choose basemaps */
 let Layers = [
@@ -48,9 +48,9 @@ let Layers = [
   /*NaturaSuojelualueet,
   YksityisetSuojelualueet,*/
   ValtionSuojeluAlueet,
-  Huuhtouma20K,
-  Huuhtouma50K,
-  HuuhtoumaRajanopeus
+  Huuhtouma_20K_maapera,
+  /*Huuhtouma50K,*/
+  Maalajinrajanopeus
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
