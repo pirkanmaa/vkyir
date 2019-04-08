@@ -11,16 +11,16 @@ import Fill from "ol/style/Fill";
 //Spatial Reference: 102139  (3067)
 
 /* VEMALA Metsakuorma Kg/Km2/v 12/2018 IKAALINEN */
-//"https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/IkaalistenReittiLanta/FeatureServer/";
+
 var serviceUrl =
   "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/KotomaIkaalistenReitti/FeatureServer/";
 
-var layer = "3";
+var layer = "4";
 
 var esrijsonFormat = new EsriJSON();
 
 let style = feature => {
-  const { Salaoj } = feature.values_;
+  const { SuojaVyoh } = feature.values_;
 
   let baseStyle = new Style({
     fill: new Fill({
@@ -33,22 +33,32 @@ let style = feature => {
   });
 
   /* 
-  Säätösalaojitus on mahdollista -> rgba( 0,102,0, 1.00 ) / #006600
-  Säätösalaojitus ei ole mahdollista -> rgba( 255,  0,  0, 1.00 ) / #FF0000  
+  Suojavyöhykettä ei voida perustaa -> rgba( 255, 0, 0,0.22 ) / #ff0000
+  Suojavyöhyke voidaan perustaa -> rgba( 230, 230, 0, 1.00 ) / #e6e600 
+  Suojavyöhyke on suositeltava perustaa -> rgba( 112, 168, 0, 1.00 ) / ##70a800
   */
 
-  switch (Salaoj) {
-    case "Säätösalaojitus on mahdollista":
-      baseStyle.setFill(new Fill({ color: "rgba(0,102,0,0.22)" }));
+  switch (SuojaVyoh) {
+    case "Suojavyöhykettä ei voida perustaa":
+      baseStyle.setFill(new Fill({ color: "rgba(255, 0, 0,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(0,102,0, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(110,110,110, 0.66)", width: 1 })
       );
       break;
-    case "Säätösalaojitus ei ole mahdollista":
-      baseStyle.setFill(new Fill({ color: "rgba(255,  0,  0,0.22)" }));
+    case "Suojavyöhyke voidaan perustaa":
+      baseStyle.setFill(new Fill({ color: "rgba(230, 230, 0,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(255,  0,  0, 0.66)",
+          color: "rgba(110,110,110, 0.66)",
+          width: 1
+        })
+      );
+      break;
+    case "Suojavyöhyke on suositeltava perustaa":
+      baseStyle.setFill(new Fill({ color: "rgba(112, 168, 0,0.22)" }));
+      baseStyle.setStroke(
+        new Stroke({
+          color: "rgba(110,110,110, 0.66)",
           width: 1
         })
       );
@@ -98,15 +108,15 @@ const vectorSource = new VectorSource({
   )
 });
 
-const Salaojitus = new VectorLayer({
+const Suojavyohyke = new VectorLayer({
   source: vectorSource,
-  name: "Säätösalaojitus",
-  title: "Säätösalaojitus",
+  name: "Suojavyöhyke",
+  title: "Suojavyöhyke",
   visible: false,
   style: style,
-  description: `KOTOMA paikkatietoanalyysilla on arvioitu peltolohkojen soveltuvuutta säätösalaojitukseen Ikaalisten reitin alueella.<br>
-  Analyysi pohjautuu vuoden 2017 peltolohkoaineistoon, vuoden 2018 Rusle aineistoon, sekä sen ympäristöhallinnon aineistoihin.<br
-  Huomioitava aineistoa tulkittaessa! Aineisto on suuntaa antava. Analyysissä, jossa aineisto on tuotettu, tulee aina koko peltolohko luokitetuksi tiettyyn luokkaan, jos jokin osa peltolohkosta täyttää analyysissä käytettävät kriteerit. `
+  description: `KOTOMA paikkatietoanalyysilla on arvioitu peltolohkojen soveltuvuutta suojavyöhykkeen perustamiseen Ikaalisten reitin alueella.<br>
+  Analyysi pohjautuu vuoden 2017 peltolohkoaineistoon, vuoden 2018 Rusle aineistoon, sekä sen ympäristöhallinnon aineistoihin.<br>
+  Huomioitava aineistoa tulkittaessa! Aineisto on suuntaa antava. Analyysissä, jossa aineisto on tuotettu, tulee aina koko peltolohko luokitetuksi tiettyyn luokkaan, jos jokin osa peltolohkosta täyttää analyysissä käytettävät kriteerit.`
 });
 
-export default Salaojitus;
+export default Suojavyohyke;

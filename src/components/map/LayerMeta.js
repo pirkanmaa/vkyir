@@ -224,6 +224,38 @@ const legend_syke_joki = [
   { type: "Ekologinen luokittelu puuttuu", color: "#ABA7B5" }
 ];
 
+/* legend_plohkot_pv
+  Palsta sijaitsee pohjaveden muodostumisalueella -> rgba( 0,77,168,0.22 ) / #004da8
+  Palsta sijaitsee pohjavesialueella -> rgba( 115, 178, 255, 1.00 ) / #73b2ff  
+  */
+const legend_plohkot_pv = [
+  { type: "Palsta sijaitsee pohjaveden muodostumisalueella", color: "#004da8" },
+  { type: "Palsta sijaitsee pohjavesialueella", color: "#73b2ff" }
+];
+
+/* legend_vemana_suojavyohyke
+  Suojavyöhykettä ei voida perustaa -> rgba( 255, 0, 0,0.22 ) / #ff0000
+  Suojavyöhyke voidaan perustaa -> rgba( 230, 230, 0, 1.00 ) / #e6e600 
+  Suojavyöhyke on suositeltava perustaa -> rgba( 112, 168, 0, 1.00 ) / ##70a800
+  */
+const legend_vemana_suojavyohyke = [
+  { type: "Suojavyöhykettä ei voida perustaa", color: "#ff0000" },
+  { type: "Suojavyöhyke voidaan perustaa", color: "#e6e600" },
+  { type: "Suojavyöhyke on suositeltava perustaa", color: "#70a800" }
+];
+
+/* legend_vemana_vesistoon
+  Palsta sijaitse alle 10 m etäisyydellä vesistöstä -> rgba( 255, 127, 127,0.22 ) / #ff7f7f
+  Palsta sijaitse alle 5 m etäisyydellä vesistöstä -> rgba( 230, 0, 0, 1.00 ) / #e60000 
+  */
+const legend_vemana_vesistoon = [
+  {
+    type: "Palsta sijaitse alle 10 m etäisyydellä vesistöstä",
+    color: "#ff7f7f"
+  },
+  { type: "Palsta sijaitse alle 5 m etäisyydellä vesistöstä", color: "#e60000" }
+];
+
 class LayerMeta extends Component {
   showMeta = layer => {
     const { classes } = this.props;
@@ -480,12 +512,12 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-      case "Salaojitus":
+      case "Säätösalaojitus":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Salaojitus
+              Säätösalaojitus
             </Typography>
             {legend_vemana_salaojitus.map((types, i) => (
               <div key={i} className={classes.slot}>
@@ -505,6 +537,58 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
+      case "Peltolohkot vesistön läheisyydessä":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Peltolohkot vesistön läheisyydessä
+            </Typography>
+            {legend_vemana_vesistoon.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+
+      case "Suojavyöhyke":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Suojavyohyke
+            </Typography>
+            {legend_vemana_suojavyohyke.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+
       case "Kalkki":
         return (
           <div classes={{ root: classes.root }}>
@@ -631,6 +715,31 @@ class LayerMeta extends Component {
               Maalajinrajanopeus
             </Typography>
             <img src="https://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=2&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
+          </div>
+        );
+      case "Peltolohkot pohjavesialueella":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Peltolohkot pohjavesialueella
+            </Typography>
+            {legend_plohkot_pv.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
           </div>
         );
     } // end switch

@@ -28,6 +28,9 @@ import Maalajinrajanopeus from "./HuuhtoumariskiRajanopeus";
 
 import Salaojitus from "./Salaojitus";
 import Kalkki from "./Kalkki";
+import PeltolohkotPV from "./LohkotPohjavesi";
+import Suojavyohyke from "./Suojavyohyke";
+import Reittivesistoon from "./Peltolohkotvesistoon";
 
 /* Choose basemaps */
 let Layers = [
@@ -55,7 +58,10 @@ let Layers = [
   /*Huuhtouma50K,*/
   Maalajinrajanopeus,
   Salaojitus,
-  Kalkki
+  Kalkki,
+  PeltolohkotPV,
+  Suojavyohyke,
+  Reittivesistoon
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
