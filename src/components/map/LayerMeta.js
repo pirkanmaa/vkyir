@@ -186,7 +186,25 @@ const legend_vemana_biohiili = [
 const legend_vemana_lanta = [
   { type: "Kuiva- ja lietelannan levitys on sallittua", color: "#006600" },
   { type: "Lannan levitys ei ole sallittua", color: "#FF0000" },
-  { type: "Lietelannan levitys on sallittua", color: "#734d26" }
+  { type: "Kuivalannan levitys on sallittua", color: "#734d26" }
+];
+
+/* legend_vemana_salaojitus
+  Säätösalaojitus on mahdollista -> rgba( 0,102,0, 1.00 ) / #006600
+  Säätösalaojitus ei ole mahdollista -> rgba( 255,  0,  0, 1.00 ) / #FF0000  
+  */
+const legend_vemana_salaojitus = [
+  { type: "Säätösalaojitus on mahdollista", color: "#006600" },
+  { type: "Säätösalaojitus ei ole mahdollista", color: "#FF0000" }
+];
+
+/* 
+  Kalkin levitys on sallittua -> rgba( 0,102,0, 1.00 ) / #006600
+  Kalkin levitys ei ole sallittua -> rgba( 255,  0,  0, 1.00 ) / #FF0000  
+  */
+const legend_vemana_kalkki = [
+  { type: "Kalkin levitys on sallittua", color: "#006600" },
+  { type: "Kalkin levitys ei ole sallittua", color: "#FF0000" }
 ];
 
 /*
@@ -462,6 +480,57 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
+      case "Salaojitus":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Salaojitus
+            </Typography>
+            {legend_vemana_salaojitus.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+      case "Kalkki":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Kalkki
+            </Typography>
+            {legend_vemana_kalkki.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+
       case "Pintavesien ekologinen tila, joet":
         return (
           <div classes={{ root: classes.root }}>

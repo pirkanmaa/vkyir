@@ -10,17 +10,17 @@ import Fill from "ol/style/Fill";
 
 //Spatial Reference: 102139  (3067)
 
-//"https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/VemalaKuormitusFosforiIKAALINEN/FeatureServer/";
+/* VEMALA Metsakuorma Kg/Km2/v 12/2018 IKAALINEN */
+//"https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/IkaalistenReittiLanta/FeatureServer/";
 var serviceUrl =
   "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/KotomaIkaalistenReitti/FeatureServer/";
 
-var layer = "5";
+var layer = "3";
 
 var esrijsonFormat = new EsriJSON();
 
 let style = feature => {
-  //console.log(feature);
-  const { Biohiili } = feature.values_;
+  const { Salaoj } = feature.values_;
 
   let baseStyle = new Style({
     fill: new Fill({
@@ -32,28 +32,25 @@ let style = feature => {
     })
   });
 
-  /*
-  "Biohiilen ei ole sallittua" -> rgba( 255, 0, 0, 1.00 ) #FF0000
-  "Biohiilen on sallittua" -> rgba( 220, 220, 0, 1.00 ) #dcdc00
-  "Biohiilen on suositeltavaa" -> rgba( 0, 200, 0, 1.00 ) #00c600
+  /* 
+  Säätösalaojitus on mahdollista -> rgba( 0,102,0, 1.00 ) / #006600
+  Säätösalaojitus ei ole mahdollista -> rgba( 255,  0,  0, 1.00 ) / #FF0000  
   */
-  switch (Biohiili) {
-    case "Biohiilen levitys ei ole sallittua":
-      baseStyle.setFill(new Fill({ color: "rgba(255, 0, 0,0.22)" }));
+
+  switch (Salaoj) {
+    case "Säätösalaojitus on mahdollista":
+      baseStyle.setFill(new Fill({ color: "rgba(0,102,0,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(255, 0, 0, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(0,102,0, 0.66)", width: 1 })
       );
       break;
-    case "Biohiilen levitys on sallittua":
-      baseStyle.setFill(new Fill({ color: "rgba(220, 220, 0,0.22)" }));
+    case "Säätösalaojitus ei ole mahdollista":
+      baseStyle.setFill(new Fill({ color: "rgba(255,  0,  0,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(220, 220, 0, 0.66)", width: 1 })
-      );
-      break;
-    case "Biohiilen levitys on suositeltavaa":
-      baseStyle.setFill(new Fill({ color: "rgba(0, 200, 0,0.22)" }));
-      baseStyle.setStroke(
-        new Stroke({ color: "rgba(0, 200, 0, 0.66)", width: 1 })
+        new Stroke({
+          color: "rgba(255,  0,  0, 0.66)",
+          width: 1
+        })
       );
       break;
   }
@@ -101,15 +98,15 @@ const vectorSource = new VectorSource({
   )
 });
 
-const Biohiili = new VectorLayer({
+const Salaojitus = new VectorLayer({
   source: vectorSource,
-  name: "Biohiili",
-  title: "Biohiili",
+  name: "Salaojitus",
+  title: "Salaojitus",
   visible: false,
   style: style,
-  description: `KOTOMA paikkatietoanalyysilla arvioitu peltolohkojen soveltuvuus biohiilen levitykseen Ikaalisten reitin alueella.<br>
+  description: `KOTOMA paikkatietoanalyysilla arvioitu peltolohkojen soveltuvuus salaojitukseen Ikaalisten reitin alueella.<br>
   Analyysi pohjautuu vuoden 2017 peltolohkoaineistoon, vuoden 2018 Rusle aineistoon, sekä sen ympäristöhallinnon aineistoihin. <br>
   Huomioitava aineistoa tulkittaessa! Aineisto on suuntaa antava. Analyysissä, jossa aineisto on tuotettu, tulee aina koko peltolohko luokitetuksi tiettyyn luokkaan, jos jokin osa peltolohkosta täyttää analyysissä käytettävät kriteerit. `
 });
 
-export default Biohiili;
+export default Salaojitus;

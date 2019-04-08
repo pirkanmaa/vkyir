@@ -26,6 +26,9 @@ import Huuhtouma_20K_maapera from "./Huuhtouma20K";
 
 import Maalajinrajanopeus from "./HuuhtoumariskiRajanopeus";
 
+import Salaojitus from "./Salaojitus";
+import Kalkki from "./Kalkki";
+
 /* Choose basemaps */
 let Layers = [
   Rusle,
@@ -45,12 +48,14 @@ let Layers = [
   Lanta,
   Tulvariski_1000,
   Pohjavesialueet,
-  /*NaturaSuojelualueet,
-  YksityisetSuojelualueet,*/
+  NaturaSuojelualueet,
+  YksityisetSuojelualueet,
   ValtionSuojeluAlueet,
   Huuhtouma_20K_maapera,
   /*Huuhtouma50K,*/
-  Maalajinrajanopeus
+  Maalajinrajanopeus,
+  Salaojitus,
+  Kalkki
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */

@@ -13,14 +13,14 @@ import Fill from "ol/style/Fill";
 /* VEMALA Metsakuorma Kg/Km2/v 12/2018 IKAALINEN */
 
 var serviceUrl =
-  "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/IkaalistenReittiLanta/FeatureServer/";
+  "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/KotomaIkaalistenReitti/FeatureServer/";
 
-var layer = "0";
+var layer = "2";
 
 var esrijsonFormat = new EsriJSON();
 
 let style = feature => {
-  const { Lannanlevitys } = feature.values_;
+  const { Lanta } = feature.values_;
 
   let baseStyle = new Style({
     fill: new Fill({
@@ -38,7 +38,7 @@ let style = feature => {
   Lietelannan levitys on sallittua -> rgba( 115,77,38, 1.00 ) / #734d26
   */
 
-  switch (Lannanlevitys) {
+  switch (Lanta) {
     case "Kuiva- ja lietelannan levitys on sallittua":
       baseStyle.setFill(new Fill({ color: "rgba(0,102,0,0.22)" }));
       baseStyle.setStroke(
@@ -54,7 +54,7 @@ let style = feature => {
         })
       );
       break;
-    case "Lietelannan levitys on sallittua":
+    case "Kuivalannan levitys on sallittua":
       baseStyle.setFill(new Fill({ color: "rgba(115,77,38,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
