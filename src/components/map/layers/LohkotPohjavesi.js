@@ -33,13 +33,13 @@ let style = feature => {
   });
 
   /* 
-  Palsta sijaitsee pohjaveden muodostumisalueella -> rgba( 0,77,168,0.22 ) / #004da8
+  Palsta sijaitsee pohjaveden muodostumisalueella -> rgba( 0,0,204,0.22 ) / #0000cc
   Palsta sijaitsee pohjavesialueella -> rgba( 115, 178, 255, 1.00 ) / #73b2ff  
   */
 
   switch (PohjavTxt) {
     case "Palsta sijaitsee pohjaveden muodostumisalueella":
-      baseStyle.setFill(new Fill({ color: "rgba(0,77,168,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(0,0,204,0.50)" }));
       baseStyle.setStroke(
         new Stroke({ color: "rgba(110,110,110, 0.66)", width: 1 })
       );

@@ -225,11 +225,11 @@ const legend_syke_joki = [
 ];
 
 /* legend_plohkot_pv
-  Palsta sijaitsee pohjaveden muodostumisalueella -> rgba( 0,77,168,0.22 ) / #004da8
+  Palsta sijaitsee pohjaveden muodostumisalueella -> rgba( 0,0,204,0.22 ) / #0000cc
   Palsta sijaitsee pohjavesialueella -> rgba( 115, 178, 255, 1.00 ) / #73b2ff  
   */
 const legend_plohkot_pv = [
-  { type: "Palsta sijaitsee pohjaveden muodostumisalueella", color: "#004da8" },
+  { type: "Palsta sijaitsee pohjaveden muodostumisalueella", color: "#0000cc" },
   { type: "Palsta sijaitsee pohjavesialueella", color: "#73b2ff" }
 ];
 
