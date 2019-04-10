@@ -42,6 +42,10 @@ const styles = theme => ({
   infoButton: {
     textTransform: "none",
     textAlign: "left"
+  },
+  toolTip: {
+    color: "black",
+    backgroundColor: "white"
   }
 });
 
@@ -111,9 +115,10 @@ class LayerControl extends Component {
                       key={"A" + index}
                       label={
                         <Tooltip
+                          classes={{ tooltip: classes.toolTip }}
                           id="layerInfoTooltip"
                           title="lisätietoa"
-                          placement="right-start"
+                          placement="bottom-end"
                           leaveTouchDelay={250}
                           enterTouchDelay={500}
                         >
