@@ -1,41 +1,46 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import React, { Component } from "react";
+import { withStyles, withTheme } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import blueGrey from "@material-ui/core/colors/blueGrey";
+import grey from "@material-ui/core/colors/grey";
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: 'none',
-    right: '1rem',
-    top: '1rem',
-    position: 'absolute',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    border: "none",
+    right: "1rem",
+    top: "1rem",
+    position: "absolute",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: blueGrey[500]
   },
+  selected: {
+    color: grey[50],
+    background: blueGrey[500]
+  }
 });
 
 const options = [
-  'Hämeenkyrö',
-  'Ikaalinen',
-  'Jämijärvi',
-  'Kankaanpää',
-  'Karvia',
-  'Kihniö',
-  'Nokia',
-  'Parkano',
-  'Virrat',
-  'Ylöjärvi' 
+  "Hämeenkyrö",
+  "Ikaalinen",
+  "Jämijärvi",
+  "Kankaanpää",
+  "Karvia",
+  "Kihniö",
+  "Nokia",
+  "Parkano",
+  "Virrat",
+  "Ylöjärvi"
 ];
 
 class KuntaFilter extends Component {
-
   state = {
     anchorEl: null
   };
@@ -51,12 +56,10 @@ class KuntaFilter extends Component {
   };
 
   render() {
-
     const { classes } = this.props;
     const { anchorEl } = this.state;
 
     return (
-
       <div className={classes.root}>
         <List component="nav">
           <ListItem
@@ -67,6 +70,7 @@ class KuntaFilter extends Component {
             onClick={this.handleClickListItem}
           >
             <ListItemText
+              classes={{ primary: classes.selected }}
               primary="Valitse kuntasi"
               secondary={options[this.props.filterSelection]}
             />
@@ -82,8 +86,8 @@ class KuntaFilter extends Component {
             <MenuItem
               key={option}
               selected={index === this.props.filterSelection}
-              onClick={(e) => {
-                this.props.handleClick(e,index,option);
+              onClick={e => {
+                this.props.handleClick(e, index, option);
                 this.setState({ anchorEl: null });
               }}
             >
