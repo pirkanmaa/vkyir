@@ -15,6 +15,9 @@ import Slider from "@material-ui/lab/Slider";
 import LayerInfo from "./LayerInfo";
 
 import LayerMeta from "./LayerMeta";
+import { ok } from "assert";
+import Typography from "@material-ui/core/Typography";
+import blueGrey from "@material-ui/core/colors/blueGrey";
 
 const styles = theme => ({
   root: {
@@ -46,6 +49,11 @@ const styles = theme => ({
   toolTip: {
     color: "black",
     backgroundColor: "white"
+  },
+  heading: {
+    color: "white",
+    backgroundColor: blueGrey[500],
+    padding: "10px"
   }
 });
 
@@ -58,7 +66,9 @@ class LayerControl extends Component {
     layerOpacity: Layers.map(item => item.layer.values_.opacity),
     layerInfoVisibility: false,
     infoLayer: "",
-    layerInfo: null
+    layerInfo: null,
+    headerMask: ["Eroosio", "Maatalouden vesistötoimenpiteet", "Kuormitus"],
+    headerIndex: [0, 2, 8]
   };
 
   toggleLayerAdder = () =>
@@ -96,6 +106,22 @@ class LayerControl extends Component {
     this.setState({ layerInfoVisibility: !this.state.layerInfoVisibility });
   };
 
+  renderHeader = (group, index) => {
+    //console.log(group, index);
+    return this.state.headerMask.includes(group) &&
+      this.state.headerIndex.includes(index) ? (
+      <span key={index}>
+        <Typography
+          variant="subheading"
+          classes={{ root: this.props.classes.heading }}
+          gutterBottom
+        >
+          {group}
+        </Typography>
+      </span>
+    ) : null;
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -111,6 +137,7 @@ class LayerControl extends Component {
               (item, index) =>
                 this.state.show.title.indexOf(item.title) > -1 && (
                   <div key={index}>
+                    {this.renderHeader(item.group, index)}
                     <FormControlLabel
                       key={"A" + index}
                       label={

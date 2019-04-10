@@ -114,6 +114,7 @@ const Suojavyohyke = new VectorLayer({
   title: "Suojavyöhyke",
   visible: false,
   style: style,
+  group: "Maatalouden vesistötoimenpiteet",
   description: `KOTOMA paikkatietoanalyysilla on arvioitu peltolohkojen soveltuvuutta suojavyöhykkeen perustamiseen Ikaalisten reitin alueella.<br>
   Analyysi pohjautuu vuoden 2017 peltolohkoaineistoon, vuoden 2018 Rusle aineistoon, sekä sen ympäristöhallinnon aineistoihin.<br>
   Huomioitava aineistoa tulkittaessa! Aineisto on suuntaa antava. Analyysissä, jossa aineisto on tuotettu, tulee aina koko peltolohko luokitetuksi tiettyyn luokkaan, jos jokin osa peltolohkosta täyttää analyysissä käytettävät kriteerit.`

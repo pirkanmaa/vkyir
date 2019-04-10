@@ -20,6 +20,7 @@ const Rusle = new Tile({
   title: "Eroosiomalli, Metsä [kg/ha/v]",
   name: "Eroosiomalli, Metsä [kg/ha/v]",
   visible: false,
+  group: "Eroosio",
   description: `Karttapohjainen valtakunnallinen eroosioriskimalli (kiintoainetta Kg/ha/vuosi), joka kuvaa metsän uudistamisen yhteydessä tehtävän maanmuokkauksen vaikutus eroosioon. Mallin avulla voidaan löytää eroosioriskin hot spot – lohkot koko valtakunnan tasolla metsien osalta. Mallia voidaan käyttää apuna suunniteltaessa vesistöjen kunnostustoimenpiteitä ja niiden sijoittamista. Eroosion mukana kulkeutuu eteläisen Suomen oloissa pääosa vesistöihin päätyvästä fosforikuormasta. Mallin on tuottanut Luonnonvarakeskus.`
 });
 

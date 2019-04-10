@@ -1,5 +1,7 @@
 import Kuntarajat from "./Kuntarajat";
 import Rusle from "./Rusle";
+import Rusle2 from "./Rusle2";
+
 import Vesty from "./Vesty";
 import Pintavesieko from "./Pintavesieko";
 import Jokikunnostukset from "./Jokikunnostukset";
@@ -14,7 +16,7 @@ import Forforit_peltokuorma from "./Fosfori_3";
 import Kipsi from "./Kipsi";
 import Biohiili from "./Biohiili";
 import Lanta from "./Lanta";
-import Rusle2 from "./Rusle2";
+
 import JokienKunto from "./jokien_kunto";
 import Tulvariski_1000 from "./Tulvaalueet";
 import Pohjavesialueet from "./Pohjavesialueet";
@@ -34,34 +36,34 @@ import Reittivesistoon from "./Peltolohkotvesistoon";
 
 /* Choose basemaps */
 let Layers = [
-  Rusle,
+  Rusle, // Eroosiot
   Rusle2,
-  Pintavesieko,
+  Biohiili, // Maatalouden vesistötoimenpiteet
+  Lanta,
+  Kalkki,
+  PeltolohkotPV,
+  Suojavyohyke,
+  Reittivesistoon,
+  Fosforit_pitoisuus, // Kuormitus
+  Fosforit_pistekuorma,
+  Forforit_metsakuorma,
+  Forforit_peltokuorma,
+  Pintavesieko, // EI RYHMÄÄ
   JokienKunto,
   Kuntarajat,
   TPO,
   Kunnostusalueet,
   Vesty,
-  Fosforit_pitoisuus,
-  Fosforit_pistekuorma,
-  Forforit_metsakuorma,
-  Forforit_peltokuorma,
-  /*Kipsi,*/
-  Biohiili,
-  Lanta,
+
   Tulvariski_1000,
   Pohjavesialueet,
   NaturaSuojelualueet,
   YksityisetSuojelualueet,
   ValtionSuojeluAlueet,
   Huuhtouma_20K_maapera,
-  /*Huuhtouma50K,*/
+
   Maalajinrajanopeus,
-  Salaojitus,
-  Kalkki,
-  PeltolohkotPV,
-  Suojavyohyke,
-  Reittivesistoon
+  Salaojitus
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
@@ -71,7 +73,8 @@ function convert(array) {
       layer: layer,
       name: layer.getProperties().name,
       title: layer.getProperties().title,
-      visibility: layer.getProperties().visible
+      visibility: layer.getProperties().visible,
+      group: layer.getProperties().group
     });
     return acc;
   }, []);
