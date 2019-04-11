@@ -38,9 +38,9 @@ let style = feature => {
   */
   switch (Vesistoon) {
     case "Palsta sijaitse alle 10 m etäisyydellä vesistöstä":
-      baseStyle.setFill(new Fill({ color: "rgba(255, 127, 127,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(255, 127, 127,0.80)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(110,110,110, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(110,110,110, 0.90)", width: 1 })
       );
       break;
     case "Palsta sijaitse alle 5 m etäisyydellä vesistöstä":

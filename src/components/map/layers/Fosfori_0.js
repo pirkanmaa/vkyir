@@ -110,8 +110,8 @@ const vectorSource = new VectorSource({
 
 const Fosforit_pistekuorma = new VectorLayer({
   source: vectorSource,
-  name: "Pistekuorma [Kg/v] 12/2018",
-  title: "Pistekuorma [Kg/v] 12/2018",
+  name: "Pistekuormitus, Fosfori",
+  title: "Pistekuormitus, Fosfori",
   visible: false,
   style: style,
   group: "Kuormitus",

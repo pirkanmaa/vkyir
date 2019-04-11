@@ -110,8 +110,8 @@ const vectorSource = new VectorSource({
 
 const Lanta = new VectorLayer({
   source: vectorSource,
-  name: "Lanta",
-  title: "Lanta",
+  name: "Lannan levitys",
+  title: "Lannan levitys",
   visible: false,
   style: style,
   group: "Maatalouden vesistötoimenpiteet",

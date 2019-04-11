@@ -38,8 +38,9 @@ import Reittivesistoon from "./Peltolohkotvesistoon";
 let Layers = [
   Rusle, // Eroosiot
   Rusle2,
-  Biohiili, // Maatalouden vesistötoimenpiteet
-  Lanta,
+  /*Biohiili,*/
+
+  Lanta, // Maatalouden vesistötoimenpiteet
   Kalkki,
   PeltolohkotPV,
   Suojavyohyke,

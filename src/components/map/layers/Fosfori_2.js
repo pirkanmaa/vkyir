@@ -136,8 +136,8 @@ const vectorSource = new VectorSource({
 
 const Fosforit_metsakuorma = new VectorLayer({
   source: vectorSource,
-  name: "Metsakuorma [Kg/Km2/v] 12/2018",
-  title: "Metsakuorma [Kg/Km2/v] 12/2018",
+  name: "Metsäkuormitus, Fosfori",
+  title: "Metsäkuormitus, Fosfori",
   visible: false,
   style: style,
   group: "Kuormitus",

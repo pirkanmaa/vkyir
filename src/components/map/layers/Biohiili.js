@@ -103,8 +103,8 @@ const vectorSource = new VectorSource({
 
 const Biohiili = new VectorLayer({
   source: vectorSource,
-  name: "Biohiili",
-  title: "Biohiili",
+  name: "Biohiilen levitys",
+  title: "Biohiilen levitys",
   visible: false,
   style: style,
   group: "Maatalouden vesistötoimenpiteet",

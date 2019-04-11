@@ -337,12 +337,12 @@ class LayerMeta extends Component {
             ))}
           </div>
         );
-      case "Pitoisuus P [ug/l]":
+      case "Pitoisuus, Fosfori":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Fosfori pitoisuudet
+              Fosforipitoisuus (ug/l)
             </Typography>
             {legend_vemana_pitoisuus.map((types, i) => (
               <div key={i} className={classes.slot}>
@@ -362,12 +362,12 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-      case "Pistekuorma [Kg/v] 12/2018":
+      case "Pistekuormitus, Fosfori":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Fosfori pistekuorma
+              Fosforikuormitus (kg/v)
             </Typography>
             {legend_vemana_pistekuorma.map((types, i) => (
               <div key={i} className={classes.slot}>
@@ -387,12 +387,12 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-      case "Metsakuorma [Kg/Km2/v] 12/2018":
+      case "Metsäkuormitus, Fosfori":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Fosfori pitoisuudet
+              Fosforikuormitus (kg/km2/v)
             </Typography>
             {legend_vemana_metsakuorma.map((types, i) => (
               <div key={i} className={classes.slot}>
@@ -412,12 +412,12 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-      case "Peltokuorma [Kg/Km2/v] 12/2018":
+      case "Peltokuormitus, Fosfori":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Fosfori pitoisuudet
+              Fosforikuormitus (kg/km2/v)
             </Typography>
             {legend_vemana_peltokuorma.map((types, i) => (
               <div key={i} className={classes.slot}>
@@ -462,12 +462,12 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-      case "Biohiili":
+      case "Biohiilen levitys":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Biohiili
+              Biohiilen levitys
             </Typography>
             {legend_vemana_biohiili.map((types, i) => (
               <div key={i} className={classes.slot}>
@@ -487,12 +487,12 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
-      case "Lanta":
+      case "Lannan levitys":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Lanta
+              Lannan levitys
             </Typography>
             {legend_vemana_lanta.map((types, i) => (
               <div key={i} className={classes.slot}>
@@ -589,12 +589,12 @@ class LayerMeta extends Component {
           </div>
         );
 
-      case "Kalkki":
+      case "Rakennekalkin levitys":
         return (
           <div classes={{ root: classes.root }}>
             <Divider />
             <Typography className={classes.typography} variant="body2">
-              Kalkki
+              Rakennekalkin levitys
             </Typography>
             {legend_vemana_kalkki.map((types, i) => (
               <div key={i} className={classes.slot}>
@@ -706,13 +706,13 @@ class LayerMeta extends Component {
             <img src="https://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=1&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
           </div>
         );
-      case "Maalajin rajanopeus ylittyy":
+      case "Uomaeroosio":
         return (
           <div classes={{ root: classes.root }}>
             <br />
             <Divider />
             <Typography variant="body2" className={classes.typography}>
-              Maalajinrajanopeus
+              Uomaeroosio
             </Typography>
             <img src="https://aineistot.metsakeskus.fi/metsakeskus/services/Vesiensuojelu/Vesiuomien_maa_aineksen_huuhtoutumisriski/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=2&legend_options=fontName:Arial;fontSize:14;fontAntiAliasing:true" />
           </div>

@@ -129,8 +129,8 @@ const vectorSource = new VectorSource({
 
 const Fosforit_pitoisuus = new VectorLayer({
   source: vectorSource,
-  name: "Pitoisuus P [ug/l]",
-  title: "Pitoisuus P [ug/l]",
+  name: "Pitoisuus, Fosfori",
+  title: "Pitoisuus, Fosfori",
   visible: false,
   style: style,
   group: "Kuormitus",

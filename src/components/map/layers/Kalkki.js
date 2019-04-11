@@ -100,8 +100,8 @@ const vectorSource = new VectorSource({
 
 const Kalkki = new VectorLayer({
   source: vectorSource,
-  name: "Kalkki",
-  title: "Kalkki",
+  name: "Rakennekalkin levitys",
+  title: "Rakennekalkin levitys",
   visible: false,
   style: style,
   group: "Maatalouden vesistötoimenpiteet",

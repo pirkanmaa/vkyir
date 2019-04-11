@@ -17,10 +17,12 @@ const source = new TileWMS({
 const Maalajinrajanopeus = new Tile({
   source: source,
   opacity: 0.75,
-  title: "Maalajin rajanopeus ylittyy",
-  name: "Maalajin rajanopeus ylittyy",
+  title: "Uomaeroosio",
+  name: "Uomaeroosio",
   visible: false,
-  description: `Riskianalyysi, joka on laskettu GTK:n maaperäaineiston, eri maalajien rajanopeusarvojen sekä aikaisemmin Suomen metsäkeskuksessa tehdyn veden virtausmallin perusteella. Veden virtausmalliaineistosta on tässä analyysissä käytetty veden virtausnopeutta. Tuloksena on tieto kohteista, joissa ojan virtausnopeus ylittää maalajin rajanopeuden. Maalajin rajanopeudella tarkoitetaan suurinta veden virtausnopeutta, jolloin maalajite ei vielä lähde liikkeelle eli ei synny eroosiota.`
+  description: `Tieto kohteista, joissa ojan virtausnopeus ylittää maalajin rajanopeuden. Maalajin rajanopeudella tarkoitetaan suurinta veden virtausnopeutta, jolloin maalajite ei vielä lähde liikkeelle eli ei synny eroosiota.<br>
+  Kyseessä on riskianalyysi, joka on laskettu Geologian tutkimuskeskuksen maaperäaineiston, eri maalajien rajanopeusarvojen sekä aikaisemmin Suomen metsäkeskuksessa tehdyn veden virtausmallin perusteella. Veden virtausmalliaineistosta on tässä analyysissä käytetty veden virtausnopeutta.
+  `
 });
 
 export default Maalajinrajanopeus;
