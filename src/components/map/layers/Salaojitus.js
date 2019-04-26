@@ -103,6 +103,7 @@ const Salaojitus = new VectorLayer({
   name: "Säätösalaojitus",
   title: "Säätösalaojitus",
   visible: false,
+  group: "Maatalouden vesiensuojelutoimenpiteet, KOTOMA",
   style: style,
   description: `KOTOMA paikkatietoanalyysilla on arvioitu peltolohkojen soveltuvuutta säätösalaojitukseen Ikaalisten reitin alueella.<br>
   Analyysi pohjautuu vuoden 2017 peltolohkoaineistoon, vuoden 2018 Rusle aineistoon, sekä sen ympäristöhallinnon aineistoihin.<br

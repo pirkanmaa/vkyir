@@ -19,6 +19,7 @@ const Huuhtouma_20K_maapera = new Tile({
   opacity: 0.75,
   title: "Maaperä 1:20 000",
   name: "Maaperä 1:20 000",
+  group: "Muu",
   visible: false,
   description: `Maaperä 1:20 000/1:50 000 aineisto sisältää vuosina 1972-2007 maankäytön suunnitteluun, maankamaran raaka-aineiden tutkimukseen ja inventointiin, ympäristönhoitoon ja tieteelliseen tutkimukseen tuotettua tietoa. <br>Kartoitusmittakaava on pääsääntöisesti ollut 1:10 000. Aineistossa on esitetty pohjamaana 1 metrin syvyydessä oleva maalaji. Pohjamaakuvion minimikoko on yleensä 2 hehtaaria; poikkeuksena saaret, suo- ja peltosaarekkeet sekä geologisesti merkittävät kohteet. Pohjamaan päällä oleva 0,4-0,9 metrin paksuinen maakerros on kuvattu pintamaana. Geologisesti tai taloudellisesti merkittävissä tapauksissa voidaan kuvata paksumpikin pintamaakerros. Pintamaan minimikuviokoko on yleensä 4 hehtaaria. Alle 0,4 metrin paksuisia tai vaikeasti rajattavia peittäviä maakerroksia kuvataan pistemäisinä tietoina, joiden vaikutusalueen koko on vähintään 4 hehtaaria. <br>Maalajien lisäksi aineistossa kuvataan eri tavoin syntyneitä geologisia maaperämuodostumia, kuten harjuja ja kumpumoreeneja. Muita kartoituskohteita, esimerkiksi pienet kalliohavainnot, dyynit, muinaisrannat, on esitetty pistemäisinä tai viivamaisina tietoina.`
 });

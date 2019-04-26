@@ -103,7 +103,7 @@ const Reittivesistoon = new VectorLayer({
   title: "Peltolohkot vesistön läheisyydessä",
   visible: false,
   style: style,
-  group: "Maatalouden vesistötoimenpiteet",
+  group: "Maatalouden vesiensuojelutoimenpiteet, KOTOMA",
   description: `Peltolohkot vesistön läheisyydessä<br>
   KOTOMA paikkatietoanalyysissa huomioitu peltolohkojen sijainti vesistön läheisyydessä Ikaalisten reitin alueella. Aineisto kuvaa peltolohkon sijaintia 5 tai 10 metrin etäisyydellä vesistöstä.<br>
     Huomioitava aineistoa tulkittaessa! Aineisto on suuntaa antava. Analyysissä, jossa aineisto on tuotettu, tulee aina koko peltolohko luokitetuksi tiettyyn luokkaan, jos jokin osa peltolohkosta täyttää analyysissä käytettävät kriteerit.`

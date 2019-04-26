@@ -22,6 +22,7 @@ const TPO = new Tile({
   opacity: 0.75,
   title: "Vesienhoidon tehostamisalueet",
   name: "Vesienhoidon tehostamisalueet",
+  group: "Toimenpiteet",
   visible: false,
   description: `Pirkanmaan vesienhoidon toimenpideohjelmassa (TPO) kuvatuilla tehostamisalueilla vesistöjen vedenlaatu edellyttää tehostettujen vesiensuojelumenetelmien käyttöä. Tehostamisalueet ovat sektorikohtaiset: maatalous sekä metsätalous ja turvetuotanto. Tehostamisalueiden määrityksessä on huomioitu mm. vesien tila, maankäyttömuotojen ja vesistökohtaisen kuormituksen vähennystarve. 
     <br>

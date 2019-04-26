@@ -19,6 +19,7 @@ const Maalajinrajanopeus = new Tile({
   opacity: 0.75,
   title: "Uomaeroosio",
   name: "Uomaeroosio",
+  group: "Eroosio",
   visible: false,
   description: `Tieto kohteista, joissa ojan virtausnopeus ylittää maalajin rajanopeuden. Maalajin rajanopeudella tarkoitetaan suurinta veden virtausnopeutta, jolloin maalajite ei vielä lähde liikkeelle eli ei synny eroosiota.<br>
   Kyseessä on riskianalyysi, joka on laskettu Geologian tutkimuskeskuksen maaperäaineiston, eri maalajien rajanopeusarvojen sekä aikaisemmin Suomen metsäkeskuksessa tehdyn veden virtausmallin perusteella. Veden virtausmalliaineistosta on tässä analyysissä käytetty veden virtausnopeutta.

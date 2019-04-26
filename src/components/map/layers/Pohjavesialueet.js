@@ -18,6 +18,7 @@ const Pohjavesialueet = new Tile({
   opacity: 0.75,
   title: "Pohjavesialueet",
   name: "Pohjavesialueet",
+  group: "Suojelualueet",
   visible: false,
   description: `Aineisto sisältää vedenhankintaa varten kartoitetut ja luokitellut pohjavesialueet.
   Aineisto kuuluu SYKEn avoimiin aineistoihin (CC BY 4.0) lukuunottamatta pistemäisiä pohjavesialueita. 

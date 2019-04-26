@@ -21,6 +21,7 @@ const Kunnostusalueet = new Tile({
   opacity: 1,
   title: "Järvi- ja jokikunnostusalueet",
   name: "Järvi- ja jokikunnostusalueet",
+  group: "Toimenpiteet",
   visible: false,
   description: `Pirkanmaan vesienhoidon toimenpideohjelmassa (TPO) on valittu vesirakentamisen, säännöstelyn ja kunnostusten järvi- ja jokikunnostuskohteita. Valinnassa ovat ensisijaisina vesimuodostumat, jotka eivät vielä ole saavuttaneet ympäristötavoitetta hyvästä tilasta tai joiden tilan on vaarassa heikentyä. 
     Valitut kohteet liittyvät rehevöityneiden järvien kunnostuksiin, säännöstelyn kehittämiseen (Kyrösjärvi) sekä virtavesien elinympäristökunnostuksiin.<br>

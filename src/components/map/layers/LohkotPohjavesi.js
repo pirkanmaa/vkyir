@@ -104,7 +104,7 @@ const Peltolohkotpohjavesialueella = new VectorLayer({
   title: "Peltolohkot pohjavesialueella",
   visible: false,
   style: style,
-  group: "Maatalouden vesistötoimenpiteet",
+  group: "Maatalouden vesiensuojelutoimenpiteet, KOTOMA",
   description: `Peltolohkot pohjavesialueella<br>
   KOTOMA paikkatietoanalyysissa huomioitu peltolohkojen sijainti pohjavesialueella Ikaalisten reitin alueella. Aineisto kuvaa peltolohkon sijaintia kokonaan tai osittain pohjavesialueelle tai pohjaveden muodostumisalueelle.<br>
   Huomioitava aineistoa tulkittaessa! Aineisto on suuntaa antava. Analyysissä, jossa aineisto on tuotettu, tulee aina koko peltolohko luokitetuksi tiettyyn luokkaan, jos jokin osa peltolohkosta täyttää analyysissä käytettävät kriteerit.`

@@ -67,8 +67,16 @@ class LayerControl extends Component {
     layerInfoVisibility: false,
     infoLayer: "",
     layerInfo: null,
-    headerMask: ["Eroosio", "Maatalouden vesistötoimenpiteet", "Kuormitus"],
-    headerIndex: [0, 2, 8]
+    headerMask: [
+      "Eroosio",
+      "Maatalouden vesiensuojelutoimenpiteet, KOTOMA",
+      "Kuormitus",
+      "Vesien tila",
+      "Toimenpiteet",
+      "Suojelualueet",
+      "Muu"
+    ],
+    headerIndex: [0, 3, 9, 13, 15, 18, 22]
   };
 
   toggleLayerAdder = () =>

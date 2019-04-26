@@ -18,6 +18,7 @@ const Tulvariski_1000 = new Tile({
   opacity: 0.75,
   title: "Tulvariskivyöhykkeet (vesistö)",
   name: "Tulvariskivyöhykkeet (vesistö)",
+  group: "Muu",
   visible: false,
   description: `Tulvariskivyöhykkeet (vesistö)`
 });

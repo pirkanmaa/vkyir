@@ -38,38 +38,42 @@ import Reittivesistoon from "./Peltolohkotvesistoon";
 let Layers = [
   Rusle, // Eroosiot
   Rusle2,
+  Maalajinrajanopeus,
   /*Biohiili,*/
 
-  Lanta, // Maatalouden vesistötoimenpiteet
+  Lanta, // Maatalouden vesiensuojelutoimenpiteet, KOTOMA
   Kalkki,
   PeltolohkotPV,
   Suojavyohyke,
   Reittivesistoon,
+  Salaojitus,
+
   Fosforit_pitoisuus, // Kuormitus
   Fosforit_pistekuorma,
   Forforit_metsakuorma,
   Forforit_peltokuorma,
-  Pintavesieko, // EI RYHMÄÄ
-  JokienKunto,
-  Kuntarajat,
-  TPO,
-  Kunnostusalueet,
-  Vesty,
 
-  Tulvariski_1000,
-  Pohjavesialueet,
+  Pintavesieko, // Vesien tila
+  JokienKunto,
+
+  Kunnostusalueet, // Toimenpiteet
+  Vesty,
+  TPO,
+
+  Pohjavesialueet, //Suojelualueet
   NaturaSuojelualueet,
   YksityisetSuojelualueet,
   ValtionSuojeluAlueet,
-  Huuhtouma_20K_maapera,
 
-  Maalajinrajanopeus,
-  Salaojitus
+  Kuntarajat, // Muu
+  Tulvariski_1000,
+  Huuhtouma_20K_maapera
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
 function convert(array) {
   return array.reduce((acc, layer) => {
+    console.log(layer.getProperties().group);
     acc.push({
       layer: layer,
       name: layer.getProperties().name,

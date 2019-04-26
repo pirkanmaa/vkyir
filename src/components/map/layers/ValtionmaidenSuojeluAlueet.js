@@ -23,6 +23,7 @@ const ValtionSuojeluAlueet = new Tile({
   opacity: 0.75,
   title: "Valtion maiden luonnonsuojelualueet",
   name: "Valtion maiden luonnonsuojelualueet",
+  group: "Suojelualueet",
   visible: false,
   description: `Luonnonsuojelu- ja erämaa-alueet<br>
   Luonnonsuojelu- ja erämaa-alueet –aineisto koostuu luonnonsuojelulain nojalla tai asetuksella valtion maille tai lääninhallituksen päätöksellä yksityismaille perustetuista luonnonsuojelualueista. Aineistoon kuuluvat myös luonnontilaisina säilytettävät ja osittain luonnonmukaisesti käsiteltävät laaja-alaiset erämaa-alueet. 1.9.2014 alkaen aineisto on tuotettu kokonaisuudessaan Metsähallituksen SATJ-järjestelmässä. Aineisto kuuluu SYKEn avoimiin aineistoihin (CC BY 4.0).

@@ -18,6 +18,7 @@ const NaturaSuojelualueet = new Tile({
   opacity: 0.75,
   title: "Natura 2000 - SAC Manner-Suomi aluemaiset",
   name: "Natura 2000 - SAC Manner-Suomi aluemaiset",
+  group: "Suojelualueet",
   visible: false,
   description: `
   Natura 2000 - SAC Manner-Suomi. Erityisten suojelutoimien alue.`
