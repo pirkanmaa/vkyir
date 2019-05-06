@@ -20,7 +20,7 @@ const Tulvariski_1000 = new Tile({
   name: "Tulvariskivyöhykkeet (vesistö)",
   group: "Muu",
   visible: false,
-  description: `Tulvariskivyöhykkeet (vesistö)`
+  description: `Pirkanmaalla on laadittu tulvakartat lähes kaikista suurimmista järvistä. <br>Tulvakartat on laadittu erittäin harvinaisen tulvan aiheuttamille vedenkorkeuksilla (kerran 1000 vuodessa toistuva tulva), mutta aineistoa voidaan hyödyntää myös tarkastellessa pienempien tulvien levinneisyyttä järvien rantoihin.`
 });
 
 export default Tulvariski_1000;

@@ -201,6 +201,24 @@ class LayerInfo extends Component {
           </div>
         );
         break;
+      case "Tulvariskivyöhykkeet (vesistö)":
+        return (
+          <div classes={{ root: classes.root }}>
+            <br />
+            <Divider />
+            <br />
+            <span>
+              <a
+                href="https://www.ymparisto.fi/tulvakartat?f=Pirkanmaan_ELYkeskus"
+                target="_blank"
+                key="tpo2"
+              >
+                Linkki Pirkanmaan tulvakartta-aineistoihin
+              </a>
+            </span>
+          </div>
+        );
+        break;
       case "Kunnostustoimenpiteet":
         return (
           <div classes={{ root: classes.root }}>
