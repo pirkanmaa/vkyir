@@ -213,7 +213,7 @@ class LayerInfo extends Component {
                 target="_blank"
                 key="tpo2"
               >
-                Linkki Pirkanmaan tulvakartta-aineistoihin
+                Lisätietoja aineistosta
               </a>
             </span>
           </div>
