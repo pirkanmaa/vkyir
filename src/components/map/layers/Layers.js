@@ -34,6 +34,8 @@ import PeltolohkotPV from "./LohkotPohjavesi";
 import Suojavyohyke from "./Suojavyohyke";
 import Reittivesistoon from "./Peltolohkotvesistoon";
 
+import Turpeenotto from "./Turpeennosto";
+
 /* Choose basemaps */
 let Layers = [
   Rusle, // Eroosiot
@@ -48,10 +50,11 @@ let Layers = [
   Reittivesistoon,
   Salaojitus,
 
+  /* SYKE dataa kuralla ota takaisin kun linjassa. 29052019
   Fosforit_pitoisuus, // Kuormitus
   Fosforit_pistekuorma,
   Forforit_metsakuorma,
-  Forforit_peltokuorma,
+  Forforit_peltokuorma,*/
 
   Pintavesieko, // Vesien tila
   JokienKunto,
@@ -67,7 +70,8 @@ let Layers = [
 
   Kuntarajat, // Muu
   Tulvariski_1000,
-  Huuhtouma_20K_maapera
+  Huuhtouma_20K_maapera,
+  Turpeenotto
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
