@@ -10,12 +10,12 @@ import Fill from "ol/style/Fill";
 
 //Spatial Reference: 102139  (3067)
 
-/* VEMALA Metsakuorma Kg/Km2/v 12/2018 IKAALINEN */
+/* VEMALA Peltokuorma Kg/Km2/v 12/2018 IKAALINEN */
 
 var serviceUrl =
   "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/VemalaKuormitusFosforiIKAALINEN/FeatureServer/";
 
-var layer = "3";
+var layer = "1";
 
 var esrijsonFormat = new EsriJSON();
 

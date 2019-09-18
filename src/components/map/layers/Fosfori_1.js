@@ -15,7 +15,7 @@ import Fill from "ol/style/Fill";
 var serviceUrl =
   "https://services.arcgis.com/eOoJrX8K8DfwR6Ct/arcgis/rest/services/VemalaKuormitusFosforiIKAALINEN/FeatureServer/";
 
-var layer = "1";
+var layer = "3";
 
 var esrijsonFormat = new EsriJSON();
 

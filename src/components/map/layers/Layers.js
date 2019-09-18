@@ -50,11 +50,12 @@ let Layers = [
   Reittivesistoon,
   Salaojitus,
 
-  /* SYKE dataa kuralla ota takaisin kun linjassa. 29052019
+  // SYKE dataa kuralla ota takaisin kun linjassa. 29052019
+  // otettiin takaisin vaikka kuralla 18092019
   Fosforit_pitoisuus, // Kuormitus
   Fosforit_pistekuorma,
   Forforit_metsakuorma,
-  Forforit_peltokuorma,*/
+  Forforit_peltokuorma,
 
   Pintavesieko, // Vesien tila
   JokienKunto,
@@ -89,4 +90,4 @@ function convert(array) {
   }, []);
 }
 
-export default (Layers = convert(Layers));
+export default Layers = convert(Layers);
