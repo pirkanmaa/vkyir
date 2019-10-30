@@ -18,21 +18,6 @@ var serviceUrl =
 var layer = "3";
 
 var esrijsonFormat = new EsriJSON();
-
-let style = feature => {
-  let baseStyle = new Style({
-    fill: new Fill({
-      color: "rgba(125,157,255,0.8)"
-    }),
-    stroke: new Stroke({
-      color: "rgba(125, 157, 255, 1)",
-      width: 1
-    })
-  });
-
-  return baseStyle;
-};
-
 const vectorSource = new VectorSource({
   loader: function(extent, resolution, projection) {
     var url =
@@ -78,7 +63,15 @@ const SykeRantaviiva = new VectorLayer({
   name: "Järvet",
   title: "Järvet",
   visible: false,
-  style: style,
+  style: new Style({
+    fill: new Fill({
+      color: "rgba(125,157,255,0.8)"
+    }),
+    stroke: new Stroke({
+      color: "rgba(125, 157, 255, 1)",
+      width: 1
+    })
+  }),
   group: "Vesien tila",
   description: `Aineisto pohjautuu Maanmittauslaitoksen maastotietokannan vuosien 2000-2008 aineistoon (1:5 000-1:10 000). Maastotietokannan vesiin sisältyvistä kohteista mukaan on otettu alueina vakavedet sekä yli 5 m leveät virtavedet. Lisäksi mukana on maastotietokannan yli 200 m2:n kokoisia altaita. Viivoina kuvatuista alle 5 m leveistä virtavesistä on mukana vesistön päävirtausreitit sisältäen sekä 2-5 m leveitä että alle 2 m leveitä virtavesiä. Aineisto on uudelleen luokiteltu ja topologialtaan tarkistettu SYKEssä. Aineiston pohjalta on SYKEssä luotu uomia kuvaava uomaverkosto, jonka verkostomainen rakenne on tuotettu lisäämällä viivamaisiin jokiin aluemaisten jokien keskilinjat sekä järvien ylitykset ns. pseudouomilla. Aineistoon on lisätty myös järvi- ja uomatunnukset. `
 });
