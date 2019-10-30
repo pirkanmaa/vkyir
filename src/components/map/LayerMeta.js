@@ -101,6 +101,13 @@ const legend_vemana_pistekuorma = [
 ];
 
 /*
+Pitoisuus (Fosforipitoisuus (ug/l)
+  0,01-20       #e6f9ff -> rgb(230,249,255)
+  20,01-30      #0099cc -> rgb(0,153,204) 
+  30,01 - 50    #bf80ff -> rgb(191,128,255) 
+  50,01 - 100   #5900b3 -> rgb(89,0,179) 
+  100,01 - 310  #993333 -> rgb(153,51,51) 
+
   0,01 - 20 -> rgb(191,233,255)
   20,01 - 30 -> rgb(129,186,227)
   30,01 - 50 -> rgb(77,141,201)
@@ -108,52 +115,45 @@ const legend_vemana_pistekuorma = [
   100,01 - 310 -> rgb(0,57,148) */
 
 const legend_vemana_pitoisuus = [
-  { type: "0,01 - 20", color: "#bfe9ff" },
-  { type: "20,01 - 30", color: "#81bae3" },
-  { type: "30,01 - 50", color: "#4d8dc9" },
-  { type: "50,01 - 100", color: "#2160ad" },
-  { type: "100,01 - 310", color: "#003994" }
+  { type: "0,01 - 20", color: "#e6f9ff" },
+  { type: "20,01 - 30", color: "#0099cc" },
+  { type: "30,01 - 50", color: "#bf80ff" },
+  { type: "50,01 - 100", color: "#5900b3" },
+  { type: "100,01 - 310", color: "#993333" }
 ];
 
 /*
-  0,01 - 1,5 -> rgba( 211, 255, 191, 1.00 ) #d3ffbf
-  1,51 - 3 -> rgba( 156, 219, 125, 1.00 )   #9cdb7d
-  3 - 4,5 -> rgba( 108, 184, 70, 1.00 )     #6cb846
-  4,5 - 6 -> rgba( 68, 148, 28, 1.00 )      #44941c
-  6 - 17,8 -> rgba( 38, 115, 0, 1.00 )      #267300 */
-
-/* new
-  0,01 - 1,5 -> rgba( 109,  153,  89, 1.00 )  #6d9959
-  1,51 - 3 -> rgba( 84,  128,  64, 1.00 )     #548040
-  3 - 4,5 -> rgba( 58,  102,  38, 1.00 )      #3a6626
-  4,5 - 6 -> rgba( 33,  77,  13, 1.00 )       #214d0d
-  6 - 17,8 -> rgba( 7,  51,  0, 1.00 )        #073300
+Metsäkuormitus Fosfori (Fosforikuormitus (kg/km2/v)
+0,01-1,5 #e6f9ff -> rgb(230,249,255)
+1,51-3 #0099cc   -> rgb(0,153,204) 
+3-4,5 #bf80ff    -> rgb(191,128,255)
+4,5-6 #5900b3    -> rgb(89,0,179) 
+6-17,8 #993333   -> rgb(153,51,51) 
   */
-
 const legend_vemana_metsakuorma = [
-  { type: "0,01 - 1,5", color: "#6d9959" },
-  { type: "1,51 - 3", color: "#548040" },
-  { type: "3 - 4,5", color: "#3a6626" },
-  { type: "4,5 - 6", color: "#214d0d" },
-  { type: "6 - 17,8", color: "#073300" }
+  { type: "0,01 - 1,5", color: "#e6f9ff" },
+  { type: "1,51 - 3", color: "#0099cc" },
+  { type: "3 - 4,5", color: "#bf80ff" },
+  { type: "4,5 - 6", color: "#5900b3" },
+  { type: "6 - 17,8", color: "#993333" }
 ];
 
 /* 
-  0,01 - 10 -> rgb(198, 141, 83, 1.00) #c68d53 ok
-  10,01 - 20 -> rgb(172, 115, 57, 1.00) #ac7339 ok
-  20,01 - 40 -> rgba(134, 90, 44, 1.00) #865a2c ok
-  40,01 - 60 -> rgba(96, 64, 32, 1.00) #604020 ok
-  60,01 - 80-> rgba(57, 38, 19, 1.00) #392613
-  80,01 - 117,07-> rgba(19, 13, 6, 1.00) #130d06
-  PeltoPKg_Km2
+Peltokuormitus Fosfori (Fosforikuormitus (kg/km2/v)
+0,01-10 #e6f9ff  -> rgb(230,249,255)
+10,01-20 #0099cc -> rgb(0,153,204) 
+20,01-40 #bf80ff -> rgb(191,128,255)
+40,01-60 #5900b3 -> rgb(89,0,179) 
+60,01-80 #993333 -> rgb(153,51,51) 
+80,01-177,07 #391313 -> rgb(57,19,19)
   */
 const legend_vemana_peltokuorma = [
-  { type: "0,01 - 10", color: "#c68d53" },
-  { type: "10,01 - 20", color: "#ac7339" },
-  { type: "20,01 - 40", color: "#865a2c" },
-  { type: "40,01 - 60", color: "#604020" },
-  { type: "60,01 - 80", color: "#392613" },
-  { type: "80,01 - 117,07", color: "#130d06" }
+  { type: "0,01 - 10", color: "#e6f9ff" },
+  { type: "10,01 - 20", color: "#0099cc" },
+  { type: "20,01 - 40", color: "#bf80ff" },
+  { type: "40,01 - 60", color: "#5900b3" },
+  { type: "60,01 - 80", color: "#993333" },
+  { type: "80,01 - 117,07", color: "#391313" }
 ];
 
 /*
@@ -223,6 +223,11 @@ const legend_syke_joki = [
   { type: "Huono", color: "#ED1924" },
   { type: "Ekologinen luokittelu puuttuu", color: "#ABA7B5" }
 ];
+
+/*              
+  "järvet" -> rgba(125,157,255,0.8) #7d9dff  
+  */
+const legend_syke_jarvet = [{ type: "Järvet", color: "#7d9dff" }];
 
 /* legend_plohkot_pv
   Palsta sijaitsee pohjaveden muodostumisalueella -> rgba( 0,0,204,0.22 ) / #0000cc
@@ -640,6 +645,33 @@ class LayerMeta extends Component {
             <Divider />
           </div>
         );
+
+      case "Järvet":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Järvet
+            </Typography>
+            {legend_syke_jarvet.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+
       case "Tulvariskivyöhykkeet (vesistö)":
         return (
           <div classes={{ root: classes.root }}>

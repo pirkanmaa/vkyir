@@ -33,51 +33,59 @@ let style = feature => {
   });
 
   /*
-  0,01 - 20 -> rgb(191,233,255)
-  20,01 - 30 -> rgb(129,186,227)
-  30,01 - 50 -> rgb(77,141,201)
-  50,01 - 100 -> rgb(33,96,173)
-  100,01 - 310 -> rgb(0,57,148) */
+  VEMALA_MetsakuormaKg_Km2_v_05_2019_IKAALINEN (0)
+  VEMALA_PeltokuormaKg_Km2_v_05_2019_IKAALINEN (1)
+  VEMALA_PistekuormaKg_v_05_2019_IKAALINEN (2)
+  VEMALA_PitoisuusP_ug_l_05_2019_IKAALINEN (3)
+
+  uudet värit 
+  Pitoisuus (Fosforipitoisuus (ug/l)
+  0,01-20       #e6f9ff -> rgb(230,249,255)
+  20,01-30      #0099cc -> rgb(0,153,204) 
+  30,01 - 50    #bf80ff -> rgb(191,128,255) 
+  50,01 - 100   #5900b3 -> rgb(89,0,179) 
+  100,01 - 310  #993333 -> rgb(153,51,51) 
+ */
 
   switch (PitP_ug_l) {
     case "0,01 - 20":
-      baseStyle.setFill(new Fill({ color: "rgba(191, 233, 255,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(230,249,255,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(191, 233, 255, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(230,249,255, 0.66)", width: 1 })
       );
       break;
     case "20,01 - 30":
-      baseStyle.setFill(new Fill({ color: "rgba(129,186,227,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(0,153,204,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(129,186,227, 0.66)",
+          color: "rgba(0,153,204, 0.66)",
           width: 1
         })
       );
       break;
     case "30,01 - 50":
-      baseStyle.setFill(new Fill({ color: "rgba(77,141,201,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(191,128,255,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(77,141,201, 0.66)",
+          color: "rgba(191,128,255, 0.66)",
           width: 1
         })
       );
       break;
     case "50,01 - 100":
-      baseStyle.setFill(new Fill({ color: "rgba(33,96,173,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(89,0,179,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(33,96,173, 0.66)",
+          color: "rgba(89,0,179, 0.66)",
           width: 1
         })
       );
       break;
     case "100,01 - 310":
-      baseStyle.setFill(new Fill({ color: "rgba(0,57,148,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(153,51,51,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(0,57,148, 0.66)",
+          color: "rgba(153,51,51, 0.66)",
           width: 1
         })
       );

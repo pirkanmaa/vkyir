@@ -32,59 +32,60 @@ let style = feature => {
     })
   });
 
-  /* olds 
-  0,01 - 1,5 -> rgba( 211, 255, 191, 1.00 )
-  1,51 - 3 -> rgba( 156, 219, 125, 1.00 )
-  3 - 4,5 -> rgba( 108, 184, 70, 1.00 )
-  4,5 - 6 -> rgba( 68, 148, 28, 1.00 )
-  6 - 17,8 -> rgba( 38, 115, 0, 1.00 ) */
+  /*
+  VEMALA_MetsakuormaKg_Km2_v_05_2019_IKAALINEN (0)
+  VEMALA_PeltokuormaKg_Km2_v_05_2019_IKAALINEN (1)
+  VEMALA_PistekuormaKg_v_05_2019_IKAALINEN (2)
+  VEMALA_PitoisuusP_ug_l_05_2019_IKAALINEN (3)
 
-  /* new
-  0,01 - 1,5 -> rgba( 109,  153,  89, 1.00 )
-  1,51 - 3 -> rgba( 84,  128,  64, 1.00 )
-  3 - 4,5 -> rgba( 58,  102,  38, 1.00 )
-  4,5 - 6 -> rgba( 33,  77,  13, 1.00 )
-  6 - 17,8 -> rgba( 7,  51,  0, 1.00 ) */
+
+  Metsäkuormitus Fosfori (Fosforikuormitus (kg/km2/v)
+  0,01-1,5 #e6f9ff #e6f9ff -> rgb(230,249,255)
+  1,51-3 #0099cc #0099cc -> rgb(0,153,204) 
+  3-4,5 #bf80ff #bf80ff -> rgb(191,128,255)
+  4,5-6 #5900b3 #5900b3 -> rgb(89,0,179) 
+  6-17,8 #993333 #993333 -> rgb(153,51,51) 
+ */
 
   switch (Metsa_P_Kg_Km2_v) {
     case "0,01 - 1,5":
-      baseStyle.setFill(new Fill({ color: "rgba(109,153,89,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(230,249,255,0.22)" }));
       baseStyle.setStroke(
-        new Stroke({ color: "rgba(109,153,89, 0.66)", width: 1 })
+        new Stroke({ color: "rgba(230,249,255, 0.66)", width: 1 })
       );
       break;
     case "1,51 - 3":
-      baseStyle.setFill(new Fill({ color: "rgba(84,  128,  64,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(0,153,204,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(84,  128,  64, 0.66)",
+          color: "rgba(0,153,204, 0.66)",
           width: 1
         })
       );
       break;
     case "3,01 - 4,5":
-      baseStyle.setFill(new Fill({ color: "rgba(58,  102,  38,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(191,128,255,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(58,  102,  38, 0.66)",
+          color: "rgba(191,128,255, 0.66)",
           width: 1
         })
       );
       break;
     case "4,51 - 6":
-      baseStyle.setFill(new Fill({ color: "rgba(33,  77,  13,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(89,0,179,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(33,  77,  13, 0.66)",
+          color: "rgba(89,0,179, 0.66)",
           width: 1
         })
       );
       break;
     case "6,01 - 17,8":
-      baseStyle.setFill(new Fill({ color: "rgba(7,  51,  0,0.22)" }));
+      baseStyle.setFill(new Fill({ color: "rgba(153,51,51,0.22)" }));
       baseStyle.setStroke(
         new Stroke({
-          color: "rgba(7,  51,  0, 0.66)",
+          color: "rgba(153,51,51, 0.66)",
           width: 1
         })
       );

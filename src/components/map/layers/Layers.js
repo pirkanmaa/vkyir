@@ -36,6 +36,8 @@ import Reittivesistoon from "./Peltolohkotvesistoon";
 
 import Turpeenotto from "./Turpeennosto";
 
+import SykeRantaviiva from "./SykeRantaviiva";
+
 /* Choose basemaps */
 let Layers = [
   Rusle, // Eroosiot
@@ -72,7 +74,8 @@ let Layers = [
   Kuntarajat, // Muu
   Tulvariski_1000,
   Huuhtouma_20K_maapera,
-  Turpeenotto
+  Turpeenotto,
+  SykeRantaviiva
 ];
 
 /* This converts the above basemap array into an array of objects with keys "layer, name, title" with values from map layers */
