@@ -89,6 +89,12 @@ const legend1 = [
   }
 ];
 
+const legend_soiden_ojitustilanne = [
+  { type: "Ojittamaton turvemaa", color: "#B2FE37" },
+  { type: "Ojitettu turvemaa", color: "#F8A925" },
+  { type: "Turpeenottoalue", color: "#A30DE2" }
+];
+
 /*
   0,01 - 16 -> rgba( 76, 230, 0, 1.00 )
   16,01 - 70 -> rgba( 255, 255, 0, 1.00 )
@@ -757,6 +763,31 @@ class LayerMeta extends Component {
               Peltolohkot pohjavesialueella
             </Typography>
             {legend_plohkot_pv.map((types, i) => (
+              <div key={i} className={classes.slot}>
+                <Avatar
+                  classes={{ root: classes.avatar }}
+                  style={{ background: `${types.color}` }}
+                />
+                <Typography
+                  variant="body1"
+                  style={{ color: "black", fontSize: "14px", fontWeight: 400 }}
+                >
+                  {types.type}
+                </Typography>
+              </div>
+            ))}
+            <br />
+            <Divider />
+          </div>
+        );
+      case "Suot":
+        return (
+          <div classes={{ root: classes.root }}>
+            <Divider />
+            <Typography className={classes.typography} variant="body2">
+              Soiden ojitustilanne
+            </Typography>
+            {legend_soiden_ojitustilanne.map((types, i) => (
               <div key={i} className={classes.slot}>
                 <Avatar
                   classes={{ root: classes.avatar }}
